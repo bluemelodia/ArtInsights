@@ -8,6 +8,26 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Deployment steps
 
+### Client side
+
+To deploy to GitHub pages, run the following commands:
+
+    1) Generate distributable files in the docs folder. 
+ 
+       ng build --prod --baseHref="https://github.com/bluemelodia/ArtInsights"
+
+    2) Check the docs folder is created and contains the distributable files.
+
+        <img src="./imgs/sample-docs.png>
+
+    3) Commit the contents folder, and push it to the repo.
+
+        git add .
+        git commit -m "<commit-message>"
+        git push -u origin master
+
+### Server side
+
 In the folder where the `app.yaml` file is located, run `gcloud app deploy`. Each time this command is run, a new version of the service is created, and traffic is automatically routed to the latest version. 
 
 Run `gcloud app browse` to view the service in the browser.
