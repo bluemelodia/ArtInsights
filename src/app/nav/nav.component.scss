@@ -1,0 +1,29 @@
+@import '../../styles.scss';
+
+:host {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    max-width: $nav-bar-width;
+
+    box-sizing: border-box;
+    background-color: $app-dark-nav;
+    padding: $small-spacing;
+}
+
+nav {
+    @include flex-col();
+
+    button {
+        background-color: transparent;
+
+        &:hover {
+            background-color: $app-light-nav;
+        }
+    }
+
+    button:not(:first-child) {
+        margin-top: $large-spacing;
+    }
+}
