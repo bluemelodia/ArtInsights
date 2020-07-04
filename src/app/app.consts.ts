@@ -23,3 +23,18 @@ export const mediaData = {
         alt: 'tumblr' 
     }
 }
+
+export const mediaActions = {
+    Tags : {
+        iconPath: 'assets/icons/promotion.png', 
+        alt: 'search by tag'
+    },
+    Follows : {
+        iconPath: 'assets/icons/follow.png', 
+        alt: 'view follower information'
+    },
+    Engagement : {
+        iconPath: 'assets/icons/heart.png', 
+        alt: 'post engagement'
+    }
+}

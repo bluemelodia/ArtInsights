@@ -15,6 +15,14 @@
 nav {
     @include flex-col();
 
+    &:not(:first-child) {
+        margin-top: $large-spacing;
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $app-light-nav;
+    }
+
     button {
         background-color: transparent;
         height: $button-dimensions;
@@ -26,5 +34,9 @@ nav {
 
     button:not(:first-child) {
         margin-top: $large-spacing;
+    }
+
+    button:last-child {
+        margin-bottom: $large-spacing;
     }
 }
