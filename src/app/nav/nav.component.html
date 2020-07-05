@@ -4,7 +4,10 @@
     </button>
 </nav>
 <nav>
-    <button *ngFor="let action of mediaActions | keyvalue">
-        <app-nav-item [iconName]="action.value.iconName" [altText]="action.value.alt"></app-nav-item>
+    <button *ngFor="let action of navActions | keyvalue">
+        <app-nav-item 
+            [iconName]="action.value.iconName" 
+            [altText]="action.value.alt"
+            [link]="action.value.link"></app-nav-item>
     </button>
 </nav>

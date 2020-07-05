@@ -4,12 +4,25 @@ export enum media {
     Tumblr = 'Tumblr'
 }
 
-export interface Media {
-    iconName: string,
-    alt: string
+export enum userAction {
+    Follow = 'follow',
+    Posts = 'posts',
+    Tags = 'tag'
 }
 
-export const mediaData = {
+export interface MediaAction {
+    follow: string,
+    posts: string, 
+    tag: string
+}
+
+export interface NavItem {
+    iconName: string,
+    alt: string,
+    link?: string
+}
+
+export const mediaData: { [id: string] : NavItem } = {
     DeviantArt : { 
         iconName: 'deviantart.png', 
         alt: 'deviantArt' 
@@ -24,17 +37,19 @@ export const mediaData = {
     }
 }
 
-export const mediaActions = {
+export const navActions: { [id: string] : NavItem } = {
     Tags : {
         iconName: 'promotion.png', 
         alt: 'search by tag'
     },
     Follows : {
         iconName: 'follow.png', 
-        alt: 'view follower information'
+        alt: 'view follower information',
+        link: '/following'
     },
     Engagement : {
         iconName: 'heart.png', 
         alt: 'post engagement'
     }
 }
+

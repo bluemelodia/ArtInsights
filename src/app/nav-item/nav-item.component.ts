@@ -9,6 +9,7 @@ export class NavItemComponent implements OnInit {
 
   @Input() iconName: string;
   @Input() altText: string;
+  @Input() link: string;
 
   constructor() { }
 

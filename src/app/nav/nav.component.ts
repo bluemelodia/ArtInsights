@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { mediaData, mediaActions } from '../app.consts';
+import { mediaData, navActions } from '../app.consts';
 
 @Component({
   selector: 'app-nav',
@@ -8,7 +8,7 @@ import { mediaData, mediaActions } from '../app.consts';
 })
 export class NavComponent implements OnInit {
   public mediaData = mediaData;
-  public mediaActions = mediaActions;
+  public navActions = navActions;
 
   constructor() { }
 
