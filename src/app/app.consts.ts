@@ -11,15 +11,15 @@ export interface Media {
 
 export const mediaData = {
     DeviantArt : { 
-        iconName: '072-deviantart.png', 
+        iconName: 'deviantart.png', 
         alt: 'deviantArt' 
     },
     Twitter: {
-        iconName: '016-twitter-1.png', 
+        iconName: 'twitter.png', 
         alt: 'twitter' 
     },
     Tumblr: {
-        iconName: '019-tumblr.png',
+        iconName: 'tumblr.png',
         alt: 'tumblr' 
     }
 }

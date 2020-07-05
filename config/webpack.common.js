@@ -75,8 +75,8 @@ module.exports = {
         }),
         /* 
          * Tell the CopyWebpackPlugin to copy all files in src/images to 
-         * the 'images' folder inside of the output 'dist' folder.
-         * As the images will now be served from the dist folder, we can now 
+         * the 'images' folder inside of the output 'docs' folder.
+         * As the images will now be served from the docs folder, we can now 
          * use relative paths for image files. 
          * 
          * Webpack will not process images as part of bundling by default, because
