@@ -2,6 +2,8 @@
 
 const CleanWebpackPlugin   = require('clean-webpack-plugin');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 /* Generates an HTML5 file that includes all our webpack bundles 
  * in the body using script tags. */
 const HtmlWebpackPlugin    = require('html-webpack-plugin');
@@ -84,6 +86,6 @@ module.exports = {
             helpers.root('docs'), { root: helpers.root(), verbose: true }),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
-        })
+        }),
     ]
 };
