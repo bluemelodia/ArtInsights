@@ -1,10 +1,10 @@
 <nav>
     <button *ngFor="let media of mediaData | keyvalue">
-        <app-nav-item [iconPath]="media.value.iconPath" [altText]="media.value.alt"></app-nav-item>
+        <app-nav-item [iconName]="media.value.iconPath" [altText]="media.value.alt"></app-nav-item>
     </button>
 </nav>
 <nav>
     <button *ngFor="let action of mediaActions | keyvalue">
-        <app-nav-item [iconPath]="action.value.iconPath" [altText]="action.value.alt"></app-nav-item>
+        <app-nav-item [iconName]="action.value.iconPath" [altText]="action.value.alt"></app-nav-item>
     </button>
 </nav>

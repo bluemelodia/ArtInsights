@@ -7,8 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NavItemComponent implements OnInit {
 
-  @Input() iconPath: string;
+  @Input() iconName: string;
   @Input() altText: string;
+
+  public iconPrefix = './nav-icons/';
 
   constructor() { }
 
