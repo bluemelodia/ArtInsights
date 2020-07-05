@@ -50,6 +50,14 @@ For the dev build (build:dev command in package.json):
 
     Changes to CSS/JS result in an instant browser update, which is almost comparable to changing the styles directly in the browser’s dev tools.
 
+build:clean: 
+
+    To keep the proejct clean, delete the files that the Angular compiler generated in order to compile the application. We delete the files before compilation, and after generating bundles. 
+
+build:prod: 
+
+    run the Angular compiler with the ngc command, and then run webpack in production mode to generate the bundles.
+
 Source: <a href="https://www.freecodecamp.org/news/how-to-configure-webpack-4-with-angular-7-a-complete-guide-9a23c879f471/">How to configure Webpack 4 with Angular 7: a complete guide</a>
 
 ## Running unit tests
