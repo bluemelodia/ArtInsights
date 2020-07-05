@@ -1,19 +1,39 @@
+/*
+* This config will be used for both dev and prod.
+*/
+
 'use strict';
 
+/*
+* Remove/clean build folders before building again. 
+*/
 const CleanWebpackPlugin   = require('clean-webpack-plugin');
 
-const CopyPlugin = require('copy-webpack-plugin');
-
-/* Generates an HTML5 file that includes all our webpack bundles 
- * in the body using script tags. */
+/* 
+* Generates an HTML5 file that includes all our webpack bundles 
+* in the body using script tags. It requires the path to the template. 
+*/
 const HtmlWebpackPlugin    = require('html-webpack-plugin');
+
+const CopyPlugin = require('copy-webpack-plugin');
 
 const helpers              = require('./helpers');
 const isDev                = process.env.NODE_ENV !== 'production';
 
 module.exports = {
+    /* 
+    * Entry point: indicates which module webpack should use to begin building
+    * out its internal dependency graph. Webpack will then figure out which modules
+    * and libraries that the entry point depends on (directly || indirectly).
+    */
     entry: {
+        /* Only imports the app's third-party modules, ex. angular. */
         vendor: './src/vendor.ts',
+        /* 
+         * Needed to run an Angular app in most browsers. This bundle file
+         * will load first, so this is a good place to configure the browser
+         * environment for production or deployment.
+         */
         polyfills: './src/polyfills.ts',
         main: isDev ? './src/main.ts' : './src/main.aot.ts'
     },
@@ -22,8 +42,15 @@ module.exports = {
         extensions: ['.ts', '.js', '.scss']
     },
 
+    /* 
+    * Loaders: 
+    *   the 'test' property identifies which file(s) should be transformed
+    *   the 'use' property indicates which loader should be used to do the transforming
+    */
     module: {
         /* 
+         * html-loader: used to load .html files. 
+         *
          * sass-loader: loads a Sass/SCSS file and compiles it to CSS. Has a 
          * dependency on node-sass.
          * 
@@ -52,6 +79,11 @@ module.exports = {
                 ],
                 include: helpers.root('src', 'assets')
             },
+            /* 
+            * In Angular apps, we add styles to components by passing a file path
+            * to the styleUrls array. However, we need to output styles as a string.
+            * The to-string-loader will do that for us.
+            */
             {
                 test: /\.(scss|sass)$/,
                 use: [
@@ -64,6 +96,11 @@ module.exports = {
         ]
     },
 
+    /* 
+    * Loaders are used to transform certain types of modules, while plugins are
+    * leveraged to perform a wider range of tasks, ex. bundle optimization, asset
+    * management, and injecting environment variables. 
+    */
     plugins: [
         /* Remove and clean build folders. By default, it removes all files inside of
          * webpack's output.path directory plus unused webpack assets after every
