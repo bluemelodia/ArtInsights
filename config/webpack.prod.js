@@ -9,6 +9,8 @@ const cssnano                 = require('cssnano');
 const commonConfig            = require('./webpack.common');
 const helpers                 = require('./helpers');
 
+/* Allows creation of a webpack file that's generic across all configs, that can
+ * be merged with another config. */
 module.exports = webpackMerge(commonConfig, {
     mode: 'production',
 
