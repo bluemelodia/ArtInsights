@@ -1,6 +1,7 @@
 'use strict';
 
 const CleanWebpackPlugin   = require('clean-webpack-plugin');
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 
 /* Generates an HTML5 file that includes all our webpack bundles 
  * in the body using script tags. */
@@ -82,9 +83,9 @@ module.exports = {
          * successful build. */
         new CleanWebpackPlugin(
             helpers.root('docs'), { root: helpers.root(), verbose: true }),
-
         new HtmlWebpackPlugin({
             template: 'src/index.html'
-        })
+        }),
+        new BaseHrefWebpackPlugin({ baseHref: './' })
     ]
 };
