@@ -38,7 +38,19 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+For the dev build (build:dev command in package.json):
+
+  `webpack-dev-server --inline --hot --progress --port 8080`
+
+--hot enables webpack Hot Module Replacement (HMR). It exchanges, adds, or removes modules while an application is running, without a full reload. This helps:
+
+    Retain the application state, which is lost during a full reload.
+
+    Only update what’s changed.
+
+    Changes to CSS/JS result in an instant browser update, which is almost comparable to changing the styles directly in the browser’s dev tools.
+
+Source: <a href="https://www.freecodecamp.org/news/how-to-configure-webpack-4-with-angular-7-a-complete-guide-9a23c879f471/">How to configure Webpack 4 with Angular 7: a complete guide</a>
 
 ## Running unit tests
 

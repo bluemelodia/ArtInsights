@@ -13,7 +13,18 @@ const helpers                 = require('./helpers');
  * be merged with another config. */
 module.exports = webpackMerge(commonConfig, {
     mode: 'production',
-
+    /*
+    * Tell webpack to output bundles to the docs folder. 
+    * The hash to the file names helps webpack detect whether a file has changed. 
+    * For this purpose, webpack provides ploaceholders to attach specific info 
+    * to outputs:
+    * 
+    *   [id] returns the chunk id.
+    *   [hash] returns the build hash. If any portion of the build changes, 
+    *   this will change as well.
+    * 
+    *   Save hash for prod, as it's not essential for dev.
+    */
     output: {
         path: helpers.root('docs'),
         publicPath: './',
@@ -22,17 +33,33 @@ module.exports = webpackMerge(commonConfig, {
     },
 
     optimization: {
+        /* As with dev, skip the emitting phase whenever there are errors while
+        * compiling. This ensures that no erroring assets are emitted. */
         noEmitOnErrors: true,
+        /* Indicates which chunks will be selected for optimization. 
+         * Providing 'all' means that chunks can be shared between async and non-async chunks. */
         splitChunks: {
             chunks: 'all'
         },
+        /* 
+        * Imported modules are initialized for each runtime chunk separately.
+        * 
+        * When working on a project with multiple entry points, we want to have 
+        * only one runtime instance - hence set it to 'single' 
+        */
         runtimeChunk: 'single',
         minimizer: [
+            /* Uses uglify-us to minify JS files. Set cache & parallel properties 
+             * to true in order to enable file caching & use multi-process parallel
+             * processing to improve the build speed. */
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true
             }),
-
+            /* Searches for CSS assets during the webpack build and will optimize
+             * and minify it. We use the cssnano processor for optimization. 
+             * All comments will be removed from the minified CSS, and no messages
+             * will be printed to the console. */
             new OptimizeCSSAssetsPlugin({
                 cssProcessor: cssnano,
                 cssProcessorOptions: {
@@ -46,6 +73,9 @@ module.exports = webpackMerge(commonConfig, {
     },
 
     module: {
+        /* This is the official plugin that AOT uses to compile Angular 
+        * components & modules. This loader works with the webpack plugin to compile TS.
+        * We need to include both, and not include any other TS compiler loader. */
         rules: [
             {
                 test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
