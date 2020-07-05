@@ -5,13 +5,15 @@ export enum media {
 }
 
 export enum userAction {
-    Follow = 'follow',
+    Followers = 'followers',
+    Following = 'following',
     Posts = 'posts',
     Tags = 'tag'
 }
 
 export interface MediaAction {
-    follow: string,
+    followers: string,
+    following: string,
     posts: string, 
     tag: string
 }

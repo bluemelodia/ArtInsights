@@ -29,7 +29,9 @@
     "@angular/router": "^8.2.14",
     "@angular/upgrade": "^8.2.14",
     "@types/jest": "^26.0.3",
+    "angular-font-awesome": "^3.1.2",
     "core-js": "~2.6",
+    "font-awesome": "^4.7.0",
     "protractor": "^7.0.0",
     "rxjs": "^6.6.0",
     "zone.js": "~0.8"

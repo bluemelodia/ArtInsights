@@ -4,17 +4,20 @@ const baseUrl = 'https://artinsights.ue.r.appspot.com';
 
 const mediaActionMap: { [id: string] : MediaAction } = {
     [media.DeviantArt]: {
-        [userAction.Follow]: '', 
+        [userAction.Followers]: '', 
+        [userAction.Following]: '', 
         [userAction.Posts]: '',
         [userAction.Tags]: ''
     },
     [media.Tumblr]: {
-        [userAction.Follow]: 'followers', 
+        [userAction.Followers]: 'followers', 
+        [userAction.Following]: 'following', 
         [userAction.Posts]: 'blog',
         [userAction.Tags]: 'tag'
     },
     [media.Twitter]: {
-        [userAction.Follow]: '', 
+        [userAction.Followers]: '', 
+        [userAction.Following]: '',  
         [userAction.Posts]: 'tweets',
         [userAction.Tags]: 'search'
     }

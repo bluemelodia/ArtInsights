@@ -6,8 +6,16 @@ import { urlForSite } from '../app.endpoints';
   providedIn: 'root'
 })
 export class FollowService {
-  public tumblrURL = urlForSite(media.Tumblr, userAction.Follow);
-  public deviantArtURL = urlForSite(media.DeviantArt, userAction.Follow);
+  public tumblrFollowers = urlForSite(media.Tumblr, userAction.Followers);
+  public tumblrFollowing = urlForSite(media.Tumblr, userAction.Followers);
 
   constructor() { }
+
+  public getTumblrFollowers() {
+    
+  }
+
+  public getTumblrFollowing() {
+
+  }
 }
