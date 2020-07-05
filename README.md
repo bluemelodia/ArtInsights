@@ -14,7 +14,7 @@ To deploy to GitHub pages, run the following commands:
 
     1) Generate distributable files in the docs folder. 
  
-       ng build --prod --baseHref="https://github.com/bluemelodia/ArtInsights"
+       npm run build:prod
 
     2) Check the docs folder is created and contains the distributable files.
 
@@ -54,7 +54,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Tutorial Credits
 
-Webpack configuration from: https://github.com/samteb/angular-7-webpack-4-boilerplate
+<a href="https://www.freecodecamp.org/news/how-to-configure-webpack-4-with-angular-7-a-complete-guide-9a23c879f471/">How to configure Webpack 4 with Angular 7: a complete guide</a>
+
+<a href="https://medium.com/a-beginners-guide-for-webpack-2/copy-all-images-files-to-a-folder-using-copy-webpack-plugin-7c8cf2de7676">Copy all images/files to a folder using copy-webpack-plugin</a>
 
 ## Asset Credits
 

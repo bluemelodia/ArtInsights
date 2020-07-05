@@ -2,7 +2,7 @@
 
 const CleanWebpackPlugin   = require('clean-webpack-plugin');
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 /* Generates an HTML5 file that includes all our webpack bundles 
  * in the body using script tags. */
@@ -60,20 +60,6 @@ module.exports = {
                     { loader: 'sass-loader', options: { sourceMap: isDev } }
                 ],
                 include: helpers.root('src', 'app')
-            },
-            /* Ensures that images will be processed and added to the output directory.
-             * Additionally, the image variables will contain the final URL of the image
-             * after processing.
-             * 
-             * When processing images, the loader will recognize them as local files
-             * and replace the ./my-image.png path with the final path to the image
-             * in the output directory. The html-loader handles <img src="./my-image.png" /> 
-             * in the same manner. */
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
             }
         ]
     },
@@ -87,5 +73,18 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),
+        /* 
+         * Tell the CopyWebpackPlugin to copy all files in src/images to 
+         * the 'images' folder inside of the output 'dist' folder.
+         * As the images will now be served from the dist folder, we can now 
+         * use relative paths for image files. 
+         * 
+         * Webpack will not process images as part of bundling by default, because
+         * we have no import/require statements for our image resources in JS. 
+         * Therefore, Webpack will not see them as dependencies.
+         * */
+        new CopyPlugin([
+            { from: 'src/images', to: 'images' } 
+        ]), 
     ]
 };

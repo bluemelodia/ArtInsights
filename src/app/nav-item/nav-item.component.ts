@@ -10,11 +10,12 @@ export class NavItemComponent implements OnInit {
   @Input() iconName: string;
   @Input() altText: string;
 
-  public iconPrefix = './nav-icons/';
-
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  public getIconPath(): string {
+    return `./images/${this.iconName}`;
+  }
 }
