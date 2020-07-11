@@ -8,6 +8,7 @@ import { ManageFollowsModule } from './manage-follows/manage-follows.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { NavItemComponent } from './nav-item/nav-item.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ManageFollowsModule
   ],

@@ -1,6 +1,13 @@
 <div class="search-bar">
-    <input class="search-input" type="text" placeholder="Search" aria-label="Search">
-    <div class="search-button" type="submit">
+    <input #searchInput
+        class="search-input" 
+        type="text" 
+        [placeholder]="placeholder" 
+        (keyup.enter)="userSearched(searchInput.value)"
+        aria-label="Search">
+    <div class="search-button"
+        (click)="userSearched(searchInput.value)"
+        type="submit">
         <img [src]="searchIconPath" alt="search">
     </div>
 </div>
