@@ -77,7 +77,7 @@ module.exports = {
                     { loader: 'css-loader', options: { sourceMap: isDev } },
                     { loader: 'sass-loader', options: { sourceMap: isDev } }
                 ],
-                include: helpers.root('src', 'assets')
+                include: helpers.root('src', 'styles')
             },
             /* 
             * In Angular apps, we add styles to components by passing a file path
