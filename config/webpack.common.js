@@ -35,7 +35,8 @@ module.exports = {
          * environment for production or deployment.
          */
         polyfills: './src/polyfills.ts',
-        main: isDev ? './src/main.ts' : './src/main.aot.ts'
+        main: isDev ? './src/main.ts' : './src/main.aot.ts',
+        styles: './src/styles/styles.scss'
     },
 
     resolve: {

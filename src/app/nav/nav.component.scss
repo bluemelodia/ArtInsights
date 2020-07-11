@@ -27,6 +27,7 @@ nav {
     button {
         background-color: transparent;
         height: $button-dimensions;
+        border: none;
 
         &:hover {
             background-color: $app-light-nav;
