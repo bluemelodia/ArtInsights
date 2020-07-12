@@ -29,6 +29,7 @@
 
         .scrollable-list {
             max-height: 450px;
+            padding-right: $large-spacing;
             overflow-y: scroll;
         }
     }
