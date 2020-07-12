@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TumblrFollowService } from '../tumblr-follow.service';
 import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser } from '../follow.types';
+import { userAction } from '../../app.consts';
 
 @Component({
   selector: 'app-follow',
@@ -41,23 +42,7 @@ export class FollowComponent implements OnInit {
     }
   }
 
-  public followsYou(blog: string) {
-    return blog in this.tumblrFollowerMap;
-  }
-
-  public showTumblrWidget() {
-    return this.tumblrFollowers.length > 0 || this.tumblrFollowing.length > 0;
-  }
-
-  /* Open in a tab. */
-  public visitTumblr(blogURL: string) {
-    window.open(blogURL, "_blank");
-  }
-
-  public dateForTimestamp(timestamp: number) {
-    return new Date(timestamp * 1000);
-  }
-
+  /* Tumblr-specific actions. */
   private getMoreTumblrFollowers(blog: string) {
     if (this.hasMoreTumblrFollowers) {
       this.getTumblrFollowers(blog, this.tumblrFollowerOffset);

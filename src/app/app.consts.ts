@@ -5,17 +5,23 @@ export enum media {
 }
 
 export enum userAction {
+    Auth = 'auth',
+    Follow = 'follow',
     Followers = 'followers',
     Following = 'following',
     Posts = 'posts',
-    Tags = 'tag'
+    Tags = 'tag',
+    Unfollow = 'unfollow'
 }
 
 export interface MediaAction {
+    auth?: string,
+    follow?: string,
     followers: string,
     following: string,
     posts: string, 
-    tag: string
+    tag: string, 
+    unfollow?: string
 }
 
 export interface NavItem {
@@ -54,4 +60,3 @@ export const navActions: { [id: string] : NavItem } = {
         alt: 'post engagement'
     }
 }
-

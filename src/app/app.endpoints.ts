@@ -10,10 +10,13 @@ const mediaActionMap: { [id: string] : MediaAction } = {
         [userAction.Tags]: ''
     },
     [media.Tumblr]: {
+        [userAction.Auth]: 'auth',
+        [userAction.Follow]: 'follow',
         [userAction.Followers]: 'followers', 
         [userAction.Following]: 'following', 
         [userAction.Posts]: 'blog',
-        [userAction.Tags]: 'tag'
+        [userAction.Tags]: 'tag',
+        [userAction.Unfollow]: 'unfollow'
     },
     [media.Twitter]: {
         [userAction.Followers]: '', 

@@ -3,12 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { ManageFollowsModule } from './manage-follows/manage-follows.module';
-
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FollowsModule } from './follows/follows.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ManageFollowsModule
+    FollowsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,6 +12,8 @@ import { TumblrBlogResponse } from './follow.types';
 export class TumblrFollowService {
   public tumblrFollowers = urlForSite(media.Tumblr, userAction.Followers);
   public tumblrFollowing = urlForSite(media.Tumblr, userAction.Following);
+  public followTumblrBlog = urlForSite(media.Tumblr, userAction.Follow);
+  public unfollowTumblrBlog = urlForSite(media.Tumblr, userAction.Unfollow);
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +26,18 @@ export class TumblrFollowService {
   public getTumblrFollowing(blog: string, offset: number = 0): Observable<TumblrBlogResponse> {
     const url = this.tumblrFollowing + `/${blog}/offset/${offset}`;
     console.log(`📘 Get Tumblr following for ${blog}: `, url);
+    return this.http.get<TumblrBlogResponse>(url);
+  }
+
+  public followBlog(blog: string): Observable<TumblrBlogResponse> {
+    const url = this.followTumblrBlog + `/${blog}`;
+    console.log(`📘 Follow Tumblr blog ${blog}: `, url);
+    return this.http.get<TumblrBlogResponse>(url);
+  }
+
+  public unfollowBlog(blog: string): Observable<TumblrBlogResponse> {
+    const url = this.unfollowTumblrBlog + `/${blog}`;
+    console.log(`📘 Unfollow Tumblr blog ${blog}: `, url);
     return this.http.get<TumblrBlogResponse>(url);
   }
 }

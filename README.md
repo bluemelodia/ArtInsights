@@ -52,7 +52,7 @@ For the dev build (build:dev command in package.json):
 
 build:clean: 
 
-    To keep the proejct clean, delete the files that the Angular compiler generated in order to compile the application. We delete the files before compilation, and after generating bundles. 
+    To keep the project clean, delete the files that the Angular compiler generated in order to compile the application. We delete the files before compilation, and after generating bundles. 
 
 build:prod: 
 

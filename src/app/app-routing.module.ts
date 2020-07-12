@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FollowComponent } from './manage-follows/follow/follow.component';
+import { FollowComponent } from './follows/follow/follow.component';
 
 const routes: Routes = [
   { path: 'following', component: FollowComponent }

@@ -1,5 +1,5 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { media } from '../../app.consts';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { media, userAction } from '../../app.consts';
 
 @Component({
   selector: 'app-blog',
@@ -9,6 +9,8 @@ import { media } from '../../app.consts';
 export class BlogComponent implements OnInit {
   @Input() isFollowing: boolean;
   @Input() mediaType: media;
+
+  @Output() onUserAction = new EventEmitter<userAction>();
 
   @HostBinding('class') get themeClasses(): string {
     switch(this.mediaType) {
@@ -22,5 +24,13 @@ export class BlogComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  updateBlogFollowStatus() {
+    if (this.isFollowing) {
+      this.onUserAction.emit(userAction.Unfollow);
+    } else {
+      this.onUserAction.emit(userAction.Follow);
+    }
   }
 }

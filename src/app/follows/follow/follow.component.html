@@ -1,0 +1,10 @@
+<app-search
+    placeholder="Name of Blog"
+    (onUserSearch)="onBlogSearch($event)">
+</app-search>
+<app-tumblr-follow
+    [tumblrFollowers]="tumblrFollowers"
+    [tumblrFollowerMap]="tumblrFollowerMap"
+    [tumblrFollowing]="tumblrFollowing"
+    [tumblrFollowingMap]="tumblrFollowingMap">
+</app-tumblr-follow>
