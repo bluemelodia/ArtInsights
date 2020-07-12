@@ -45,7 +45,13 @@ export class FollowComponent implements OnInit {
   private follow(blog: string, medium: media) {
     switch(medium) {
       case media.Tumblr:
-        this.tumblrFollowService.followBlog(blog);
+        this.tumblrFollowService.followBlog(blog)
+          .subscribe((res: TumblrBlogResponse) => {
+              if (res.statusCode === 403) {
+                console.log("GO TO AUTH!");
+              }
+              console.log("Try to follow: ", res);
+          })
         break;
     }
   }
@@ -53,7 +59,13 @@ export class FollowComponent implements OnInit {
   private unfollow(blog: string, medium: media) {
     switch(medium) {
       case media.Tumblr:
-        this.tumblrFollowService.unfollowBlog(blog);
+        this.tumblrFollowService.unfollowBlog(blog)
+          .subscribe((res: TumblrBlogResponse) => {
+            if (res.statusCode === 403) {
+              console.log("GO TO AUTH!");
+            }
+            console.log("Try to unfollow: ", res);
+          })
         break;
     }
   }
