@@ -6,11 +6,12 @@
     padding: 0;
     border: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
     margin: $large-spacing; 
-    margin-left: $nav-bar-width;
+    margin-left: $main-content-inset;
 }
 
 

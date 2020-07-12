@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FollowService } from '../follow.service';
-import { Blog, BlogResponse, Followers, Following, User } from '../follow.types';
+import { TumblrFollowService } from '../tumblr-follow.service';
+import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser } from '../follow.types';
 
 @Component({
   selector: 'app-follow',
@@ -8,7 +8,7 @@ import { Blog, BlogResponse, Followers, Following, User } from '../follow.types'
   styleUrls: ['./follow.component.scss']
 })
 export class FollowComponent implements OnInit {
-  constructor(private followService: FollowService) { }
+  constructor(private tumblrFollowService: TumblrFollowService) { }
 
   private blog: string;
 
@@ -18,15 +18,15 @@ export class FollowComponent implements OnInit {
    * fetching more followers/following when new entries are no longer being returned
    * by the API calls (we are getting repeats back).
    */
-  private followers: string[] = [];
-  private followerMap: { [user: string] : User } = {};
-  private followerOffset = 0;
-  private hasMoreFollowers = true;
+  public tumblrFollowers: string[] = [];
+  public tumblrFollowerMap: { [user: string] : TumblrUser } = {};
+  private tumblrFollowerOffset = 0;
+  private hasMoreTumblrFollowers = true;
 
-  private following: string[] = [];
-  private followingMap: { [user: string] : Blog } = {};
-  private followingOffset = 0;
-  private hasMoreFollowing = true;
+  public tumblrFollowing: string[] = [];
+  public tumblrFollowingMap: { [user: string] : TumblrBlog } = {};
+  private tumblrFollowingOffset = 0;
+  private hasMoreTumblrFollowing = true;
 
   ngOnInit() {
 
@@ -35,99 +35,108 @@ export class FollowComponent implements OnInit {
   public onBlogSearch(blog: string) {
     /* New blog search, reset all. */
     if (blog.length > 0 && blog !== this.blog) {
-      this.resetBlogStats;
-      this.getFollowers(blog, this.followerOffset);
-      this.getFollowing(blog, this.followingOffset);
+      this.resetTumblrStats;
+      this.getTumblrFollowers(blog, this.tumblrFollowerOffset);
+      this.getTumblrFollowing(blog, this.tumblrFollowingOffset);
     }
   }
 
-  private getMoreFollowers(blog: string) {
-    if (this.hasMoreFollowers) {
-      this.getFollowers(blog, this.followerOffset);
+  public showTumblrWidget() {
+    return this.tumblrFollowers.length > 0 || this.tumblrFollowing.length > 0;
+  }
+
+  /* Open in a tab. */
+  public visitTumblr(blogURL: string) {
+    window.open(blogURL, "_blank");
+  }
+
+  private getMoreTumblrFollowers(blog: string) {
+    if (this.hasMoreTumblrFollowers) {
+      this.getTumblrFollowers(blog, this.tumblrFollowerOffset);
     }
   }
 
-  private getMoreFollowing(blog: string) {
-    if (this.hasMoreFollowing) {
-      this.getFollowing(blog, this.followingOffset);
+  private getMoreTumblrFollowing(blog: string) {
+    if (this.hasMoreTumblrFollowing) {
+      this.getTumblrFollowing(blog, this.tumblrFollowingOffset);
     }
   }
 
-  public resetBlogStats() {
-    this.followers = [];
-    this.followerMap = {};
-    this.followerOffset = 0;
-    this.hasMoreFollowers = true;
+  public resetTumblrStats() {
+    this.tumblrFollowers = [];
+    this.tumblrFollowerMap = {};
+    this.tumblrFollowerOffset = 0;
+    this.hasMoreTumblrFollowers = true;
 
-    this.following = [];
-    this.followingMap = {};
-    this.followingOffset = 0;
-    this.hasMoreFollowing = true;
+    this.tumblrFollowing = [];
+    this.tumblrFollowingMap = {};
+    this.tumblrFollowingOffset = 0;
+    this.hasMoreTumblrFollowing = true;
   }
 
-  public getFollowers(blogger: string, offset: number = 0) {
-    this.followService.getTumblrFollowers(blogger, offset)
-      .subscribe((blogData: BlogResponse) => { 
+  public getTumblrFollowers(blog: string, offset: number = 0) {
+    this.tumblrFollowService.getTumblrFollowers(blog, offset)
+      .subscribe((blogData: TumblrBlogResponse) => { 
         if (blogData.statusCode !== -1) {
-          const responseData = blogData.responseData as Followers;
+          const responseData = blogData.responseData as TumblrFollowers;
           if (!responseData.users || responseData.users.length < 1) {
-            this.hasMoreFollowers = false;
+            this.hasMoreTumblrFollowers = false;
           }
-          responseData.users.forEach((user: User) => {
-            if (user.name in this.followerMap) {
-              this.hasMoreFollowers = false;
+          responseData.users.forEach((user: TumblrUser) => {
+            if (user.name in this.tumblrFollowerMap) {
+              this.hasMoreTumblrFollowers = false;
             } else {
-              this.addFollower(user);
+              this.addTumblrFollower(user);
             }
           });
-          this.getMoreFollowers(blogger);
-          console.log("Followers 🙌🏼: ", blogData, this.followers)
+          this.getMoreTumblrFollowers(blog);
+          console.log("TumblrFollowers 🙌🏼: ", blogData, this.tumblrFollowers)
         }
       })
   }
 
-  private addFollower(user: User) {
-    let follower: User = {
+  private addTumblrFollower(user: TumblrUser) {
+    let follower: TumblrUser = {
       name: user.name, 
       url: user.url,
       updated: user.updated, 
       following: user.following
     };
-    this.followers.push(follower.name);
-    this.followerMap[follower.name] = follower;
-    this.followerOffset++;
+    this.tumblrFollowers.push(follower.name);
+    this.tumblrFollowerMap[follower.name] = follower;
+    this.tumblrFollowerOffset++;
   }
 
-  public getFollowing(blogger: string, offset: number = 0) {
-    this.followService.getTumblrFollowing(blogger, offset)
-      .subscribe((blogData: BlogResponse) => {
+  public getTumblrFollowing(blog: string, offset: number = 0) {
+    this.tumblrFollowService.getTumblrFollowing(blog, offset)
+      .subscribe((blogData: TumblrBlogResponse) => {
         if (blogData.statusCode !== -1) {
-          const responseData = blogData.responseData as Following;
+          const responseData = blogData.responseData as TumblrFollowing;
           if (!responseData.blogs || responseData.blogs.length < 1) {
-            this.hasMoreFollowing = false;
+            this.hasMoreTumblrFollowing = false;
           }
-          responseData.blogs.forEach((blog: Blog) => {
-            if (blog.name in this.followingMap) {
-              this.hasMoreFollowing = false;
+          responseData.blogs.forEach((blog: TumblrBlog) => {
+            if (blog.name in this.tumblrFollowingMap) {
+              this.hasMoreTumblrFollowing = false;
             } else {
-              this.addFollowing(blog);
+              this.addTumblrFollowing(blog);
             }
           });
-          this.getMoreFollowing(blogger);
-          console.log("Following 🎀: ", blogData, this.following);
+          this.getMoreTumblrFollowing(blog);
+          console.log("TumblrFollowing 🎀: ", blogData, this.tumblrFollowing);
         }
       })
   }
 
-  private addFollowing(blog: Blog) {
-    let following: Blog = {
+  private addTumblrFollowing(blog: TumblrBlog) {
+    let tumblrFollowing: TumblrBlog = {
       name: blog.name, 
       title: blog.title,
       url: blog.url,
       updated: blog.updated
     };
-    this.following.push(following.name);
-    this.followingMap[following.name] = following;
-    this.followingOffset++;
+    this.tumblrFollowing.push(tumblrFollowing.name);
+    this.tumblrFollowingMap[tumblrFollowing.name] = tumblrFollowing;
+    this.tumblrFollowingOffset++;
   }
 }

@@ -2,3 +2,26 @@
     placeholder="Name of Blog"
     (onUserSearch)="onBlogSearch($event)">
 </app-search>
+<section *ngIf="showTumblrWidget()" class="tumblr-follows">
+    <div class="followers">
+        <h2>Followers</h2>
+        <div *ngIf="tumblrFollowers.length > 0" class="scrollable-list">
+            <app-follower *ngFor="let follower of tumblrFollowers"
+                mediaType="Tumblr"
+                [isFollowing]="tumblrFollowerMap[follower].following">
+                <div media-type="tumblr">
+                    <h3 
+                        (click)="visitTumblr(tumblrFollowerMap[follower].url)"
+                    >{{ follower }}</h3>
+                </div>
+            </app-follower>
+        </div>
+    </div>
+    <div class="following">
+        <h2>Following</h2>
+        <div *ngIf="tumblrFollowing.length > 0" class="scrollable-list">
+            <app-following *ngFor="let following of tumblrFollowing">
+            </app-following>
+        </div>  
+    </div>
+</section>

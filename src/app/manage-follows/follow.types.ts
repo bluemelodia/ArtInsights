@@ -1,28 +1,28 @@
-export interface User {
+export interface TumblrUser {
     following: boolean,
     name: string, 
     updated: number,
     url: string
 }
 
-export interface Blog {
+export interface TumblrBlog {
     name: string, 
     title: string,
     updated: number,
     url: string 
 }
 
-export interface BlogResponse {
+export interface TumblrBlogResponse {
     statusCode: number,
-    responseData: Followers | Following
+    responseData: TumblrFollowers | TumblrFollowing
 }
 
-export interface Followers {
+export interface TumblrFollowers {
     total_users: number,
-    users: User[],
+    users: TumblrUser[],
 }
 
-export interface Following {
+export interface TumblrFollowing {
     total_users: number,
-    blogs: Blog[],
+    blogs: TumblrBlog[],
 }
