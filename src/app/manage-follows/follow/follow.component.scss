@@ -15,7 +15,7 @@
 
         h2 {
             text-align: center;
-            padding: $small-spacing;
+            padding-bottom: $large-spacing;
         }
 
         h3 {
@@ -35,5 +35,11 @@
 
     & .followers {
         margin-right: $large-spacing;
+    }
+
+    & .following {
+        & .follows-back {
+            color: $tumblr-mutual;
+        }
     }
 }

@@ -41,6 +41,10 @@ export class FollowComponent implements OnInit {
     }
   }
 
+  public followsYou(blog: string) {
+    return blog in this.tumblrFollowerMap;
+  }
+
   public showTumblrWidget() {
     return this.tumblrFollowers.length > 0 || this.tumblrFollowing.length > 0;
   }
@@ -48,6 +52,10 @@ export class FollowComponent implements OnInit {
   /* Open in a tab. */
   public visitTumblr(blogURL: string) {
     window.open(blogURL, "_blank");
+  }
+
+  public dateForTimestamp(timestamp: number) {
+    return new Date(timestamp * 1000);
   }
 
   private getMoreTumblrFollowers(blog: string) {

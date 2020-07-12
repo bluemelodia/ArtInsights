@@ -6,22 +6,31 @@
     <div class="followers">
         <h2>Followers</h2>
         <div *ngIf="tumblrFollowers.length > 0" class="scrollable-list">
-            <app-follower *ngFor="let follower of tumblrFollowers"
+            <app-blog *ngFor="let follower of tumblrFollowerMap | keyvalue"
                 mediaType="Tumblr"
-                [isFollowing]="tumblrFollowerMap[follower].following">
+                [isFollowing]="follower.value.following">
                 <div media-type="tumblr">
-                    <h3 
-                        (click)="visitTumblr(tumblrFollowerMap[follower].url)"
-                    >{{ follower }}</h3>
+                    <h3 (click)="visitTumblr(follower.value.url)">
+                        {{ follower.key }}
+                    </h3>
+                    <p>Last Updated: {{ dateForTimestamp(follower.value.updated) | date: 'MM/dd/yyyy' }}</p>
                 </div>
-            </app-follower>
+            </app-blog>
         </div>
     </div>
     <div class="following">
         <h2>Following</h2>
         <div *ngIf="tumblrFollowing.length > 0" class="scrollable-list">
-            <app-following *ngFor="let following of tumblrFollowing">
-            </app-following>
+            <app-blog *ngFor="let following of tumblrFollowingMap | keyvalue"
+                [isFollowing]="true"
+                mediaType="Tumblr">
+                <div media-type="tumblr">
+                    <h3 (click)="visitTumblr(following.value.url)">
+                        {{ following.key }}
+                    </h3>
+                    <div *ngIf="followsYou(following.key)" class="follows-back">Follows you</div>
+                </div>
+            </app-blog>
         </div>  
     </div>
 </section>

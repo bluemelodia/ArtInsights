@@ -1,1 +1,4 @@
-<p>blog works!</p>
+<div class="blog-info">
+    <ng-content select="[media-type=tumblr]"></ng-content>
+</div>
+<div class="follow-button">{{ isFollowing? "Unfollow" : "Follow" }}</div>
