@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TumblrFollowService } from '../tumblr-follow.service';
 import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser } from '../follow.types';
-import { userAction } from '../../app.consts';
+import { media } from '../../app.consts';
 
 @Component({
   selector: 'app-follow',
@@ -42,18 +42,31 @@ export class FollowComponent implements OnInit {
     }
   }
 
-  /* Tumblr-specific actions. */
-  private getMoreTumblrFollowers(blog: string) {
-    if (this.hasMoreTumblrFollowers) {
-      this.getTumblrFollowers(blog, this.tumblrFollowerOffset);
+  private follow(blog: string, medium: media) {
+    switch(medium) {
+      case media.Tumblr:
+        this.tumblrFollowService.followBlog(blog);
+        break;
     }
   }
 
-  private getMoreTumblrFollowing(blog: string) {
-    if (this.hasMoreTumblrFollowing) {
-      this.getTumblrFollowing(blog, this.tumblrFollowingOffset);
+  private unfollow(blog: string, medium: media) {
+    switch(medium) {
+      case media.Tumblr:
+        this.tumblrFollowService.unfollowBlog(blog);
+        break;
     }
   }
+
+  public followTumblr(blog: string) {
+    this.follow(blog, media.Tumblr);
+  }
+
+  public unfollowTumblr(blog: string) {
+    this.unfollow(blog, media.Tumblr);
+  }
+
+  /* Tumblr-specific actions. */
 
   public resetTumblrStats() {
     this.tumblrFollowers = [];
@@ -88,6 +101,12 @@ export class FollowComponent implements OnInit {
       })
   }
 
+  private getMoreTumblrFollowers(blog: string) {
+    if (this.hasMoreTumblrFollowers) {
+      this.getTumblrFollowers(blog, this.tumblrFollowerOffset);
+    }
+  }
+
   private addTumblrFollower(user: TumblrUser) {
     let follower: TumblrUser = {
       name: user.name, 
@@ -119,6 +138,12 @@ export class FollowComponent implements OnInit {
           console.log("TumblrFollowing 🎀: ", blogData, this.tumblrFollowing);
         }
       })
+  }
+
+  private getMoreTumblrFollowing(blog: string) {
+    if (this.hasMoreTumblrFollowing) {
+      this.getTumblrFollowing(blog, this.tumblrFollowingOffset);
+    }
   }
 
   private addTumblrFollowing(blog: TumblrBlog) {
