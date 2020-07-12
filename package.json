@@ -28,6 +28,7 @@
     "@angular/platform-server": "^8.2.14",
     "@angular/router": "^8.2.14",
     "@angular/upgrade": "^8.2.14",
+    "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@types/jest": "^26.0.3",
     "angular-font-awesome": "^3.1.2",
     "core-js": "~2.6",

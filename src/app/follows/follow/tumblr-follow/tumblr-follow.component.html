@@ -5,7 +5,7 @@
             <app-blog *ngFor="let follower of tumblrFollowerMap | keyvalue"
                 [isFollowing]="follower.value.following"
                 [mediaType]="mediaType"
-                (onUserAction)="onUserAction($event, follower.key)">
+                (onUserAction)="onUserAction($event, follower.value.url)">
                 <div media-type="tumblr">
                     <h3 (click)="blogUtils.visitBlog(follower.value.url)">
                         {{ follower.key }}
@@ -21,7 +21,7 @@
             <app-blog *ngFor="let following of tumblrFollowingMap | keyvalue"
                 [isFollowing]="true"
                 [mediaType]="mediaType"
-                (onUserAction)="onUserAction($event, following.key)">
+                (onUserAction)="onUserAction($event, following.value.url)">
                 <div media-type="tumblr">
                     <h3 (click)="blogUtils.visitBlog(following.value.url)">
                         {{ following.key }}

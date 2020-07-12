@@ -30,13 +30,13 @@ export class TumblrFollowService {
   }
 
   public followBlog(blog: string): Observable<TumblrBlogResponse> {
-    const url = this.followTumblrBlog + `/${blog}`;
+    const url = this.followTumblrBlog + `?blog=${blog}`;
     console.log(`📘 Follow Tumblr blog ${blog}: `, url);
     return this.http.get<TumblrBlogResponse>(url);
   }
 
   public unfollowBlog(blog: string): Observable<TumblrBlogResponse> {
-    const url = this.unfollowTumblrBlog + `/${blog}`;
+    const url = this.unfollowTumblrBlog + `?blog=${blog}`;
     console.log(`📘 Unfollow Tumblr blog ${blog}: `, url);
     return this.http.get<TumblrBlogResponse>(url);
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TumblrFollowService } from '../tumblr-follow.service';
 import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser } from '../follow.types';
 import { media } from '../../app.consts';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-follow',
@@ -9,7 +10,7 @@ import { media } from '../../app.consts';
   styleUrls: ['./follow.component.scss']
 })
 export class FollowComponent implements OnInit {
-  constructor(private tumblrFollowService: TumblrFollowService) { }
+  constructor(private tumblrFollowService: TumblrFollowService, private auth: AuthService) { }
 
   private blog: string;
 
@@ -46,9 +47,9 @@ export class FollowComponent implements OnInit {
     switch(medium) {
       case media.Tumblr:
         this.tumblrFollowService.followBlog(blog)
-          .subscribe((res: TumblrBlogResponse) => {
+          .subscribe((res: any) => {
               if (res.statusCode === 403) {
-                console.log("GO TO AUTH!");
+                this.auth.authenticateUser(medium);
               }
               console.log("Try to follow: ", res);
           })
@@ -60,9 +61,9 @@ export class FollowComponent implements OnInit {
     switch(medium) {
       case media.Tumblr:
         this.tumblrFollowService.unfollowBlog(blog)
-          .subscribe((res: TumblrBlogResponse) => {
+          .subscribe((res: any) => {
             if (res.statusCode === 403) {
-              console.log("GO TO AUTH!");
+              this.auth.authenticateUser(medium);
             }
             console.log("Try to unfollow: ", res);
           })
