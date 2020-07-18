@@ -30,14 +30,22 @@ export class TumblrFollowService {
   }
 
   public followBlog(blog: string): Observable<TumblrBlogResponse> {
-    const url = this.followTumblrBlog + `?blog=${blog}`;
+    const url = this.followTumblrBlog + `?blog=${this.removeTrailingSlash(blog)}`;
     console.log(`📘 Follow Tumblr blog ${blog}: `, url);
     return this.http.get<TumblrBlogResponse>(url);
   }
 
   public unfollowBlog(blog: string): Observable<TumblrBlogResponse> {
-    const url = this.unfollowTumblrBlog + `?blog=${blog}`;
+    const url = this.unfollowTumblrBlog + `?blog=${this.removeTrailingSlash(blog)}`;
     console.log(`📘 Unfollow Tumblr blog ${blog}: `, url);
     return this.http.get<TumblrBlogResponse>(url);
+  }
+
+  private removeTrailingSlash(url: string) {
+    let newURL = url;
+    if (url.lastIndexOf('/') === url.length - 1) {
+      newURL = url.slice(0, -1);
+    }
+    return newURL;
   }
 }

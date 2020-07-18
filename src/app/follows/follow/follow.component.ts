@@ -54,7 +54,7 @@ export class FollowComponent implements OnInit {
   }
 
   public getTumblrFollowersAndFollowing() {
-    this.resetTumblrStats;
+    this.resetTumblrStats();
     this.getTumblrFollowers(this.blog, this.tumblrFollowerOffset);
     this.getTumblrFollowing(this.blog, this.tumblrFollowingOffset);
   }
@@ -95,7 +95,7 @@ export class FollowComponent implements OnInit {
             if (res.statusCode === 403) {
               this.authService.authenticateUser(medium);
             } else if (res.statusCode !== 0) {
-              console.log(`Failed to unfollow: ${blog}, ${res}`);
+              console.log(`Failed to unfollow: ${blog}, `, res);
             } else {
               console.log(`Successfully unfollowed: ${blog}, refresh`);
               this.getTumblrFollowersAndFollowing();
