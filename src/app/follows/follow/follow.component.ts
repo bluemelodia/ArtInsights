@@ -3,6 +3,8 @@ import { TumblrFollowService } from '../tumblr-follow.service';
 import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser } from '../follow.types';
 import { media } from '../../app.consts';
 import { AuthService } from '../../auth.service';
+import { RedirectService } from '../../redirect.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-follow',
@@ -10,7 +12,13 @@ import { AuthService } from '../../auth.service';
   styleUrls: ['./follow.component.scss']
 })
 export class FollowComponent implements OnInit {
-  constructor(private tumblrFollowService: TumblrFollowService, private auth: AuthService) { }
+  constructor(
+    private tumblrFollowService: TumblrFollowService, 
+    private authService: AuthService,
+    private redirectService: RedirectService,
+  ) {
+    this.setupRedirectSubscription();
+  }
 
   private blog: string;
 
@@ -30,6 +38,8 @@ export class FollowComponent implements OnInit {
   private tumblrFollowingOffset = 0;
   private hasMoreTumblrFollowing = true;
 
+  private authRedirectSubject$: Subject<string>;
+
   ngOnInit() {
 
   }
@@ -43,15 +53,24 @@ export class FollowComponent implements OnInit {
     }
   }
 
+  private setupRedirectSubscription() {
+    this.authRedirectSubject$ = this.authService.redirectSubject$;
+    this.authRedirectSubject$
+      .subscribe((redirectLink) => {
+        console.log("Prepare to redirect to auth link: ", redirectLink);
+        this.redirectService.redirect(redirectLink);
+      })
+  }
+
   private follow(blog: string, medium: media) {
     switch(medium) {
       case media.Tumblr:
         this.tumblrFollowService.followBlog(blog)
           .subscribe((res: any) => {
-              if (res.statusCode === 403) {
-                this.auth.authenticateUser(medium);
-              }
-              console.log("Try to follow: ", res);
+            if (res.statusCode === 403) {
+              this.authService.authenticateUser(medium);
+            }
+            console.log("Try to follow: ", res);
           })
         break;
     }
@@ -63,7 +82,7 @@ export class FollowComponent implements OnInit {
         this.tumblrFollowService.unfollowBlog(blog)
           .subscribe((res: any) => {
             if (res.statusCode === 403) {
-              this.auth.authenticateUser(medium);
+              this.authService.authenticateUser(medium);
             }
             console.log("Try to unfollow: ", res);
           })
@@ -80,7 +99,6 @@ export class FollowComponent implements OnInit {
   }
 
   /* Tumblr-specific actions. */
-
   public resetTumblrStats() {
     this.tumblrFollowers = [];
     this.tumblrFollowerMap = {};
