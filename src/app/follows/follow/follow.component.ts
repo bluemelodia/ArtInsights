@@ -5,6 +5,7 @@ import { media } from '../../app.consts';
 import { AuthService } from '../../auth.service';
 import { RedirectService } from '../../redirect.service';
 import { Subject } from 'rxjs';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-follow',
@@ -47,10 +48,15 @@ export class FollowComponent implements OnInit {
   public onBlogSearch(blog: string) {
     /* New blog search, reset all. */
     if (blog.length > 0 && blog !== this.blog) {
-      this.resetTumblrStats;
-      this.getTumblrFollowers(blog, this.tumblrFollowerOffset);
-      this.getTumblrFollowing(blog, this.tumblrFollowingOffset);
+      this.blog = blog;
+      this.getTumblrFollowersAndFollowing();
     }
+  }
+
+  public getTumblrFollowersAndFollowing() {
+    this.resetTumblrStats;
+    this.getTumblrFollowers(this.blog, this.tumblrFollowerOffset);
+    this.getTumblrFollowing(this.blog, this.tumblrFollowingOffset);
   }
 
   private setupRedirectSubscription() {
@@ -69,6 +75,11 @@ export class FollowComponent implements OnInit {
           .subscribe((res: any) => {
             if (res.statusCode === 403) {
               this.authService.authenticateUser(medium);
+            } else if (res.statusCode !== 0) {
+              console.log(`Failed to follow: ${blog}, ${res}`);
+            } else {
+              console.log(`Successfully followed: ${blog}, refresh`);
+              this.getTumblrFollowersAndFollowing();
             }
             console.log("Try to follow: ", res);
           })
@@ -83,6 +94,11 @@ export class FollowComponent implements OnInit {
           .subscribe((res: any) => {
             if (res.statusCode === 403) {
               this.authService.authenticateUser(medium);
+            } else if (res.statusCode !== 0) {
+              console.log(`Failed to unfollow: ${blog}, ${res}`);
+            } else {
+              console.log(`Successfully unfollowed: ${blog}, refresh`);
+              this.getTumblrFollowersAndFollowing();
             }
             console.log("Try to unfollow: ", res);
           })
