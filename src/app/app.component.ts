@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ArtInsights';
+
+  @HostListener('window:message', ['$event'])
+  receivedPostedMessage(event: any) {
+    console.log("Received a message: ", event);
+    if (event.origin !== 'https://artinsights.ue.r.appspot.com') {
+      return;
+    }
+    console.log("Auth passed? ");
+  }
 }

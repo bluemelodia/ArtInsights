@@ -10,7 +10,7 @@ import { RedirectService } from '../redirect.service';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  @HostListener('message', ['$event'])
+  @HostListener('window:message', ['$event'])
   receivedPostedMessage(event: any) {
     console.log("Received a message: ", event);
     if (event.origin !== 'https://artinsights.ue.r.appspot.com') {
