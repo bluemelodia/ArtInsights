@@ -10,15 +10,6 @@ import { RedirectService } from '../redirect.service';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  @HostListener('window:message', ['$event'])
-  receivedPostedMessage(event: any) {
-    console.log("Received a message: ", event);
-    if (event.origin !== 'https://artinsights.ue.r.appspot.com') {
-      return;
-    }
-    console.log("Auth passed? ");
-  }
-
   private tumblrAuthRedirectSubject$: Subject<string>;
   private daAuthRedirectSubject$: Subject<string>;
 
