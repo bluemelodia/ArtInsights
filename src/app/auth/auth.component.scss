@@ -24,7 +24,7 @@ section {
             margin: $small-spacing;
     
             &:hover {
-                background-color: $app-light-nav;
+                background-color: $app-tertiary;
                 box-shadow: inset 0 0 0 2px $app-dark-nav;
             }
     
@@ -45,14 +45,19 @@ section {
     }
 
     .continue-button {
-        background-color: $app-dark-nav;
+        background-color: $app-primary;
         color: $light-text-color;
         font-size: $large-font;
+        font-weight: bold;
 
         padding: $large-spacing;
         margin: $large-spacing;
 
         max-width: 700px;
         width: 100%;
+
+        &:hover {
+            background-color: $app-secondary;
+        }
     }
 }
