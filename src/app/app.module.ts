@@ -8,12 +8,14 @@ import { NavComponent } from './nav/nav.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FollowsModule } from './follows/follows.module';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    NavItemComponent
+    NavItemComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

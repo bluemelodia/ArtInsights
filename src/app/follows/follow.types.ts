@@ -1,3 +1,16 @@
+export interface Deviant {
+    user: DeviantUserInfo,
+    is_watching: boolean, 
+    watches_you: boolean
+}
+
+export interface DeviantUserInfo {
+    userid: string,
+    username: string,
+    usericon: string,
+    type: string
+}
+
 export interface TumblrUser {
     following: boolean,
     name: string, 

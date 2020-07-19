@@ -9,12 +9,20 @@ import { Observable, of, Subject } from 'rxjs';
 })
 export class AuthService {
   public tumblrAuthURL = urlForSite(media.Tumblr, userAction.Auth);
-  private authRedirectSubject$ = new Subject<string>();
+  private tumblrRedirectSubject$ = new Subject<string>();
+ 
+  public deviantArtAuthURL = urlForSite(media.DeviantArt, userAction.Auth);
+  private daRedirectSubject$ = new Subject<string>();
 
   constructor(private http: HttpClient) { }
 
-  public get redirectSubject$() {
-    return this.authRedirectSubject$;
+  public redirectSubject$(socialMedia: media) {
+    switch (socialMedia) {
+      case media.DeviantArt:
+        return this.daRedirectSubject$;
+      case media.Tumblr:
+        return this.tumblrRedirectSubject$;
+    }
   }
 
   authenticateUser(socialMedia: media) {
@@ -24,23 +32,27 @@ export class AuthService {
       .subscribe((data: string) => {
         if (data) {
           console.log("Prepare to redirect: ", data);
-          this.authRedirectSubject$.next(data);
+          this.redirectSubject$(socialMedia).next(data);
         } else {
           throw new Error(`Unable to authenticate the user for ${socialMedia}.`);
         }
       }, 
       (error: Error) => {
-        return this.authRedirectSubject$.next(null);
+        this.redirectSubject$(socialMedia).next(null);
       });
   }
 
   showAuthorizationPage(socialMedia: media): Observable<any> {
     switch (socialMedia) {
+      case media.DeviantArt:
+        console.log("📘 Initiate DeviantArt authentication: ", this.deviantArtAuthURL);
+        return this.http.get(this.deviantArtAuthURL,
+          {responseType: 'text'});
       case media.Tumblr:
         console.log("📘 Initiate Tumblr authentication: ", this.tumblrAuthURL);
         return this.http.get(
-            this.tumblrAuthURL,
-            {responseType: 'text'});
+          this.tumblrAuthURL,
+          {responseType: 'text'});
       default:
         break;
     }

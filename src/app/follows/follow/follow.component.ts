@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { TumblrFollowService } from '../tumblr-follow.service';
-import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser } from '../follow.types';
+import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser, Deviant } from '../follow.types';
 import { media } from '../../app.consts';
 import { AuthService } from '../../auth.service';
 import { RedirectService } from '../../redirect.service';
 import { Subject } from 'rxjs';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { DeviantArtFollowService } from '../deviant-art-follow.service';
 
 @Component({
   selector: 'app-follow',
@@ -15,6 +15,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 export class FollowComponent implements OnInit {
   constructor(
     private tumblrFollowService: TumblrFollowService, 
+    private daFollowService: DeviantArtFollowService,
     private authService: AuthService,
     private redirectService: RedirectService,
   ) {
@@ -39,7 +40,13 @@ export class FollowComponent implements OnInit {
   private tumblrFollowingOffset = 0;
   private hasMoreTumblrFollowing = true;
 
-  private authRedirectSubject$: Subject<string>;
+  public deviantArtFriends: string[] = [];
+  public deviantArtFriendMap: { [user: string]: Deviant } = {};
+  private deviantArtFriendOffset = 0;
+  private hasMoreDAFriends = true;
+
+  private tumblrAuthRedirectSubject$: Subject<string>;
+  private daAuthRedirectSubject$: Subject<string>;
 
   ngOnInit() {
 
@@ -49,7 +56,8 @@ export class FollowComponent implements OnInit {
     /* New blog search, reset all. */
     if (blog.length > 0 && blog !== this.blog) {
       this.blog = blog;
-      this.getTumblrFollowersAndFollowing();
+      this.getDeviantArtFriendsAndFollowers();
+      //this.getTumblrFollowersAndFollowing();
     }
   }
 
@@ -60,14 +68,21 @@ export class FollowComponent implements OnInit {
   }
 
   private setupRedirectSubscription() {
-    this.authRedirectSubject$ = this.authService.redirectSubject$;
-    this.authRedirectSubject$
+    this.tumblrAuthRedirectSubject$ = this.authService.redirectSubject$(media.Tumblr);
+    this.tumblrAuthRedirectSubject$
       .subscribe((redirectLink) => {
         console.log("Prepare to redirect to auth link: ", redirectLink);
         this.redirectService.redirect(redirectLink);
-      })
-  }
+    });
 
+    this.daAuthRedirectSubject$ = this.authService.redirectSubject$(media.DeviantArt);
+    this.daAuthRedirectSubject$
+      .subscribe((redirectLink) => {
+        console.log("Prepare to redirect to auth link: ", redirectLink);
+        this.redirectService.redirect(redirectLink);
+    });
+  }
+  
   private follow(blog: string, medium: media) {
     switch(medium) {
       case media.Tumblr:
@@ -106,6 +121,32 @@ export class FollowComponent implements OnInit {
     }
   }
 
+  /* DeviantArt-specific actions. */
+  private resetDAStats() {
+    this.deviantArtFriends = [];
+    this.deviantArtFriendMap = {};
+    this.deviantArtFriendOffset = 0;
+    this.hasMoreDAFriends = true;
+  }
+
+  public getDeviantArtFriendsAndFollowers() {
+    this.resetDAStats();
+    this.getDeviantArtFriends(this.blog, this.deviantArtFriendOffset);
+  }
+
+  public getDeviantArtFriends(username: string, offset: number = 0) {
+    console.log("GET DA FRIENDS");
+    this.daFollowService.getDAFriends(username, offset)
+      .subscribe((res: any) => {
+        if (res.statusCode === 403) {
+          this.authService.authenticateUser(media.DeviantArt);
+        } else {
+          console.log("YO ", res);
+        }
+      });
+  }
+
+  /* Tumblr-specific actions. */
   public followTumblr(blog: string) {
     this.follow(blog, media.Tumblr);
   }
@@ -114,8 +155,7 @@ export class FollowComponent implements OnInit {
     this.unfollow(blog, media.Tumblr);
   }
 
-  /* Tumblr-specific actions. */
-  public resetTumblrStats() {
+  private resetTumblrStats() {
     this.tumblrFollowers = [];
     this.tumblrFollowerMap = {};
     this.tumblrFollowerOffset = 0;

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FollowComponent } from './follows/follow/follow.component';
 
 const routes: Routes = [
-  { path: 'following', component: FollowComponent }
+  { path: 'following', component: FollowComponent },
 ];
 
 @NgModule({
