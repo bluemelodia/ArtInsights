@@ -27,6 +27,10 @@ export class AuthComponent {
     this.authService.authenticateUser(forMedia);
   }
 
+  public checkAuthStatus() {
+    
+  }
+
   public getIconName(iconName: string) {
     return this.utils.getIconPath(iconName);
   }

@@ -1,0 +1,58 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+section {
+    width: 95%;
+    margin: 0 auto;
+
+    @include flex-col($justify-content: center);
+    align-items: center;
+
+    .instructions {
+        @include large-and-center-font($title-font);
+    }
+
+    p {
+        @include large-and-center-font($large-font, $font-weight: normal);
+    }
+
+    .nav-section {
+        @include flex-row();
+
+        .nav-button {
+            width: $auth-button-dimensions;
+            margin: $small-spacing;
+    
+            &:hover {
+                background-color: $app-light-nav;
+                box-shadow: inset 0 0 0 2px $app-dark-nav;
+            }
+    
+            button {
+                background-color: transparent;
+                height: $auth-button-dimensions;
+        
+                img {
+                    height: 100%;
+                    padding: $small-spacing;
+                }
+            }
+    
+            .media-name {
+                @include large-and-center-font($large-font);
+            }
+        }
+    }
+
+    .continue-button {
+        background-color: $app-dark-nav;
+        color: $light-text-color;
+        font-size: $large-font;
+
+        padding: $large-spacing;
+        margin: $large-spacing;
+
+        max-width: 700px;
+        width: 100%;
+    }
+}

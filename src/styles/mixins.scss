@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 @mixin flex-row($justify-content: center) {
     display: flex;
     justify-content: $justify-content;
@@ -7,4 +9,17 @@
     display: flex;
     flex-direction: column;
     justify-content: $justify-content;
+}
+
+@mixin large-and-center-font($font-size, $font-weight: bold) {
+    text-align: center;
+    font-weight: $font-weight;
+    
+    @if $font-size == $large-font {
+        font-size: $large-font;
+        line-height: $large-line-height;
+    } @else if $font-size == $title-font {
+        font-size: $title-font;
+        line-height: $title-line-height;
+    }
 }

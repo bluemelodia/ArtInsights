@@ -20,6 +20,10 @@ $large-spacing: $small-spacing * 2;
 $nav-bar-width: $small-spacing * 8;
 $main-content-inset: $nav-bar-width + $large-spacing;
 $button-dimensions: $small-spacing * 6;
+$auth-button-dimensions: $button-dimensions * 2;
 $search-bar-height: $small-spacing * 6;
 
 $large-font: 18px;
+$title-font: $large-font * 1.5;
+$large-line-height: $large-font * 2;
+$title-line-height: $large-line-height * 1.5;

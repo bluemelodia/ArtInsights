@@ -1,7 +1,15 @@
-<nav>
-    <div *ngFor="let media of mediaData | keyvalue">
-        <button (click)="auth(media.key)" [attr.alt]="'Authenticate with ' + media.value.alt">
-            <img [src]="getIconName(media.value.iconName)"/>
-        </button>
+<section>
+    <div class="instructions">Authentication Required</div>
+    <p>Pick your social media(s) of choice.</p>
+    <div class="nav-section">
+        <div class="nav-button" *ngFor="let media of mediaData | keyvalue">
+            <button (click)="auth(media.key)" [attr.alt]="'Authenticate with ' + media.value.alt">
+                <img [src]="getIconName(media.value.iconName)"/>
+            </button>
+            <div class="media-name">{{ media.key }}</div>
+        </div>
     </div>
-</nav>
+    <button class="continue-button" (click)="checkAuthStatus()">
+        Continue
+    </button>
+</section>
