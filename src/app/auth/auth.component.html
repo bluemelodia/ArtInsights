@@ -1,1 +1,7 @@
-<button (click)="auth()">Auth</button>
+<nav>
+    <div *ngFor="let media of mediaData | keyvalue">
+        <button (click)="auth(media.key)" [attr.alt]="'Authenticate with ' + media.value.alt">
+            <img [src]="getIconName(media.value.iconName)"/>
+        </button>
+    </div>
+</nav>
