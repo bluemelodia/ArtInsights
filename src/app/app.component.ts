@@ -8,6 +8,13 @@ import { Component, HostListener } from '@angular/core';
 export class AppComponent {
   title = 'ArtInsights';
 
+  public showDialog = false;
+
+  public buttonClicked() {
+    this.showDialog = true; 
+    document.getElementById("dialog").focus();
+  }
+
   @HostListener('window:message', ['$event'])
   receivedPostedMessage(event: any) {
     console.log("Received a message: ", event);
