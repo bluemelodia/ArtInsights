@@ -24,7 +24,7 @@ export class AuthComponent {
       case media.DeviantArt:
       case media.Tumblr:
         this.authStatus[mediaType] = status;
-        this.isAuthorized = true;
+        this.isAuthorized = status === AuthStatus.Success;
         break;
       default:
         break;
@@ -56,6 +56,17 @@ export class AuthComponent {
   }
 
   public getStylesForMediaButton(media: media) {
+    let mediaStyle = [];
+    switch (this.authStatus[media]) {
+      case AuthStatus.Success:
+        mediaStyle.push('auth-success');
+        break;
+    }
+
+    return mediaStyle.join(" ");
+  }
+
+  public getIconForMediaButton(media: media) {
     switch (this.authStatus[media]) {
       case AuthStatus.Unattempted:
       case AuthStatus.Success:

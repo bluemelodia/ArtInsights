@@ -1,13 +1,17 @@
 <section>
-    <div class="instructions">Login</div>
-    <p>Choose one or more social media platforms.</p>
+    <header class="instructions">
+        <h1 class="login-header">Login</h1>
+        <p>Sign into one or more the social media platform(s) below.</p>
+    </header>
     <div class="nav-section">
-        <div class="nav-button" *ngFor="let media of mediaData | keyvalue">
+        <div class="nav-button" [ngClass]="getStylesForMediaButton(media.key)" *ngFor="let media of mediaData | keyvalue">
             <button (click)="auth(media.key)" [attr.alt]="'Authenticate with ' + media.value.alt">
                 <img class="sm-icon" [src]="getIconName(media.value.iconName)"/>
-                <img class="sm-auth" [src]="getStylesForMediaButton(media.key)"/>
             </button>
-            <div class="media-name">{{ media.key }}</div>
+            <div class="media-name">
+                {{ media.key }}
+            </div>
+            <img class="auth-status" [src]="getIconForMediaButton(media.key)"/>
         </div>
     </div>
     <button class="continue-button" [disabled]="isAuthorized ? null : true">
