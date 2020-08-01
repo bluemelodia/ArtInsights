@@ -20,7 +20,6 @@ section {
         @include flex-row();
 
         .nav-button {
-            width: $auth-button-dimensions;
             margin: $small-spacing;
     
             &:hover {
@@ -31,10 +30,18 @@ section {
             button {
                 background-color: transparent;
                 height: $auth-button-dimensions;
+                position: relative;
         
-                img {
+                .sm-icon {
                     height: 100%;
                     padding: $small-spacing;
+                }
+
+                .sm-auth {
+                    height: $auth-button-dimensions / 4;
+                    position: absolute;
+                    bottom: $small-spacing;
+                    right: $small-spacing;
                 }
             }
     
@@ -58,6 +65,10 @@ section {
 
         &:hover {
             background-color: $app-secondary;
+        }
+
+        &:disabled, &[disabled] {
+            background-color: $app-primary-disabled;
         }
     }
 }

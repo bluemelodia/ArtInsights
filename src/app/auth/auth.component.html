@@ -4,12 +4,13 @@
     <div class="nav-section">
         <div class="nav-button" *ngFor="let media of mediaData | keyvalue">
             <button (click)="auth(media.key)" [attr.alt]="'Authenticate with ' + media.value.alt">
-                <img [src]="getIconName(media.value.iconName)"/>
+                <img class="sm-icon" [src]="getIconName(media.value.iconName)"/>
+                <img class="sm-auth" [src]="getStylesForMediaButton(media.key)"/>
             </button>
             <div class="media-name">{{ media.key }}</div>
         </div>
     </div>
-    <button class="continue-button" (click)="checkAuthStatus()">
+    <button class="continue-button" [disabled]="isAuthorized ? null : true">
         Continue
     </button>
 </section>

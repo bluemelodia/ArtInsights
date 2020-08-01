@@ -8,16 +8,16 @@ import { UtilsService } from '../utils.service';
 })
 export class NavItemComponent implements OnInit {
 
-  @Input() iconName: string;
+  @Input() set iconName(iconName: string) {
+    this.iconPath = this.utils.getIconPath(iconName);
+  }
   @Input() altText: string;
   @Input() link: string;
+
+  public iconPath: string;
 
   constructor(private utils: UtilsService) { }
 
   ngOnInit(): void {
-  }
-
-  public getIconPath(): string {
-    return this.utils.getIconPath(this.iconName);
   }
 }

@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { media } from './app.consts';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,19 +10,17 @@ import { Component, HostListener } from '@angular/core';
 export class AppComponent {
   title = 'ArtInsights';
 
-  public showDialog = false;
-
-  public buttonClicked() {
-    this.showDialog = true; 
-    document.getElementById("dialog").focus();
-  }
-
   @HostListener('window:message', ['$event'])
   receivedPostedMessage(event: any) {
     console.log("Received a message: ", event);
     if (event.origin !== 'https://artinsights.ue.r.appspot.com') {
       return;
     }
-    console.log("Auth passed? ");
+    console.log("Auth passed? ", event.data);
+    this.auth.authSuccess(event.data);
+  }
+
+  constructor(private auth: AuthService) {
+
   }
 }

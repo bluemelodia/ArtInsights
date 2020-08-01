@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { media, userAction } from './app.consts';
 import { urlForSite } from './app.endpoints';
 import { Observable, of, Subject } from 'rxjs';
+import { AuthPostResponse } from './auth/auth.types';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,8 @@ export class AuthService {
   public deviantArtAuthURL = urlForSite(media.DeviantArt, userAction.Auth);
   private daRedirectSubject$ = new Subject<string>();
 
+  private authSuccessSubject$ = new Subject<AuthPostResponse>();
+
   constructor(private http: HttpClient) { }
 
   public redirectSubject$(socialMedia: media) {
@@ -23,6 +26,10 @@ export class AuthService {
       case media.Tumblr:
         return this.tumblrRedirectSubject$;
     }
+  }
+
+  public get authOutcomeSubject$() {
+    return this.authSuccessSubject$;
   }
 
   authenticateUser(socialMedia: media) {
@@ -56,5 +63,10 @@ export class AuthService {
       default:
         break;
     }
+  }
+
+  authSuccess(data: AuthPostResponse) {
+    console.log("Auth succeeded: ", data);
+    this.authSuccessSubject$.next(data);
   }
 }
