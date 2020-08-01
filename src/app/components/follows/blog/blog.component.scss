@@ -1,0 +1,30 @@
+@import '../../../../styles/mixins.scss';
+@import '../../../../styles/variables.scss';
+
+:host {
+    @include flex-row(space-between);
+
+    margin-top: $small-spacing;
+    margin-bottom: $small-spacing;
+    padding: $small-spacing;
+    border: 2px solid $light-text-color;
+
+    & .follow-button {
+        color: $light-text-color;
+        font-weight: bold;
+    }
+
+    &.tumblr-theme {
+        background-color: $tumblr-medium;
+        &:hover {
+            border: 2px solid $tumblr-light;
+        }
+
+        & .follow-button {
+            &:hover {
+                color: $tumblr-light;
+            }
+        }
+    }
+}
+

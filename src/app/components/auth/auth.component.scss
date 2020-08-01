@@ -1,0 +1,91 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+@mixin media-button-subtle {
+    background-color: $app-tertiary;
+    box-shadow: inset 0 0 0 2px $app-dark-nav;
+}
+
+:host {
+    @include flex-row();
+    height: 100vh;
+}
+
+section {
+    width: 95%;
+    margin: 0 auto;
+
+    @include flex-col($justify-content: center);
+    align-items: center;
+
+    .instructions {
+        .login-header {
+            @include large-and-center-font($title-font);
+        }
+
+        p {
+            @include large-and-center-font($large-font, $font-weight: normal);
+        }
+    }
+
+    .nav-section {
+        @include flex-row();
+        margin: $large-spacing;
+
+        .nav-button {
+            margin: $small-spacing;
+            padding: $large-spacing;
+            position: relative;
+
+            /* Depends on auth status. */
+            &.auth-success {
+                @include media-button-subtle();
+            }
+
+            .auth-status {
+                height: $auth-button-dimensions / 4;
+                position: absolute;
+                top: $small-spacing;
+                left: $small-spacing;
+            }
+    
+            &:hover {
+                @include media-button-subtle();
+            }
+    
+            button {
+                background-color: transparent;
+                height: $auth-button-dimensions;
+        
+                .sm-icon {
+                    height: 100%;
+                    padding: $small-spacing;
+                }
+            }
+    
+            .media-name {
+                @include large-and-center-font($large-font);
+            }
+        }
+    }
+
+    .continue-button {
+        background-color: $app-primary;
+        color: $light-text-color;
+        font-size: $large-font;
+        font-weight: bold;
+
+        padding: $large-spacing;
+
+        max-width: 700px;
+        width: 100%;
+
+        &:hover {
+            background-color: $app-secondary;
+        }
+
+        &:disabled, &[disabled] {
+            background-color: $app-primary-disabled;
+        }
+    }
+}

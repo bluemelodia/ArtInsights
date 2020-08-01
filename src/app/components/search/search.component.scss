@@ -1,0 +1,46 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+$search-bar-border: #2d3436;
+$search-focus-border: #a29bfe;
+$search-background-color: #dfe6e9;
+
+@mixin search-focus {
+    outline: none;
+    border: 2px solid $search-focus-border;
+}
+
+:host {
+    @include flex-row();
+}
+
+.search-bar {
+    @include flex-row();
+
+    width: 100%;
+    max-width: 700px;
+    height: $search-bar-height;
+    background-color: $search-background-color;
+    border: 2px solid $search-bar-border;
+
+    .search-input {
+        width: 100%;
+        padding: $small-spacing;
+        background-color: transparent;
+        font-size: $large-font;
+
+        &:focus, &:hover {
+            @include search-focus();
+        }
+    }
+    
+    .search-button {
+        @include flex-col($justify-content: center);
+        max-width: 30px;
+        margin: $small-spacing;
+    
+        & img {
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,44 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+:host {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    max-width: $nav-bar-width;
+
+    box-sizing: border-box;
+    background-color: $app-dark-nav;
+    padding: $small-spacing;
+}
+
+nav {
+    @include flex-col();
+
+    &:not(:first-child) {
+        margin-top: $large-spacing;
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $app-light-nav;
+    }
+
+    button {
+        background-color: transparent;
+        height: $button-dimensions;
+        border: none;
+
+        &:hover {
+            background-color: $app-light-nav;
+        }
+    }
+
+    button:not(:first-child) {
+        margin-top: $large-spacing;
+    }
+
+    button:last-child {
+        margin-bottom: $large-spacing;
+    }
+}
