@@ -41,6 +41,7 @@ export class AuthComponent {
     private utils: UtilsService
   ) {
     this.setupRedirectSubscriptions();
+    this.setupAuthSubscription();
 
     /* We don't need Twitter auth as we are only going to be accessing public data. */
     delete this.mediaData[media.Twitter];

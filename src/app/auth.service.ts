@@ -67,6 +67,6 @@ export class AuthService {
 
   authSuccess(data: AuthPostResponse) {
     console.log("Auth succeeded: ", data);
-    this.authSuccessSubject$.next(data);
+    this.authOutcomeSubject$.next(data);
   }
 }

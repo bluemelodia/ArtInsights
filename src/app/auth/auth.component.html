@@ -1,6 +1,6 @@
 <section>
-    <div class="instructions">Authentication Required</div>
-    <p>Pick your social media(s) of choice.</p>
+    <div class="instructions">Login</div>
+    <p>Choose one or more social media platforms.</p>
     <div class="nav-section">
         <div class="nav-button" *ngFor="let media of mediaData | keyvalue">
             <button (click)="auth(media.key)" [attr.alt]="'Authenticate with ' + media.value.alt">
