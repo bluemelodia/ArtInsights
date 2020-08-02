@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { FollowComponent } from './components/follows/follow/follow.component';
 import { Authentication } from './routing/auth';
 import { LoginComponent } from './components/login/login.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'auth', component: AuthComponent },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: 'following', component: FollowComponent, canActivate: [Authentication] },
 ];

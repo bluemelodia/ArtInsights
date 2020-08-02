@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   }
 
   setLoginMode(isNewUser: boolean) {
-    console.log("NEW: ", isNewUser);
     this.newUser = isNewUser;
   }
 }
