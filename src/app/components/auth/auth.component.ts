@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { media, mediaData } from '../../app.consts';
+import { media, mediaData, alertType } from '../../app.consts';
 import { authMediaData, AuthPostResponse, AuthStatus } from './auth.types';
 import { AuthService } from '../../services/auth.service';
 import { RedirectService } from '../../services/redirect.service';
 import { UtilsService } from '../../services/utils.service';
 import { Subject } from 'rxjs';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-auth',
@@ -19,7 +20,6 @@ export class AuthComponent {
 
   public isAuthorized = false;
   private userAuthForMedia(mediaType: media, status: AuthStatus) {
-    console.log("user auth for media: ", mediaType);
     switch(mediaType) {
       case media.DeviantArt:
       case media.Tumblr:
@@ -36,6 +36,7 @@ export class AuthComponent {
   };
 
   constructor(
+    private alertService: AlertService,
     private authService: AuthService, 
     private redirectService: RedirectService,
     private utils: UtilsService
@@ -82,14 +83,16 @@ export class AuthComponent {
     this.tumblrAuthRedirectSubject$ = this.authService.redirectSubject$(media.Tumblr);
     this.tumblrAuthRedirectSubject$
       .subscribe((redirectLink) => {
-        console.log("Tumblr: Prepare to redirect to auth link: ", redirectLink);
+        console.info("Tumblr: Prepare to redirect to auth link: ", redirectLink);
+        this.alertService.showAlert(alertType.Info, 'Connecting to Tumblr...');
         this.redirectService.redirect(redirectLink);
     });
 
     this.daAuthRedirectSubject$ = this.authService.redirectSubject$(media.DeviantArt);
     this.daAuthRedirectSubject$
       .subscribe((redirectLink) => {
-        console.log("DeviantArt: Prepare to redirect to auth link: ", redirectLink);
+        console.info("DeviantArt: Prepare to redirect to auth link: ", redirectLink);
+        this.alertService.showAlert(alertType.Info, 'Connecting to DeviantArt...');
         this.redirectService.redirect(redirectLink);
     });
   }
@@ -99,10 +102,12 @@ export class AuthComponent {
     this.authOutcomeSubject$
       .subscribe((response: AuthPostResponse) => {
         if (response && response.statusCode === 0) {
-          console.log("Auth succesful for ", response);
+          console.info("Auth successful for ", response);
+          this.alertService.showAlert(alertType.Success, `${response.mediaType} authorization successful.`);
           this.userAuthForMedia(response.mediaType, AuthStatus.Success);
         } else {
-          console.log("Auth failed for: ", response);
+          console.info("Auth failed for: ", response);
+          this.alertService.showAlert(alertType.Error, `${response.mediaType} authorization failed. Please try again.`);
           this.userAuthForMedia(response.mediaType, AuthStatus.Failed);
         }
       });

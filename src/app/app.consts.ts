@@ -14,6 +14,18 @@ export enum userAction {
     Unfollow = 'unfollow'
 }
 
+export enum alertType {
+    Error = 'error',
+    Info = 'info',
+    Success = 'success',
+    Warning = 'warning'
+}
+
+export interface Alert {
+    type: alertType, 
+    message: string
+}
+
 export interface MediaAction {
     auth?: string,
     follow?: string,

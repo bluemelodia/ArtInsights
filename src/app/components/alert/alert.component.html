@@ -1,1 +1,4 @@
-<p>alert works!</p>
+<dialog [ngClass]="alertStyle"
+    [@showHide]="showAlert ? 'show' : 'hide'">
+    <p>{{ alertMessage }}</p>
+</dialog>
