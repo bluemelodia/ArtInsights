@@ -5,21 +5,77 @@
     justify-content: $justify-content;
 }
 
+@mixin flex-row-percent-width($width: 100%) {
+    @include flex-row();
+    width: $width;
+}
+
 @mixin flex-col($justify-content: flex-start) {
     display: flex;
     flex-direction: column;
     justify-content: $justify-content;
 }
 
-@mixin large-and-center-font($font-size, $font-weight: bold) {
+@mixin wide-and-center() {
+    @include full-width-limited();
+    @include flex-col($justify-content: center);
+    align-items: center;
+}
+
+$default-line-height: 44px; 
+
+@mixin large-and-center-font($font-size, $font-weight: bold, $line-height: $default-line-height) {
     text-align: center;
     font-weight: $font-weight;
     
-    @if $font-size == $large-font {
-        font-size: $large-font;
+    @if $line-height != $default-line-height {
+        line-height: $line-height;
+    } @else if $font-size == $large-font {
         line-height: $large-line-height;
     } @else if $font-size == $title-font {
-        font-size: $title-font;
         line-height: $title-line-height;
     }
+    
+    @if $font-size == $large-font {
+        font-size: $large-font;
+    } @else if $font-size == $title-font {
+        font-size: $title-font;
+    }
+}
+
+@mixin full-width-limited($limit: 700px) {
+    width: 100%;
+    max-width: $limit;
+}
+
+@mixin input-style($width: 100%) {
+    font-size: $large-font;
+    text-align: center;
+    height: 44px;
+    width: $width;
+}
+
+@mixin large-rectangular-button() {
+    @include full-width-limited();
+
+    background-color: $app-primary;
+    color: $light-text-color;
+    font-size: $large-font;
+    font-weight: normal;
+
+    padding: $large-spacing;
+
+    &:hover, &.selected {
+        background-color: $app-secondary;
+        font-weight: bold;
+    }
+
+    &:disabled, &[disabled] {
+        background-color: $app-primary-disabled;
+    }
+}
+
+@mixin subtle-bordered-button() {
+    background-color: $app-tertiary;
+    box-shadow: inset 0 0 0 2px $app-dark-nav;
 }

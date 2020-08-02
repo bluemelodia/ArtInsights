@@ -65,7 +65,7 @@ export class AlertComponent implements OnInit {
   }
 
   private delayedDismiss() {
-    timer(3000)
+    timer(5000)
       .subscribe(() => {
         this.dismissAlert();
       });

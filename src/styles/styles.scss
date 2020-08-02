@@ -12,6 +12,10 @@
 body {
     margin: $large-spacing; 
     margin-left: $main-content-inset;
+
+    &.full-width {
+        margin: 0;
+    }
 }
 
 

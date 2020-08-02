@@ -1,0 +1,34 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+:host {
+    @include flex-row();
+    height: 100vh;
+}
+
+form {
+    @include wide-and-center();
+
+    .form-field {
+        @include flex-row-percent-width();
+        margin-bottom: $large-spacing;
+
+        label {
+            @include large-and-center-font($large-font, $font-weight: normal);
+            width: 100%;
+        }
+
+        input[type=text], input[type=password] {
+            @include subtle-bordered-button();
+            @include input-style();
+        }
+
+        button {
+            @include large-rectangular-button();
+        }
+    }
+
+    input[type=submit] {
+        @include large-rectangular-button();
+    }
+}

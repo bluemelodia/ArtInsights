@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { media } from './app.consts';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -20,7 +20,15 @@ export class AppComponent {
     this.auth.authSuccess(event.data);
   }
 
-  constructor(private auth: AuthService) {
-
+  constructor(
+      private auth: AuthService, 
+      public router: Router
+  ) {
+    /* Conditionally apply styles to the body depending on which route we are in. */
+    router.events.forEach((event) => {
+      if(event instanceof NavigationEnd) {
+        document.body.className = router.url === '/login' ? 'full-width' : '';
+      }
+    });
   }
 }

@@ -1,0 +1,19 @@
+<!-- update the template with the form control using the formControl binding provided by the 
+    FormControlDirective (also included in ReactiveFormsModule) -->
+<form>
+    <div class="form-field">
+        <label>E-mail</label>
+        <input type="text" placeholder="Enter e-mail address." [formControl]="emailControl">
+    </div>
+    <div class="form-field">
+        <label>Password</label>
+        <input type="password" placeholder="Enter password." [formControl]="passwordControl">
+    </div>
+    <div class="form-field">
+        <button [class.selected]="newUser" 
+            (click)="setLoginMode(true)">New User</button>
+        <button [class.selected]="!newUser" 
+            (click)="setLoginMode(false)">Returning User</button>
+    </div>
+    <input type="submit" value="Submit">
+</form>

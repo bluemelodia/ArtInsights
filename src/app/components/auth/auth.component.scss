@@ -1,22 +1,13 @@
 @import '../../../styles/mixins.scss';
 @import '../../../styles/variables.scss';
 
-@mixin media-button-subtle {
-    background-color: $app-tertiary;
-    box-shadow: inset 0 0 0 2px $app-dark-nav;
-}
-
 :host {
     @include flex-row();
     height: 100vh;
 }
 
 section {
-    width: 95%;
-    margin: 0 auto;
-
-    @include flex-col($justify-content: center);
-    align-items: center;
+    @include wide-and-center();
 
     .instructions {
         .login-header {
@@ -39,7 +30,7 @@ section {
 
             /* Depends on auth status. */
             &.auth-success {
-                @include media-button-subtle();
+                @include subtle-bordered-button();
             }
 
             .auth-status {
@@ -50,7 +41,7 @@ section {
             }
     
             &:hover {
-                @include media-button-subtle();
+                @include subtle-bordered-button();
             }
     
             button {
@@ -70,22 +61,6 @@ section {
     }
 
     .continue-button {
-        background-color: $app-primary;
-        color: $light-text-color;
-        font-size: $large-font;
-        font-weight: bold;
-
-        padding: $large-spacing;
-
-        max-width: 700px;
-        width: 100%;
-
-        &:hover {
-            background-color: $app-secondary;
-        }
-
-        &:disabled, &[disabled] {
-            background-color: $app-primary-disabled;
-        }
+        @include large-rectangular-button();
     }
 }

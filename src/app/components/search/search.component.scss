@@ -16,9 +16,8 @@ $search-background-color: #dfe6e9;
 
 .search-bar {
     @include flex-row();
+    @include full-width-limited();
 
-    width: 100%;
-    max-width: 700px;
     height: $search-bar-height;
     background-color: $search-background-color;
     border: 2px solid $search-bar-border;

@@ -14,7 +14,10 @@
             <img class="auth-status" [src]="getIconForMediaButton(media.key)"/>
         </div>
     </div>
-    <button class="continue-button" [disabled]="isAuthorized ? null : true">
+    <button 
+        class="continue-button" 
+        [disabled]="isAuthorized ? null : true"
+        (click)="loginUser()">
         Continue
     </button>
 </section>

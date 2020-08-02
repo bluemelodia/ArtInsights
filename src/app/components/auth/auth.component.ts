@@ -6,6 +6,7 @@ import { RedirectService } from '../../services/redirect.service';
 import { UtilsService } from '../../services/utils.service';
 import { Subject } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -39,6 +40,7 @@ export class AuthComponent {
     private alertService: AlertService,
     private authService: AuthService, 
     private redirectService: RedirectService,
+    private router: Router,
     private utils: UtilsService
   ) {
     this.setupRedirectSubscriptions();
@@ -50,6 +52,12 @@ export class AuthComponent {
 
   public auth(forMedia: media) {
     this.authService.authenticateUser(forMedia);
+  }
+
+  public loginUser() {
+    if (this.isAuthorized) {
+      this.router.navigate['home'];
+    }
   }
 
   public getIconName(iconName: string) {
