@@ -7,15 +7,15 @@
 }
 
 section {
-    @include wide-and-center();
+    @include wide-and-center($width: 95%);
 
     .instructions {
         .login-header {
-            @include large-and-center-font($title-font);
+            @include large-aligned-text($title-font);
         }
 
         p {
-            @include large-and-center-font($large-font, $font-weight: normal);
+            @include large-aligned-text($large-font, $font-weight: normal);
         }
     }
 
@@ -55,7 +55,7 @@ section {
             }
     
             .media-name {
-                @include large-and-center-font($large-font);
+                @include large-aligned-text($large-font);
             }
         }
     }

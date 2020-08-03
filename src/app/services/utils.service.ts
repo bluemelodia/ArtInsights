@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UtilsService {
-
   constructor() { }
 
   public getIconPath(iconName: string): string {

@@ -1,13 +1,33 @@
 <!-- update the template with the form control using the formControl binding provided by the 
     FormControlDirective (also included in ReactiveFormsModule) -->
-<form>
-    <div class="form-field">
-        <label>E-mail</label>
-        <input type="text" placeholder="Enter e-mail address." [formControl]="emailControl">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <header class="instructions">
+        <h1 class="login-header">{{ newUser? "Sign Up" : "Login" }}</h1>
+    </header>
+
+    <div class="form-field col">
+        <div class="email-label">
+            <label>E-mail</label>
+            <label class="warn-invalid" *ngIf="loginFormControl.email.touched && loginFormControl.email.errors?.required">
+                E-mail is required.
+            </label>
+            <label class="warn-invalid" *ngIf="loginFormControl.email.touched && loginFormControl.email.errors?.email">
+                Please provide a valid e-mail address. 
+            </label>
+        </div>
+        <input type="text" placeholder="Enter e-mail address." formControlName="email">
     </div>
-    <div class="form-field">
-        <label>Password</label>
-        <input type="password" placeholder="Enter password." [formControl]="passwordControl">
+    <div class="form-field col">
+        <div class="password-label">
+            <label>Password</label>
+            <label class="warn-invalid" *ngIf="loginFormControl.password.touched && loginFormControl.password.errors?.required">
+                Password is required.
+            </label>
+            <label class="warn-invalid" *ngIf="loginFormControl.password.touched && loginFormControl.password.errors?.minlength">
+                Passwords must contain at least 6 characters.
+            </label>
+        </div>
+        <input type="password" placeholder="Enter password." formControlName="password">
     </div>
     <div class="form-field">
         <button [class.selected]="newUser" 
@@ -15,5 +35,5 @@
         <button [class.selected]="!newUser" 
             (click)="setLoginMode(false)">Returning User</button>
     </div>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" [disabled]="!loginForm.valid">
 </form>

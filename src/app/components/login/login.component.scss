@@ -7,15 +7,38 @@
 }
 
 form {
-    @include wide-and-center();
+    @include wide-and-center($width: 95%);
+
+    .instructions {
+        .login-header {
+            @include large-aligned-text($title-font);
+        }
+    }
 
     .form-field {
         @include flex-row-percent-width();
         margin-bottom: $large-spacing;
 
+        &.col {
+            @include flex-col();
+
+            .email-label, .password-label {
+                @include flex-row-percent-width();
+                margin-bottom: $small-spacing;
+                align-items: center;
+            }
+        }
+
         label {
-            @include large-and-center-font($large-font, $font-weight: normal);
+            font-weight: normal;
+            text-align: left;
             width: 100%;
+
+            &.warn-invalid {
+                width: 100%;
+                text-align: right;
+                color: $app-error;
+            }
         }
 
         input[type=text], input[type=password] {

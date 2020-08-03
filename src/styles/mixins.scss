@@ -16,16 +16,16 @@
     justify-content: $justify-content;
 }
 
-@mixin wide-and-center() {
-    @include full-width-limited();
+@mixin wide-and-center($width: 100%) {
+    @include full-width-limited($width: $width);
     @include flex-col($justify-content: center);
     align-items: center;
 }
 
-$default-line-height: 44px; 
+$default-line-height: 0px; 
 
-@mixin large-and-center-font($font-size, $font-weight: bold, $line-height: $default-line-height) {
-    text-align: center;
+@mixin large-aligned-text($font-size, $font-weight: bold, $line-height: $default-line-height, $alignment: center) {
+    text-align: $alignment;
     font-weight: $font-weight;
     
     @if $line-height != $default-line-height {
@@ -43,8 +43,8 @@ $default-line-height: 44px;
     }
 }
 
-@mixin full-width-limited($limit: 700px) {
-    width: 100%;
+@mixin full-width-limited($limit: 700px, $width: 100%) {
+    width: $width;
     max-width: $limit;
 }
 
