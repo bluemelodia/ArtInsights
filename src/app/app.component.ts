@@ -30,7 +30,7 @@ export class AppComponent {
     /* Condtionally apply styles to the body depending on our environment. */
     if (ENVIRONMENT === Environment.Production) {
       console.log("SET ATTRIBUTE");
-      document.body.setAttribute('background-image', './images/login.png');
+      document.body.style.backgroundImage = 'url(./images/login.png)';
     } else {
       console.log("NOT PROD!!!!");
     }
