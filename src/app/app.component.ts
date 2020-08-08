@@ -26,7 +26,9 @@ export class AppComponent {
       public router: Router
   ) {
     /* Condtionally apply styles to the body depending on our environment. */
+    console.log("ENVIRONEMNT: ", environment);
     if (environment.production) {
+      console.log("SET ATTRIBUTE");
       document.body.setAttribute('background-image', './images/login.png');
     }
 
