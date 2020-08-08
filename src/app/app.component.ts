@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,11 @@ export class AppComponent {
       private auth: AuthService, 
       public router: Router
   ) {
+    /* Condtionally apply styles to the body depending on our environment. */
+    if (environment.production) {
+      document.body.setAttribute('background-image', './images/login.png');
+    }
+
     /* Conditionally apply styles to the body depending on which route we are in. */
     router.events.forEach((event) => {
       if(event instanceof NavigationEnd) {
