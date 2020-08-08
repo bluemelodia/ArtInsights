@@ -1,5 +1,19 @@
 @import './variables.scss';
 
+@mixin full-background($url: url, $position: center) {
+    background-image: url($url);
+    background-size: cover;
+    background-position: $position;
+}
+
+@mixin absolute-zero() {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 @mixin flex-row($justify-content: center) {
     display: flex;
     justify-content: $justify-content;

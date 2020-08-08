@@ -9,7 +9,7 @@ import { UtilsService } from '../../../services/utils.service';
 export class NavItemComponent implements OnInit {
 
   @Input() set iconName(iconName: string) {
-    this.iconPath = this.utils.getIconPath(iconName);
+    this.iconPath = this.utils.getImagePath(iconName);
   }
   @Input() altText: string;
   @Input() link: string;

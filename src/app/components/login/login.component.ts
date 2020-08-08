@@ -12,7 +12,9 @@ export class LoginComponent implements OnInit {
 
   public newUser = true;
 
-  constructor(private fb: FormBuilder, private utils: UtilsService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private utils: UtilsService) { }
 
   ngOnInit() {
     /* 

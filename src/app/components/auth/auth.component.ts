@@ -61,7 +61,7 @@ export class AuthComponent {
   }
 
   public getIconName(iconName: string) {
-    return this.utils.getIconPath(iconName);
+    return this.utils.getImagePath(iconName);
   }
 
   public getStylesForMediaButton(media: media) {

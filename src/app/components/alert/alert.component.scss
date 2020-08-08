@@ -18,15 +18,12 @@ $warning-bg: #e17055;
     display: flex;
 
     dialog {
+        @include absolute-zero();
+
         color: $light-text-color;
         padding: $large-spacing;
         width: 100%;
 
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    
         &.info {
             background: $info-bg;
         }

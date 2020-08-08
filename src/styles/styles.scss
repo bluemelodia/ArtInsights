@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import './mixins.scss';
 @import './variables.scss';
 
 * {
@@ -16,6 +17,14 @@ body {
     &.full-width {
         margin: 0;
     }
+}
+
+body::before {
+    @include full-background($url: '/images/login.png', $position: bottom);
+    @include absolute-zero();
+
+    content: '';
+    opacity: 0.4;
 }
 
 

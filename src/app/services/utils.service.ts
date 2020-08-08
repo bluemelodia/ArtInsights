@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class UtilsService {
   constructor() { }
 
-  public getIconPath(iconName: string): string {
-    return `./images/${iconName}`;
+  public getImagePath(imageName: string): string {
+    return `./images/${imageName}`;
   }
 }
