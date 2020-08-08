@@ -11,7 +11,7 @@
 }
 
 body {
-    @include full-background($url: '/images/login.png', $position: bottom);
+    @include full-background($url: './images/login.png', $position: bottom);
 
     margin: $large-spacing; 
     margin-left: $main-content-inset;
@@ -27,6 +27,3 @@ body {
         opacity: 0.4;
     }
 }
-
-
-
