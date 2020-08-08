@@ -16,9 +16,11 @@ const CleanWebpackPlugin   = require('clean-webpack-plugin');
 const HtmlWebpackPlugin    = require('html-webpack-plugin');
 
 const CopyPlugin = require('copy-webpack-plugin');
+var webpack = require('webpack');
 
 const helpers              = require('./helpers');
 const isDev                = process.env.NODE_ENV !== 'production';
+const environment          = isDev? 'development' : 'production';
 
 module.exports = {
     /* 
@@ -110,6 +112,12 @@ module.exports = {
             helpers.root('docs'), { root: helpers.root(), verbose: true }),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
+        }),
+        /*
+        * Creates global constants and makes them available in the app.
+        */
+        new webpack.DefinePlugin({
+            "ENVIRONMENT": JSON.stringify(environment)
         }),
         /* 
          * Tell the CopyWebpackPlugin to copy all files in src/images to 

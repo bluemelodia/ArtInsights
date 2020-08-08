@@ -1,7 +1,9 @@
 import { Component, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import { environment } from '../environments/environment';
+import { Environment } from './app.consts';
+
+declare const ENVIRONMENT: Environment;
 
 @Component({
   selector: 'app-root',
@@ -26,10 +28,11 @@ export class AppComponent {
       public router: Router
   ) {
     /* Condtionally apply styles to the body depending on our environment. */
-    console.log("ENVIRONEMNT: ", environment);
-    if (environment.production) {
+    if (ENVIRONMENT === Environment.Production) {
       console.log("SET ATTRIBUTE");
       document.body.setAttribute('background-image', './images/login.png');
+    } else {
+      console.log("NOT PROD!!!!");
     }
 
     /* Conditionally apply styles to the body depending on which route we are in. */
