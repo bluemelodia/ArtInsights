@@ -15,11 +15,15 @@ $warning-bg: #e17055;
     bottom: 0; 
     text-align: right;
 
-    display: flex;
+    .alert-dialog {
+        @include flex-row($justify-content: flex-start);
 
-    dialog {
-        @include absolute-zero();
-
+        /* 
+        * This is needed for the animation. As the absolute-zero mixin will
+        * constrain top: 0 and prevent the dialog from growing to accomodate
+        * longer messages, we don't need to use it here.
+        */
+        position: absolute;
         color: $light-text-color;
         padding: $large-spacing;
         width: 100%;
