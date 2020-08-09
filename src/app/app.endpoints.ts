@@ -32,7 +32,16 @@ export function urlForAction(userAction: UserAction) {
 }
 
 function endpointForAction(userAction: UserAction) {
-
+    let endpoint; 
+    switch(userAction) {
+        case UserAction.Login:
+            endpoint = 'login';
+            break;
+        case UserAction.Register:
+            endpoint = 'register';
+            break;
+    }
+    return endpoint;
 }
 
 export function urlForSite(site: Media, userMediaAction: UserMediaAction) {

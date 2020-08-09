@@ -1,8 +1,14 @@
-import { Media } from '../../app.consts';
+import { Media, UserAction } from '../../app.consts';
 
 export interface AuthPostResponse {
     statusCode: number,
     mediaType: Media
+}
+
+export interface LoginPostResponse {
+    statusCode: number,
+    errorMsg?: string,
+    userAction?: UserAction
 }
 
 export enum AuthStatus {

@@ -67,7 +67,7 @@ export class FollowComponent implements OnInit {
   }
 
   private setupRedirectSubscription() {
-    this.authRedirectSubject$ = this.authService.loginRedirectSubject$;
+    this.authRedirectSubject$ = this.authService.authRedirectSubject$;
     this.authRedirectSubject$
       .subscribe((redirectLink) => {
         console.log("Prepare to redirect to auth link: ", redirectLink);

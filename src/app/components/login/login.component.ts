@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { LoginService } from '../../services/login.service';
+import { LoginPostResponse } from '../auth/auth.types';
+import { Subject } from 'rxjs';
+import { AlertService } from '../../services/alert.service';
+import { AlertType, UserAction } from '../../app.consts';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +15,12 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup; 
 
   public newUser = true;
+  private loginSubject$: Subject<LoginPostResponse>;
 
   constructor(
     private fb: FormBuilder, 
-    private auth: AuthService) { }
+    private login: LoginService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     /* 
@@ -33,12 +39,35 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+    this.setupLoginSubscription();
   }
 
   /* Returns the form controls of the login form. */
   get loginFormControl() {
-    console.log(this.loginForm.controls);
     return this.loginForm.controls;
+  }
+
+  public setupLoginSubscription() {
+    this.loginSubject$ = this.login.loginSubject$;
+    this.loginSubject$
+      .subscribe((response: LoginPostResponse) => {
+        if (response && response.statusCode === 0) {
+          console.info("Login/registration successful for ", response);
+          let message = '';
+          switch(response.userAction) {
+            case UserAction.Login:
+              message = 'Welcome to Art Insights!';
+              break;
+            case UserAction.Register:
+              message = 'Registration successful. Please log in using your credentials.';
+              break;
+          }
+          this.alertService.showAlert(AlertType.Success, message);
+        } else {
+          console.info("Login failed for: ", response);
+          this.alertService.showAlert(AlertType.Error, response.errorMsg);
+        }
+      });
   }
 
   setLoginMode(isNewUser: boolean) {
@@ -47,12 +76,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.loginForm.value);
-    const username = this.loginForm.value.username;
+    const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
     if (this.newUser) {
-      this.auth.registerUser(username, password);
+      this.login.registerUser(email, password);
     } else {
-      this.auth.loginUser(username, password);
+      this.login.loginUser(email, password);
     }
   }
 }

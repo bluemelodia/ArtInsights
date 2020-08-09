@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent {
   public mediaData = Object.assign({}, mediaData);
-  private authOutcomeSubject$: Subject<AuthPostResponse>;
+  private authSubject$: Subject<AuthPostResponse>;
   private authRedirectSubject$: Subject<string>;
 
   public isAuthorized = false;
@@ -87,7 +87,7 @@ export class AuthComponent {
   }
 
   public setupRedirectSubscriptions() {
-    this.authRedirectSubject$ = this.authService.loginRedirectSubject$;
+    this.authRedirectSubject$ = this.authService.authRedirectSubject$;
     this.authRedirectSubject$
       .subscribe((redirectLink) => {
         console.info("Prepare to redirect to auth link: ", redirectLink);
@@ -97,8 +97,8 @@ export class AuthComponent {
   }
 
   public setupAuthSubscription() {
-    this.authOutcomeSubject$ = this.authService.authOutcomeSubject$;
-    this.authOutcomeSubject$
+    this.authSubject$ = this.authService.authSubject$;
+    this.authSubject$
       .subscribe((response: AuthPostResponse) => {
         if (response && response.statusCode === 0) {
           console.info("Auth successful for ", response);

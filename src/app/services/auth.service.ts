@@ -1,41 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Media, UserAction, UserMediaAction } from '../app.consts';
-import { urlForSite, urlForAction } from '../app.endpoints';
+import { Media, UserMediaAction } from '../app.consts';
+import { urlForSite } from '../app.endpoints';
 import { AuthPostResponse } from '../components/auth/auth.types';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  /* For user login and registration. */
-  public loginURL = urlForAction(UserAction.Login);
-  public registerURL = urlForAction(UserAction.Register);
-
   /* For authentication with social Media. */
   public tumblrAuthURL = urlForSite(Media.Tumblr, UserMediaAction.Auth); 
   public deviantArtAuthURL = urlForSite(Media.DeviantArt, UserMediaAction.Auth);
-  private authRedirectSubject$ = new Subject<string>();
-
-  private authSuccessSubject$ = new Subject<AuthPostResponse>();
+  private mediaLoginRedirectSubject$ = new Subject<string>();
+  private mediaAuthSubject$ = new Subject<AuthPostResponse>();
 
   constructor(private http: HttpClient) { }
 
-  public registerUser(username: string, password: string) {
-
+  public get authRedirectSubject$() {
+    return this.mediaLoginRedirectSubject$;
   }
 
-  public loginUser(username: string, password: string) {
-
-  }
-
-  public get loginRedirectSubject$() {
-    return this.authRedirectSubject$;
-  }
-
-  public get authOutcomeSubject$() {
-    return this.authSuccessSubject$;
+  public get authSubject$() {
+    return this.mediaAuthSubject$;
   }
 
   authenticateUser(socialMedia: Media) {
@@ -45,13 +32,13 @@ export class AuthService {
       .subscribe((data: string) => {
         if (data) {
           console.log("Prepare to redirect: ", data);
-          this.loginRedirectSubject$.next(data);
+          this.authRedirectSubject$.next(data);
         } else {
           throw new Error(`Unable to authenticate the user for ${socialMedia}.`);
         }
       }, 
       (error: Error) => {
-        this.loginRedirectSubject$.next(null);
+        this.authRedirectSubject$.next(null);
       });
   }
 
@@ -73,7 +60,7 @@ export class AuthService {
 
   authSuccess(data: AuthPostResponse) {
     console.log("Auth succeeded: ", data);
-    this.authOutcomeSubject$.next(data);
+    this.authSubject$.next(data);
   }
 
   isLoggedIn(): boolean {
