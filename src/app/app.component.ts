@@ -35,7 +35,7 @@ export class AppComponent {
     /* Conditionally apply styles to the body depending on which route we are in. */
     router.events.forEach((event) => {
       if(event instanceof NavigationEnd) {
-        document.body.className = router.url === '/login' ? 'full-width' : '';
+        document.body.className = router.url === '/login' || router.url === '/auth' ? 'full-width' : '';
       }
     });
   }

@@ -33,7 +33,9 @@ import { AuthInterceptor } from './services/auth.interceptor';
   ],
   /* We can have several different interceptors, which is why we provide the interceptor
    * service with the option multi: true. */
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [ 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

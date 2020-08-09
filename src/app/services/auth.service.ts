@@ -62,8 +62,4 @@ export class AuthService {
     console.log("Auth succeeded: ", data);
     this.authSubject$.next(data);
   }
-
-  isLoggedIn(): boolean {
-    return true;
-  }
 }
