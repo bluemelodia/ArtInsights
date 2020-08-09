@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { media, userAction } from '../../app.consts';
+import { Media, UserMediaAction } from '../../app.consts';
 import { urlForSite } from '../../app.endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviantArtFollowService {
-  public deviantArtFriends = urlForSite(media.DeviantArt, userAction.Followers);
-  public deviantArtFollowers = urlForSite(media.DeviantArt, userAction.Following);
-  public followDeviant = urlForSite(media.DeviantArt, userAction.Follow);
-  public unfollowDeviant = urlForSite(media.DeviantArt, userAction.Unfollow);
+  public deviantArtFriends = urlForSite(Media.DeviantArt, UserMediaAction.Followers);
+  public deviantArtFollowers = urlForSite(Media.DeviantArt, UserMediaAction.Following);
+  public followDeviant = urlForSite(Media.DeviantArt, UserMediaAction.Follow);
+  public unfollowDeviant = urlForSite(Media.DeviantArt, UserMediaAction.Unfollow);
 
   constructor(private http: HttpClient) { }
 

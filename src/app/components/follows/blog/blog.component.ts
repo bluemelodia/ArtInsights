@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
-import { media, userAction } from '../../../app.consts';
+import { Media, UserMediaAction } from '../../../app.consts';
 
 @Component({
   selector: 'app-blog',
@@ -8,13 +8,13 @@ import { media, userAction } from '../../../app.consts';
 })
 export class BlogComponent implements OnInit {
   @Input() isFollowing: boolean;
-  @Input() mediaType: media;
+  @Input() mediaType: Media;
 
-  @Output() onUserAction = new EventEmitter<userAction>();
+  @Output() onUserAction = new EventEmitter<UserMediaAction>();
 
   @HostBinding('class') get themeClasses(): string {
     switch(this.mediaType) {
-      case media.Tumblr:
+      case Media.Tumblr:
         return 'tumblr-theme';
       default:
         return '';
@@ -28,9 +28,9 @@ export class BlogComponent implements OnInit {
 
   updateBlogFollowStatus() {
     if (this.isFollowing) {
-      this.onUserAction.emit(userAction.Unfollow);
+      this.onUserAction.emit(UserMediaAction.Unfollow);
     } else {
-      this.onUserAction.emit(userAction.Follow);
+      this.onUserAction.emit(UserMediaAction.Follow);
     }
   }
 }

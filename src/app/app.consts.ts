@@ -3,13 +3,19 @@ export enum Environment {
     Production = 'production'
 }
 
-export enum media {
+export enum UserAction {
+    Login = 'login',
+    Logout = 'logout',
+    Register = 'register',
+}
+
+export enum Media {
     DeviantArt = 'DeviantArt',
     Twitter = 'Twitter',
     Tumblr = 'Tumblr'
 }
 
-export enum userAction {
+export enum UserMediaAction {
     Auth = 'auth',
     Follow = 'follow',
     Followers = 'followers',
@@ -19,7 +25,7 @@ export enum userAction {
     Unfollow = 'unfollow'
 }
 
-export enum alertType {
+export enum AlertType {
     Error = 'error',
     Info = 'info',
     Success = 'success',
@@ -27,7 +33,7 @@ export enum alertType {
 }
 
 export interface Alert {
-    type: alertType, 
+    type: AlertType, 
     message: string
 }
 

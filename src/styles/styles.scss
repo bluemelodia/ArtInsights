@@ -20,11 +20,12 @@ body {
         margin: 0;
     }
 
+    /* Applying opacity on body itself would render all contents translucent. */
     &::before {
         @include absolute-zero();
-    
+        background-color: $app-secondary;
+        opacity: 0.05;
         content: '';
-        opacity: 0.4;
     }
 }
 

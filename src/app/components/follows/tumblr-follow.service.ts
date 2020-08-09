@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { media, userAction } from '../../app.consts';
+import { Media, UserMediaAction } from '../../app.consts';
 import { urlForSite } from '../../app.endpoints';
 import { TumblrBlogResponse } from './follow.types';
 
@@ -10,10 +10,10 @@ import { TumblrBlogResponse } from './follow.types';
   providedIn: 'root'
 })
 export class TumblrFollowService {
-  public tumblrFollowers = urlForSite(media.Tumblr, userAction.Followers);
-  public tumblrFollowing = urlForSite(media.Tumblr, userAction.Following);
-  public followTumblrBlog = urlForSite(media.Tumblr, userAction.Follow);
-  public unfollowTumblrBlog = urlForSite(media.Tumblr, userAction.Unfollow);
+  public tumblrFollowers = urlForSite(Media.Tumblr, UserMediaAction.Followers);
+  public tumblrFollowing = urlForSite(Media.Tumblr, UserMediaAction.Following);
+  public followTumblrBlog = urlForSite(Media.Tumblr, UserMediaAction.Follow);
+  public unfollowTumblrBlog = urlForSite(Media.Tumblr, UserMediaAction.Unfollow);
 
   constructor(private http: HttpClient) { }
 

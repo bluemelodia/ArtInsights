@@ -1,8 +1,8 @@
-import { media } from '../../app.consts';
+import { Media } from '../../app.consts';
 
 export interface AuthPostResponse {
     statusCode: number,
-    mediaType: media
+    mediaType: Media
 }
 
 export enum AuthStatus {

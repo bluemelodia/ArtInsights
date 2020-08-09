@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { media, mediaData, alertType } from '../../app.consts';
+import { Media, mediaData, AlertType } from '../../app.consts';
 import { authMediaData, AuthPostResponse, AuthStatus } from './auth.types';
 import { AuthService } from '../../services/auth.service';
 import { RedirectService } from '../../services/redirect.service';
@@ -16,14 +16,13 @@ import { Router } from '@angular/router';
 export class AuthComponent {
   public mediaData = Object.assign({}, mediaData);
   private authOutcomeSubject$: Subject<AuthPostResponse>;
-  private tumblrAuthRedirectSubject$: Subject<string>;
-  private daAuthRedirectSubject$: Subject<string>;
+  private authRedirectSubject$: Subject<string>;
 
   public isAuthorized = false;
-  private userAuthForMedia(mediaType: media, status: AuthStatus) {
+  private userAuthForMedia(mediaType: Media, status: AuthStatus) {
     switch(mediaType) {
-      case media.DeviantArt:
-      case media.Tumblr:
+      case Media.DeviantArt:
+      case Media.Tumblr:
         this.authStatus[mediaType] = status;
         this.isAuthorized = status === AuthStatus.Success;
         break;
@@ -32,8 +31,8 @@ export class AuthComponent {
     }
   }
   public authStatus = {
-    [media.DeviantArt]: AuthStatus.Unattempted,
-    [media.Tumblr]: AuthStatus.Unattempted
+    [Media.DeviantArt]: AuthStatus.Unattempted,
+    [Media.Tumblr]: AuthStatus.Unattempted
   };
 
   constructor(
@@ -47,10 +46,10 @@ export class AuthComponent {
     this.setupAuthSubscription();
 
     /* We don't need Twitter auth as we are only going to be accessing public data. */
-    delete this.mediaData[media.Twitter];
+    delete this.mediaData[Media.Twitter];
   }
 
-  public auth(forMedia: media) {
+  public auth(forMedia: Media) {
     this.authService.authenticateUser(forMedia);
   }
 
@@ -64,9 +63,9 @@ export class AuthComponent {
     return this.utils.getImagePath(iconName);
   }
 
-  public getStylesForMediaButton(media: media) {
+  public getStylesForMediaButton(Media: Media) {
     let mediaStyle = [];
-    switch (this.authStatus[media]) {
+    switch (this.authStatus[Media]) {
       case AuthStatus.Success:
         mediaStyle.push('auth-success');
         break;
@@ -75,12 +74,12 @@ export class AuthComponent {
     return mediaStyle.join(" ");
   }
 
-  public getIconForMediaButton(media: media) {
-    switch (this.authStatus[media]) {
+  public getIconForMediaButton(Media: Media) {
+    switch (this.authStatus[Media]) {
       case AuthStatus.Unattempted:
       case AuthStatus.Success:
       case AuthStatus.Failed:
-        const authStatus = this.authStatus[media];
+        const authStatus = this.authStatus[Media];
         return this.getIconName(authMediaData[authStatus].iconName);
       default:
         return '';
@@ -88,19 +87,11 @@ export class AuthComponent {
   }
 
   public setupRedirectSubscriptions() {
-    this.tumblrAuthRedirectSubject$ = this.authService.redirectSubject$(media.Tumblr);
-    this.tumblrAuthRedirectSubject$
+    this.authRedirectSubject$ = this.authService.loginRedirectSubject$;
+    this.authRedirectSubject$
       .subscribe((redirectLink) => {
-        console.info("Tumblr: Prepare to redirect to auth link: ", redirectLink);
-        this.alertService.showAlert(alertType.Info, 'Connecting to Tumblr...');
-        this.redirectService.redirect(redirectLink);
-    });
-
-    this.daAuthRedirectSubject$ = this.authService.redirectSubject$(media.DeviantArt);
-    this.daAuthRedirectSubject$
-      .subscribe((redirectLink) => {
-        console.info("DeviantArt: Prepare to redirect to auth link: ", redirectLink);
-        this.alertService.showAlert(alertType.Info, 'Connecting to DeviantArt...');
+        console.info("Prepare to redirect to auth link: ", redirectLink);
+        this.alertService.showAlert(AlertType.Info, 'Connecting to Tumblr...');
         this.redirectService.redirect(redirectLink);
     });
   }
@@ -111,11 +102,11 @@ export class AuthComponent {
       .subscribe((response: AuthPostResponse) => {
         if (response && response.statusCode === 0) {
           console.info("Auth successful for ", response);
-          this.alertService.showAlert(alertType.Success, `${response.mediaType} authorization successful.`);
+          this.alertService.showAlert(AlertType.Success, `${response.mediaType} authorization successful.`);
           this.userAuthForMedia(response.mediaType, AuthStatus.Success);
         } else {
           console.info("Auth failed for: ", response);
-          this.alertService.showAlert(alertType.Error, `${response.mediaType} authorization failed. Please try again.`);
+          this.alertService.showAlert(AlertType.Error, `${response.mediaType} authorization failed. Please try again.`);
           this.userAuthForMedia(response.mediaType, AuthStatus.Failed);
         }
       });

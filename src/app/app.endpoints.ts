@@ -1,54 +1,62 @@
-import { media, userAction, MediaAction } from './app.consts';
+import { Media, UserAction, UserMediaAction, MediaAction } from './app.consts';
 
 const baseUrl = 'https://artinsights.ue.r.appspot.com';
 
 const mediaActionMap: { [id: string] : MediaAction } = {
-    [media.DeviantArt]: {
-        [userAction.Auth]: 'auth',
-        [userAction.Followers]: 'friends', 
-        [userAction.Following]: '', 
-        [userAction.Posts]: '',
-        [userAction.Tags]: ''
+    [Media.DeviantArt]: {
+        [UserMediaAction.Auth]: 'auth',
+        [UserMediaAction.Followers]: 'friends', 
+        [UserMediaAction.Following]: '', 
+        [UserMediaAction.Posts]: '',
+        [UserMediaAction.Tags]: ''
     },
-    [media.Tumblr]: {
-        [userAction.Auth]: 'auth',
-        [userAction.Follow]: 'follow',
-        [userAction.Followers]: 'followers', 
-        [userAction.Following]: 'following', 
-        [userAction.Posts]: 'blog',
-        [userAction.Tags]: 'tag',
-        [userAction.Unfollow]: 'unfollow'
+    [Media.Tumblr]: {
+        [UserMediaAction.Auth]: 'auth',
+        [UserMediaAction.Follow]: 'follow',
+        [UserMediaAction.Followers]: 'followers', 
+        [UserMediaAction.Following]: 'following', 
+        [UserMediaAction.Posts]: 'blog',
+        [UserMediaAction.Tags]: 'tag',
+        [UserMediaAction.Unfollow]: 'unfollow'
     },
-    [media.Twitter]: {
-        [userAction.Followers]: '', 
-        [userAction.Following]: '',  
-        [userAction.Posts]: 'tweets',
-        [userAction.Tags]: 'search'
+    [Media.Twitter]: {
+        [UserMediaAction.Followers]: '', 
+        [UserMediaAction.Following]: '',  
+        [UserMediaAction.Posts]: 'tweets',
+        [UserMediaAction.Tags]: 'search'
     }
 }
 
-function endpointForSite(site: media, userAction: userAction) {
+export function urlForAction(userAction: UserAction) {
+    return `${baseUrl}/${endpointForAction(userAction)}`;
+}
+
+function endpointForAction(userAction: UserAction) {
+
+}
+
+export function urlForSite(site: Media, userMediaAction: UserMediaAction) {
+    return `${baseUrl}/${endpointForSite(site, userMediaAction)}`;
+}
+
+function endpointForSite(site: Media, userMediaAction: UserMediaAction) {
     let endpoint;
     let action;
 
     switch(site) {
-        case media.DeviantArt:
+        case Media.DeviantArt:
             endpoint = 'art';
-            action = mediaActionMap[media.DeviantArt][userAction];
+            action = mediaActionMap[Media.DeviantArt][userMediaAction];
             break;
-        case media.Twitter:
+        case Media.Twitter:
             endpoint = 'twitter';
-            action = mediaActionMap[media.Twitter][userAction];
+            action = mediaActionMap[Media.Twitter][userMediaAction];
             break;
-        case media.Tumblr:
+        case Media.Tumblr:
             endpoint = 'tumblr';
-            action = mediaActionMap[media.Tumblr][userAction];
+            action = mediaActionMap[Media.Tumblr][userMediaAction];
             break;
     }
 
     return `${endpoint}/${action}`;
-}
-
-export function urlForSite(site: media, userAction: userAction) {
-    return `${baseUrl}/${endpointForSite(site, userAction)}`;
 }

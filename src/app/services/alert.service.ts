@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { alertType, Alert } from '../app.consts';
+import { AlertType, Alert } from '../app.consts';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AlertService {
     return this.alertSubject$;
   }
 
-  public showAlert(type: alertType, message: string) {
+  public showAlert(type: AlertType, message: string) {
       const alert: Alert = {
         type: type, 
         message: message

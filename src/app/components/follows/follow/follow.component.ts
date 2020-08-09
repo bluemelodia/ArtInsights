@@ -1,7 +1,7 @@
 import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { TumblrFollowService } from '../tumblr-follow.service';
 import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser, Deviant } from '../follow.types';
-import { media } from '../../../app.consts';
+import { Media } from '../../../app.consts';
 import { AuthService } from '../../../services/auth.service';
 import { RedirectService } from '../../../services/redirect.service';
 import { Subject } from 'rxjs';
@@ -45,8 +45,7 @@ export class FollowComponent implements OnInit {
   private deviantArtFriendOffset = 0;
   private hasMoreDAFriends = true;
 
-  private tumblrAuthRedirectSubject$: Subject<string>;
-  private daAuthRedirectSubject$: Subject<string>;
+  private authRedirectSubject$: Subject<string>;
 
   ngOnInit() {
 
@@ -68,24 +67,17 @@ export class FollowComponent implements OnInit {
   }
 
   private setupRedirectSubscription() {
-    this.tumblrAuthRedirectSubject$ = this.authService.redirectSubject$(media.Tumblr);
-    this.tumblrAuthRedirectSubject$
-      .subscribe((redirectLink) => {
-        console.log("Prepare to redirect to auth link: ", redirectLink);
-        this.redirectService.redirect(redirectLink);
-    });
-
-    this.daAuthRedirectSubject$ = this.authService.redirectSubject$(media.DeviantArt);
-    this.daAuthRedirectSubject$
+    this.authRedirectSubject$ = this.authService.loginRedirectSubject$;
+    this.authRedirectSubject$
       .subscribe((redirectLink) => {
         console.log("Prepare to redirect to auth link: ", redirectLink);
         this.redirectService.redirect(redirectLink);
     });
   }
   
-  private follow(blog: string, medium: media) {
+  private follow(blog: string, medium: Media) {
     switch(medium) {
-      case media.Tumblr:
+      case Media.Tumblr:
         this.tumblrFollowService.followBlog(blog)
           .subscribe((res: any) => {
             if (res.statusCode === 403) {
@@ -102,9 +94,9 @@ export class FollowComponent implements OnInit {
     }
   }
 
-  private unfollow(blog: string, medium: media) {
+  private unfollow(blog: string, medium: Media) {
     switch(medium) {
-      case media.Tumblr:
+      case Media.Tumblr:
         this.tumblrFollowService.unfollowBlog(blog)
           .subscribe((res: any) => {
             if (res.statusCode === 403) {
@@ -139,7 +131,7 @@ export class FollowComponent implements OnInit {
     this.daFollowService.getDAFriends(username, offset)
       .subscribe((res: any) => {
         if (res.statusCode === 403) {
-          this.authService.authenticateUser(media.DeviantArt);
+          this.authService.authenticateUser(Media.DeviantArt);
         } else {
           console.log("YO ", res);
         }
@@ -148,11 +140,11 @@ export class FollowComponent implements OnInit {
 
   /* Tumblr-specific actions. */
   public followTumblr(blog: string) {
-    this.follow(blog, media.Tumblr);
+    this.follow(blog, Media.Tumblr);
   }
 
   public unfollowTumblr(blog: string) {
-    this.unfollow(blog, media.Tumblr);
+    this.unfollow(blog, Media.Tumblr);
   }
 
   private resetTumblrStats() {

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { TumblrUser, TumblrBlog } from '../../follow.types';
 import { BlogUtilsService } from '../../blog-utils.service';
-import { userAction, media } from '../../../../app.consts';
+import { UserMediaAction, Media } from '../../../../app.consts';
 
 @Component({
   selector: 'app-tumblr-follow',
@@ -17,7 +17,7 @@ export class TumblrFollowComponent implements OnInit {
   @Output() followBlog = new EventEmitter<string>();
   @Output() unfollowBlog = new EventEmitter<string>();
 
-  public mediaType = media.Tumblr;
+  public mediaType = Media.Tumblr;
 
   constructor(public blogUtils: BlogUtilsService) { }
 
@@ -29,13 +29,13 @@ export class TumblrFollowComponent implements OnInit {
   }
 
   /* Generic callback for when user clicks on a button in the blog component. */
-  public onUserAction(action: userAction, blog: string) {
+  public onUserAction(action: UserMediaAction, blog: string) {
     console.log("On user action: ", action, blog);
     switch(action) {
-      case userAction.Follow:
+      case UserMediaAction.Follow:
         this.followBlog.emit(blog);
         break;
-      case userAction.Unfollow:
+      case UserMediaAction.Unfollow:
         this.unfollowBlog.emit(blog);
         break;
     }

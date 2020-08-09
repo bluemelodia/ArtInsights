@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { AlertService } from '../../services/alert.service';
 import { Subject, timer } from 'rxjs';
-import { Alert, alertType } from '../../app.consts';
+import { Alert, AlertType } from '../../app.consts';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 
 @Component({
@@ -32,7 +32,7 @@ export class AlertComponent implements OnInit {
   public alertStyle = '';
   public showAlert = false;
 
-  private set alertType(type: alertType) {
+  private set AlertType(type: AlertType) {
     this.alertStyle = type;
   }
 
@@ -51,7 +51,7 @@ export class AlertComponent implements OnInit {
         this.dismissAlert();
         timer(0)
           .subscribe(() => {
-            this.alertType = alert.type;
+            this.AlertType = alert.type;
             this.alertMessage = alert.message;
             this.showAlert = true;
             this.delayedDismiss();
