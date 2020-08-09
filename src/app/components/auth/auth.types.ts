@@ -7,6 +7,7 @@ export interface AuthPostResponse {
 
 export interface LoginPostResponse {
     statusCode: number,
+    responseData?: string
     errorMsg?: string,
     userAction?: UserAction
 }

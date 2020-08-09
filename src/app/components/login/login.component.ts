@@ -5,6 +5,7 @@ import { LoginPostResponse } from '../auth/auth.types';
 import { Subject } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import { AlertType, UserAction } from '../../app.consts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,10 @@ export class LoginComponent implements OnInit {
   private loginSubject$: Subject<LoginPostResponse>;
 
   constructor(
+    private alertService: AlertService,
     private fb: FormBuilder, 
     private login: LoginService,
-    private alertService: AlertService) { }
+    private router: Router) { }
 
   ngOnInit() {
     /* 

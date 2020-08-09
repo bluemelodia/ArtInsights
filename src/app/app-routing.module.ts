@@ -7,7 +7,7 @@ import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'auth', component: AuthComponent },
+  { path: 'auth', component: AuthComponent, canActivate: [] },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: 'following', component: FollowComponent, canActivate: [Authentication] },
 ];

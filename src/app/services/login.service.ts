@@ -26,6 +26,10 @@ export class LoginService {
     this.loginOrRegisterUser(UserAction.Login, { username: username, password: password});
   }
 
+  public logoutUser() {
+    localStorage.removeItem('auth_token');
+  }
+
   public get loginSubject$() {
     return this.userLoginSubject$;
   }
@@ -37,6 +41,9 @@ export class LoginService {
         if (data) {
           data.userAction = userAction;
           console.log("Action Succeeded: ", data);
+          if (userAction === UserAction.Login) {
+            this.storeAuthToken(data.responseData);
+          }
           this.userLoginSubject$.next(data);
         } else {
           throw new Error(`Login or registration failed.`);
@@ -46,5 +53,11 @@ export class LoginService {
         console.log("ERROR: ", error);
         this.userLoginSubject$.next(null);
       });
+  }
+
+  /* Store the auth token returned from the server. To be sent on each post-login request. */
+  private storeAuthToken(token: string) {
+    console.log("Store the user auth token: ", token);
+    localStorage.setItem('auth_token', token);
   }
 }
