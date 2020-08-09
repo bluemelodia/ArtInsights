@@ -31,9 +31,9 @@
     </div>
     <div class="form-field">
         <button [class.selected]="newUser" 
-            (click)="setLoginMode(true)">New User</button>
+            (click)="$event.preventDefault(); setLoginMode(true)">New User</button>
         <button [class.selected]="!newUser" 
-            (click)="setLoginMode(false)">Returning User</button>
+            (click)="$event.preventDefault(); setLoginMode(false)">Returning User</button>
     </div>
     <input type="submit" value="Submit" [disabled]="!loginForm.valid">
 </form>
