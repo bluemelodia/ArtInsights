@@ -11,25 +11,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <!-- Start Single Page Apps for GitHub Pages -->
+  <script type="text/javascript">
+    // Single Page Apps for GitHub Pages
+    // https://github.com/rafrex/spa-github-pages
+    // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+    // ----------------------------------------------------------------------
+    // This script checks to see if a redirect is present in the query string
+    // and converts it back into the correct url and adds it to the
+    // browser's history using window.history.replaceState(...),
+    // which won't cause the browser to attempt to load the new url.
+    // When the single page app is loaded further down in this file,
+    // the correct url will be waiting in the browser's history for
+    // the single page app to route accordingly.
+    (function(l) {
+      if (l.search) {
+        var q = {};
+        l.search.slice(1).split('&').forEach(function(v) {
+          var a = v.split('=');
+          q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+        });
+        if (q.p !== undefined) {
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + (q.p || '') +
+            (q.q ? ('?' + q.q) : '') +
+            l.hash
+          );
+        }
+      }
+    }(window.location))
+  </script>
+  <!-- End Single Page Apps for GitHub Pages -->
 </head>
 <body>
-  <!-- Github Pages hack to allow SPA refresh without receiving 404. The script checks for
-  a cached redirect URL in session storage, adjusts the URL via HTML5 history if one is found,
-  and removes the cached URL from session storage. -->
-  <script>
-    (function () {
-      // Retrieve the URL the user was trying to access when receiving the 404.
-      var redirect = sessionStorage.redirect;
-      // Remove the URL from sessionStorage.
-      delete sessionStorage.redirect;
-      // Check if we actually need to redirect.
-      if (redirect && redirect != location.href) {
-        // We need to redirect to the URL the user was trying to access.
-        history.replaceState(null, null, redirect);
-      }
-    })();
-  </script>
-  <!-- /Github Pages hack. -->
   <app-root></app-root>
-<script type="text/javascript" src="./33a4fb81b7a1f4cb9d50.js"></script><script type="text/javascript" src="./1.33a4fb81b7a1f4cb9d50.chunk.js"></script><script type="text/javascript" src="./5.33a4fb81b7a1f4cb9d50.chunk.js"></script><script type="text/javascript" src="./7.33a4fb81b7a1f4cb9d50.chunk.js"></script><script type="text/javascript" src="./3.33a4fb81b7a1f4cb9d50.chunk.js"></script><script type="text/javascript" src="./6.33a4fb81b7a1f4cb9d50.chunk.js"></script><script type="text/javascript" src="./2.33a4fb81b7a1f4cb9d50.chunk.js"></script><script type="text/javascript" src="./4.33a4fb81b7a1f4cb9d50.chunk.js"></script></body>
+<script type="text/javascript" src="./b3a4a6a10f60fb130e92.js"></script><script type="text/javascript" src="./1.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./5.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./7.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./3.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./6.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./2.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./4.b3a4a6a10f60fb130e92.chunk.js"></script></body>
 </html>
