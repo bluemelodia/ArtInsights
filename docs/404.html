@@ -1,40 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>ArtInsights</title>
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // https://github.com/rafrex/spa-github-pages
-      // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-      // ----------------------------------------------------------------------
-      // This script takes the current url and converts the path and query
-      // string into just a query string, and then redirects the browser
-      // to the new url with only a query string and hash fragment,
-      // e.g. http://www.foo.tld/one/two?a=b&c=d#qwe, becomes
-      // http://www.foo.tld/?p=/one/two&q=a=b~and~c=d#qwe
-      // Note: this 404.html file must be at least 512 bytes for it to work
-      // with Internet Explorer (it is currently > 512 bytes)
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Art Insights</title>
 
-      // If you're creating a Project Pages site and NOT using a custom domain,
-      // then set segmentCount to 1 (enterprise users may need to set it to > 1).
-      // This way the code will only replace the route part of the path, and not
-      // the real directory in which the app resides, for example:
-      // https://username.github.io/repo-name/one/two?a=b&c=d#qwe becomes
-      // https://username.github.io/repo-name/?p=/one/two&q=a=b~and~c=d#qwe
-      // Otherwise, leave segmentCount as 0.
-      var segmentCount = 1;
-
-      var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?p=/' +
-        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
-    </script>
-  </head>
-  <body>
-  <script type="text/javascript" src="./b3a4a6a10f60fb130e92.js"></script><script type="text/javascript" src="./1.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./5.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./7.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./3.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./6.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./2.b3a4a6a10f60fb130e92.chunk.js"></script><script type="text/javascript" src="./4.b3a4a6a10f60fb130e92.chunk.js"></script></body>
+  <!-- The <base href="/"> tells the Angular router how to compose navigation URLs.
+  We tell Angular what is the static part of the URL. The router then only modifies
+  the remaining part of the URL. -->
+  <base href="./">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <app-root></app-root>
+<script type="text/javascript" src="./be696a85b68f63c25be0.js"></script><script type="text/javascript" src="./1.be696a85b68f63c25be0.chunk.js"></script><script type="text/javascript" src="./5.be696a85b68f63c25be0.chunk.js"></script><script type="text/javascript" src="./7.be696a85b68f63c25be0.chunk.js"></script><script type="text/javascript" src="./3.be696a85b68f63c25be0.chunk.js"></script><script type="text/javascript" src="./6.be696a85b68f63c25be0.chunk.js"></script><script type="text/javascript" src="./2.be696a85b68f63c25be0.chunk.js"></script><script type="text/javascript" src="./4.be696a85b68f63c25be0.chunk.js"></script></body>
 </html>
