@@ -55,7 +55,7 @@ export class AuthComponent {
 
   public loginUser() {
     if (this.isAuthorized) {
-      this.router.navigate['home'];
+      this.router.navigateByUrl('/home');
     }
   }
 

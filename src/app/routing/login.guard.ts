@@ -18,7 +18,7 @@ export class LoginGuard implements CanActivate {
 
     console.log("🚔 No auth token, bye!");
 
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('/login');
     return false;
   }
 }
