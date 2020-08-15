@@ -48,7 +48,7 @@ export class FollowComponent implements OnInit {
   private authRedirectSubject$: Subject<string>;
 
   ngOnInit() {
-
+    this.onBlogSearch('');
   }
 
   public onBlogSearch(blog: string) {
@@ -56,7 +56,7 @@ export class FollowComponent implements OnInit {
     if (blog.length > 0 && blog !== this.blog) {
       this.blog = blog;
       this.getDeviantArtFriendsAndFollowers();
-      //this.getTumblrFollowersAndFollowing();
+      this.getTumblrFollowersAndFollowing();
     }
   }
 

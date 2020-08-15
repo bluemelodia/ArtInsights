@@ -13,7 +13,10 @@ export class LoginGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    console.log("🚔 Do we have an auth token?");
     if (localStorage.getItem("auth_token")) { return true; }
+
+    console.log("🚔 No auth token, bye!");
 
     this.router.navigate(['/login']);
     return false;
