@@ -83,3 +83,7 @@ export const navActions: { [id: string] : NavItem } = {
         alt: 'post engagement'
     }
 }
+
+export const AuthTokenKey = 'auth_token';
+export const DeviantArtOAuthKey = 'oauth_deviant-art';
+export const TumblrOAuthKey = 'oauth_tumblr';

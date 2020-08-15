@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Media, mediaData, AlertType } from '../../app.consts';
+import { Media, mediaData, AlertType, DeviantArtOAuthKey, TumblrOAuthKey } from '../../app.consts';
 import { authMediaData, AuthPostResponse, AuthStatus } from './auth.types';
 import { AuthService } from '../../services/auth.service';
 import { RedirectService } from '../../services/redirect.service';
@@ -7,6 +7,7 @@ import { UtilsService } from '../../services/utils.service';
 import { Subject } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-auth',
@@ -23,21 +24,21 @@ export class AuthComponent {
     switch(mediaType) {
       case Media.DeviantArt:
       case Media.Tumblr:
-        this.authStatus[mediaType] = status;
-        this.isAuthorized = status === AuthStatus.Success;
+        if (status === AuthStatus.Success) {
+          this.localStorageService.setOAuthKey(mediaType, AuthStatus.Success);
+        }
         break;
       default:
         break;
     }
   }
-  public authStatus = {
-    [Media.DeviantArt]: AuthStatus.Unattempted,
-    [Media.Tumblr]: AuthStatus.Unattempted
-  };
+
+
 
   constructor(
     private alertService: AlertService,
     private authService: AuthService, 
+    private localStorageService: LocalStorageService,
     private redirectService: RedirectService,
     private router: Router,
     private utils: UtilsService
@@ -54,7 +55,7 @@ export class AuthComponent {
   }
 
   public loginUser() {
-    if (this.isAuthorized) {
+    if (this.localStorageService.isUserAuth()) {
       this.router.navigateByUrl('/home');
     }
   }
@@ -63,24 +64,22 @@ export class AuthComponent {
     return this.utils.getImagePath(iconName);
   }
 
-  public getStylesForMediaButton(Media: Media) {
+  public getStylesForMediaButton(media: Media) {
     let mediaStyle = [];
-    switch (this.authStatus[Media]) {
-      case AuthStatus.Success:
-        mediaStyle.push('auth-success');
-        break;
+    if (this.localStorageService.oAuthStatusForMedia(media)) {
+      mediaStyle.push('auth-success');
     }
 
     return mediaStyle.join(" ");
   }
 
-  public getIconForMediaButton(Media: Media) {
-    switch (this.authStatus[Media]) {
+  public getIconForMediaButton(media: Media) {
+    const oAuthStatus = this.localStorageService.oAuthStatusForMedia(media);
+    switch (oAuthStatus) {
       case AuthStatus.Unattempted:
       case AuthStatus.Success:
       case AuthStatus.Failed:
-        const authStatus = this.authStatus[Media];
-        return this.getIconName(authMediaData[authStatus].iconName);
+        return this.getIconName(authMediaData[oAuthStatus].iconName);
       default:
         return '';
     }

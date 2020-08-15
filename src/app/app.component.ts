@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { Environment } from './app.consts';
+import { LoginService } from './services/login.service';
 
 declare const ENVIRONMENT: Environment;
 
@@ -23,8 +24,16 @@ export class AppComponent {
     this.auth.authSuccess(event.data);
   }
 
+  /* Log out the user, clearing local storage when they close the window. */
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event: any) {
+      console.log("Window closing. Log out the user.");
+      this.login.logoutUser();
+  }
+
   constructor(
       private auth: AuthService, 
+      private login: LoginService,
       public router: Router
   ) {
     /* Condtionally apply styles to the body depending on our environment. */

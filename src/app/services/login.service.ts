@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserAction } from '../app.consts';
+import { UserAction, AuthTokenKey, DeviantArtOAuthKey, TumblrOAuthKey } from '../app.consts';
 import { urlForAction } from '../app.endpoints';
 import { Observable, of, Subject } from 'rxjs';
 import { LoginPostResponse } from '../components/auth/auth.types';
@@ -27,7 +27,9 @@ export class LoginService {
   }
 
   public logoutUser() {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem(AuthTokenKey);
+    localStorage.removeItem(DeviantArtOAuthKey);
+    localStorage.removeItem(TumblrOAuthKey);
   }
 
   public get loginSubject$() {
@@ -58,6 +60,6 @@ export class LoginService {
   /* Store the auth token returned from the server. To be sent on each post-login request. */
   private storeAuthToken(token: string) {
     console.log("Store the user auth token: ", token);
-    localStorage.setItem('auth_token', token);
+    localStorage.setItem(AuthTokenKey, token);
   }
 }
