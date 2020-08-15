@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { LoginService } from '../../services/login.service';
 import { LoginPostResponse } from '../auth/auth.types';
 import { Subject } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import { AlertType, UserAction } from '../../app.consts';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -59,8 +60,8 @@ export class LoginComponent implements OnInit {
           switch(response.userAction) {
             case UserAction.Login:
               message = 'Welcome to Art Insights!';
-              console.info("Navigate to auth page.");
-              this.router.navigate['auth'];
+              console.info("Navigate to auth page");
+              this.router.navigate['/auth'];
               break;
             case UserAction.Register:
               message = 'Registration successful. Please log in using your credentials.';
