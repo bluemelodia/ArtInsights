@@ -13,6 +13,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Github Pages hack to allow SPA refresh without receiving 404. The script checks for
+  a cached redirect URL in session storage, adjusts the URL via HTML5 history if one is found,
+  and removes the cached URL from session storage. -->
+  <script>
+    (function () {
+      // Retrieve the URL the user was trying to access when receiving the 404.
+      var redirect = sessionStorage.redirect;
+      // Remove the URL from sessionStorage.
+      delete sessionStorage.redirect;
+      // Check if we actually need to redirect.
+      if (redirect && redirect != location.href) {
+        // We need to redirect to the URL the user was trying to access.
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
+  <!-- /Github Pages hack. -->
   <app-root></app-root>
 </body>
 </html>

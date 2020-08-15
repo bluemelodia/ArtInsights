@@ -1,0 +1,36 @@
+<!-- Navigating to a view other than the base domain redirects you to GitHub's 404 page.
+This happens because GitHub pages looks for a directory within a corresponding HTML file, ex.
+request to http://a/b will search for b.html within the a directory.
+
+As a workaround, create our own 404.html and cache the URL of the requested view. Once the
+view is cached, we redirect to the base domain where the app is bootstrapped. From the 
+base domain, write a script to have Angular serve the requested view once the app bootstraps. 
+
+This way the user doesn't get stuck on the 404 page. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>ArtInsights</title>
+
+  <script>
+    // Store the URL the user was trying to access when receiving the 404.
+    sessionStorage.redirect = location.href;
+  </script>
+
+  <!-- Immediately redirect to the base URL so we can use the SPA routing. -->
+  <meta http-equiv="refresh" content="0;URL='/'"></meta>
+</head>
+
+<body>
+<!-- IE required at least 512 bytes of data to show non-default 404. -->
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</body>    
+            
+</body>
+
+</html>

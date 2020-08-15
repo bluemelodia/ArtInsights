@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
           switch(response.userAction) {
             case UserAction.Login:
               message = 'Welcome to Art Insights!';
+              console.info("Navigate to auth page.");
               this.router.navigate['auth'];
               break;
             case UserAction.Register:
