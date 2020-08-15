@@ -113,6 +113,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),
+        new HtmlWebpackPlugin({
+            filename: '404.html',
+            template: 'src/404.html'
+        }),
         /*
         * Creates global constants and makes them available in the app.
         */
