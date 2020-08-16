@@ -1,0 +1,10 @@
+@import '../../../../styles/mixins.scss';
+@import '../../../../styles/variables.scss';
+
+.blogs {
+    @include flex-col($justify-content: flex-start);
+
+    img {
+        height: 80px;
+    }
+}

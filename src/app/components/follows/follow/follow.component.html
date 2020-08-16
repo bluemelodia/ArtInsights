@@ -1,4 +1,7 @@
-<app-blog-list *ngIf="tumblrUser" [userInfo]="tumblrUser"></app-blog-list>
+<app-blog-list 
+    *ngIf="tumblrUser" 
+    [userInfo]="tumblrUser"
+    (getFollowers)="onBlogSearch($event)"></app-blog-list>
 <app-tumblr-follow
     [tumblrFollowers]="tumblrFollowers"
     [tumblrFollowerMap]="tumblrFollowerMap"

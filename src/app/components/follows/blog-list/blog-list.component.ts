@@ -28,7 +28,8 @@ export class BlogListComponent implements OnInit {
     return this.defaultAvatar;
   }
 
-  getFollows() {
-    
+  getFollows(blog: string) {
+    console.log("Get follows for: ", blog);
+    this.getFollowers.emit(blog);
   }
 }
