@@ -16,7 +16,7 @@
     </div>
     <button 
         class="continue-button" 
-        [disabled]="isAuthorized ? null : true"
+        [disabled]="isAuthorized() ? null : true"
         (click)="loginUser()">
         Continue
     </button>

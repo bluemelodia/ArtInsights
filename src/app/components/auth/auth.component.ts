@@ -19,22 +19,6 @@ export class AuthComponent {
   private authSubject$: Subject<AuthPostResponse>;
   private authRedirectSubject$: Subject<string>;
 
-  public isAuthorized = false;
-  private userAuthForMedia(mediaType: Media, status: AuthStatus) {
-    switch(mediaType) {
-      case Media.DeviantArt:
-      case Media.Tumblr:
-        if (status === AuthStatus.Success) {
-          this.localStorageService.setOAuthKey(mediaType, AuthStatus.Success);
-        }
-        break;
-      default:
-        break;
-    }
-  }
-
-
-
   constructor(
     private alertService: AlertService,
     private authService: AuthService, 
@@ -58,6 +42,10 @@ export class AuthComponent {
     if (this.localStorageService.isUserAuth()) {
       this.router.navigateByUrl('/home');
     }
+  }
+
+  public isAuthorized() {
+    this.localStorageService.isUserAuth();
   }
 
   public getIconName(iconName: string) {
@@ -109,5 +97,18 @@ export class AuthComponent {
           this.userAuthForMedia(response.mediaType, AuthStatus.Failed);
         }
       });
+  }
+
+  private userAuthForMedia(mediaType: Media, status: AuthStatus) {
+    switch(mediaType) {
+      case Media.DeviantArt:
+      case Media.Tumblr:
+        if (status === AuthStatus.Success) {
+          this.localStorageService.setOAuthKey(mediaType, AuthStatus.Success);
+        }
+        break;
+      default:
+        break;
+    }
   }
 }
