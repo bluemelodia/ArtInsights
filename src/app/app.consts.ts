@@ -7,6 +7,7 @@ export enum UserAction {
     Login = 'login',
     Logout = 'logout',
     Register = 'register',
+    FetchBlogs = 'user',
 }
 
 export enum Media {

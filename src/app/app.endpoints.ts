@@ -40,6 +40,9 @@ function endpointForAction(userAction: UserAction) {
         case UserAction.Register:
             endpoint = 'register';
             break;
+        case UserAction.FetchBlogs:
+            endpoint = 'user';
+            break;
     }
     return endpoint;
 }

@@ -6,6 +6,7 @@ import { AuthService } from '../../../services/auth.service';
 import { RedirectService } from '../../../services/redirect.service';
 import { Subject } from 'rxjs';
 import { DeviantArtFollowService } from '../deviant-art-follow.service';
+import { BlogService } from '../../../services/blog.service';
 
 @Component({
   selector: 'app-follow',
@@ -14,12 +15,13 @@ import { DeviantArtFollowService } from '../deviant-art-follow.service';
 })
 export class FollowComponent implements OnInit {
   constructor(
+    private blogService: BlogService,
     private tumblrFollowService: TumblrFollowService, 
     private daFollowService: DeviantArtFollowService,
     private authService: AuthService,
     private redirectService: RedirectService,
   ) {
-    this.setupRedirectSubscription();
+    this.setupTumblrSubscription();
   }
 
   private blog: string;
@@ -30,6 +32,8 @@ export class FollowComponent implements OnInit {
    * fetching more followers/following when new entries are no longer being returned
    * by the API calls (we are getting repeats back).
    */
+  private tumblrUserSubject$ = this.blogService.tumblrUserSub$;
+
   public tumblrFollowers: string[] = [];
   public tumblrFollowerMap: { [user: string] : TumblrUser } = {};
   private tumblrFollowerOffset = 0;
@@ -45,10 +49,16 @@ export class FollowComponent implements OnInit {
   private deviantArtFriendOffset = 0;
   private hasMoreDAFriends = true;
 
-  private authRedirectSubject$: Subject<string>;
-
   ngOnInit() {
-    this.onBlogSearch('');
+    console.log("Get Tumblr User!");
+    this.blogService.getTumblrUser();
+  }
+
+  public setupTumblrSubscription() {
+    this.tumblrUserSubject$
+      .subscribe((user) => {
+        console.log("Received Tumblr user: ", user);
+      });
   }
 
   public onBlogSearch(blog: string) {
@@ -64,15 +74,6 @@ export class FollowComponent implements OnInit {
     this.resetTumblrStats();
     this.getTumblrFollowers(this.blog, this.tumblrFollowerOffset);
     this.getTumblrFollowing(this.blog, this.tumblrFollowingOffset);
-  }
-
-  private setupRedirectSubscription() {
-    this.authRedirectSubject$ = this.authService.authRedirectSubject$;
-    this.authRedirectSubject$
-      .subscribe((redirectLink) => {
-        console.log("Prepare to redirect to auth link: ", redirectLink);
-        this.redirectService.redirect(redirectLink);
-    });
   }
   
   private follow(blog: string, medium: Media) {
