@@ -45,7 +45,7 @@ export class AuthComponent {
   }
 
   public isAuthorized() {
-    this.localStorageService.isUserAuth();
+    return this.localStorageService.isUserAuth();
   }
 
   public getIconName(iconName: string) {
