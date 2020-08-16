@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UtilsService } from '../../../services/utils.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-item',
@@ -16,8 +17,12 @@ export class NavItemComponent implements OnInit {
 
   public iconPath: string;
 
-  constructor(private utils: UtilsService) { }
+  constructor(private utils: UtilsService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  routeToLink() {
+    this.router.navigateByUrl(this.link);
   }
 }
