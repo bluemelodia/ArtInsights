@@ -23,6 +23,7 @@ export class NavItemComponent implements OnInit {
   }
 
   routeToLink() {
+    console.log("Route the user to: ", this.link);
     this.router.navigateByUrl(this.link);
   }
 }

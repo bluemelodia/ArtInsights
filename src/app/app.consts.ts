@@ -58,11 +58,13 @@ export interface NavItem {
 export const mediaData: { [id: string] : NavItem } = {
     DeviantArt : { 
         iconName: 'deviantart.png', 
-        alt: 'deviantArt' 
+        alt: 'deviantArt',
+        link: '/deviant-art'
     },
     Twitter: {
         iconName: 'twitter.png', 
-        alt: 'twitter' 
+        alt: 'twitter',
+        link: '/twitter'
     },
     Tumblr: {
         iconName: 'tumblr.png',
@@ -75,11 +77,6 @@ export const navActions: { [id: string] : NavItem } = {
     Tags : {
         iconName: 'promotion.png', 
         alt: 'search by tag'
-    },
-    Follows : {
-        iconName: 'follow.png', 
-        alt: 'view follower information',
-        link: '/following'
     },
     Engagement : {
         iconName: 'heart.png', 
