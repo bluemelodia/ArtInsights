@@ -8,13 +8,13 @@ export interface TumblrResponseData {
 }
 
 export interface TumblrUserInfo {
-    blogs: [TumblrBlog],
+    blogs: [TumblrUserBlog],
     following: number,
     likes: number, 
     name: string
 }
 
-export interface TumblrBlog {
+export interface TumblrUserBlog {
     admin: boolean, 
     avatar: [AvatarImage],
     description: string,

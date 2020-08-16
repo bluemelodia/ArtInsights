@@ -32,7 +32,7 @@ export class FollowComponent implements OnInit {
    })
   }
 
-  private blog: string;
+  public tumblrUser: TumblrUserInfo;
 
   /*
    * The Tumblr API total_blogs and total_users fields do not reflect the actual number
@@ -64,14 +64,13 @@ export class FollowComponent implements OnInit {
     this.tumblrUserSubject$
       .subscribe((user: TumblrUserInfo) => {
         console.log("Received Tumblr user: ", user);
-        
+        this.tumblrUser = user;
       });
   }
 
   public onBlogSearch(blog: string) {
     /* New blog search, reset all. */
-    if (blog.length > 0 && blog !== this.blog) {
-      this.blog = blog;
+    if (this.tumblrUser) {
       this.getDeviantArtFriendsAndFollowers();
       this.getTumblrFollowersAndFollowing();
     }
@@ -79,8 +78,8 @@ export class FollowComponent implements OnInit {
 
   public getTumblrFollowersAndFollowing() {
     this.resetTumblrStats();
-    this.getTumblrFollowers(this.blog, this.tumblrFollowerOffset);
-    this.getTumblrFollowing(this.blog, this.tumblrFollowingOffset);
+    this.getTumblrFollowers('blog', this.tumblrFollowerOffset);
+    this.getTumblrFollowing('blog', this.tumblrFollowingOffset);
   }
   
   private follow(blog: string, medium: Media) {
@@ -131,12 +130,12 @@ export class FollowComponent implements OnInit {
 
   public getDeviantArtFriendsAndFollowers() {
     this.resetDAStats();
-    this.getDeviantArtFriends(this.blog, this.deviantArtFriendOffset);
+    this.getDeviantArtFriends(this.deviantArtFriendOffset);
   }
 
-  public getDeviantArtFriends(username: string, offset: number = 0) {
+  public getDeviantArtFriends(offset: number = 0) {
     console.log("GET DA FRIENDS");
-    this.daFollowService.getDAFriends(username, offset)
+    this.daFollowService.getDAFriends('username', offset)
       .subscribe((res: any) => {
         if (res.statusCode === 403) {
           this.authService.authenticateUser(Media.DeviantArt);

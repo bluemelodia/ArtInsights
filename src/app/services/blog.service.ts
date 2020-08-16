@@ -23,6 +23,7 @@ export class BlogService {
       .subscribe((data: TumblrUserResponse) => {
         console.log("RECEIVED USER DATA: ", data);
         if (data && data.statusCode === 0 && data.responseData) {
+          console.log("Send tumblr user: ", data.responseData.user);
           this.tumblrUserSubject$.next(data.responseData.user);
         } else {
           throw new Error(`Failed to get Tumblr user.`);
