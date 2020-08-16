@@ -66,7 +66,8 @@ export const mediaData: { [id: string] : NavItem } = {
     },
     Tumblr: {
         iconName: 'tumblr.png',
-        alt: 'tumblr' 
+        alt: 'tumblr',
+        link: '/tumblr'
     }
 }
 
