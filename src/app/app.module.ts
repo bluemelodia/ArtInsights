@@ -5,13 +5,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { NavModule } from './components/nav/nav.module';
 import { LoginComponent } from './components/login/login.component';
-import { AuthInterceptor } from './services/auth.interceptor';
 import { HomeModule } from './components/home-dashboard/home.module';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { HomeModule } from './components/home-dashboard/home.module';
     AppComponent,
     AuthComponent,
     AlertComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
