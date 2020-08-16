@@ -3,10 +3,10 @@ import { TumblrFollowService } from '../tumblr-follow.service';
 import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser, Deviant } from '../follow.types';
 import { Media } from '../../../app.consts';
 import { AuthService } from '../../../services/auth.service';
-import { RedirectService } from '../../../services/redirect.service';
 import { Subject } from 'rxjs';
 import { DeviantArtFollowService } from '../deviant-art-follow.service';
 import { BlogService } from '../../../services/blog.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-follow',
@@ -19,9 +19,16 @@ export class FollowComponent implements OnInit {
     private tumblrFollowService: TumblrFollowService, 
     private daFollowService: DeviantArtFollowService,
     private authService: AuthService,
-    private redirectService: RedirectService,
+    private router: Router
   ) {
     this.setupTumblrSubscription();
+
+    this.router.events.subscribe(event =>{
+      if (event instanceof NavigationEnd){
+        console.log("Nav ending, get Tumblr user: ", event);
+        this.blogService.getTumblrUser();
+      }
+   })
   }
 
   private blog: string;
@@ -50,8 +57,6 @@ export class FollowComponent implements OnInit {
   private hasMoreDAFriends = true;
 
   ngOnInit() {
-    console.log("Get Tumblr User!");
-    this.blogService.getTumblrUser();
   }
 
   public setupTumblrSubscription() {
