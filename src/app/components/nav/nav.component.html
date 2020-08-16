@@ -1,6 +1,9 @@
 <nav>
     <button *ngFor="let media of mediaData | keyvalue">
-        <app-nav-item [iconName]="media.value.iconName" [altText]="media.value.alt"></app-nav-item>
+        <app-nav-item 
+            [iconName]="media.value.iconName" 
+            [altText]="media.value.alt"
+            [link]="media.value.link"></app-nav-item>
     </button>
 </nav>
 <nav>
