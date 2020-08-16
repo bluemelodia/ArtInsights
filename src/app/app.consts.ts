@@ -6,8 +6,7 @@ export enum Environment {
 export enum UserAction {
     Login = 'login',
     Logout = 'logout',
-    Register = 'register',
-    FetchBlogs = 'user',
+    Register = 'register'
 }
 
 export enum Media {
@@ -23,6 +22,7 @@ export enum UserMediaAction {
     Following = 'following',
     Posts = 'posts',
     Tags = 'tag',
+    User = 'user',
     Unfollow = 'unfollow'
 }
 
@@ -45,6 +45,7 @@ export interface MediaAction {
     following: string,
     posts: string, 
     tag: string, 
+    user?: string,
     unfollow?: string
 }
 

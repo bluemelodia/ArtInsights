@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { urlForAction } from '../app.endpoints';
-import { UserAction } from '../app.consts';
+import { urlForSite } from '../app.endpoints';
+import { Media, UserMediaAction } from '../app.consts';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class BlogService {
-  public tumblrUserURL = urlForAction(UserAction.FetchBlogs); 
+  public tumblrUserURL = urlForSite(Media.Tumblr, UserMediaAction.User); 
   private tumblrUserSubject$ = new Subject<string>();
 
   constructor(private http: HttpClient) { }

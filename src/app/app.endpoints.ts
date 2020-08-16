@@ -17,6 +17,7 @@ const mediaActionMap: { [id: string] : MediaAction } = {
         [UserMediaAction.Following]: 'following', 
         [UserMediaAction.Posts]: 'blog',
         [UserMediaAction.Tags]: 'tag',
+        [UserMediaAction.User]: 'user',
         [UserMediaAction.Unfollow]: 'unfollow'
     },
     [Media.Twitter]: {
@@ -39,9 +40,6 @@ function endpointForAction(userAction: UserAction) {
             break;
         case UserAction.Register:
             endpoint = 'register';
-            break;
-        case UserAction.FetchBlogs:
-            endpoint = 'user';
             break;
     }
     return endpoint;
