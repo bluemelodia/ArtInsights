@@ -3,13 +3,14 @@ import { urlForSite } from '../app.endpoints';
 import { Media, UserMediaAction } from '../app.consts';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { TumblrUserInfo, TumblrUserResponse } from '../types/tumblr.types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
   public tumblrUserURL = urlForSite(Media.Tumblr, UserMediaAction.User); 
-  private tumblrUserSubject$ = new Subject<string>();
+  private tumblrUserSubject$ = new Subject<TumblrUserInfo>();
 
   constructor(private http: HttpClient) { }
 
@@ -19,12 +20,12 @@ export class BlogService {
 
   getTumblrUser() {
     this.http.get(this.tumblrUserURL, { withCredentials: true })
-      .subscribe((data: any) => {
-        if (data) {
-          console.log("RECEIVED USER DATA: ", data);
-          this.tumblrUserSubject$.next(data);
+      .subscribe((data: TumblrUserResponse) => {
+        console.log("RECEIVED USER DATA: ", data);
+        if (data && data.statusCode === 0 && data.responseData) {
+          this.tumblrUserSubject$.next(data.responseData.user);
         } else {
-          throw new Error(`Login or registration failed.`);
+          throw new Error(`Failed to get Tumblr user.`);
         }
       }, 
       (error: Error) => {

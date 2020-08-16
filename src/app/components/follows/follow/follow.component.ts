@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { DeviantArtFollowService } from '../deviant-art-follow.service';
 import { BlogService } from '../../../services/blog.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { TumblrUserInfo } from '../../../types/tumblr.types';
 
 @Component({
   selector: 'app-follow',
@@ -61,8 +62,9 @@ export class FollowComponent implements OnInit {
 
   public setupTumblrSubscription() {
     this.tumblrUserSubject$
-      .subscribe((user) => {
+      .subscribe((user: TumblrUserInfo) => {
         console.log("Received Tumblr user: ", user);
+        
       });
   }
 
