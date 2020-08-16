@@ -2,12 +2,7 @@
 @import '../../../../../styles/variables.scss';
 
 .tumblr-follows {
-    @include flex-row(space-around);
-
-    background-color: $tumblr-bg;
-    margin: $large-spacing;
-    padding: $large-spacing;
-    border: 3px solid $widget-border;
+    @include tumblr-container();
 
     & .followers, & .following {
         color: $light-text-color;

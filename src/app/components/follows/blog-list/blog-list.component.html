@@ -2,11 +2,11 @@
 <div *ngFor="let blog of userInfo.blogs" class="blogs">
     <div class="blog-details">
         <h3>{{ blog.name }} - {{ blog.title }}</h3>
-        <p (click)="blogUtils.visitBlog(blog.url)">
+        <p class="blog-url" (click)="blogUtils.visitBlog(blog.url)">
             {{ blog.url }}
         </p>
         <div class="blog-actions">
-            <img (click)="getFollows(blog.name)" [src]="followImg">
+            <p (click)="getFollows(blog.name)">Followers and Following</p>
         </div>
     </div>
     <img [src]="avatarForBlog(blog)">

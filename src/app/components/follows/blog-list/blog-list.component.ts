@@ -14,7 +14,6 @@ export class BlogListComponent implements OnInit {
 
   /* Default user avatar. */
   public defaultAvatar = this.utils.getImagePath('tumblr-avatar');
-  public followImg = this.utils.getImagePath('follow');
 
   constructor(private utils: UtilsService, public blogUtils: BlogUtilsService) { }
 

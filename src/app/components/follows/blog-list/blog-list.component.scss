@@ -1,10 +1,23 @@
 @import '../../../../styles/mixins.scss';
 @import '../../../../styles/variables.scss';
 
-.blogs {
-    @include flex-col($justify-content: flex-start);
+:host {
+    color: $light-text-color;
 
-    img {
-        height: 80px;
+    .blogs {
+        @include tumblr-container();
+    
+        .blog-url {
+    
+            &:hover {
+                color: $tumblr-light;
+                cursor: pointer;
+            }
+        }
+    
+        img {
+            height: 80px;
+        }
     }
 }
+

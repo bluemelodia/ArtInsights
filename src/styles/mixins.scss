@@ -102,3 +102,12 @@ $default-line-height: 0px;
     background-color: $app-tertiary;
     box-shadow: inset 0 0 0 2px $app-dark-nav;
 }
+
+@mixin tumblr-container() {
+    @include flex-row(space-around);
+
+    background-color: $tumblr-bg;
+    margin: $large-spacing;
+    padding: $large-spacing;
+    border: 3px solid $widget-border;
+}
