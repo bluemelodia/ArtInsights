@@ -8,18 +8,12 @@
 
     .blogs {
         @include flex-row($justify-content: space-between);
+        @include tumblr-theme();
 
         margin-top: $small-spacing;
         margin-bottom: $small-spacing;
         padding: $small-spacing;
         border: 2px solid $light-text-color;
-    
-        &.tumblr-theme {
-            background-color: $tumblr-medium;
-            &:hover {
-                border: 2px solid $tumblr-light;
-            }
-        }
 
         .blog-url {
     

@@ -3,7 +3,7 @@
 
 :host {
     @include flex-row(space-between);
-    
+
     margin-top: $small-spacing;
     margin-bottom: $small-spacing;
     padding: $small-spacing;
@@ -15,10 +15,7 @@
     }
 
     &.tumblr-theme {
-        background-color: $tumblr-medium;
-        &:hover {
-            border: 2px solid $tumblr-light;
-        }
+        @include tumblr-theme();
 
         & .follow-button {
             &:hover {

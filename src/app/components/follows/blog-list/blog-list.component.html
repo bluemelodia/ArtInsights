@@ -1,5 +1,5 @@
 <h2>{{ userInfo.name }}</h2>
-<div *ngFor="let blog of userInfo.blogs" class="blogs tumblr-theme">
+<div *ngFor="let blog of userInfo.blogs" class="blogs">
     <div (click)="getFollows(blog.name)" class="blog-details">
         <h3 class="blog-url"
             (click)="blogUtils.visitBlog(blog.url)">
