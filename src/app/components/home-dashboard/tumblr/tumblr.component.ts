@@ -1,24 +1,23 @@
-import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TumblrFollowService } from '../tumblr-follow.service';
-import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser, Deviant } from '../follow.types';
-import { Media } from '../../../app.consts';
+import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser } from '../follow.types';
+import { Media, AlertType } from '../../../app.consts';
 import { AuthService } from '../../../services/auth.service';
-import { Subject } from 'rxjs';
-import { DeviantArtFollowService } from '../deviant-art-follow.service';
 import { BlogService } from '../../../services/blog.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { TumblrUserInfo } from '../../../types/tumblr.types';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
-  selector: 'app-follow',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-tumblr',
+  templateUrl: './tumblr.component.html',
+  styleUrls: ['./tumblr.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class TumblrComponent implements OnInit {
   constructor(
+    private alertService: AlertService,
     private blogService: BlogService,
     private tumblrFollowService: TumblrFollowService, 
-    private daFollowService: DeviantArtFollowService,
     private authService: AuthService,
     private router: Router
   ) {
@@ -53,11 +52,6 @@ export class HomeComponent implements OnInit {
   private tumblrFollowingOffset = 0;
   private hasMoreTumblrFollowing = true;
 
-  public deviantArtFriends: string[] = [];
-  public deviantArtFriendMap: { [user: string]: Deviant } = {};
-  private deviantArtFriendOffset = 0;
-  private hasMoreDAFriends = true;
-
   ngOnInit() {
   }
 
@@ -73,9 +67,9 @@ export class HomeComponent implements OnInit {
     /* New blog search, reset all. */
     if (this.tumblrUser && blog !== this.blog) {
       this.blog = blog;
+      this.alertService.showAlert(AlertType.Info, `Retrieving data for ${this.blog}...`);
       this.getTumblrFollowersAndFollowing();
     }
-    this.getDeviantArtFriendsAndFollowers();
   }
 
   public getTumblrFollowersAndFollowing() {
@@ -92,8 +86,10 @@ export class HomeComponent implements OnInit {
             if (res.statusCode === 403) {
               this.authService.authenticateUser(medium);
             } else if (res.statusCode !== 0) {
+              this.alertService.showAlert(AlertType.Error, `Unable to follow ${blog}.`);
               console.log(`Failed to follow: ${blog}, ${res}`);
             } else {
+              this.alertService.showAlert(AlertType.Success, `You followed ${blog}.`);
               console.log(`Successfully followed: ${blog}, refresh`);
               this.getTumblrFollowersAndFollowing();
             }
@@ -109,42 +105,19 @@ export class HomeComponent implements OnInit {
         this.tumblrFollowService.unfollowBlog(blog)
           .subscribe((res: any) => {
             if (res.statusCode === 403) {
-              this.authService.authenticateUser(medium);
+              this.router.navigateByUrl('/auth');
             } else if (res.statusCode !== 0) {
               console.log(`Failed to unfollow: ${blog}, `, res);
+              this.alertService.showAlert(AlertType.Error, `Unable to unfollow ${blog}.`);
             } else {
               console.log(`Successfully unfollowed: ${blog}, refresh`);
+              this.alertService.showAlert(AlertType.Success, `You unfollowed ${blog}.`);
               this.getTumblrFollowersAndFollowing();
             }
             console.log("Try to unfollow: ", res);
           })
         break;
     }
-  }
-
-  /* DeviantArt-specific actions. */
-  private resetDAStats() {
-    this.deviantArtFriends = [];
-    this.deviantArtFriendMap = {};
-    this.deviantArtFriendOffset = 0;
-    this.hasMoreDAFriends = true;
-  }
-
-  public getDeviantArtFriendsAndFollowers() {
-    this.resetDAStats();
-    this.getDeviantArtFriends(this.deviantArtFriendOffset);
-  }
-
-  public getDeviantArtFriends(offset: number = 0) {
-    console.log("GET DA FRIENDS");
-    this.daFollowService.getDAFriends('username', offset)
-      .subscribe((res: any) => {
-        if (res.statusCode === 403) {
-          this.authService.authenticateUser(Media.DeviantArt);
-        } else {
-          console.log("YO ", res);
-        }
-      });
   }
 
   /* Tumblr-specific actions. */
