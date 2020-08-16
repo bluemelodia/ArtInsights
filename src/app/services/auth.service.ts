@@ -52,7 +52,7 @@ export class AuthService {
         console.log("📘 Initiate Tumblr authentication: ", this.tumblrAuthURL);
         return this.http.get(
           this.tumblrAuthURL,
-          {responseType: 'text'});
+          {responseType: 'text', withCredentials: true });
       default:
         break;
     }

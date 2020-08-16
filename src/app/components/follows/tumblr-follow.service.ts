@@ -20,25 +20,25 @@ export class TumblrFollowService {
   public getTumblrFollowers(blog: string, offset: number = 0): Observable<TumblrBlogResponse> {
     const url = this.tumblrFollowers + `/${blog}/offset/${offset}`;
     console.log(`📘 Get Tumblr followers for ${blog}: `, url);
-    return this.http.get<TumblrBlogResponse>(url);
+    return this.http.get<TumblrBlogResponse>(url, { withCredentials: true });
   }
 
   public getTumblrFollowing(blog: string, offset: number = 0): Observable<TumblrBlogResponse> {
     const url = this.tumblrFollowing + `/${blog}/offset/${offset}`;
     console.log(`📘 Get Tumblr following for ${blog}: `, url);
-    return this.http.get<TumblrBlogResponse>(url);
+    return this.http.get<TumblrBlogResponse>(url, { withCredentials: true });
   }
 
   public followBlog(blog: string): Observable<TumblrBlogResponse> {
     const url = this.followTumblrBlog + `?blog=${this.removeTrailingSlash(blog)}`;
     console.log(`📘 Follow Tumblr blog ${blog}: `, url);
-    return this.http.get<TumblrBlogResponse>(url);
+    return this.http.get<TumblrBlogResponse>(url, { withCredentials: true });
   }
 
   public unfollowBlog(blog: string): Observable<TumblrBlogResponse> {
     const url = this.unfollowTumblrBlog + `?blog=${this.removeTrailingSlash(blog)}`;
     console.log(`📘 Unfollow Tumblr blog ${blog}: `, url);
-    return this.http.get<TumblrBlogResponse>(url);
+    return this.http.get<TumblrBlogResponse>(url, { withCredentials: true });
   }
 
   private removeTrailingSlash(url: string) {

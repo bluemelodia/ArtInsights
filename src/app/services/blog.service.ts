@@ -18,7 +18,7 @@ export class BlogService {
   }
 
   getTumblrUser() {
-    this.http.get(this.tumblrUserURL)
+    this.http.get(this.tumblrUserURL, { withCredentials: true })
       .subscribe((data: any) => {
         if (data) {
           console.log("RECEIVED USER DATA: ", data);
