@@ -2,10 +2,16 @@
 @import '../../../../styles/variables.scss';
 
 :host {
+    @include tumblr-container();
     color: $light-text-color;
 
     .blogs {
-        @include tumblr-container();
+        @include flex-col(space-between);
+
+        margin-top: $small-spacing;
+        margin-bottom: $small-spacing;
+        padding: $small-spacing;
+        border: 2px solid $light-text-color;
     
         .blog-url {
     

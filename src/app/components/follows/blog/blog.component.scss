@@ -3,7 +3,7 @@
 
 :host {
     @include flex-row(space-between);
-
+    
     margin-top: $small-spacing;
     margin-bottom: $small-spacing;
     padding: $small-spacing;

@@ -110,4 +110,7 @@ $default-line-height: 0px;
     margin: $large-spacing;
     padding: $large-spacing;
     border: 3px solid $widget-border;
+
+    max-width: $max-width;
+    margin: 0 auto;
 }
