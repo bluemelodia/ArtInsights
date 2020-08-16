@@ -104,8 +104,6 @@ $default-line-height: 0px;
 }
 
 @mixin tumblr-container() {
-    @include flex-row(space-around);
-
     background-color: $tumblr-bg;
     margin: $large-spacing;
     padding: $large-spacing;

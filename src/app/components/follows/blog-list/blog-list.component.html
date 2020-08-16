@@ -1,13 +1,10 @@
 <h2>{{ userInfo.name }}</h2>
-<div *ngFor="let blog of userInfo.blogs" class="blogs">
-    <div class="blog-details">
-        <h3>{{ blog.name }} - {{ blog.title }}</h3>
-        <p class="blog-url" (click)="blogUtils.visitBlog(blog.url)">
-            {{ blog.url }}
-        </p>
-        <div class="blog-actions">
-            <p (click)="getFollows(blog.name)">Followers and Following</p>
-        </div>
+<div *ngFor="let blog of userInfo.blogs" class="blogs tumblr-theme">
+    <div (click)="getFollows(blog.name)" class="blog-details">
+        <h3 class="blog-url"
+            (click)="blogUtils.visitBlog(blog.url)">
+            {{ blog.name }} - {{ blog.title }}
+        </h3>
     </div>
     <img [src]="avatarForBlog(blog)">
 </div>

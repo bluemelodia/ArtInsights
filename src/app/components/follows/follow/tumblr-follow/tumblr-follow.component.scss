@@ -3,6 +3,7 @@
 
 .tumblr-follows {
     @include tumblr-container();
+    @include flex-row(space-around);
 
     & .followers, & .following {
         color: $light-text-color;

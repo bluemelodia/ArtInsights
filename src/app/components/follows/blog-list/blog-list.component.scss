@@ -3,16 +3,24 @@
 
 :host {
     @include tumblr-container();
+    @include flex-col($justify-content: space-around);
     color: $light-text-color;
 
     .blogs {
-        @include flex-col(space-between);
+        @include flex-row($justify-content: space-between);
 
         margin-top: $small-spacing;
         margin-bottom: $small-spacing;
         padding: $small-spacing;
         border: 2px solid $light-text-color;
     
+        &.tumblr-theme {
+            background-color: $tumblr-medium;
+            &:hover {
+                border: 2px solid $tumblr-light;
+            }
+        }
+
         .blog-url {
     
             &:hover {
