@@ -9,10 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AlertComponent } from './components/alert/alert.component';
-import { FollowsModule } from './components/follows/follows.module';
 import { NavModule } from './components/nav/nav.module';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { HomeModule } from './components/home-dashboard/home.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FollowsModule,
+    HomeModule,
     NavModule,
     ReactiveFormsModule
   ],

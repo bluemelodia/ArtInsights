@@ -11,10 +11,10 @@ import { TumblrUserInfo } from '../../../types/tumblr.types';
 
 @Component({
   selector: 'app-follow',
-  templateUrl: './follow.component.html',
-  styleUrls: ['./follow.component.scss']
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class FollowComponent implements OnInit {
+export class HomeComponent implements OnInit {
   constructor(
     private blogService: BlogService,
     private tumblrFollowService: TumblrFollowService, 
@@ -71,11 +71,11 @@ export class FollowComponent implements OnInit {
 
   public onBlogSearch(blog: string) {
     /* New blog search, reset all. */
-    if (this.tumblrUser) {
+    if (this.tumblrUser && blog !== this.blog) {
       this.blog = blog;
-      this.getDeviantArtFriendsAndFollowers();
       this.getTumblrFollowersAndFollowing();
     }
+    this.getDeviantArtFriendsAndFollowers();
   }
 
   public getTumblrFollowersAndFollowing() {

@@ -5,6 +5,8 @@
             (click)="blogUtils.visitBlog(blog.url)">
             {{ blog.name }} - {{ blog.title }}
         </h3>
+        <p [innerHTML]="blog.description"></p>
+        <p>Last Updated: {{ blogUtils.dateForTimestamp(blog.updated) | date: 'MM/dd/yyyy' }}</p>
     </div>
     <img [src]="avatarForBlog(blog)">
 </div>
