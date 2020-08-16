@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TumblrUserBlog, TumblrUserInfo } from '../../../types/tumblr.types';
 import { UtilsService } from '../../../services/utils.service';
 import { BlogUtilsService } from '../blog-utils.service';
@@ -10,9 +10,11 @@ import { BlogUtilsService } from '../blog-utils.service';
 })
 export class BlogListComponent implements OnInit {
   @Input() userInfo: TumblrUserInfo;
+  @Output() getFollowers = new EventEmitter<string>();
 
   /* Default user avatar. */
   public defaultAvatar = this.utils.getImagePath('tumblr-avatar');
+  public followImg = this.utils.getImagePath('follow');
 
   constructor(private utils: UtilsService, public blogUtils: BlogUtilsService) { }
 
@@ -24,5 +26,9 @@ export class BlogListComponent implements OnInit {
         return blog.avatar[0].url;
     }
     return this.defaultAvatar;
+  }
+
+  getFollows() {
+    
   }
 }

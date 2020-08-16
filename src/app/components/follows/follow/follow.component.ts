@@ -33,6 +33,7 @@ export class FollowComponent implements OnInit {
   }
 
   public tumblrUser: TumblrUserInfo;
+  public blog: string;
 
   /*
    * The Tumblr API total_blogs and total_users fields do not reflect the actual number
@@ -71,6 +72,7 @@ export class FollowComponent implements OnInit {
   public onBlogSearch(blog: string) {
     /* New blog search, reset all. */
     if (this.tumblrUser) {
+      this.blog = blog;
       this.getDeviantArtFriendsAndFollowers();
       this.getTumblrFollowersAndFollowing();
     }
@@ -78,8 +80,8 @@ export class FollowComponent implements OnInit {
 
   public getTumblrFollowersAndFollowing() {
     this.resetTumblrStats();
-    this.getTumblrFollowers('blog', this.tumblrFollowerOffset);
-    this.getTumblrFollowing('blog', this.tumblrFollowingOffset);
+    this.getTumblrFollowers(this.blog, this.tumblrFollowerOffset);
+    this.getTumblrFollowing(this.blog, this.tumblrFollowingOffset);
   }
   
   private follow(blog: string, medium: Media) {
