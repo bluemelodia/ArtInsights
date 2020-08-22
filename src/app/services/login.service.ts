@@ -26,6 +26,10 @@ export class LoginService {
     this.loginOrRegisterUser(UserAction.Login, { username: username, password: password});
   }
 
+  public newSession() {
+    this.logoutUser();
+  }
+
   public logoutUser() {
     localStorage.removeItem(AuthTokenKey);
     localStorage.removeItem(DeviantArtOAuthKey);

@@ -47,5 +47,8 @@ export class AppComponent {
         document.body.className = router.url === '/login' || router.url === '/auth' ? 'full-width' : '';
       }
     });
+
+    /* Wipe old local storage cookies. */
+    this.login.newSession();
   }
 }
