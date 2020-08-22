@@ -13,15 +13,13 @@ import { AlertComponent } from './components/alert/alert.component';
 import { NavModule } from './components/nav/nav.module';
 import { LoginComponent } from './components/login/login.component';
 import { HomeModule } from './components/home-dashboard/home.module';
-import { DeviantArtComponent } from './components/home-dashboard/deviantart/deviantart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     AlertComponent,
-    LoginComponent,
-    DeviantArtComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

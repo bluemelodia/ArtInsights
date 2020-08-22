@@ -8,7 +8,8 @@ const mediaActionMap: { [id: string] : MediaAction } = {
         [UserMediaAction.Followers]: 'friends', 
         [UserMediaAction.Following]: '', 
         [UserMediaAction.Posts]: '',
-        [UserMediaAction.Tags]: ''
+        [UserMediaAction.Tags]: '',
+        [UserMediaAction.User]: 'user',
     },
     [Media.Tumblr]: {
         [UserMediaAction.Auth]: 'auth',

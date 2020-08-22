@@ -15,6 +15,9 @@ export class BlogService {
   public tumblrUserURL = urlForSite(Media.Tumblr, UserMediaAction.User); 
   private tumblrUserSubject$ = new Subject<TumblrUserInfo>();
 
+  public deviantURL = urlForSite(Media.DeviantArt, UserMediaAction.User); 
+  private deviantSubject$ = new Subject<TumblrUserInfo>();
+
   constructor(
     private http: HttpClient,
     private auth: AuthService
@@ -22,6 +25,31 @@ export class BlogService {
 
   get tumblrUserSub$() {
     return this.tumblrUserSubject$;
+  }
+
+  get deviantSub$() {
+    return this.deviantSubject$;
+  }
+
+  getDeviant() {
+    this.http.get(this.deviantURL, { withCredentials: true })
+      .subscribe((data: any) => {
+        console.log("RECEIVED USER DATA: ", data);
+        if (data && data.statusCode === 0 && data.responseData) {
+          console.log("Send deviant: ", data.responseData.user);
+          this.deviantSub$.next(data.responseData.user);
+        } else if (data && data.statusCode === 450) {
+          /* Keep this here in case the user un-auths mid-session. */
+          this.auth.userUnauthForMedia(Media.DeviantArt, 'Failed to get user information. Please grant access to your DeviantArt account.');
+          this.deviantSub$.next(null);
+        } else {
+          throw new Error(`Failed to get Tumblr user.`);
+        }
+      }, 
+      (error: Error) => {
+        console.log("ERROR: ", error);
+        this.tumblrUserSubject$.next(null);
+      });
   }
 
   getTumblrUser() {
@@ -33,7 +61,7 @@ export class BlogService {
           this.tumblrUserSubject$.next(data.responseData.user);
         } else if (data && data.statusCode === 450) {
           /* Keep this here in case the user un-auths mid-session. */
-          this.auth.redirectToAuthWithAlertMsg('Failed to get user information. Please grant access to your Tumblr account.');
+          this.auth.userUnauthForMedia(Media.Tumblr, 'Failed to get user information. Please grant access to your Tumblr account.');
           this.tumblrUserSubject$.next(null);
         } else {
           throw new Error(`Failed to get Tumblr user.`);

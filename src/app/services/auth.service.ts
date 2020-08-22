@@ -41,7 +41,8 @@ export class AuthService {
     return this.storage.oAuthStatusForMedia(media) === AuthStatus.Success;
   }
 
-  public redirectToAuthWithAlertMsg(alertMsg: string) {
+  public userUnauthForMedia(media: Media, alertMsg: string) {
+    this.storage.setOAuthKey(media, AuthStatus.Unattempted);
     this.alert.showAlert(AlertType.Error, 'Failed to get user information. Please grant access to your Tumblr account.');
     this.router.navigateByUrl('/auth');
   }
