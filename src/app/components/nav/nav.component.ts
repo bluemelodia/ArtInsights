@@ -12,6 +12,7 @@ import { AuthStatus } from '../auth/auth.types';
 export class NavComponent implements OnInit {
   public mediaData = mediaData;
   public navActions = navActions;
+  public authSuccess = AuthStatus.Success;
 
   public mediaStatus = {};
 

@@ -1,8 +1,8 @@
 <nav>
     <button *ngFor="let media of mediaData | keyvalue"
-        [disabled]="mediaStatus[media.key]">
+        [disabled]="mediaStatus[media.key] === authSuccess">
         <app-nav-item 
-            [disableNav]="mediaStatus[media.key]"
+            [disableNav]="mediaStatus[media.key] === authSuccess"
             [iconName]="media.value.iconName" 
             [altText]="media.value.alt"
             [link]="media.value.link"></app-nav-item>
