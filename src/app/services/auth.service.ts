@@ -41,7 +41,7 @@ export class AuthService {
     return this.storage.oAuthStatusForMedia(media) === AuthStatus.Success;
   }
 
-  public userUnauthForMedia(media: Media, alertMsg: string) {
+  public userUnauthForMedia(media: Media) {
     this.storage.setOAuthKey(media, AuthStatus.Unattempted);
     this.alert.showAlert(AlertType.Error, `Failed to get user information. Please grant access to your ${media} account.`);
     this.router.navigateByUrl('/auth');

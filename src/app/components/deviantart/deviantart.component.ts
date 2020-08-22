@@ -50,9 +50,9 @@ export class DeviantArtComponent implements OnInit {
 
   public setupDASubscription() {
     this.deviantUserSubject$
-      .subscribe((user: DeviantData) => {
-        console.log("Received DA user: ", user);
-        this.deviant = user;
+      .subscribe((deviant: DeviantData) => {
+        console.log("Received DA user: ", deviant);
+        this.deviant = deviant;
       });
   }
 

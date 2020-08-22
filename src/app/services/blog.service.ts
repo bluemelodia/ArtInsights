@@ -42,7 +42,7 @@ export class BlogService {
           this.deviantSub$.next(deviant);
         } else if (data && data.statusCode === 450) {
           /* Keep this here in case the user un-auths mid-session. */
-          this.auth.userUnauthForMedia(Media.DeviantArt, 'Failed to get user information. Please grant access to your DeviantArt account.');
+          this.auth.userUnauthForMedia(Media.DeviantArt);
           this.deviantSub$.next(null);
         } else {
           throw new Error(`Failed to get Deviant.`);
@@ -64,7 +64,7 @@ export class BlogService {
           this.tumblrUserSubject$.next(tumblrUser.user);
         } else if (data && data.statusCode === 450) {
           /* Keep this here in case the user un-auths mid-session. */
-          this.auth.userUnauthForMedia(Media.Tumblr, 'Failed to get user information. Please grant access to your Tumblr account.');
+          this.auth.userUnauthForMedia(Media.Tumblr);
           this.tumblrUserSubject$.next(null);
         } else {
           throw new Error(`Failed to get Tumblr user.`);

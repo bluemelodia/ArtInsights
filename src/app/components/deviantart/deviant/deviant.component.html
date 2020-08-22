@@ -2,8 +2,8 @@
     <div (click)="getDeviantWatches()" class="deviant-details">
         <h3 class="blog-url"
             (click)="blogUtils.visitBlog(daURL)">
-            {{ deviant.username }}
+            {{ daUser.username }}
         </h3>
     </div>
-    <img [src]="deviant.usericon ? deviant.usericon : defaultAvatar">
+    <img [src]="daUser.usericon ? daUser.usericon : defaultAvatar">
 </div>

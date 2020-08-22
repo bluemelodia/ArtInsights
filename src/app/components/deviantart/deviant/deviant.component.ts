@@ -11,9 +11,11 @@ import { DeviantData } from '../../../types/deviant.types';
 export class DeviantComponent implements OnInit {
 @Input() set deviant(data: DeviantData) {
   this.daURL = `${data.username}.deviantArt.com`;
+  this.daUser = data;
 }
 @Output() getWatches = new EventEmitter<string>();
 
+public daUser: DeviantData;
 public daURL = '';
 
  /* Default user avatar. */
@@ -25,7 +27,7 @@ public daURL = '';
  }
 
  getDeviantWatches() {
-   console.log("Get follows for: ", this.deviant.username);
-   this.getWatches.emit(this.deviant.username);
+   console.log("Get follows for: ", this.daUser.username);
+   this.getWatches.emit(this.daUser.username);
  }
 }

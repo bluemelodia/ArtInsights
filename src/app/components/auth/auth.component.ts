@@ -90,25 +90,12 @@ export class AuthComponent {
         if (response && response.statusCode === 0) {
           console.info("Auth successful for ", response);
           this.alertService.showAlert(AlertType.Success, `${response.mediaType} authorization successful.`);
-          this.userAuthForMedia(response.mediaType, AuthStatus.Success);
+          this.storage.setOAuthKey(response.mediaType, AuthStatus.Success);
         } else {
           console.info("Auth failed for: ", response);
           this.alertService.showAlert(AlertType.Error, `${response.mediaType} authorization failed. Please try again.`);
-          this.userAuthForMedia(response.mediaType, AuthStatus.Failed);
+          this.storage.setOAuthKey(response.mediaType, AuthStatus.Failed);
         }
       });
-  }
-
-  private userAuthForMedia(mediaType: Media, status: AuthStatus) {
-    switch(mediaType) {
-      case Media.DeviantArt:
-      case Media.Tumblr:
-        if (status === AuthStatus.Success) {
-          this.storage.setOAuthKey(mediaType, AuthStatus.Success);
-        }
-        break;
-      default:
-        break;
-    }
   }
 }

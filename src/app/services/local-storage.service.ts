@@ -29,10 +29,12 @@ export class LocalStorageService {
   public setOAuthKey(mediaType: Media, authStatus: AuthStatus) {
     switch (mediaType) {
       case Media.DeviantArt:
+        console.log("Set DA auth key: ", authStatus);
         localStorage.setItem(DeviantArtOAuthKey, authStatus);
         this.DeviantArtOAuthSubject$.next(authStatus);
         break;
       case Media.Tumblr:
+        console.log("Set Tumblr auth key: ", authStatus);
         localStorage.setItem(TumblrOAuthKey, authStatus);
         this.TumblrOAuthSubject$.next(authStatus);
         break;
