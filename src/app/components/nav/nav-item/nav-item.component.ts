@@ -14,7 +14,7 @@ export class NavItemComponent implements OnInit {
   }
   @Input() altText: string;
   @Input() link: string;
-  @Input() disabled: boolean;
+  @Input() disableNav: boolean;
 
   public iconPath: string;
 
@@ -24,8 +24,8 @@ export class NavItemComponent implements OnInit {
   }
 
   routeToLink() {
-    console.log("Route the user to: ", this.link, this.disabled);
-    if (!this.disabled) {
+    console.log("Route the user to: ", this.link, this.disableNav);
+    if (!this.disableNav) {
       this.router.navigateByUrl(this.link);
     }
   }
