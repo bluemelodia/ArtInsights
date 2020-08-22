@@ -32,9 +32,9 @@ export class NavComponent implements OnInit {
       /* Subscribe to changes in social media auth status, and enable/disable the
        * navigation links accordingly. Twitter is always auth = true as only the 
        * public API is used. */
-      this.TumblrOAuthSubject$.subscribe((twitterStatus: AuthStatus) => {
-        this.mediaStatus[Media.Twitter] = twitterStatus;
-        console.log("🎯 Twitter status: ", this.mediaStatus);
+      this.TumblrOAuthSubject$.subscribe((tumblrStatus: AuthStatus) => {
+        this.mediaStatus[Media.Tumblr] = tumblrStatus;
+        console.log("🎯 Tumblr status: ", this.mediaStatus);
       });
 
       this.DeviantArtOAuthSubject$.subscribe((deviantArtStatus: AuthStatus) => {

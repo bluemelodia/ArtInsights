@@ -2,14 +2,16 @@
 @import '../../../../styles/variables.scss';
 
 :host {
-    @include tumblr-container();
-    @include flex-col($justify-content: space-around);
+    @include deviantart-container();
+    display: flex;
     color: $light-text-color;
     margin-bottom: $large-spacing;
 
-    .blogs {
+    .deviant {
         @include flex-row($justify-content: space-between);
-        @include tumblr-theme();
+        width: 100%; 
+
+        @include deviantart-theme();
 
         margin-top: $small-spacing;
         margin-bottom: $small-spacing;
@@ -17,9 +19,8 @@
         border: 2px solid $light-text-color;
 
         .blog-url {
-    
             &:hover {
-                color: $tumblr-light;
+                color: $deviantart-light;
                 cursor: pointer;
             }
         }

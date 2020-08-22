@@ -103,8 +103,7 @@ $default-line-height: 0px;
     box-shadow: inset 0 0 0 2px $app-dark-nav;
 }
 
-@mixin tumblr-container() {
-    background-color: $tumblr-bg;
+@mixin user-container() {
     margin: $large-spacing;
     padding: $large-spacing;
     border: 3px solid $widget-border;
@@ -113,9 +112,26 @@ $default-line-height: 0px;
     margin: 0 auto;
 }
 
+@mixin tumblr-container() {
+    background-color: $tumblr-bg;
+    @include user-container();
+}
+
+@mixin deviantart-container() {
+    background-color: $deviantart-bg;
+    @include user-container();
+}
+
 @mixin tumblr-theme {
     background-color: $tumblr-medium;
     &:hover {
         border: 2px solid $tumblr-light;
+    }
+}
+
+@mixin deviantart-theme {
+    background-color: $deviantart-medium;
+    &:hover {
+        border: 2px solid $deviantart-light;
     }
 }
