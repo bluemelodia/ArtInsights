@@ -4,19 +4,20 @@
         <p>Sign into one or more the social media platform(s) below.</p>
     </header>
     <div class="nav-section">
-        <div class="nav-button" 
-            [ngClass]="getStylesForMediaButton(media.key)" 
-            *ngFor="let media of mediaData | keyvalue">
-            <button (click)="auth(media.key)" 
-                [disabled]="authService.isAuthorizedForMedia(media.key)"
-                [attr.alt]="'Authenticate with ' + media.value.alt">
+        <button class="nav-button" 
+            *ngFor="let media of mediaData | keyvalue"
+            (click)="auth(media.key)" 
+            [ngClass]="getStylesForMediaButton(media.key)"
+            [disabled]="authService.isAuthorizedForMedia(media.key)"
+            [attr.alt]="'Authenticate with ' + media.value.alt">
+            <button>
                 <img class="sm-icon" [src]="getIconName(media.value.iconName)"/>
             </button>
             <div class="media-name">
                 {{ media.key }}
             </div>
             <img class="auth-status" [src]="getIconForMediaButton(media.key)"/>
-        </div>
+        </button>
     </div>
     <button 
         class="continue-button" 

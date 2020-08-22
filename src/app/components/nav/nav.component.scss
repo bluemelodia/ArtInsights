@@ -32,6 +32,14 @@ nav {
         &:hover {
             background-color: $app-light-nav;
         }
+
+        &:disabled, &[disabled] {
+            opacity: 0.25;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
     }
 
     button:not(:first-child) {

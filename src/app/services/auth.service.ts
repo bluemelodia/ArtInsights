@@ -37,6 +37,7 @@ export class AuthService {
   }
 
   public isAuthorizedForMedia(media: Media) {
+    console.log("Authorized for media? ", this.localStorage.oAuthStatusForMedia(media));
     return this.localStorage.oAuthStatusForMedia(media) === AuthStatus.Success;
   }
 
