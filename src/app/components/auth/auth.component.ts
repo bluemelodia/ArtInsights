@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Media, mediaData, AlertType, DeviantArtOAuthKey, TumblrOAuthKey } from '../../app.consts';
-import { authMediaData, AuthPostResponse, AuthStatus } from './auth.types';
+import { authMediaData, AuthPostResponse, AuthStatus, AuthRedirectResponse } from './auth.types';
 import { AuthService } from '../../services/auth.service';
 import { RedirectService } from '../../services/redirect.service';
 import { UtilsService } from '../../services/utils.service';
@@ -17,7 +17,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 export class AuthComponent {
   public mediaData = Object.assign({}, mediaData);
   private authSubject$: Subject<AuthPostResponse>;
-  private authRedirectSubject$: Subject<string>;
+  private authRedirectSubject$: Subject<AuthRedirectResponse>;
 
   constructor(
     private alertService: AlertService,
@@ -72,10 +72,14 @@ export class AuthComponent {
   public setupRedirectSubscriptions() {
     this.authRedirectSubject$ = this.authService.authRedirectSubject$;
     this.authRedirectSubject$
-      .subscribe((redirectLink) => {
+      .subscribe((redirectLink: AuthRedirectResponse) => {
         console.info("Prepare to redirect to auth link: ", redirectLink);
-        this.alertService.showAlert(AlertType.Info, 'Connecting to Tumblr...');
-        this.redirectService.redirect(redirectLink);
+        if (redirectLink.redirect) {
+          this.alertService.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
+          this.redirectService.redirect(redirectLink.redirect);
+        } else {
+          this.alertService.showAlert(AlertType.Error, `We are unable to connect to ${redirectLink.mediaType} at this time. Please try again later.`);
+        }
     });
   }
 

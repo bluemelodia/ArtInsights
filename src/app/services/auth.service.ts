@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Media, UserMediaAction, AlertType } from '../app.consts';
 import { urlForSite } from '../app.endpoints';
-import { AuthPostResponse, AuthStatus } from '../components/auth/auth.types';
+import { AuthPostResponse, AuthStatus, AuthRedirectResponse } from '../components/auth/auth.types';
 import { Observable, Subject } from 'rxjs';
 import { AlertService } from './alert.service';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class AuthService {
   /* For authentication with social Media. */
   public tumblrAuthURL = urlForSite(Media.Tumblr, UserMediaAction.Auth); 
   public deviantArtAuthURL = urlForSite(Media.DeviantArt, UserMediaAction.Auth);
-  private mediaLoginRedirectSubject$ = new Subject<string>();
+  private mediaLoginRedirectSubject$ = new Subject<AuthRedirectResponse>();
   private mediaAuthSubject$ = new Subject<AuthPostResponse>();
 
   constructor(
@@ -52,13 +52,19 @@ export class AuthService {
       .subscribe((data: string) => {
         if (data) {
           console.log("Prepare to redirect: ", data);
-          this.authRedirectSubject$.next(data);
+          this.authRedirectSubject$.next({
+            redirect: data, 
+            mediaType: socialMedia
+          });
         } else {
           throw new Error(`Unable to authenticate the user for ${socialMedia}.`);
         }
       }, 
       (error: Error) => {
-        this.authRedirectSubject$.next(null);
+        this.authRedirectSubject$.next({
+          redirect: null,
+          mediaType: socialMedia
+        });
       });
   }
 

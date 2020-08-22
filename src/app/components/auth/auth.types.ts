@@ -5,6 +5,11 @@ export interface AuthPostResponse {
     mediaType: Media
 }
 
+export interface AuthRedirectResponse {
+    redirect: string,
+    mediaType: Media
+}
+
 export interface LoginPostResponse {
     statusCode: number,
     responseData?: string
