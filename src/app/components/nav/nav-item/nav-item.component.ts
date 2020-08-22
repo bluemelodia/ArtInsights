@@ -26,6 +26,7 @@ export class NavItemComponent implements OnInit {
   routeToLink() {
     console.log("Route the user to: ", this.link, this.disableNav);
     if (!this.disableNav) {
+      console.log("Route the user!!!!!!! ", this.link);
       this.router.navigateByUrl(this.link);
     }
   }

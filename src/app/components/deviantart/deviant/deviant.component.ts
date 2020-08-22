@@ -10,7 +10,7 @@ import { DeviantData } from '../../../types/deviant.types';
 })
 export class DeviantComponent implements OnInit {
 @Input() set deviant(data: DeviantData) {
-  this.daURL = `${data.username}.deviantArt.com`;
+  this.daURL = `https://${data.username}.deviantArt.com`;
   this.daUser = data;
 }
 @Output() getWatches = new EventEmitter<string>();

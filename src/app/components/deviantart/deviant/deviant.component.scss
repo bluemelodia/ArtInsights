@@ -4,11 +4,11 @@
 :host {
     @include deviantart-container();
     display: flex;
-    color: $light-text-color;
     margin-bottom: $large-spacing;
 
     .deviant {
         @include flex-row($justify-content: space-between);
+        color: $light-text-color; 
         width: 100%; 
 
         @include deviantart-theme();
@@ -18,7 +18,7 @@
         padding: $small-spacing;
         border: 2px solid $light-text-color;
 
-        .blog-url {
+        .blog-url {            
             &:hover {
                 color: $deviantart-light;
                 cursor: pointer;
