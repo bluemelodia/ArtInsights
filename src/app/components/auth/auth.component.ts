@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Media, mediaData, AlertType, DeviantArtOAuthKey, TumblrOAuthKey } from '../../app.consts';
+import { Media, mediaData, AlertType } from '../../app.consts';
 import { authMediaData, AuthPostResponse, AuthStatus, AuthRedirectResponse } from './auth.types';
 import { AuthService } from '../../services/auth.service';
 import { RedirectService } from '../../services/redirect.service';
@@ -22,7 +22,7 @@ export class AuthComponent {
   constructor(
     private alertService: AlertService,
     public authService: AuthService, 
-    private localStorageService: LocalStorageService,
+    private storage: LocalStorageService,
     private redirectService: RedirectService,
     private router: Router,
     private utils: UtilsService
@@ -39,7 +39,7 @@ export class AuthComponent {
   }
 
   public loginUser() {
-    if (this.localStorageService.isUserAuth()) {
+    if (this.storage.isUserAuth()) {
       this.router.navigateByUrl('/home');
     }
   }
@@ -58,7 +58,7 @@ export class AuthComponent {
   }
 
   public getIconForMediaButton(media: Media) {
-    const oAuthStatus = this.localStorageService.oAuthStatusForMedia(media);
+    const oAuthStatus = this.storage.oAuthStatusForMedia(media);
     switch (oAuthStatus) {
       case AuthStatus.Unattempted:
       case AuthStatus.Success:
@@ -104,7 +104,7 @@ export class AuthComponent {
       case Media.DeviantArt:
       case Media.Tumblr:
         if (status === AuthStatus.Success) {
-          this.localStorageService.setOAuthKey(mediaType, AuthStatus.Success);
+          this.storage.setOAuthKey(mediaType, AuthStatus.Success);
         }
         break;
       default:
