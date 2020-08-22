@@ -24,10 +24,6 @@ export class TumblrFollowComponent implements OnInit {
   ngOnInit() {
   }
 
-  public showTumblrWidget() {
-    return this.tumblrFollowers.length > 0 || this.tumblrFollowing.length > 0;
-  }
-
   /* Generic callback for when user clicks on a button in the blog component. */
   public onUserAction(action: UserMediaAction, blog: string) {
     console.log("On user action: ", action, blog);

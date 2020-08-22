@@ -1,4 +1,4 @@
-<section *ngIf="showTumblrWidget()" class="tumblr-follows">
+<section *ngIf="this.tumblrFollowers.length > 0 || this.tumblrFollowing.length > 0" class="tumblr-follows">
     <div class="followers">
         <h2>Followers</h2>
         <div *ngIf="tumblrFollowers.length > 0" class="scrollable-list">
