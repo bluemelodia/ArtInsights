@@ -6,6 +6,7 @@ import { BlogService } from '../../services/blog.service';
 import { TumblrFollowService } from '../../services/tumblr-follow.service';
 import { AuthService } from '../../services/auth.service';
 import { DeviantData } from '../../types/deviant.types';
+import { AlertType } from '../../app.consts';
 
 @Component({
   selector: 'app-deviantart',
@@ -54,6 +55,14 @@ export class DeviantArtComponent implements OnInit {
         this.deviant = user;
       });
   }
+
+  public getWatches() {
+    if (this.deviant) {
+      this.alertService.showAlert(AlertType.Info, `Retrieving data for ${this.deviant}...`);
+      //this.getTumblrFollowersAndFollowing();
+    }
+  }
+
 /*
   public onBlogSearch(blog: string) {
  

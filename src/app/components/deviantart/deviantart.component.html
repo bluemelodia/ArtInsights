@@ -1,2 +1,5 @@
-<p>deviantart works!</p>
+<app-deviant
+    *ngIf="deviant" 
+    [deviant]="deviant"
+    (getWatches)="getWatches()"></app-deviant>
 <app-deviantart-follow></app-deviantart-follow>
