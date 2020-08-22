@@ -14,6 +14,7 @@ export class NavItemComponent implements OnInit {
   }
   @Input() altText: string;
   @Input() link: string;
+  @Input() disabled: boolean;
 
   public iconPath: string;
 

@@ -21,7 +21,7 @@ export class AuthService {
   constructor(
     private http: HttpClient, 
     private alert: AlertService,
-    private localStorage: LocalStorageService,
+    private storage: LocalStorageService,
     private router: Router) { }
 
   public get authRedirectSubject$() {
@@ -33,12 +33,12 @@ export class AuthService {
   }
 
   public isAuthorized() {
-    return this.localStorage.isUserAuth();
+    return this.storage.isUserAuth();
   }
 
   public isAuthorizedForMedia(media: Media) {
-    console.log("Authorized for media? ", this.localStorage.oAuthStatusForMedia(media));
-    return this.localStorage.oAuthStatusForMedia(media) === AuthStatus.Success;
+    console.log("Authorized for media? ", this.storage.oAuthStatusForMedia(media));
+    return this.storage.oAuthStatusForMedia(media) === AuthStatus.Success;
   }
 
   public redirectToAuthWithAlertMsg(alertMsg: string) {

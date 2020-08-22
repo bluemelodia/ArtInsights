@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserAction, AuthTokenKey, DeviantArtOAuthKey, TumblrOAuthKey } from '../app.consts';
+import { UserAction, AuthTokenKey } from '../app.consts';
 import { urlForAction } from '../app.endpoints';
 import { Observable, of, Subject } from 'rxjs';
 import { LoginPostResponse } from '../components/auth/auth.types';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,10 @@ export class LoginService {
   public registerURL = urlForAction(UserAction.Register);
   private userLoginSubject$ = new Subject<LoginPostResponse>();
 
-  constructor(private http: HttpClient) { }
+  constructor(
+      private http: HttpClient,
+      private storage: LocalStorageService
+  ) { }
 
   public registerUser(username: string, password: string) {
     console.log("Register user: ", username, password);
@@ -31,9 +35,7 @@ export class LoginService {
   }
 
   public logoutUser() {
-    localStorage.removeItem(AuthTokenKey);
-    localStorage.removeItem(DeviantArtOAuthKey);
-    localStorage.removeItem(TumblrOAuthKey);
+    this.storage.deleteAllKeys();
   }
 
   public get loginSubject$() {
@@ -48,7 +50,7 @@ export class LoginService {
           data.userAction = userAction;
           console.log("Action Succeeded: ", data);
           if (userAction === UserAction.Login) {
-            this.storeAuthToken(data.responseData);
+            this.storage.storeAuthToken(data.responseData);
           }
           this.userLoginSubject$.next(data);
         } else {
@@ -59,11 +61,5 @@ export class LoginService {
         console.log("ERROR: ", error);
         this.userLoginSubject$.next(null);
       });
-  }
-
-  /* Store the auth token returned from the server. To be sent on each post-login request. */
-  private storeAuthToken(token: string) {
-    console.log("Store the user auth token: ", token);
-    localStorage.setItem(AuthTokenKey, token);
   }
 }
