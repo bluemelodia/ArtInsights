@@ -24,7 +24,8 @@ export class TumblrComponent implements OnInit {
     this.setupTumblrSubscription();
 
     this.router.events.subscribe(event =>{
-      if (event instanceof NavigationEnd){
+      console.log("Nav ending, should we get Tumblr user? ", event);
+      if (event instanceof NavigationEnd && event.url === "/tumblr"){
         console.log("Nav ending, get Tumblr user: ", event);
         this.blogService.getTumblrUser();
       }
