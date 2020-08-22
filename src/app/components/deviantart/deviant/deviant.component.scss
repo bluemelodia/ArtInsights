@@ -18,15 +18,22 @@
         padding: $small-spacing;
         border: 2px solid $light-text-color;
 
-        .blog-url {            
-            &:hover {
-                color: $deviantart-light;
-                cursor: pointer;
+        .deviant-details {
+            @include flex-row();
+            align-items: center;
+
+            .blog-url {   
+                padding-left: $large-spacing;
+                         
+                &:hover {
+                    color: $deviantart-light;
+                    cursor: pointer;
+                }
             }
         }
     
         img {
-            height: 80px;
+            height: 50px;
         }
     }
 }
