@@ -35,7 +35,7 @@ export class LoginService {
   }
 
   public logoutUser() {
-    this.storage.deleteAllKeys();
+    this.storage.resetKeys();
   }
 
   public get loginSubject$() {

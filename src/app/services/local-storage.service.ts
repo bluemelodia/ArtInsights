@@ -53,9 +53,9 @@ export class LocalStorageService {
   }
 
   /* Logout or start new session. */
-  public deleteAllKeys() {
+  public resetKeys() {
     localStorage.removeItem(AuthTokenKey);
-    localStorage.removeItem(DeviantArtOAuthKey);
-    localStorage.removeItem(TumblrOAuthKey);
+    localStorage.setItem(DeviantArtOAuthKey, AuthStatus.Unattempted);
+    localStorage.setItem(TumblrOAuthKey, AuthStatus.Unattempted);
   }
 }
