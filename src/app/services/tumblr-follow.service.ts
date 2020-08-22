@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Media, UserMediaAction } from '../../app.consts';
-import { urlForSite } from '../../app.endpoints';
-import { TumblrBlogResponse } from './follow.types';
+import { Media, UserMediaAction } from '../app.consts';
+import { urlForSite } from '../app.endpoints';
+import { TumblrBlogResponse } from '../types/tumblr.types';
 
 @Injectable({
   providedIn: 'root'

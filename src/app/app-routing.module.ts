@@ -4,10 +4,10 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { LoginGuard } from './routing/login.guard';
 import { AuthGuard } from './routing/auth.guard';
-import { TumblrComponent } from './components/home-dashboard/tumblr/tumblr.component';
 import { HomeComponent } from './components/home-dashboard/home/home.component';
-import { DeviantArtComponent } from './components/home-dashboard/deviantart/deviantart.component';
+import { DeviantArtComponent } from './components/deviantart/deviantart.component';
 import { Media } from './app.consts';
+import { TumblrComponent } from './components/tumblr/tumblr.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

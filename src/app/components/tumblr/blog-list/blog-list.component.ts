@@ -1,14 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TumblrUserBlog, TumblrUserInfo } from '../../../types/tumblr.types';
+import { TumblrUserInfo, TumblrUserBlog } from '../../../types/tumblr.types';
 import { UtilsService } from '../../../services/utils.service';
-import { BlogUtilsService } from '../blog-utils.service';
+import { BlogUtilsService } from '../../../services/blog-utils.service';
+
 
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.scss']
 })
-export class BlogListComponent implements OnInit {
+export class TumblrBlogListComponent implements OnInit {
   @Input() userInfo: TumblrUserInfo;
   @Output() getFollowers = new EventEmitter<string>();
 

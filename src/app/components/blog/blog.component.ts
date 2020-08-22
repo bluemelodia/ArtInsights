@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
-import { Media, UserMediaAction } from '../../../app.consts';
+import { Media, UserMediaAction } from '../../app.consts';
 
 @Component({
   selector: 'app-blog',

@@ -37,13 +37,13 @@ export class AuthService {
   }
 
   public isAuthorizedForMedia(media: Media) {
-    console.log("Authorized for media? ", this.storage.oAuthStatusForMedia(media));
+    console.log("Authorized for media? ", media, this.storage.oAuthStatusForMedia(media));
     return this.storage.oAuthStatusForMedia(media) === AuthStatus.Success;
   }
 
   public userUnauthForMedia(media: Media, alertMsg: string) {
     this.storage.setOAuthKey(media, AuthStatus.Unattempted);
-    this.alert.showAlert(AlertType.Error, 'Failed to get user information. Please grant access to your Tumblr account.');
+    this.alert.showAlert(AlertType.Error, `Failed to get user information. Please grant access to your ${media} account.`);
     this.router.navigateByUrl('/auth');
   }
 

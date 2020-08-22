@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { TumblrFollowService } from '../tumblr-follow.service';
-import { TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing, TumblrUser } from '../follow.types';
-import { Media, AlertType } from '../../../app.consts';
-import { AuthService } from '../../../services/auth.service';
-import { BlogService } from '../../../services/blog.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { TumblrUserInfo } from '../../../types/tumblr.types';
-import { AlertService } from '../../../services/alert.service';
+
+import { AlertService } from '../../services/alert.service';
+import { BlogService } from '../../services/blog.service';
+import { TumblrFollowService } from '../../services/tumblr-follow.service';
+import { AuthService } from '../../services/auth.service';
+import { DeviantData } from '../../types/deviant.types';
 
 @Component({
-  selector: 'app-tumblr',
-  templateUrl: './tumblr.component.html',
-  styleUrls: ['./tumblr.component.scss']
+  selector: 'app-deviantart',
+  templateUrl: './deviantart.component.html',
+  styleUrls: ['./deviantart.component.scss']
 })
-export class TumblrComponent implements OnInit {
+export class DeviantArtComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private blogService: BlogService,
@@ -21,51 +20,43 @@ export class TumblrComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    this.setupTumblrSubscription();
+    this.setupDASubscription();
 
     this.router.events.subscribe(event =>{
-      console.log("Nav ending, should we get Tumblr user? ", event);
-      if (event instanceof NavigationEnd && event.url === "/tumblr"){
-        console.log("Nav ending, get Tumblr user: ", event);
-        this.blogService.getTumblrUser();
+      console.log("Nav ending, should we get DeviantArt user? ", event);
+      if (event instanceof NavigationEnd && event.url === "/deviant-art"){
+        console.log("Nav ending, get Deviant: ", event);
+        this.blogService.getDeviant();
       }
    })
   }
 
-  public tumblrUser: TumblrUserInfo;
-  public blog: string;
+  public deviant: DeviantData;
+  private deviantUserSubject$ = this.blogService.deviantSub$;
 
-  /*
-   * The Tumblr API total_blogs and total_users fields do not reflect the actual number
-   * of blogs/users that the blog is being followed by/is following. Therefore, stop
-   * fetching more followers/following when new entries are no longer being returned
-   * by the API calls (we are getting repeats back).
-   */
-  private tumblrUserSubject$ = this.blogService.tumblrUserSub$;
+  // public tumblrFollowers: string[] = [];
+  // public tumblrFollowerMap: { [user: string] : TumblrUser } = {};
+  // private tumblrFollowerOffset = 0;
+  // private hasMoreTumblrFollowers = true;
 
-  public tumblrFollowers: string[] = [];
-  public tumblrFollowerMap: { [user: string] : TumblrUser } = {};
-  private tumblrFollowerOffset = 0;
-  private hasMoreTumblrFollowers = true;
-
-  public tumblrFollowing: string[] = [];
-  public tumblrFollowingMap: { [user: string] : TumblrBlog } = {};
-  private tumblrFollowingOffset = 0;
-  private hasMoreTumblrFollowing = true;
+  // public tumblrFollowing: string[] = [];
+  // public tumblrFollowingMap: { [user: string] : TumblrBlog } = {};
+  // private tumblrFollowingOffset = 0;
+  // private hasMoreTumblrFollowing = true;
 
   ngOnInit() {
   }
 
-  public setupTumblrSubscription() {
-    this.tumblrUserSubject$
-      .subscribe((user: TumblrUserInfo) => {
-        console.log("Received Tumblr user: ", user);
-        this.tumblrUser = user;
+  public setupDASubscription() {
+    this.deviantUserSubject$
+      .subscribe((user: DeviantData) => {
+        console.log("Received DA user: ", user);
+        this.deviant = user;
       });
   }
-
+/*
   public onBlogSearch(blog: string) {
-    /* New blog search, reset all. */
+ 
     if (this.tumblrUser && blog !== this.blog) {
       this.blog = blog;
       this.alertService.showAlert(AlertType.Info, `Retrieving data for ${this.blog}...`);
@@ -121,7 +112,6 @@ export class TumblrComponent implements OnInit {
     }
   }
 
-  /* Tumblr-specific actions. */
   public followTumblr(blog: string) {
     this.follow(blog, Media.Tumblr);
   }
@@ -218,5 +208,5 @@ export class TumblrComponent implements OnInit {
     this.tumblrFollowing.push(tumblrFollowing.name);
     this.tumblrFollowingMap[tumblrFollowing.name] = tumblrFollowing;
     this.tumblrFollowingOffset++;
-  }
+  }*/
 }

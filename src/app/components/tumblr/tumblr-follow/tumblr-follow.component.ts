@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { TumblrUser, TumblrBlog } from '../../follow.types';
-import { BlogUtilsService } from '../../blog-utils.service';
-import { UserMediaAction, Media } from '../../../../app.consts';
+import { TumblrUser, TumblrBlog } from '../../../types/tumblr.types';
+import { Media, UserMediaAction } from '../../../app.consts';
+import { BlogUtilsService } from '../../../services/blog-utils.service';
+
 
 @Component({
   selector: 'app-tumblr-follow',

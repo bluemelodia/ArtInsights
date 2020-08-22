@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { urlForSite } from '../app.endpoints';
-import { Media, UserMediaAction, AlertType } from '../app.consts';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { TumblrUserInfo, TumblrUserResponse } from '../types/tumblr.types';
-import { AlertService } from './alert.service';
-import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+
+import { urlForSite } from '../app.endpoints';
+import { Media, UserMediaAction } from '../app.consts';
+import { TumblrUserInfo, TumblrResponseData } from '../types/tumblr.types';
+import { DeviantData } from '../types/deviant.types';
+import { UserResponse } from '../types/shared.types';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class BlogService {
   private tumblrUserSubject$ = new Subject<TumblrUserInfo>();
 
   public deviantURL = urlForSite(Media.DeviantArt, UserMediaAction.User); 
-  private deviantSubject$ = new Subject<TumblrUserInfo>();
+  private deviantSubject$ = new Subject<DeviantData>();
 
   constructor(
     private http: HttpClient,
@@ -33,32 +34,34 @@ export class BlogService {
 
   getDeviant() {
     this.http.get(this.deviantURL, { withCredentials: true })
-      .subscribe((data: any) => {
+      .subscribe((data: UserResponse) => {
         console.log("RECEIVED USER DATA: ", data);
         if (data && data.statusCode === 0 && data.responseData) {
-          console.log("Send deviant: ", data.responseData.user);
-          this.deviantSub$.next(data.responseData.user);
+          const deviant = data.responseData as DeviantData;
+          console.log("Send deviant: ", deviant);
+          this.deviantSub$.next(deviant);
         } else if (data && data.statusCode === 450) {
           /* Keep this here in case the user un-auths mid-session. */
           this.auth.userUnauthForMedia(Media.DeviantArt, 'Failed to get user information. Please grant access to your DeviantArt account.');
           this.deviantSub$.next(null);
         } else {
-          throw new Error(`Failed to get Tumblr user.`);
+          throw new Error(`Failed to get Deviant.`);
         }
       }, 
       (error: Error) => {
         console.log("ERROR: ", error);
-        this.tumblrUserSubject$.next(null);
+        this.deviantSub$.next(null);
       });
   }
 
   getTumblrUser() {
     this.http.get(this.tumblrUserURL, { withCredentials: true })
-      .subscribe((data: TumblrUserResponse) => {
+      .subscribe((data: UserResponse) => {
         console.log("RECEIVED USER DATA: ", data);
         if (data && data.statusCode === 0 && data.responseData) {
-          console.log("Send tumblr user: ", data.responseData.user);
-          this.tumblrUserSubject$.next(data.responseData.user);
+          const tumblrUser = data.responseData as TumblrResponseData;
+          console.log("Send tumblr user: ", tumblrUser.user);
+          this.tumblrUserSubject$.next(tumblrUser.user);
         } else if (data && data.statusCode === 450) {
           /* Keep this here in case the user un-auths mid-session. */
           this.auth.userUnauthForMedia(Media.Tumblr, 'Failed to get user information. Please grant access to your Tumblr account.');
