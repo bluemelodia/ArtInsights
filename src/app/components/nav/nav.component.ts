@@ -13,7 +13,7 @@ export class NavComponent implements OnInit {
   public mediaData = mediaData;
   public navActions = navActions;
 
-  public mediaStatus: {};
+  public mediaStatus = {};
 
   private TumblrOAuthSubject$ = this.storage.TumblrOAuthSubject$;
   private DeviantArtOAuthSubject$ = this.storage.DeviantArtOAuthSubject$;
@@ -24,6 +24,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
       Object.keys(mediaData).forEach((media) => {
+        console.log("Push media status: ", media);
         this.mediaStatus[media] = AuthStatus.Unattempted;
       });
 

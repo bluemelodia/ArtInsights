@@ -28,7 +28,6 @@ section {
             padding: $large-spacing;
             position: relative;
             background-color: transparent;
-            color: $dark-text-color;
 
             /* Depends on auth status. */
             &.auth-success {
