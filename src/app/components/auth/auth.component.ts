@@ -21,7 +21,7 @@ export class AuthComponent {
 
   constructor(
     private alertService: AlertService,
-    private authService: AuthService, 
+    public authService: AuthService, 
     private localStorageService: LocalStorageService,
     private redirectService: RedirectService,
     private router: Router,
@@ -44,17 +44,13 @@ export class AuthComponent {
     }
   }
 
-  public isAuthorized() {
-    return this.localStorageService.isUserAuth();
-  }
-
   public getIconName(iconName: string) {
     return this.utils.getImagePath(iconName);
   }
 
   public getStylesForMediaButton(media: Media) {
     let mediaStyle = [];
-    if (this.localStorageService.oAuthStatusForMedia(media)) {
+    if (this.authService.isAuthorizedForMedia(media)) {
       mediaStyle.push('auth-success');
     }
 

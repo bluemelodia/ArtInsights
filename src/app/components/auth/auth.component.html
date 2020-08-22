@@ -4,8 +4,12 @@
         <p>Sign into one or more the social media platform(s) below.</p>
     </header>
     <div class="nav-section">
-        <div class="nav-button" [ngClass]="getStylesForMediaButton(media.key)" *ngFor="let media of mediaData | keyvalue">
-            <button (click)="auth(media.key)" [attr.alt]="'Authenticate with ' + media.value.alt">
+        <div class="nav-button" 
+            [ngClass]="getStylesForMediaButton(media.key)" 
+            *ngFor="let media of mediaData | keyvalue">
+            <button (click)="auth(media.key)" 
+                [disabled]="authService.isAuthorizedForMedia(media.key)"
+                [attr.alt]="'Authenticate with ' + media.value.alt">
                 <img class="sm-icon" [src]="getIconName(media.value.iconName)"/>
             </button>
             <div class="media-name">
@@ -16,7 +20,7 @@
     </div>
     <button 
         class="continue-button" 
-        [disabled]="isAuthorized() ? null : true"
+        [disabled]="authService.isAuthorized() ? null : true"
         (click)="loginUser()">
         Continue
     </button>

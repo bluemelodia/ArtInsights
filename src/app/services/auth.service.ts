@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Media, UserMediaAction } from '../app.consts';
+import { Media, UserMediaAction, AlertType } from '../app.consts';
 import { urlForSite } from '../app.endpoints';
-import { AuthPostResponse } from '../components/auth/auth.types';
+import { AuthPostResponse, AuthStatus } from '../components/auth/auth.types';
 import { Observable, Subject } from 'rxjs';
+import { AlertService } from './alert.service';
+import { Router } from '@angular/router';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,11 @@ export class AuthService {
   private mediaLoginRedirectSubject$ = new Subject<string>();
   private mediaAuthSubject$ = new Subject<AuthPostResponse>();
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient, 
+    private alert: AlertService,
+    private localStorage: LocalStorageService,
+    private router: Router) { }
 
   public get authRedirectSubject$() {
     return this.mediaLoginRedirectSubject$;
@@ -23,6 +30,19 @@ export class AuthService {
 
   public get authSubject$() {
     return this.mediaAuthSubject$;
+  }
+
+  public isAuthorized() {
+    return this.localStorage.isUserAuth();
+  }
+
+  public isAuthorizedForMedia(media: Media) {
+    return this.localStorage.oAuthStatusForMedia(media) === AuthStatus.Success;
+  }
+
+  public redirectToAuthWithAlertMsg(alertMsg: string) {
+    this.alert.showAlert(AlertType.Error, 'Failed to get user information. Please grant access to your Tumblr account.');
+    this.router.navigateByUrl('/auth');
   }
 
   authenticateUser(socialMedia: Media) {

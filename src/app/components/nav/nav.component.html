@@ -1,5 +1,6 @@
 <nav>
-    <button *ngFor="let media of mediaData | keyvalue">
+    <button *ngFor="let media of mediaData | keyvalue"
+        [disabled]="!authService.isAuthorizedForMedia(media.key)">
         <app-nav-item 
             [iconName]="media.value.iconName" 
             [altText]="media.value.alt"
