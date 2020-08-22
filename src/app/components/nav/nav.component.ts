@@ -23,9 +23,9 @@ export class NavComponent implements OnInit {
       private storage: LocalStorageService) { }
 
   ngOnInit(): void {
-      for (let media in mediaData) {
+      Object.keys(mediaData).forEach((media) => {
         this.mediaStatus[media] = AuthStatus.Unattempted;
-      }
+      });
 
       /* Subscribe to changes in social media auth status, and enable/disable the
        * navigation links accordingly. Twitter is always auth = true as only the 

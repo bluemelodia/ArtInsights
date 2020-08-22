@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Media, DeviantArtOAuthKey, TumblrOAuthKey, AuthTokenKey } from '../app.consts';
 import { AuthStatus } from '../components/auth/auth.types';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,8 @@ import { Subject } from 'rxjs';
 export class LocalStorageService {
   constructor() { }
 
-  public TumblrOAuthSubject$ = new Subject<AuthStatus>();
-  public DeviantArtOAuthSubject$ = new Subject<AuthStatus>();
+  public TumblrOAuthSubject$ = new BehaviorSubject(AuthStatus.Unattempted);
+  public DeviantArtOAuthSubject$ = new BehaviorSubject(AuthStatus.Unattempted);
 
   /* Store the auth token returned from the server. To be sent on each post-login request. */
   public storeAuthToken(token: string) {
