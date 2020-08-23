@@ -23,6 +23,10 @@
             }
         }
 
+        .da-style {
+            @include flex-row();
+        }
+
         .watcher-icon {
             height: $deviantart-icon-size;
             padding-right: $small-spacing;
@@ -33,9 +37,5 @@
             padding-right: $large-spacing;
             overflow-y: scroll;
         }
-    }
-    
-    & .followers {
-        margin-right: $large-spacing;
     }
 }

@@ -8,14 +8,16 @@
                 [mediaType]="mediaType"
                 (onUserAction)="onUserAction($event, watcher.key)">
                 <div media-type="deviantArt">
-                    <img class="watcher-icon"
+                    <div class="da-style">
+                        <img class="watcher-icon"
                         [src]="watcher.value.user.usericon ? watcher.value.user.usericon : defaultAvatar"/>
-                    <div>
-                        <h3 (click)="blogUtils.visitBlog(getDAURL(watcher.key))">
-                            {{ watcher.key }}
-                        </h3>  
-                        {{ watcher.value.user.type | deviant | uppercase }}
-                    </div>    
+                        <div>
+                            <h3 (click)="blogUtils.visitBlog(getDAURL(watcher.key))">
+                                {{ watcher.key }}
+                            </h3>  
+                            {{ watcher.value.user.type | deviant | uppercase }}
+                        </div> 
+                    </div>
                 </div>
             </app-blog>
         </div>
