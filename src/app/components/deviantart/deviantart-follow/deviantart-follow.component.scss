@@ -2,7 +2,7 @@
 @import '../../../../styles/variables.scss';
 
 .deviant-art-follows {
-    @include tumblr-container();
+    @include deviantart-container();
     @include flex-row(space-around);
 
     & .followers, & .following {
@@ -25,6 +25,7 @@
 
         .watcher-icon {
             height: $deviantart-icon-size;
+            padding-top: $small-spacing;
         }
     
         .scrollable-list {
@@ -36,11 +37,5 @@
     
     & .followers {
         margin-right: $large-spacing;
-    }
-    
-    & .following {
-        & .follows-back {
-            color: $tumblr-mutual;
-        }
     }
 }
