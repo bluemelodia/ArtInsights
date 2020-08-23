@@ -2,4 +2,8 @@
     *ngIf="deviant" 
     [deviant]="deviant"
     (getWatches)="getWatches()"></app-deviant>
-<app-deviantart-follow></app-deviantart-follow>
+<app-deviantart-follow
+    [watchers]="watchers"
+    [watchersMap]="watchersMap"
+>
+</app-deviantart-follow>

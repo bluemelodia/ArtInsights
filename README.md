@@ -2,9 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
-## Issues
+## Issues/TODOs
 
 - Directly visiting deviant-art, tumblr URLs causes auth token erasure and logout.
+- Fetch followers X at a time, if the user scrolls down then fetch the next batch.
 
 ## Development server
 

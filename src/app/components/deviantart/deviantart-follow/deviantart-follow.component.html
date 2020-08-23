@@ -1,1 +1,17 @@
-<p>deviantart-follow works!</p>
+<section *ngIf="this.watchers.length > 0" class="deviant-art-follows">
+    <div class="followers">
+        <h2>Watchers</h2>
+        <div class="scrollable-list">
+            <app-blog *ngFor="let watcher of watchersMap | keyvalue"
+                [isFollowing]="watcher.value.is_watching"
+                [mediaType]="mediaType"
+                (onUserAction)="onUserAction($event, watcher.user.username)">
+                <div media-type="deviantArt">
+                    <h3 (click)="blogUtils.visitBlog(getDAURL(watcher.user.username))">
+                        {{ watcher.user.username }}
+                    </h3>
+                </div>
+            </app-blog>
+        </div>
+    </div>
+</section>

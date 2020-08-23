@@ -1,0 +1,42 @@
+@import '../../../../styles/mixins.scss';
+@import '../../../../styles/variables.scss';
+
+.deviant-art-follows {
+    @include tumblr-container();
+    @include flex-row(space-around);
+
+    & .followers, & .following {
+        color: $light-text-color;
+        width: 100%;
+    
+        h2 {
+            text-align: center;
+            padding-bottom: $large-spacing;
+        }
+    
+        h3 {
+            letter-spacing: 0.5px;
+    
+            &:hover {
+                color: $tumblr-light;
+                cursor: pointer;
+            }
+        }
+    
+        .scrollable-list {
+            max-height: 450px;
+            padding-right: $large-spacing;
+            overflow-y: scroll;
+        }
+    }
+    
+    & .followers {
+        margin-right: $large-spacing;
+    }
+    
+    & .following {
+        & .follows-back {
+            color: $tumblr-mutual;
+        }
+    }
+}

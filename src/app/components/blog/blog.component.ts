@@ -16,6 +16,8 @@ export class BlogComponent implements OnInit {
     switch(this.mediaType) {
       case Media.Tumblr:
         return 'tumblr-theme';
+      case Media.DeviantArt:
+        return 'deviant-art-theme';
       default:
         return '';
     }

@@ -62,6 +62,7 @@ export class DeviantArtComponent implements OnInit {
     }
   }
 
+  /* TODO: don't grab all records at once - wait until the user scrolls. */
   public getDAFollowersAndFollowing(offset: number = 0) {
     this.deviantFollowService.getDAFriends(this.deviant.username, offset)
       .subscribe((watcherData: UserResponse) => { 
