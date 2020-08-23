@@ -5,7 +5,7 @@ const baseUrl = 'https://artinsights.ue.r.appspot.com';
 const mediaActionMap: { [id: string] : MediaAction } = {
     [Media.DeviantArt]: {
         [UserMediaAction.Auth]: 'auth',
-        [UserMediaAction.Followers]: 'friends', 
+        [UserMediaAction.Followers]: 'watchers', 
         [UserMediaAction.Following]: '', 
         [UserMediaAction.Posts]: '',
         [UserMediaAction.Tags]: '',

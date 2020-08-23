@@ -3,10 +3,10 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { AlertService } from '../../services/alert.service';
 import { BlogService } from '../../services/blog.service';
-import { TumblrFollowService } from '../../services/tumblr-follow.service';
 import { AuthService } from '../../services/auth.service';
 import { DeviantData } from '../../types/deviant.types';
 import { AlertType } from '../../app.consts';
+import { DeviantArtFollowService } from '../../services/deviant-art-follow.service';
 
 @Component({
   selector: 'app-deviantart',
@@ -17,7 +17,7 @@ export class DeviantArtComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private blogService: BlogService,
-    private tumblrFollowService: TumblrFollowService, 
+    private deviantFollowService: DeviantArtFollowService, 
     private authService: AuthService,
     private router: Router
   ) {
@@ -35,32 +35,52 @@ export class DeviantArtComponent implements OnInit {
   public deviant: DeviantData;
   private deviantUserSubject$ = this.blogService.deviantSub$;
 
-  // public tumblrFollowers: string[] = [];
-  // public tumblrFollowerMap: { [user: string] : TumblrUser } = {};
-  // private tumblrFollowerOffset = 0;
-  // private hasMoreTumblrFollowers = true;
-
-  // public tumblrFollowing: string[] = [];
-  // public tumblrFollowingMap: { [user: string] : TumblrBlog } = {};
-  // private tumblrFollowingOffset = 0;
-  // private hasMoreTumblrFollowing = true;
+  public watchers: string[] = [];
+  public watchersMap: { [user: string] : any } = {};
+  private watcherOffset = 0;
+  private hasMoreWatchers = true;
 
   ngOnInit() {
   }
 
+  /* Since there can only be one DA user, as soon as the user info is received, 
+   * we can make the get watches call. */
   public setupDASubscription() {
     this.deviantUserSubject$
       .subscribe((deviant: DeviantData) => {
         console.log("Received DA user: ", deviant);
         this.deviant = deviant;
+        this.getWatches();
       });
   }
 
   public getWatches() {
     if (this.deviant) {
       this.alertService.showAlert(AlertType.Info, `Retrieving data for ${this.deviant}...`);
-      //this.getTumblrFollowersAndFollowing();
+      this.getDAFollowersAndFollowing();
     }
+  }
+
+  public getDAFollowersAndFollowing(offset: number = 0) {
+    this.deviantFollowService.getDAFriends(this.deviant.username, offset)
+      .subscribe((watcherData: any) => { 
+        if (watcherData.statusCode !== -1) {
+          console.log("Watchers: ", watcherData);
+          const responseData = watcherData.responseData as any;
+          if (!responseData.users || responseData.users.length < 1) {
+            this.hasMoreWatchers = false;
+          }
+          responseData.users.forEach((user: any) => {
+            if (user.name in this.watchersMap) {
+              this.hasMoreWatchers = false;
+            } else {
+              //this.addTumblrFollower(user);
+            }
+          });
+          //this.getMoreTumblrFollowers(blog);
+          //console.log("TumblrFollowers 🙌🏼: ", blogData, this.tumblrFollowers)
+        }
+      })
   }
 
 /*

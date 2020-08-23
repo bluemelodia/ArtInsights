@@ -13,7 +13,6 @@ export class DeviantComponent implements OnInit {
   this.daURL = `https://${data.username}.deviantArt.com`;
   this.daUser = data;
 }
-@Output() getWatches = new EventEmitter<string>();
 
 public daUser: DeviantData;
 public daURL = '';
@@ -24,10 +23,5 @@ public daURL = '';
  constructor(private utils: UtilsService, public blogUtils: BlogUtilsService) { }
 
  ngOnInit() {
- }
-
- getDeviantWatches() {
-   console.log("Get follows for: ", this.daUser.username);
-   this.getWatches.emit(this.daUser.username);
  }
 }
