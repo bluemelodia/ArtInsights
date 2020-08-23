@@ -5,10 +5,10 @@
             <app-blog *ngFor="let watcher of watchersMap | keyvalue"
                 [isFollowing]="watcher.value.is_watching"
                 [mediaType]="mediaType"
-                (onUserAction)="onUserAction($event, watcher.user.username)">
+                (onUserAction)="onUserAction($event, watcher.key)">
                 <div media-type="deviantArt">
-                    <h3 (click)="blogUtils.visitBlog(getDAURL(watcher.user.username))">
-                        {{ watcher.user.username }}
+                    <h3 (click)="blogUtils.visitBlog(getDAURL(watcher.key))">
+                        {{ watcher.key }}
                     </h3>
                 </div>
             </app-blog>
