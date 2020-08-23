@@ -109,6 +109,7 @@ export class DeviantArtComponent implements OnInit {
   public followDeviant(deviant: string) {
     this.deviantFollowService.watch(deviant)
     .subscribe((res: any) => {
+      console.log("FOLLOW RES: ", res);
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (res.statusCode !== 0 || res.error_description) {
@@ -128,6 +129,7 @@ export class DeviantArtComponent implements OnInit {
   public unfollowDeviant(deviant: string) {
     this.deviantFollowService.unwatch(deviant)
     .subscribe((res: any) => {
+      console.log("UNFOLLOW RES: ", res);
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.Tumblr);
       } else if (res.statusCode !== 0 || res.error_description) {
