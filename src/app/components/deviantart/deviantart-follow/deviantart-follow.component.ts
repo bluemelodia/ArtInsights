@@ -59,7 +59,7 @@ export class DeviantArtFollowComponent implements OnInit {
     const position = this.scrollContainer.nativeElement.scrollHeight - this.scrollContainer.nativeElement.scrollTop;
     const height = this.scrollContainer.nativeElement.clientHeight;
     console.log("Reload? ", position, height, position > height - threshold);
-    return position < height - threshold;
+    return position < height + threshold;
   }
 
   /* Generic callback for when user clicks on a button in the blog component. */
