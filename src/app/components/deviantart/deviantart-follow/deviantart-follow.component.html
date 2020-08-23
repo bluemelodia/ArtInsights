@@ -11,8 +11,7 @@
                     <h3 (click)="blogUtils.visitBlog(getDAURL(watcher.key))">
                         {{ watcher.key }}
                     </h3>
-                    <img 
-                        class="watcher-icon"
+                    <img class="watcher-icon"
                         [src]="watcher.value.usericon ? watcher.value.usericon : defaultAvatar"/>
                 </div>
             </app-blog>

@@ -23,5 +23,15 @@
             }
         }
     }
+
+    &.deviantart-theme {
+        @include deviantart-theme();
+
+        & .follow-button {
+            &:hover {
+                color: $deviantart-light;
+            }
+        }
+    }
 }
 
