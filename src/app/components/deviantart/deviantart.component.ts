@@ -4,9 +4,10 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { BlogService } from '../../services/blog.service';
 import { AuthService } from '../../services/auth.service';
-import { DeviantData } from '../../types/deviant.types';
+import { DeviantData, DeviantWatchers, DeviantWatcher } from '../../types/deviant.types';
 import { AlertType } from '../../app.consts';
 import { DeviantArtFollowService } from '../../services/deviant-art-follow.service';
+import { UserResponse } from '../../types/shared.types';
 
 @Component({
   selector: 'app-deviantart',
@@ -56,31 +57,37 @@ export class DeviantArtComponent implements OnInit {
 
   public getWatches() {
     if (this.deviant) {
-      this.alertService.showAlert(AlertType.Info, `Retrieving data for ${this.deviant}...`);
+      this.alertService.showAlert(AlertType.Info, `Retrieving data for ${this.deviant.username}...`);
       this.getDAFollowersAndFollowing();
     }
   }
 
   public getDAFollowersAndFollowing(offset: number = 0) {
     this.deviantFollowService.getDAFriends(this.deviant.username, offset)
-      .subscribe((watcherData: any) => { 
+      .subscribe((watcherData: UserResponse) => { 
         if (watcherData.statusCode !== -1) {
           console.log("Watchers: ", watcherData);
-          const responseData = watcherData.responseData as any;
-          if (!responseData.users || responseData.users.length < 1) {
+          const responseData = watcherData.responseData as DeviantWatchers;
+          if (!responseData.has_more || responseData.results.length < 1) {
             this.hasMoreWatchers = false;
           }
-          responseData.users.forEach((user: any) => {
-            if (user.name in this.watchersMap) {
-              this.hasMoreWatchers = false;
-            } else {
-              //this.addTumblrFollower(user);
-            }
+          responseData.results.forEach((watcher: DeviantWatcher) => {
+            this.addWatcher(watcher);
           });
-          //this.getMoreTumblrFollowers(blog);
-          //console.log("TumblrFollowers 🙌🏼: ", blogData, this.tumblrFollowers)
+          console.log("Watchers so far: ", this.watchers);
+
+          if (this.hasMoreWatchers) {
+            this.getDAFollowersAndFollowing(++this.watcherOffset);
+          }
         }
       })
+  }
+
+  public addWatcher(watcher: DeviantWatcher) {
+    if (watcher.user && watcher.user.username) {
+      this.watchers.push(watcher.user.username);
+      this.watchersMap[watcher.user.username] = watcher;
+    }
   }
 
 /*
@@ -239,3 +246,4 @@ export class DeviantArtComponent implements OnInit {
     this.tumblrFollowingOffset++;
   }*/
 }
+
