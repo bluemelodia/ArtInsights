@@ -111,7 +111,7 @@ export class DeviantArtComponent implements OnInit {
     .subscribe((res: any) => {
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
-      } else if (res.statusCode !== 0) {
+      } else if (res.statusCode !== 0 || res.error_description) {
         this.alertService.showAlert(AlertType.Error, `Unable to watch ${deviant}.`);
         console.log(`Failed to watch: ${deviant}, ${res}`);
       } else {
@@ -130,7 +130,7 @@ export class DeviantArtComponent implements OnInit {
     .subscribe((res: any) => {
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.Tumblr);
-      } else if (res.statusCode !== 0) {
+      } else if (res.statusCode !== 0 || res.error_description) {
         console.log(`Failed to unwatch: ${deviant}, `, res);
         this.alertService.showAlert(AlertType.Error, `Unable to unwatch ${deviant}.`);
       } else {
