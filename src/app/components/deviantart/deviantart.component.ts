@@ -8,6 +8,7 @@ import { DeviantData, DeviantWatchers, DeviantWatcher } from '../../types/devian
 import { AlertType, Media } from '../../app.consts';
 import { DeviantArtFollowService } from '../../services/deviant-art-follow.service';
 import { UserResponse } from '../../types/shared.types';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-deviantart',
@@ -99,7 +100,7 @@ export class DeviantArtComponent implements OnInit {
 
   public addWatcher(watcher: DeviantWatcher) {
     if (watcher.user && watcher.user.username) {
-      console.log("Add watcher: ", watcher.user, watcher.user.username);
+      console.log("Add watcher: ", watcher, watcher.user.username);
       this.watchers.push(watcher.user.username);
       this.watchersMap[watcher.user.username] = watcher;
     }
@@ -116,7 +117,9 @@ export class DeviantArtComponent implements OnInit {
       } else {
         this.alertService.showAlert(AlertType.Success, `You followed ${deviant}.`);
         console.log(`Successfully followed: ${deviant}, refresh`);
-        this.getWatches();
+        timer(1000).subscribe(() => {
+          this.getWatches();
+        });
       }
       console.log("Try to watch: ", res);
     })
@@ -133,7 +136,10 @@ export class DeviantArtComponent implements OnInit {
       } else {
         console.log(`Successfully unwatched: ${deviant}, refresh`);
         this.alertService.showAlert(AlertType.Success, `You unwatched ${deviant}.`);
-        this.getWatches();
+
+        timer(1000).subscribe(() => {
+          this.getWatches();
+        });
       }
       console.log("Try to unwatch: ", res);
     })  
