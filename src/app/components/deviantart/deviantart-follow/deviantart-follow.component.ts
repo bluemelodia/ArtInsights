@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 import { DeviantWatcher } from '../../../types/deviant.types';
 import { Media, UserMediaAction } from '../../../app.consts';
 import { BlogUtilsService } from '../../../services/blog-utils.service';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { UtilsService } from '../../../services/utils.service';
 
 @Component({
   selector: 'app-deviantart-follow',
@@ -22,7 +22,10 @@ export class DeviantArtFollowComponent implements OnInit {
   public mediaType = Media.DeviantArt;
   private userNearBottom = false;
 
-  constructor(public blogUtils: BlogUtilsService) { }
+  /* Default user avatar. */
+  public defaultAvatar = this.utils.getImagePath('deviant-avatar');
+
+  constructor(private utils: UtilsService, public blogUtils: BlogUtilsService) { }
 
   ngOnInit() {
   }
@@ -52,11 +55,11 @@ export class DeviantArtFollowComponent implements OnInit {
   * see: https://stackoverflow.com/a/22675563 and https://stackoverflow.com/a/33189270
   */
   private isUserNearBottom(): boolean {
-    const threshold = 50;
+    const threshold = 150;
     const position = this.scrollContainer.nativeElement.scrollHeight - this.scrollContainer.nativeElement.scrollTop;
     const height = this.scrollContainer.nativeElement.clientHeight;
     console.log("Reload? ", position, height, position > height - threshold);
-    return position > height - threshold;
+    return position < height - threshold;
   }
 
   /* Generic callback for when user clicks on a button in the blog component. */
