@@ -7,6 +7,6 @@ export class UtilsService {
   constructor() { }
 
   public getImagePath(imageName: string): string {
-    return `./images/${imageName}`;
+    return `./images/${imageName}.png`;
   }
 }

@@ -57,17 +57,17 @@ export interface NavItem {
 
 export const mediaData: { [id: string] : NavItem } = {
     DeviantArt : { 
-        iconName: 'deviantart.png', 
+        iconName: 'deviantart', 
         alt: 'deviantArt',
         link: '/deviant-art'
     },
     Twitter: {
-        iconName: 'twitter.png', 
+        iconName: 'twitter', 
         alt: 'twitter',
         link: '/twitter'
     },
     Tumblr: {
-        iconName: 'tumblr.png',
+        iconName: 'tumblr',
         alt: 'tumblr',
         link: '/tumblr'
     }
@@ -75,11 +75,11 @@ export const mediaData: { [id: string] : NavItem } = {
 
 export const navActions: { [id: string] : NavItem } = {
     Tags : {
-        iconName: 'promotion.png', 
+        iconName: 'promotion', 
         alt: 'search by tag'
     },
     Engagement : {
-        iconName: 'heart.png', 
+        iconName: 'heart', 
         alt: 'post engagement'
     }
 }

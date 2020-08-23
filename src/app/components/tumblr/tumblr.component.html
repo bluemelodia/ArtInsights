@@ -7,6 +7,8 @@
     [tumblrFollowerMap]="tumblrFollowerMap"
     [tumblrFollowing]="tumblrFollowing"
     [tumblrFollowingMap]="tumblrFollowingMap"
+    (fetchMoreFollowers)="getNextFollowers()"
+    (fetchMoreFollowing)="getNextFollowing()"
     (followBlog)="followTumblr($event)"
     (unfollowBlog)="unfollowTumblr($event)">
 </app-tumblr-follow>

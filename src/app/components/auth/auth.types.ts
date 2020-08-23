@@ -30,15 +30,15 @@ export interface AuthStatusItem {
 
 export const authMediaData: { [id: string] : AuthStatusItem } = {
     Unattempted : { 
-        iconName: 'add.png', 
+        iconName: 'add', 
         alt: 'authorization unattempted' 
     },
     Success : {
-        iconName: 'success.png', 
+        iconName: 'success', 
         alt: 'authorization success' 
     },
     Failed : {
-        iconName: 'failure.png',
+        iconName: 'failure',
         alt: 'authorization failed' 
     }
 }

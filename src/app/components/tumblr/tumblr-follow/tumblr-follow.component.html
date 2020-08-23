@@ -1,7 +1,9 @@
 <section *ngIf="this.tumblrFollowers.length > 0 || this.tumblrFollowing.length > 0" class="tumblr-follows">
     <div class="followers">
         <h2>Followers</h2>
-        <div *ngIf="tumblrFollowers.length > 0" class="scrollable-list">
+        <div #followers *ngIf="tumblrFollowers.length > 0"
+            (scroll)="onFollowerScroll($event)" 
+            class="scrollable-list">
             <app-blog *ngFor="let follower of tumblrFollowerMap | keyvalue"
                 [isFollowing]="follower.value.following"
                 [mediaType]="mediaType"
@@ -17,7 +19,9 @@
     </div>
     <div class="following">
         <h2>Following</h2>
-        <div *ngIf="tumblrFollowing.length > 0" class="scrollable-list">
+        <div #following *ngIf="tumblrFollowing.length > 0" 
+            (scroll)="onFollowingScroll($event)"
+            class="scrollable-list">
             <app-blog *ngFor="let following of tumblrFollowingMap | keyvalue"
                 [isFollowing]="true"
                 [mediaType]="mediaType"
