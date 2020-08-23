@@ -4,9 +4,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Issues/TODOs
 
+- Add DA follow/unfollow functionality. 
+- Test Tumblr follow/unfollow functionality. 
+
 - Directly visiting deviant-art, tumblr URLs causes auth token erasure and logout.
-- Fetch followers X at a time, if the user scrolls down then fetch the next batch.
 - Background image takes a long time to load for the first time. 
+- Add more animations (ex. loader on scroll, login page).
 
 ## Development server
 

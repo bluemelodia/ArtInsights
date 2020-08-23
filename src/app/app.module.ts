@@ -22,7 +22,7 @@ import { TumblrModule } from './components/tumblr/tumblr.module';
     AppComponent,
     AuthComponent,
     AlertComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

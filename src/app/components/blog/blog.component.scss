@@ -9,6 +9,10 @@
     padding: $small-spacing;
     border: 2px solid $light-text-color;
 
+    & .da-style {
+        @include flex-row();
+    }
+
     & .follow-button {
         color: $light-text-color;
         font-weight: bold;
