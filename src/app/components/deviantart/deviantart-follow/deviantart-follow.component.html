@@ -1,7 +1,8 @@
 <section *ngIf="this.watchers.length > 0" class="deviant-art-follows">
     <div class="followers">
         <h2>Watchers</h2>
-        <div class="scrollable-list">
+        <div #scroll class="scrollable-list"
+            (scroll)="onScroll($event)">
             <app-blog *ngFor="let watcher of watchersMap | keyvalue"
                 [isFollowing]="watcher.value.is_watching"
                 [mediaType]="mediaType"
@@ -10,6 +11,7 @@
                     <h3 (click)="blogUtils.visitBlog(getDAURL(watcher.key))">
                         {{ watcher.key }}
                     </h3>
+                    <img src="" class="watcher-icon"/>
                 </div>
             </app-blog>
         </div>

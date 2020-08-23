@@ -22,9 +22,13 @@
                 cursor: pointer;
             }
         }
+
+        .watcher-icon {
+            height: $deviantart-icon-size;
+        }
     
         .scrollable-list {
-            max-height: 450px;
+            max-height: $scroll-section-height;
             padding-right: $large-spacing;
             overflow-y: scroll;
         }
