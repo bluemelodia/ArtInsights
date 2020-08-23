@@ -5,6 +5,7 @@
     @include deviantart-container();
     display: flex;
     margin-bottom: $large-spacing;
+    width: 100%;
 
     .deviant {
         @include flex-row($justify-content: space-between);
