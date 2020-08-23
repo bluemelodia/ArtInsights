@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { BlogService } from '../../services/blog.service';
 import { AuthService } from '../../services/auth.service';
-import { DeviantData, DeviantWatchers, DeviantWatcher } from '../../types/deviant.types';
+import { DeviantData, DeviantWatchers, DeviantWatcher, WatchResponse } from '../../types/deviant.types';
 import { AlertType, Media } from '../../app.consts';
 import { DeviantArtFollowService } from '../../services/deviant-art-follow.service';
 import { UserResponse } from '../../types/shared.types';
@@ -108,11 +108,11 @@ export class DeviantArtComponent implements OnInit {
 
   public followDeviant(deviant: string) {
     this.deviantFollowService.watch(deviant)
-    .subscribe((res: any) => {
+    .subscribe((res: WatchResponse) => {
       console.log("FOLLOW RES: ", res);
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
-      } else if (res.statusCode !== 0 || res.error_description) {
+      } else if (res.statusCode !== 0 || res.responseData.status === 'error') {
         this.alertService.showAlert(AlertType.Error, `Unable to watch ${deviant}.`);
         console.log(`Failed to watch: ${deviant}, ${res}`);
       } else {
@@ -128,11 +128,11 @@ export class DeviantArtComponent implements OnInit {
 
   public unfollowDeviant(deviant: string) {
     this.deviantFollowService.unwatch(deviant)
-    .subscribe((res: any) => {
+    .subscribe((res: WatchResponse) => {
       console.log("UNFOLLOW RES: ", res);
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.Tumblr);
-      } else if (res.statusCode !== 0 || res.error_description) {
+      } else if (res.statusCode !== 0 || res.responseData.status === 'error') {
         console.log(`Failed to unwatch: ${deviant}, `, res);
         this.alertService.showAlert(AlertType.Error, `Unable to unwatch ${deviant}.`);
       } else {

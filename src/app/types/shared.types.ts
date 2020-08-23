@@ -3,5 +3,5 @@ import { TumblrResponseData } from './tumblr.types';
 
 export interface UserResponse {
     statusCode: number, 
-    responseData?: TumblrResponseData | DeviantData | DeviantWatchers
+    responseData?: TumblrResponseData | DeviantData | DeviantWatchers 
 }

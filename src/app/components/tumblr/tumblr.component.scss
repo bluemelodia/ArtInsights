@@ -1,3 +1,9 @@
 @import '../../../styles/mixins.scss';
 @import '../../../styles/variables.scss';
 
+/* Center both sub-components. */
+:host {
+    @include flex-col($justify-content: center);
+    align-items: center;
+    height: 95vh;
+}

@@ -1,3 +1,15 @@
+export interface WatchResponse {
+    statusCode: number,
+    responseData: DeviantWatchResponse
+}
+
+export interface DeviantWatchResponse {
+    error?: string, 
+    error_description?: string,
+    scope?: string, 
+    status?: string
+}
+
 export interface DeviantData {
     type: string, 
     usericon: string,
