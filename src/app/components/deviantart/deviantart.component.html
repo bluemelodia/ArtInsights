@@ -5,5 +5,7 @@
 <app-deviantart-follow
     [watchers]="watchers"
     [watchersMap]="watchersMap"
+    (followBlog)="followDeviant($event)"
+    (unfollowBlog)="unfollowDeviant($event)">
     (getNextWatchers)="userScrolledToBottom()">
 </app-deviantart-follow>

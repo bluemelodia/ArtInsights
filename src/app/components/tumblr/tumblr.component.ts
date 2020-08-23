@@ -18,7 +18,7 @@ export class TumblrComponent implements OnInit {
     private alertService: AlertService,
     private blogService: BlogService,
     private tumblrFollowService: TumblrFollowService, 
-    private authService: AuthService,
+    private auth: AuthService,
     private router: Router
   ) {
     this.setupTumblrSubscription();
@@ -83,56 +83,39 @@ export class TumblrComponent implements OnInit {
     this.getTumblrFollowers(this.blog, this.tumblrFollowerOffset);
     this.getTumblrFollowing(this.blog, this.tumblrFollowingOffset);
   }
-  
-  private follow(blog: string, medium: Media) {
-    switch(medium) {
-      case Media.Tumblr:
-        this.tumblrFollowService.followBlog(blog)
-          .subscribe((res: any) => {
-            if (res.statusCode === 403) {
-              this.authService.authenticateUser(medium);
-            } else if (res.statusCode !== 0) {
-              this.alertService.showAlert(AlertType.Error, `Unable to follow ${blog}.`);
-              console.log(`Failed to follow: ${blog}, ${res}`);
-            } else {
-              this.alertService.showAlert(AlertType.Success, `You followed ${blog}.`);
-              console.log(`Successfully followed: ${blog}, refresh`);
-              this.getTumblrFollowersAndFollowing();
-            }
-            console.log("Try to follow: ", res);
-          })
-        break;
-    }
-  }
 
-  private unfollow(blog: string, medium: Media) {
-    switch(medium) {
-      case Media.Tumblr:
-        this.tumblrFollowService.unfollowBlog(blog)
-          .subscribe((res: any) => {
-            if (res.statusCode === 403) {
-              this.router.navigateByUrl('/auth');
-            } else if (res.statusCode !== 0) {
-              console.log(`Failed to unfollow: ${blog}, `, res);
-              this.alertService.showAlert(AlertType.Error, `Unable to unfollow ${blog}.`);
-            } else {
-              console.log(`Successfully unfollowed: ${blog}, refresh`);
-              this.alertService.showAlert(AlertType.Success, `You unfollowed ${blog}.`);
-              this.getTumblrFollowersAndFollowing();
-            }
-            console.log("Try to unfollow: ", res);
-          })
-        break;
-    }
-  }
-
-  /* Tumblr-specific actions. */
   public followTumblr(blog: string) {
-    this.follow(blog, Media.Tumblr);
+    this.tumblrFollowService.followBlog(blog)
+      .subscribe((res: any) => {
+        if (res.statusCode === 403) {
+          this.auth.userUnauthForMedia(Media.Tumblr);
+        } else if (res.statusCode !== 0) {
+          this.alertService.showAlert(AlertType.Error, `Unable to follow ${blog}.`);
+          console.log(`Failed to follow: ${blog}, ${res}`);
+        } else {
+          this.alertService.showAlert(AlertType.Success, `You followed ${blog}.`);
+          console.log(`Successfully followed: ${blog}, refresh`);
+          this.getTumblrFollowersAndFollowing();
+        }
+        console.log("Try to follow: ", res);
+    })
   }
 
   public unfollowTumblr(blog: string) {
-    this.unfollow(blog, Media.Tumblr);
+    this.tumblrFollowService.unfollowBlog(blog)
+    .subscribe((res: any) => {
+      if (res.statusCode === 403) {
+        this.auth.userUnauthForMedia(Media.Tumblr);
+      } else if (res.statusCode !== 0) {
+        console.log(`Failed to unfollow: ${blog}, `, res);
+        this.alertService.showAlert(AlertType.Error, `Unable to unfollow ${blog}.`);
+      } else {
+        console.log(`Successfully unfollowed: ${blog}, refresh`);
+        this.alertService.showAlert(AlertType.Success, `You unfollowed ${blog}.`);
+        this.getTumblrFollowersAndFollowing();
+      }
+      console.log("Try to unfollow: ", res);
+    })  
   }
 
   /* Get next page of followers/followings. */

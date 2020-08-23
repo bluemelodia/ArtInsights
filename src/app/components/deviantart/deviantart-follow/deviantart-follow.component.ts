@@ -63,14 +63,14 @@ export class DeviantArtFollowComponent implements OnInit {
   }
 
   /* Generic callback for when user clicks on a button in the blog component. */
-  public onUserAction(action: UserMediaAction, blog: string) {
-    console.log("On user action: ", action, blog);
+  public onUserAction(action: UserMediaAction, deviant: string) {
+    console.log("On user action: ", action, deviant);
     switch(action) {
       case UserMediaAction.Follow:
-        this.followBlog.emit(blog);
+        this.followBlog.emit(deviant);
         break;
       case UserMediaAction.Unfollow:
-        this.unfollowBlog.emit(blog);
+        this.unfollowBlog.emit(deviant);
         break;
     }
   }

@@ -5,7 +5,7 @@ import { AlertService } from '../../services/alert.service';
 import { BlogService } from '../../services/blog.service';
 import { AuthService } from '../../services/auth.service';
 import { DeviantData, DeviantWatchers, DeviantWatcher } from '../../types/deviant.types';
-import { AlertType } from '../../app.consts';
+import { AlertType, Media } from '../../app.consts';
 import { DeviantArtFollowService } from '../../services/deviant-art-follow.service';
 import { UserResponse } from '../../types/shared.types';
 
@@ -17,6 +17,7 @@ import { UserResponse } from '../../types/shared.types';
 export class DeviantArtComponent implements OnInit {
   constructor(
     private alertService: AlertService,
+    private auth: AuthService,
     private blogService: BlogService,
     private deviantFollowService: DeviantArtFollowService, 
     private router: Router
@@ -56,9 +57,19 @@ export class DeviantArtComponent implements OnInit {
 
   public getWatches() {
     if (this.deviant) {
+      /* Reset stats. */
+      this.resetDAStats();
+
       this.alertService.showAlert(AlertType.Info, `Retrieving data for ${this.deviant.username}...`);
       this.getDAFollowersAndFollowing();
     }
+  }
+
+  private resetDAStats() {
+    this.watchers = [];
+    this.watchersMap = {};
+    this.watcherOffset = 0;
+    this.hasMoreWatchers = true;
   }
 
   public userScrolledToBottom() {
@@ -94,57 +105,38 @@ export class DeviantArtComponent implements OnInit {
     }
   }
 
-/*
-  private follow(blog: string, medium: Media) {
-    switch(medium) {
-      case Media.Tumblr:
-        this.tumblrFollowService.followBlog(blog)
-          .subscribe((res: any) => {
-            if (res.statusCode === 403) {
-              this.authService.authenticateUser(medium);
-            } else if (res.statusCode !== 0) {
-              this.alertService.showAlert(AlertType.Error, `Unable to follow ${blog}.`);
-              console.log(`Failed to follow: ${blog}, ${res}`);
-            } else {
-              this.alertService.showAlert(AlertType.Success, `You followed ${blog}.`);
-              console.log(`Successfully followed: ${blog}, refresh`);
-              this.getTumblrFollowersAndFollowing();
-            }
-            console.log("Try to follow: ", res);
-          })
-        break;
-    }
+  public followDeviant(deviant: string) {
+    this.deviantFollowService.watch(deviant)
+    .subscribe((res: any) => {
+      if (res.statusCode === 403) {
+        this.auth.userUnauthForMedia(Media.DeviantArt);
+      } else if (res.statusCode !== 0) {
+        this.alertService.showAlert(AlertType.Error, `Unable to watch ${deviant}.`);
+        console.log(`Failed to watch: ${deviant}, ${res}`);
+      } else {
+        this.alertService.showAlert(AlertType.Success, `You followed ${deviant}.`);
+        console.log(`Successfully followed: ${deviant}, refresh`);
+        this.getWatches();
+      }
+      console.log("Try to watch: ", res);
+    })
   }
 
-  private unfollow(blog: string, medium: Media) {
-    switch(medium) {
-      case Media.Tumblr:
-        this.tumblrFollowService.unfollowBlog(blog)
-          .subscribe((res: any) => {
-            if (res.statusCode === 403) {
-              this.router.navigateByUrl('/auth');
-            } else if (res.statusCode !== 0) {
-              console.log(`Failed to unfollow: ${blog}, `, res);
-              this.alertService.showAlert(AlertType.Error, `Unable to unfollow ${blog}.`);
-            } else {
-              console.log(`Successfully unfollowed: ${blog}, refresh`);
-              this.alertService.showAlert(AlertType.Success, `You unfollowed ${blog}.`);
-              this.getTumblrFollowersAndFollowing();
-            }
-            console.log("Try to unfollow: ", res);
-          })
-        break;
-    }
+  public unfollowDeviant(deviant: string) {
+    this.deviantFollowService.unwatch(deviant)
+    .subscribe((res: any) => {
+      if (res.statusCode === 403) {
+        this.auth.userUnauthForMedia(Media.Tumblr);
+      } else if (res.statusCode !== 0) {
+        console.log(`Failed to unwatch: ${deviant}, `, res);
+        this.alertService.showAlert(AlertType.Error, `Unable to unwatch ${deviant}.`);
+      } else {
+        console.log(`Successfully unwatched: ${deviant}, refresh`);
+        this.alertService.showAlert(AlertType.Success, `You unwatched ${deviant}.`);
+        this.getWatches();
+      }
+      console.log("Try to unwatch: ", res);
+    })  
   }
-
-  public followTumblr(blog: string) {
-    this.follow(blog, Media.Tumblr);
-  }
-
-  public unfollowTumblr(blog: string) {
-    this.unfollow(blog, Media.Tumblr);
-  }
-
-  */
 }
 
