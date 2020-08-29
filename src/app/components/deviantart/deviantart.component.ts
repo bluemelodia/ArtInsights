@@ -67,8 +67,8 @@ export class DeviantArtComponent implements OnInit {
       this.resetDAStats();
 
       this.alertService.showAlert(AlertType.Info, `Retrieving watchers and friends list for ${this.deviant.username}...`);
-      this.getDAFriends();
-      this.getDAWatchers();
+      this.getFriends();
+      this.getWatchers();
     }
   }
 
@@ -84,7 +84,7 @@ export class DeviantArtComponent implements OnInit {
     this.hasMoreFriends = true;
   }
 
-  public getDAFriends() {
+  public getFriends($event?: Event) {
     console.log("Get more friends: ", this.friendOffset);
     if (this.hasMoreFriends) {
       console.log("WE have more friends! Get them: ");
@@ -92,7 +92,7 @@ export class DeviantArtComponent implements OnInit {
     }
   }
 
-  public getDAWatchers() {
+  public getWatchers($event?: Event) {
     console.log("Get more watchers: ", this.watcherOffset);
     if (this.hasMoreWatchers) {
       console.log("WE have more watchers! Get them: ");

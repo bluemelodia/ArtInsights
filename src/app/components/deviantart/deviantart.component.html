@@ -9,6 +9,6 @@
     [watchingMap]="friendsMap"
     (followBlog)="followDeviant($event)"
     (unfollowBlog)="unfollowDeviant($event)">
-    (getNextWatchers)="getDAWatchers()"
-    (getNextFriends)="getDAFriends()">
+    (fetchNextWatchers)="getWatchers($event)"
+    (fetchNextFriends)="getFriends($event)">
 </app-deviantart-follow>
