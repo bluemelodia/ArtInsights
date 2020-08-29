@@ -5,6 +5,9 @@
     @include deviantart-container();
     @include flex-row(space-around);
 
+    max-height: 500px;
+    margin-bottom: $large-spacing;
+
     & .followers, & .following {
         color: $light-text-color;
         width: 100%;
