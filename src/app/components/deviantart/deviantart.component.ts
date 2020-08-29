@@ -104,7 +104,12 @@ export class DeviantArtComponent implements OnInit {
     console.log("GET MORE FRIENDS!", offset);
     this.deviantFollowService.getDAFriendsList(this.deviant.username, offset)
     .subscribe((friendData: UserResponse) => { 
-      if (friendData.statusCode !== -1) {
+      if (friendData.statusCode === 450) {
+        this.auth.userUnauthForMedia(Media.Tumblr);
+      } else if (friendData.statusCode === -1) {
+        this.alertService.showAlert(AlertType.Error, `Unable to fetch friends list at this time. Try again later.`);
+        console.log(`Failed to fetch friends list.`);
+      } else {
         console.log("Friends: ", friendData);
         const responseData = friendData.responseData as DeviantListData;
         if (!responseData.has_more || responseData.results.length < 1) {
@@ -122,7 +127,12 @@ export class DeviantArtComponent implements OnInit {
     console.log("GET MORE WATCHERS!", offset);
     this.deviantFollowService.getDAWatchers(this.deviant.username, offset)
       .subscribe((watcherData: UserResponse) => { 
-        if (watcherData.statusCode !== -1) {
+        if (watcherData.statusCode === 450) {
+          this.auth.userUnauthForMedia(Media.Tumblr);
+        } else if (watcherData.statusCode === -1) {
+          this.alertService.showAlert(AlertType.Error, `Unable to fetch watchers list at this time. Try again later.`);
+          console.log(`Failed to fetch watchers list.`);
+        } else  {
           console.log("Watchers: ", watcherData);
           const responseData = watcherData.responseData as DeviantListData;
           if (!responseData.has_more || responseData.results.length < 1) {
@@ -177,7 +187,7 @@ export class DeviantArtComponent implements OnInit {
     .subscribe((res: WatchResponse) => {
       console.log("UNFOLLOW RES: ", res);
       if (res.statusCode === 403) {
-        this.auth.userUnauthForMedia(Media.Tumblr);
+        this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (res.statusCode !== 0 || res.responseData.status === 'error') {
         console.log(`Failed to unwatch: ${deviant}, `, res);
         this.alertService.showAlert(AlertType.Error, `Unable to unwatch ${deviant}.`);
