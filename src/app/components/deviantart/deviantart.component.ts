@@ -82,6 +82,21 @@ export class DeviantArtComponent implements OnInit {
   }
 
   public getDAFollowersAndFollowing(offset: number = 0) {
+    this.deviantFollowService.getDAWatchers(this.deviant.username, offset)
+      .subscribe((watcherData: UserResponse) => { 
+        if (watcherData.statusCode !== -1) {
+          console.log("Watchers: ", watcherData);
+          const responseData = watcherData.responseData as DeviantWatchers;
+          if (!responseData.has_more || responseData.results.length < 1) {
+            this.hasMoreWatchers = false;
+          }
+          responseData.results.forEach((watcher: DeviantWatcher) => {
+            this.addWatcher(watcher);
+          });
+          console.log("Watchers so far: ", this.watchers);
+        }
+      })
+
     this.deviantFollowService.getDAFriends(this.deviant.username, offset)
       .subscribe((watcherData: UserResponse) => { 
         if (watcherData.statusCode !== -1) {
