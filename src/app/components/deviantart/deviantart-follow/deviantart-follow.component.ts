@@ -19,7 +19,7 @@ export class DeviantArtFollowComponent implements OnInit {
   @Output() followBlog = new EventEmitter<string>();
   @Output() unfollowBlog = new EventEmitter<string>();
   @Output() getNextWatchers = new EventEmitter<any>();
-  @Output() getNextWatching = new EventEmitter<any>();
+  @Output() getNextFriends = new EventEmitter<any>();
 
   @ViewChild('watchers', {static: false}) watcherContainer: ElementRef;
   @ViewChild('watching', {static: false}) watchingContainer: ElementRef;
@@ -53,7 +53,7 @@ export class DeviantArtFollowComponent implements OnInit {
     this.userNearBottomWatching = this.isUserNearBottom(this.watchingContainer);
     if (this.userNearBottomWatching) {
       console.log("Time to get the next batch (watching)");
-      this.getNextWatching.emit();
+      this.getNextFriends.emit();
     }
   }
 
