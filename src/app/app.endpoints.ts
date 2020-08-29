@@ -7,7 +7,7 @@ const mediaActionMap: { [id: string] : MediaAction } = {
         [UserMediaAction.Auth]: 'auth',
         [UserMediaAction.Follow]: 'watch',
         [UserMediaAction.Followers]: 'watchers', 
-        [UserMediaAction.Following]: '', 
+        [UserMediaAction.Following]: 'watching', 
         [UserMediaAction.Posts]: '',
         [UserMediaAction.Tags]: '',
         [UserMediaAction.User]: 'user',
