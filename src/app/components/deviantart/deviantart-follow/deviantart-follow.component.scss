@@ -1,48 +1,52 @@
 @import '../../../../styles/mixins.scss';
 @import '../../../../styles/variables.scss';
 
-.deviant-art-follows {
-    @include deviantart-container();
-    @include flex-row(space-around);
+:host {
+    width: 100%;
 
-    max-height: 500px;
-    margin-bottom: $large-spacing;
-
-    & .followers, & .following {
-        color: $light-text-color;
-        width: 100%;
+    .deviant-art-follows {
+        @include deviantart-container();
+        @include flex-row(space-around);
     
-        h2 {
-            text-align: center;
-            padding-bottom: $large-spacing;
-        }
+        margin-bottom: $large-spacing;
     
-        h3 {
-            letter-spacing: 0.5px;
-    
-            &:hover {
-                color: $deviantart-light;
-                cursor: pointer;
+        & .followers, & .following {
+            color: $light-text-color;
+            width: 100%;
+        
+            h2 {
+                text-align: center;
+                padding-bottom: $large-spacing;
             }
-        }
-
-        .da-style {
-            @include flex-row();
-        }
-
-        .watcher-icon {
-            height: $deviantart-icon-size;
-            padding-right: $small-spacing;
-        }
-
-        .follows-back {
-            color: $deviantart-mutual;
-        }
+        
+            h3 {
+                letter-spacing: 0.5px;
+        
+                &:hover {
+                    color: $deviantart-light;
+                    cursor: pointer;
+                }
+            }
     
-        .scrollable-list {
-            max-height: $scroll-section-height;
-            padding-right: $large-spacing;
-            overflow-y: scroll;
+            .da-style {
+                @include flex-row();
+            }
+    
+            .watcher-icon {
+                height: $deviantart-icon-size;
+                padding-right: $small-spacing;
+            }
+    
+            .follows-back {
+                color: $deviantart-mutual;
+            }
+        
+            .scrollable-list {
+                max-height: $scroll-section-height;
+                overflow-y: scroll;
+            }
         }
     }
 }
+
+
