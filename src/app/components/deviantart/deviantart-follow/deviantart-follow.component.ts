@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { DeviantWatcher } from '../../../types/deviant.types';
+import { DeviantWatcher, DeviantFriend } from '../../../types/deviant.types';
 import { Media, UserMediaAction } from '../../../app.consts';
 import { BlogUtilsService } from '../../../services/blog-utils.service';
 import { UtilsService } from '../../../services/utils.service';
@@ -13,14 +13,20 @@ export class DeviantArtFollowComponent implements OnInit {
   @Input() watchers: [DeviantWatcher];
   @Input() watchersMap: { [user: string] : DeviantWatcher } = {};
 
+  @Input() watching: [DeviantFriend];
+  @Input() watchingMap: { [user: string] : DeviantFriend } = {};
+
   @Output() followBlog = new EventEmitter<string>();
   @Output() unfollowBlog = new EventEmitter<string>();
   @Output() getNextWatchers = new EventEmitter<any>();
+  @Output() getNextWatching = new EventEmitter<any>();
 
-  @ViewChild('scroll', {static: false}) scrollContainer: ElementRef;
+  @ViewChild('watchers', {static: false}) watcherContainer: ElementRef;
+  @ViewChild('watching', {static: false}) watchingContainer: ElementRef;
 
   public mediaType = Media.DeviantArt;
-  private userNearBottom = false;
+  private userNearBottomWatchers = false;
+  private userNearBottomWatching = false;
 
   /* Default user avatar. */
   public defaultAvatar = this.utils.getImagePath('deviant-avatar');
@@ -35,11 +41,19 @@ export class DeviantArtFollowComponent implements OnInit {
   }
 
   /* If the user has scrolled to bottom, make a call for more watchers. */
-  public onScroll(event: any) {
-    this.userNearBottom = this.isUserNearBottom();
-    if (this.userNearBottom) {
-      console.log("Time to get the next batch!");
+  public onWatcherScroll(event: any) {
+    this.userNearBottomWatchers = this.isUserNearBottom(this.watcherContainer);
+    if (this.userNearBottomWatchers) {
+      console.log("Time to get the next batch (watchers)!");
       this.getNextWatchers.emit();
+    }
+  }
+
+  public onWatchingScroll(event: any) {
+    this.userNearBottomWatching = this.isUserNearBottom(this.watchingContainer);
+    if (this.userNearBottomWatching) {
+      console.log("Time to get the next batch (watching)");
+      this.getNextWatching.emit();
     }
   }
 
@@ -54,10 +68,10 @@ export class DeviantArtFollowComponent implements OnInit {
   * 
   * see: https://stackoverflow.com/a/22675563 and https://stackoverflow.com/a/33189270
   */
-  private isUserNearBottom(): boolean {
+  private isUserNearBottom(container: ElementRef): boolean {
     const threshold = 150;
-    const position = this.scrollContainer.nativeElement.scrollHeight - this.scrollContainer.nativeElement.scrollTop;
-    const height = this.scrollContainer.nativeElement.clientHeight;
+    const position = container.nativeElement.scrollHeight - container.nativeElement.scrollTop;
+    const height = container.nativeElement.clientHeight;
     console.log("Reload? ", position, height, position > height - threshold);
     return position < height + threshold;
   }

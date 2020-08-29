@@ -1,8 +1,8 @@
-<section *ngIf="this.watchers.length > 0" class="deviant-art-follows">
+<section *ngIf="this.watchers.length > 0 || this.watching.length > 0" class="deviant-art-follows">
     <div class="followers">
         <h2>Watchers</h2>
-        <div #scroll class="scrollable-list"
-            (scroll)="onScroll($event)">
+        <div #watcherContainer class="scrollable-list"
+            (scroll)="onWatcherScroll($event)">
             <app-blog *ngFor="let watcher of watchersMap | keyvalue"
                 [isFollowing]="watcher.value.is_watching"
                 [mediaType]="mediaType"
@@ -21,5 +21,29 @@
                 </div>
             </app-blog>
         </div>
+    </div>
+    <div class="following">
+        <h2>Watching</h2>
+        <div #watchingContainer class="scrollable-list" 
+            (scroll)="onWatchingScroll($event)">
+            <app-blog *ngFor="let friend of watchingMap | keyvalue"
+                [isFollowing]="true"
+                [mediaType]="mediaType"
+                (onUserAction)="onUserAction($event, friend.value.url)">
+                <div media-type="deviantArt">
+                    <div class="da-style">
+                        <img class="watcher-icon"
+                        [src]="friend.value.user.usericon ? friend.value.user.usericon : defaultAvatar"/>
+                        <div>
+                            <h3 (click)="blogUtils.visitBlog(getDAURL(friend.key))">
+                                {{ friend.key }}
+                            </h3>  
+                            {{ friend.value.user.type | deviant | titlecase }}
+                        </div> 
+                        <div *ngIf="friend.value.watches_you" class="follows-back">Follows you</div>
+                    </div>
+                </div>
+            </app-blog>
+        </div>  
     </div>
 </section>
