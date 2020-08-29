@@ -17,15 +17,21 @@ export interface DeviantData {
     username: string
 }
 
-export interface DeviantWatchers {
+export interface DeviantListData {
     has_more: boolean,
     next_offset: number, 
-    results:[DeviantWatcher]
+    results:[DeviantWatcher | DeviantFriend]
 }
 
 export interface DeviantWatcher {
     is_watching: boolean,
     lastvisit: string, 
+    user: DeviantData
+}
+
+export interface DeviantFriend {
+    is_watching: boolean,
+    watches_you: boolean,
     user: DeviantData
 }
 

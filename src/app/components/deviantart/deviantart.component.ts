@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { BlogService } from '../../services/blog.service';
 import { AuthService } from '../../services/auth.service';
-import { DeviantData, DeviantWatchers, DeviantWatcher, WatchResponse } from '../../types/deviant.types';
+import { DeviantData, DeviantFriend, DeviantListData, DeviantWatcher, WatchResponse } from '../../types/deviant.types';
 import { AlertType, Media } from '../../app.consts';
 import { DeviantArtFollowService } from '../../services/deviant-art-follow.service';
 import { UserResponse } from '../../types/shared.types';
@@ -42,6 +42,11 @@ export class DeviantArtComponent implements OnInit {
   private watcherOffset = 0;
   private hasMoreWatchers = true;
 
+  public friends: string[] = [];
+  public friendsMap: { [user: string] : any } = {};
+  private friendOffset = 0;
+  private hasMoreFriends = true;
+
   ngOnInit() {
   }
 
@@ -53,6 +58,7 @@ export class DeviantArtComponent implements OnInit {
         console.log("Received DA user: ", deviant);
         this.deviant = deviant;
         this.getWatches();
+        this.getFriends();
       });
   }
 
@@ -61,8 +67,18 @@ export class DeviantArtComponent implements OnInit {
       /* Reset stats. */
       this.resetDAStats();
 
-      this.alertService.showAlert(AlertType.Info, `Retrieving data for ${this.deviant.username}...`);
-      this.getDAFollowersAndFollowing();
+      this.alertService.showAlert(AlertType.Info, `Retrieving watchers for ${this.deviant.username}...`);
+      this.getDAFollowers();
+    }
+  }
+
+  public getFriends() {
+    if (this.deviant) {
+      /* Reset stats. */
+      this.resetDAStats();
+
+      this.alertService.showAlert(AlertType.Info, `Retrieving friends list for ${this.deviant.username}...`);
+      this.getDAFriends();
     }
   }
 
@@ -71,22 +87,36 @@ export class DeviantArtComponent implements OnInit {
     this.watchersMap = {};
     this.watcherOffset = 0;
     this.hasMoreWatchers = true;
+
+    this.friends = [];
+    this.friendsMap = {};
+    this.friendOffset = 0;
+    this.hasMoreFriends = true;
   }
 
-  public userScrolledToBottom() {
-    console.log("Get more watchers: ", this.watcherOffset);
-    if (this.hasMoreWatchers) {
-      console.log("WE have more watchers! Get them: ");
-      this.getDAFollowersAndFollowing(++this.watcherOffset);
+  public getDAFriends() {
+    console.log("Get more friends: ", this.friendOffset);
+    if (this.hasMoreFriends) {
+      console.log("WE have more friends! Get them: ");
+      this.getDAFriendsList(++this.friendOffset);
     }
   }
 
-  public getDAFollowersAndFollowing(offset: number = 0) {
+  public getDAWatchers() {
+    console.log("Get more watchers: ", this.watcherOffset);
+    if (this.hasMoreWatchers) {
+      console.log("WE have more watchers! Get them: ");
+      this.getDAFollowers(++this.watcherOffset);
+    }
+  }
+
+  public getDAFollowers(offset: number = 0) {
+    console.log("GET MORE WATCHERS!", offset);
     this.deviantFollowService.getDAWatchers(this.deviant.username, offset)
       .subscribe((watcherData: UserResponse) => { 
         if (watcherData.statusCode !== -1) {
           console.log("Watchers: ", watcherData);
-          const responseData = watcherData.responseData as DeviantWatchers;
+          const responseData = watcherData.responseData as DeviantListData;
           if (!responseData.has_more || responseData.results.length < 1) {
             this.hasMoreWatchers = false;
           }
@@ -96,21 +126,24 @@ export class DeviantArtComponent implements OnInit {
           console.log("Watchers so far: ", this.watchers);
         }
       })
+  }
 
+  public getDAFriendsList(offset: number = 0) {
+    console.log("GET MORE FRIENDS!", offset);
     this.deviantFollowService.getDAFriends(this.deviant.username, offset)
-      .subscribe((watcherData: UserResponse) => { 
-        if (watcherData.statusCode !== -1) {
-          console.log("Watchers: ", watcherData);
-          const responseData = watcherData.responseData as DeviantWatchers;
-          if (!responseData.has_more || responseData.results.length < 1) {
-            this.hasMoreWatchers = false;
-          }
-          responseData.results.forEach((watcher: DeviantWatcher) => {
-            this.addWatcher(watcher);
-          });
-          console.log("Watchers so far: ", this.watchers);
+    .subscribe((friendData: UserResponse) => { 
+      if (friendData.statusCode !== -1) {
+        console.log("Friends: ", friendData);
+        const responseData = friendData.responseData as DeviantListData;
+        if (!responseData.has_more || responseData.results.length < 1) {
+          this.hasMoreFriends = false;
         }
-      })
+        responseData.results.forEach((friend: DeviantFriend) => {
+          this.addFriend(friend);
+        });
+        console.log("Friends so far: ", this.watchers);
+      }
+    })
   }
 
   public addWatcher(watcher: DeviantWatcher) {
@@ -118,6 +151,14 @@ export class DeviantArtComponent implements OnInit {
       console.log("Add watcher: ", watcher, watcher.user.username);
       this.watchers.push(watcher.user.username);
       this.watchersMap[watcher.user.username] = watcher;
+    }
+  }
+
+  public addFriend(friend: DeviantFriend) {
+    if (friend.user && friend.user.username) {
+      console.log("Add friend: ", friend, friend.user.username);
+      this.friends.push(friend.user.username);
+      this.friendsMap[friend.user.username] = friend;
     }
   }
 
