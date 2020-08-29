@@ -5,6 +5,8 @@
 <app-deviantart-follow
     [watchers]="watchers"
     [watchersMap]="watchersMap"
+    [watching]="friends"
+    [watchingMap]="friendsMap"
     (followBlog)="followDeviant($event)"
     (unfollowBlog)="unfollowDeviant($event)">
     (getNextWatchers)="getDAWatchers()">
