@@ -24,7 +24,7 @@
     </div>
     <div class="following">
         <h2>Watching</h2>
-        <div #watchingContainer class="scrollable-list" 
+        <div #watching class="scrollable-list" 
             (scroll)="onWatchingScroll($event)">
             <app-blog *ngFor="let friend of watchingMap | keyvalue"
                 [isFollowing]="true"
@@ -39,8 +39,8 @@
                                 {{ friend.key }}
                             </h3>  
                             {{ friend.value.user.type | deviant | titlecase }}
+                            <div *ngIf="friend.value.watches_you" class="follows-back">Follows you</div>
                         </div> 
-                        <div *ngIf="friend.value.watches_you" class="follows-back">Follows you</div>
                     </div>
                 </div>
             </app-blog>
