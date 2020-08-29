@@ -102,7 +102,7 @@ export class DeviantArtComponent implements OnInit {
 
   public getDAFriendsList(offset: number = 0) {
     console.log("GET MORE FRIENDS!", offset);
-    this.deviantFollowService.getDAFriends(this.deviant.username, offset)
+    this.deviantFollowService.getDAFriendsList(this.deviant.username, offset)
     .subscribe((friendData: UserResponse) => { 
       if (friendData.statusCode !== -1) {
         console.log("Friends: ", friendData);

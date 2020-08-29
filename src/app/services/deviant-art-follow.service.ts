@@ -22,7 +22,7 @@ export class DeviantArtFollowService {
     return this.http.get<any>(url, { withCredentials: true });
   }
 
-  public getDAFriends(username: string, offset: number = 0): Observable<any> {
+  public getDAFriendsList(username: string, offset: number = 0): Observable<any> {
     const url = this.deviantArtFriends + `/${username}/offset/${offset}`;
     console.log(`📗 Get DA friends for ${username}: `, url);
     return this.http.get<any>(url, { withCredentials: true });
