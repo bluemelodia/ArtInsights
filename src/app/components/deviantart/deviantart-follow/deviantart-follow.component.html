@@ -1,7 +1,7 @@
-<section *ngIf="this.watchers.length > 0 || this.watching.length > 0" class="deviant-art-follows">
+<section *ngIf="this.watchers.length > 0" class="deviant-art-follows">
     <div class="followers">
         <h2>Watchers</h2>
-        <div #watcherContainer class="scrollable-list"
+        <div #watchers class="scrollable-list"
             (scroll)="onWatcherScroll($event)">
             <app-blog *ngFor="let watcher of watchersMap | keyvalue"
                 [isFollowing]="watcher.value.is_watching"
@@ -22,6 +22,8 @@
             </app-blog>
         </div>
     </div>
+</section>
+<section *ngIf="this.watching.length > 0" class="deviant-art-follows">
     <div class="following">
         <h2>Watching</h2>
         <div #watching class="scrollable-list" 
