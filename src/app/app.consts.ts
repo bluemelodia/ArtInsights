@@ -77,7 +77,7 @@ export const navActions: { [id: string] : NavItem } = {
     Tags : {
         iconName: 'promotion', 
         alt: 'search by tag',
-        link: '/tag'
+        link: '/tags'
     },
     Engagement : {
         iconName: 'heart', 
