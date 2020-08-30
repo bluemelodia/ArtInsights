@@ -6,27 +6,32 @@
         @include deviantart-theme();
         @include deviantart-container();
         @include flex-col($justify-content: center);
-        align-items: center;
-
-        margin: 0 auto;
-        margin-top: $large-spacing;
-        padding: $large-spacing;
 
         .deviations {
+            @include flex-col($justify-content: center);
+            color: $light-text-color;
             max-height: $scroll-section-height;
             overflow-y: scroll;
 
-            img {
-                height: 250px;
-                border: 2px solid $light-text-color;
+            .deviation {
                 padding: $large-spacing;
-            }
-    
-            h3 {
-                &:hover {
-                    color: $deviantart-light;
+
+                img {
+                    width: 250px;
+                    border: 2px solid $light-text-color;
+                    padding: $large-spacing;
                 }
-            }
+        
+                h3 {
+                    &:hover {
+                        color: $deviantart-light;
+                    }
+                }
+
+                .engagement {
+                    @include flex-row($justify-content: flex-start);
+                }
+            }  
         }
     }
 }
