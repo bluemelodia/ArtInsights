@@ -15,21 +15,41 @@
 
             .deviation {
                 padding: $large-spacing;
+                margin: 0 auto;
 
-                img {
+                .deviation-img {
                     width: 250px;
                     border: 2px solid $light-text-color;
                     padding: $large-spacing;
                 }
-        
-                h3 {
-                    &:hover {
-                        color: $deviantart-light;
-                    }
-                }
 
-                .engagement {
-                    @include flex-row($justify-content: flex-start);
+                .stats {
+                    margin-top: $small-spacing;
+
+                    h3 {
+                        &:hover {
+                            color: $deviantart-light;
+                        }
+                    }
+    
+                    .engagement {
+                        @include flex-row($justify-content: flex-start);
+    
+                        .favorites, .comments {
+                            @include flex-row();
+                            align-items: center;
+                            margin-right: $small-spacing;
+    
+                            img {
+                                width: $large-spacing;
+                                margin-right: $small-spacing;
+                            }
+                        }
+                    }
+
+                    .user-icon {
+                        max-height: 64px;
+                    }
                 }
             }  
         }

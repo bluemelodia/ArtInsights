@@ -4,18 +4,22 @@
         <div class="deviation" *ngFor="let deviation of deviations">
             <img class="deviation-img" [src]="deviation.content.src"/>
             <div class="stats">
-                <h3 (click)="blogUtils.visitBlog(deviation.url)">{{ deviation.title }}</h3>
-                <p>{{ deviation.author.username }}</p>
-                <div class="engagement">
-                    <div class="favorites">
-                        <img [src]="heartImg"/> 
-                        <span>{{ deviation.stats.favourites }}</span>
-                    </div>
-                    <div class="comments">
-                        <img [src]="commentImg"/>
-                        <span>{{ deviation.stats.comments }}</span>
+                <div class="stats-text">
+                    <h3 (click)="blogUtils.visitBlog(deviation.url)">{{ deviation.title }}</h3>
+                    <p>by {{ deviation.author.username }}</p>
+                    <p>{{ blogUtils.dateForTimestamp(deviation.published_time)  | date: 'MM/dd/yyyy' }} </p>
+                    <div class="engagement">
+                        <div class="favorites">
+                            <img [src]="heartImg"/> 
+                            <span>{{ deviation.stats.favourites }}</span>
+                        </div>
+                        <div class="comments">
+                            <img [src]="commentImg"/>
+                            <span>{{ deviation.stats.comments }}</span>
+                        </div>
                     </div>
                 </div>
+                <img class="user-icon" [src]="deviation.author.usericon"/>
             </div>
         </div>
     </div> 
