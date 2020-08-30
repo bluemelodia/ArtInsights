@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TaggedDeviation } from '../../../types/tag.types';
 
 @Component({
   selector: 'app-deviantart-tags',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deviantart-tags.component.scss']
 })
 export class DeviantartTagsComponent implements OnInit {
+  @Input() deviations: TaggedDeviation[] = [];
 
   constructor() { }
 
