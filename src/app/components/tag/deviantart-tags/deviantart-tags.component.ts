@@ -36,16 +36,20 @@ export class DeviantartTagsComponent implements OnInit {
 
     console.log("Deviations: ", this.deviations);
 
-    this.deviations.forEach((deviation) => {
+    this.deviations.forEach((deviation: TaggedDeviation) => {
+      console.log("Deviation: ", deviation, deviation.stats);
       commentCounts.push(deviation.stats.comments);
       faveCounts.push(deviation.stats.favourites);
     });
+
+    console.log("Comment counts before sort: ", commentCounts);
+    console.log("Fave counts after sort: ", faveCounts);
 
     commentCounts.sort((a, b) => a - b);
     faveCounts.sort((a, b) => a - b);
     console.log("Comment counts: ", commentCounts);
     console.log("Fave counts: ", faveCounts);
-    
+
     this.commentStats = {
       high: commentCounts[commentCounts.length - 1],
       low: commentCounts[0],
