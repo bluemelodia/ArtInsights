@@ -7,6 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Directly visiting deviant-art, tumblr URLs causes auth token erasure and logout.
 - Background image takes a long time to load for the first time. 
 - Add more animations (ex. loader on scroll, login page).
+- Refactor types - there's a lot of repetition.
 
 ## Development server
 

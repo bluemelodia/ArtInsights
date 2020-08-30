@@ -31,7 +31,7 @@ export class TagComponent implements OnInit {
             this.alertService.showAlert(AlertType.Error, `Unable to fetch tagged deviations at this time, try again later.`);
             console.log(`Failed to fetch tagged deviations.`);
           } else  {
-            console.log("Watchers: ", taggedDeviations);
+            console.log("Tagged deviations: ", taggedDeviations);
             const responseData = taggedDeviations.responseData as any;
           }
         })
