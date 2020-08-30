@@ -1,31 +1,33 @@
 @import '../../../../styles/mixins.scss';
 @import '../../../../styles/variables.scss';
 
+$max-deviation-width: 250px;
+
 :host {
     section {
         @include deviantart-theme();
         @include deviantart-container();
-        @include flex-col($justify-content: center);
         margin-top: $large-spacing;
+        max-height: $scroll-section-height;
+        overflow-y: scroll;
 
         .deviations {
             @include flex-col($justify-content: center);
             color: $light-text-color;
-            max-height: $scroll-section-height;
-            overflow-y: scroll;
 
             .deviation {
                 padding: $large-spacing;
                 margin: 0 auto;
 
                 .deviation-img {
-                    width: 250px;
+                    width: $max-deviation-width;
                     border: 2px solid $light-text-color;
                     padding: $large-spacing;
                 }
 
                 .deviation-data {
-                    margin-top: $small-spacing;
+                    margin-top: $large-spacing;
+                    max-width: $max-deviation-width;
 
                     h3 {
                         &:hover {
