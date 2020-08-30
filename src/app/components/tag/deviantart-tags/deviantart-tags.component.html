@@ -5,17 +5,21 @@
         <div class="stats-summary">
             <div class="favorites">
                 <img [src]="heartImg"/> 
-                <span>{{ favoriteStats.high }}</span>
-                <span>{{ favoriteStats.low }}</span>
-                <span>{{ favoriteStats.average }}</span>
-                <span>{{ favoriteStats.median }}</span>
+                <div class="stats">
+                    <span>Hi {{ favoriteStats.high }}</span>
+                    <span>Low {{ favoriteStats.low }}</span>
+                    <span>Mid {{ favoriteStats.average | number:'1.2-2' }}</span>
+                    <span>Avg {{ favoriteStats.median }}</span>
+                </div>
             </div>
             <div class="comments">
                 <img [src]="commentImg"/>
-                <span>{{ commentStats.high }}</span>
-                <span>{{ commentStats.low }}</span>
-                <span>{{ commentStats.average }}</span>
-                <span>{{ commentStats.median }}</span>
+                <div class="stats">
+                    <span>Hi {{ commentStats.high }}</span>
+                    <span>Low {{ commentStats.low }}</span>
+                    <span>Mid {{ commentStats.median }}</span>
+                    <span>Avg {{ commentStats.average | number:'1.2-2' }}</span>
+                </div>
             </div>
         </div>
     </div>

@@ -22,6 +22,10 @@ $max-deviation-width: 400px;
                     width: $large-spacing;
                     margin-right: $small-spacing;
                 }
+
+                .stats {
+                    @include flex-col($justify-content: flex-start);
+                }
             }
         }
 
