@@ -12,6 +12,10 @@ export class BlogUtilsService {
       window.open(blogURL, "_blank");
   }
 
+  public visitDeviantArt(username: string) {
+    window.open(`https://${username}.deviantArt.com`, "_blank");
+  }
+
   public dateForTimestamp(timestamp: number) {
       return new Date(timestamp * 1000);
   }

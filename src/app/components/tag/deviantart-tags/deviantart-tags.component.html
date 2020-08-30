@@ -7,7 +7,12 @@
                 <h3 (click)="blogUtils.visitBlog(deviation.url)">{{ deviation.title }}</h3>
                  <div class="deviation-stats">
                     <div class="stats">
-                        <p>by {{ deviation.author.username }}</p>
+                        <div>
+                            by <span class="author-link" 
+                                (click)="blogUtils.visitDeviantArt(deviation.author.username)">
+                                    {{ deviation.author.username }}
+                                </span>
+                        </div>
                         <p>{{ blogUtils.dateForTimestamp(deviation.published_time)  | date: 'short' }} </p>
                         <div class="engagement">
                             <div class="favorites">

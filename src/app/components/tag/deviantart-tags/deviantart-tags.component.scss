@@ -6,6 +6,7 @@
         @include deviantart-theme();
         @include deviantart-container();
         @include flex-col($justify-content: center);
+        margin-top: $large-spacing;
 
         .deviations {
             @include flex-col($justify-content: center);
@@ -34,6 +35,14 @@
 
                     .deviation-stats {
                         @include flex-row($justify-content: space-between);
+                        align-items: center;
+
+                        .author-link {
+                            &:hover {
+                                color: $deviantart-light;
+                            }
+                        }
+
                         .engagement {
                             @include flex-row($justify-content: flex-start);
         

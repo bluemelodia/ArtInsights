@@ -12,7 +12,7 @@
                         <img class="watcher-icon"
                         [src]="watcher.value.user.usericon ? watcher.value.user.usericon : defaultAvatar"/>
                         <div>
-                            <h3 (click)="blogUtils.visitBlog(getDAURL(watcher.key))">
+                            <h3 (click)="blogUtils.visitDeviantArt(watcher.key)">
                                 {{ watcher.key }}
                             </h3>  
                             {{ watcher.value.user.type | deviant | titlecase }}
@@ -37,7 +37,7 @@
                         <img class="watcher-icon"
                         [src]="friend.value.user.usericon ? friend.value.user.usericon : defaultAvatar"/>
                         <div>
-                            <h3 (click)="blogUtils.visitBlog(getDAURL(friend.key))">
+                            <h3 (click)="blogUtils.visitDeviantArt(friend.key)">
                                 {{ friend.key }}
                             </h3>  
                             {{ friend.value.user.type | deviant | titlecase }}
