@@ -4,7 +4,12 @@
 :host {
     section {
         @include deviantart-theme();
-        margin: $large-spacing;
+        @include deviantart-container();
+        @include flex-col($justify-content: center);
+        align-items: center;
+
+        margin: 0 auto;
+        margin-top: $large-spacing;
         padding: $large-spacing;
 
         img {
