@@ -36,7 +36,7 @@ $max-deviation-width: 400px;
         }
 
         .no-matches {
-            width: $max-width;
+            max-width: $max-width;
             text-align: center;
         }
     }
