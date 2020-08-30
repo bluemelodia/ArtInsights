@@ -13,6 +13,8 @@ export class DeviantartTagsComponent implements OnInit {
   @Input() commentStats: DeviationEngagement;
   @Input() favoriteStats: DeviationEngagement;
 
+  @Input() noMatchesMessage = 'Type in a tag name to search for matching deviations.';
+
   public commentImg = this.utils.getImagePath('comment');
   public heartImg = this.utils.getImagePath('heart');
 

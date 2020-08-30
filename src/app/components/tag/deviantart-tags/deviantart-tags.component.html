@@ -1,6 +1,6 @@
-<div class="no-matches" *ngIf="deviations.length === 0">No matching deviations were found.</div>
+<div class="no-matches" *ngIf="deviations.length === 0">{{ noMatchesMessage }}</div>
 
-<div class="deviations-stats">
+<div class="deviations-stats" *ngIf="deviations.length > 0">
     <h3>DeviantArt</h3>
     <div class="stats-summary">
         <div class="favorites">

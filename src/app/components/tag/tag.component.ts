@@ -16,6 +16,7 @@ export class TagComponent implements OnInit {
   public deviations: TaggedDeviation[] = [];
   public commentStatsDA: DeviationEngagement;
   public faveStatsDA: DeviationEngagement;
+  public noMatchesMessage: string;
 
   private tag = '';
 
@@ -55,6 +56,9 @@ export class TagComponent implements OnInit {
 
   private resetTagData() {
     this.deviations = [];
+    this.commentStatsDA = null;
+    this.faveStatsDA = null;
+    this.noMatchesMessage = null;
   }
 
   private getTags(tag: string) {
@@ -80,8 +84,10 @@ export class TagComponent implements OnInit {
               }
           });
           this.stat.calculateDeviationStats(this.deviations);
+        } else {
+          this.noMatchesMessage = 'No matching deviations were found.';
         }
-      }
+      } 
     });
   }
 }
