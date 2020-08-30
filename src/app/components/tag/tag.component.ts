@@ -4,7 +4,8 @@ import { Media, AlertType } from '../../app.consts';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
 import { UserResponse } from '../../types/shared.types';
-import { DeviantArtTagResponse, TaggedDeviation } from '../../types/tag.types';
+import { DeviantArtTagResponse, TaggedDeviation, DeviationEngagement } from '../../types/tag.types';
+import { StatService } from '../../services/stat.service';
 
 @Component({
   selector: 'app-tag',
@@ -13,15 +14,35 @@ import { DeviantArtTagResponse, TaggedDeviation } from '../../types/tag.types';
 })
 export class TagComponent implements OnInit {
   public deviations: TaggedDeviation[] = [];
+  public commentStatsDA: DeviationEngagement;
+  public faveStatsDA: DeviationEngagement;
+
   private tag = '';
 
   constructor(
     private deviantTags: DeviantArtTagService,
     private auth: AuthService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private stat: StatService
   ) { }
 
   ngOnInit() {
+    this.setupSubscriptions();
+  }
+
+  /* As the deviations are fetched asynchronously, and we only want to calc the stats
+   * after the entire batch has returned, subscribe to the comment/favorite subjects, 
+   * whose values will be piped to listeners after the stats have been calculated. */
+  private setupSubscriptions() {
+    this.stat.commentSubject$(Media.DeviantArt)
+    .subscribe((commentStats: DeviationEngagement) => {
+      this.commentStatsDA = commentStats;
+    });
+
+    this.stat.favoriteSubject$(Media.DeviantArt)
+    .subscribe((faveStats: DeviationEngagement) => {
+      this.faveStatsDA = faveStats;
+    });
   }
 
   public userSearchedTag(tag: string) {
@@ -55,8 +76,9 @@ export class TagComponent implements OnInit {
           tagData.results.forEach((deviation: TaggedDeviation) => {
               this.deviations.push(deviation);
           });
+          this.stat.calculateDeviationStats(this.deviations);
         }
       }
-    })
+    });
   }
 }
