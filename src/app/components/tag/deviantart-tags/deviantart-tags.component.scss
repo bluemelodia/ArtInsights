@@ -23,7 +23,7 @@
                     padding: $large-spacing;
                 }
 
-                .stats {
+                .deviation-data {
                     margin-top: $small-spacing;
 
                     h3 {
@@ -31,24 +31,27 @@
                             color: $deviantart-light;
                         }
                     }
-    
-                    .engagement {
-                        @include flex-row($justify-content: flex-start);
-    
-                        .favorites, .comments {
-                            @include flex-row();
-                            align-items: center;
-                            margin-right: $small-spacing;
-    
-                            img {
-                                width: $large-spacing;
+
+                    .deviation-stats {
+                        @include flex-row($justify-content: space-between);
+                        .engagement {
+                            @include flex-row($justify-content: flex-start);
+        
+                            .favorites, .comments {
+                                @include flex-row();
+                                align-items: center;
                                 margin-right: $small-spacing;
+        
+                                img {
+                                    width: $large-spacing;
+                                    margin-right: $small-spacing;
+                                }
                             }
                         }
-                    }
-
-                    .user-icon {
-                        max-height: 64px;
+    
+                        .user-icon {
+                            max-height: 50px;
+                        }
                     }
                 }
             }  
