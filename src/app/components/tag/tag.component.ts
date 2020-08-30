@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviantArtTagService } from '../../services/deviant-art-tag.service';
 
 @Component({
   selector: 'app-tag',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TagComponent implements OnInit {
 
-  constructor() { }
+  constructor(private deviantTags: DeviantArtTagService) { }
 
   ngOnInit() {
   }
 
+  public userSearchedTag(tag: string) {
+    if (tag && tag.length > 0) {
+      console.log("Search tag: ", tag);
+      this.deviantTags.getDeviationsForTag(tag);
+    }
+  }
 }

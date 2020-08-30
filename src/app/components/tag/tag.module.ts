@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TagComponent } from './tag.component';
 import { DeviantartTagsComponent } from './deviantart-tags/deviantart-tags.component';
+import { SearchModule } from '../search/search.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { DeviantartTagsComponent } from './deviantart-tags/deviantart-tags.compo
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    SearchModule
   ]
 })
 export class TagModule {}
