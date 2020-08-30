@@ -33,8 +33,8 @@
     align-items: center;
 }
 
-@mixin flex-row-percent-width($width: 100%) {
-    @include flex-row();
+@mixin flex-row-percent-width($width: 100%, $justify-content: center) {
+    @include flex-row($justify-content);
     width: $width;
 }
 

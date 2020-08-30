@@ -1,2 +1,6 @@
 @import '../../../styles/mixins.scss';
 @import '../../../styles/variables.scss';
+
+:host {
+    @include flex-col();
+}

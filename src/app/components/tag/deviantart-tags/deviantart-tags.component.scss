@@ -10,18 +10,28 @@ $max-deviation-width: 400px;
     margin-top: $large-spacing;
 
     .deviations-stats {
-        position: fixed;
+        padding: $large-spacing;
+        padding-top: $small-spacing;
 
-        .favorites, .comments {
-            @include flex-row-center($justify-content: flex-start);
+        .stats-summary {
+            @include flex-col($justify-content: flex-start);
+            padding-top: $large-spacing;
 
-            img {
-                width: $large-spacing;
-                margin-right: $small-spacing;
-            }
-
-            .stats {
-                @include flex-col($justify-content: flex-start);
+            .favorites, .comments {
+                @include flex-row-center($justify-content: flex-start);
+    
+                img {
+                    width: $large-spacing;
+                    margin-right: $large-spacing;
+                }
+    
+                .stats {
+                    @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+                    
+                    span {
+                        width: 25%;
+                    }
+                }
             }
         }
     }
