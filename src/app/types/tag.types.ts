@@ -34,3 +34,10 @@ export interface DeviationStats {
     comments: number, 
     favourites: number
 }
+
+export interface DeviationEngagement {
+    average: number, 
+    high: number,
+    low: number,
+    median: number
+}

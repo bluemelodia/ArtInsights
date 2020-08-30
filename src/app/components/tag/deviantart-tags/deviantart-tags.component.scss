@@ -7,13 +7,17 @@ $max-deviation-width: 250px;
     section {
         @include deviantart-theme();
         @include deviantart-container();
+        color: $light-text-color;
         margin-top: $large-spacing;
         max-height: $scroll-section-height;
         overflow-y: scroll;
 
+        .deviations-stats {
+            position: fixed;
+        }
+
         .deviations {
             @include flex-col($justify-content: center);
-            color: $light-text-color;
 
             .deviation {
                 padding: $large-spacing;
