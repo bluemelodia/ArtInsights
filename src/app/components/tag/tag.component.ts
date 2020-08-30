@@ -74,7 +74,10 @@ export class TagComponent implements OnInit {
         const tagData = taggedDeviations.responseData as DeviantArtTagResponse;
         if (tagData.results && tagData.results.length > 0) {
           tagData.results.forEach((deviation: TaggedDeviation) => {
-              this.deviations.push(deviation);
+              /* Include visual art only - literature will not have image content. */
+              if (deviation.content && deviation.content.src) {
+                this.deviations.push(deviation);
+              }
           });
           this.stat.calculateDeviationStats(this.deviations);
         }
