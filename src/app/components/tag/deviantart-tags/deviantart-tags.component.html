@@ -1,13 +1,15 @@
 <div class="no-matches" *ngIf="deviations.length === 0">No matching deviations were found.</div>
 <section *ngIf="deviations.length > 0">
-    <div class="deviation" *ngFor="let deviation of deviations">
-        <img class="deviation-img" [src]="deviation.content.src"/>
-        <div class="stats">
-            <h3 (click)="blogUtils.visitBlog(deviation.url)">{{ deviation.title }}</h3>
-            <div class="engagement">
-                <div class="favorites">{{ deviation.stats.favourites }}</div>
-                <div class="comments">{{ deviation.stats.comments }}</div>
+    <div class="deviations">
+        <div class="deviation" *ngFor="let deviation of deviations">
+            <img class="deviation-img" [src]="deviation.content.src"/>
+            <div class="stats">
+                <h3 (click)="blogUtils.visitBlog(deviation.url)">{{ deviation.title }}</h3>
+                <div class="engagement">
+                    <div class="favorites">{{ deviation.stats.favourites }}</div>
+                    <div class="comments">{{ deviation.stats.comments }}</div>
+                </div>
             </div>
         </div>
-    </div>
+    </div> 
 </section>

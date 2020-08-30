@@ -12,15 +12,20 @@
         margin-top: $large-spacing;
         padding: $large-spacing;
 
-        img {
-            height: 250px;
-            border: 2px solid $light-text-color;
-            padding: $large-spacing;
-        }
+        .deviations {
+            max-height: $scroll-section-height;
+            overflow-y: scroll;
 
-        h3 {
-            &:hover {
-                color: $deviantart-light;
+            img {
+                height: 250px;
+                border: 2px solid $light-text-color;
+                padding: $large-spacing;
+            }
+    
+            h3 {
+                &:hover {
+                    color: $deviantart-light;
+                }
             }
         }
     }
