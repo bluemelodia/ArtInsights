@@ -73,7 +73,7 @@ export class StatService {
     this.commentStats = {
       high: commentCounts[commentCounts.length - 1],
       low: commentCounts[0],
-      average: this.findAverage(faveCounts),
+      average: this.findAverage(commentCounts),
       median: this.findMedian(commentCounts)
     };
     console.log("Comment stats: ", this.commentStats);
