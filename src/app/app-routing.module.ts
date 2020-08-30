@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home-dashboard/home/home.component';
 import { DeviantArtComponent } from './components/deviantart/deviantart.component';
 import { Media } from './app.consts';
 import { TumblrComponent } from './components/tumblr/tumblr.component';
+import { TagComponent } from './components/tag/tag.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +25,11 @@ const routes: Routes = [
     component: DeviantArtComponent, 
     canActivate: [LoginGuard, AuthGuard],
     data: { media: [Media.DeviantArt] }
+  },
+  { 
+    path: 'tags',
+    component: TagComponent,
+    canActivate: [LoginGuard, AuthGuard],
   },
   { path: '',   redirectTo: '/login', pathMatch: 'full', canActivate: [LoginGuard] },
 ];

@@ -16,13 +16,14 @@ import { HomeModule } from './components/home-dashboard/home.module';
 import { LoginComponent } from './components/login/login.component';
 import { NavModule } from './components/nav/nav.module';
 import { TumblrModule } from './components/tumblr/tumblr.module';
+import { TagModule } from './components/tag/tag.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     AlertComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +35,7 @@ import { TumblrModule } from './components/tumblr/tumblr.module';
     HomeModule,
     DeviantArtModule,
     NavModule,
+    TagModule,
     TumblrModule,
     ReactiveFormsModule
   ],

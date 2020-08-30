@@ -76,7 +76,8 @@ export const mediaData: { [id: string] : NavItem } = {
 export const navActions: { [id: string] : NavItem } = {
     Tags : {
         iconName: 'promotion', 
-        alt: 'search by tag'
+        alt: 'search by tag',
+        link: '/tag'
     },
     Engagement : {
         iconName: 'heart', 
