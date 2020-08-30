@@ -1,4 +1,13 @@
-<div *ngIf="deviations.length === 0">No matching deviations were found.</div>
-<div *ngIf="deviations.length > 0">
-    We have deviations!
-</div>
+<div class="no-matches" *ngIf="deviations.length === 0">No matching deviations were found.</div>
+<section *ngIf="deviations.length > 0">
+    <div class="deviation" *ngFor="let deviation of deviations">
+        <img class="deviation-img" [src]="deviation.content.src"/>
+        <div class="stats">
+            <h3>{{ deviation.title }}</h3>
+            <div class="engagement">
+                <div class="favorites">{{ deviation.stats.favorites }}</div>
+                <div class="comments">{{ deviation.stats.comments }}</div>
+            </div>
+        </div>
+    </div>
+</section>
