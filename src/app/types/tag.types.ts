@@ -32,5 +32,5 @@ export interface DeviationContent {
 
 export interface DeviationStats {
     comments: number, 
-    favorites: number
+    favourites: number
 }

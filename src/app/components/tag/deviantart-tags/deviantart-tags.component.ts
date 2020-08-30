@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TaggedDeviation } from '../../../types/tag.types';
+import { BlogUtilsService } from '../../../services/blog-utils.service';
 
 @Component({
   selector: 'app-deviantart-tags',
@@ -9,7 +10,7 @@ import { TaggedDeviation } from '../../../types/tag.types';
 export class DeviantartTagsComponent implements OnInit {
   @Input() deviations: TaggedDeviation[] = [];
 
-  constructor() { }
+  constructor(public blogUtils: BlogUtilsService) { }
 
   ngOnInit() {
   }

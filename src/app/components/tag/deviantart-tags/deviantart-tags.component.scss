@@ -1,0 +1,22 @@
+@import '../../../../styles/mixins.scss';
+@import '../../../../styles/variables.scss';
+
+:host {
+    section {
+        @include deviantart-theme();
+        margin: $large-spacing;
+        padding: $large-spacing;
+
+        img {
+            height: 250px;
+            border: 2px solid $light-text-color;
+            padding: $large-spacing;
+        }
+
+        h3 {
+            &:hover {
+                color: $deviantart-light;
+            }
+        }
+    }
+}
