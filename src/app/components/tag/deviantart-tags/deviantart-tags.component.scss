@@ -8,6 +8,7 @@ $max-deviation-width: 400px;
     @include deviantart-container();
     color: $light-text-color;
     margin-top: $large-spacing;
+    width: 100%;
 
     .deviations-stats {
         padding: $large-spacing;
