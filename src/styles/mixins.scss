@@ -28,6 +28,11 @@
     justify-content: $justify-content;
 }
 
+@mixin flex-row-center($justify-content: center) {
+    @include flex-row($justify-content);
+    align-items: center;
+}
+
 @mixin flex-row-percent-width($width: 100%) {
     @include flex-row();
     width: $width;
@@ -37,6 +42,11 @@
     display: flex;
     flex-direction: column;
     justify-content: $justify-content;
+}
+
+@mixin flex-col-center($justify-content: flex-start) {
+    @include flex-col($justify-content);
+    align-items: center;
 }
 
 @mixin wide-and-center($width: 100%) {

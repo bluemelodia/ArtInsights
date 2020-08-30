@@ -3,7 +3,6 @@
 
 /* Center both sub-components. */
 :host {
-    @include flex-col($justify-content: center);
-    align-items: center;
+    @include flex-col-center($justify-content: center);
     height: 95vh;
 }

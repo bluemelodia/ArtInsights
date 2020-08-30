@@ -14,6 +14,15 @@ $max-deviation-width: 250px;
 
         .deviations-stats {
             position: fixed;
+
+            .favorites, .comments {
+                @include flex-row-center($justify-content: flex-start);
+
+                img {
+                    width: $large-spacing;
+                    margin-right: $small-spacing;
+                }
+            }
         }
 
         .deviations {
@@ -40,8 +49,7 @@ $max-deviation-width: 250px;
                     }
 
                     .deviation-stats {
-                        @include flex-row($justify-content: space-between);
-                        align-items: center;
+                        @include flex-row-center($justify-content: space-between);
 
                         .author-link {
                             &:hover {
@@ -53,8 +61,7 @@ $max-deviation-width: 250px;
                             @include flex-row($justify-content: flex-start);
         
                             .favorites, .comments {
-                                @include flex-row();
-                                align-items: center;
+                                @include flex-row-center();
                                 margin-right: $small-spacing;
         
                                 img {

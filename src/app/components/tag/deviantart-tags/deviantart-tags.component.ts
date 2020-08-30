@@ -34,6 +34,8 @@ export class DeviantartTagsComponent implements OnInit {
     let commentCounts: number[] = [];
     let faveCounts: number[] = [];
 
+    console.log("Deviations: ", this.deviations);
+
     this.deviations.forEach((deviation) => {
       commentCounts.push(deviation.stats.comments);
       faveCounts.push(deviation.stats.favourites);
@@ -41,7 +43,9 @@ export class DeviantartTagsComponent implements OnInit {
 
     commentCounts.sort((a, b) => a - b);
     faveCounts.sort((a, b) => a - b);
-
+    console.log("Comment counts: ", commentCounts);
+    console.log("Fave counts: ", faveCounts);
+    
     this.commentStats = {
       high: commentCounts[commentCounts.length - 1],
       low: commentCounts[0],
