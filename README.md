@@ -84,13 +84,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Asset Credits
 
 Icons made by:
+
 <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a>
 
 <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
 
 <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a>
 
-<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</
+<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a>
 from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 Photos by:

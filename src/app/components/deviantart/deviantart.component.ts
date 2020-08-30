@@ -105,7 +105,7 @@ export class DeviantArtComponent implements OnInit {
     this.deviantFollowService.getDAFriendsList(this.deviant.username, offset)
     .subscribe((friendData: UserResponse) => { 
       if (friendData.statusCode === 450) {
-        this.auth.userUnauthForMedia(Media.Tumblr);
+        this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (friendData.statusCode === -1) {
         this.alertService.showAlert(AlertType.Error, `Unable to fetch friends list at this time. Try again later.`);
         console.log(`Failed to fetch friends list.`);
@@ -128,7 +128,7 @@ export class DeviantArtComponent implements OnInit {
     this.deviantFollowService.getDAWatchers(this.deviant.username, offset)
       .subscribe((watcherData: UserResponse) => { 
         if (watcherData.statusCode === 450) {
-          this.auth.userUnauthForMedia(Media.Tumblr);
+          this.auth.userUnauthForMedia(Media.DeviantArt);
         } else if (watcherData.statusCode === -1) {
           this.alertService.showAlert(AlertType.Error, `Unable to fetch watchers list at this time. Try again later.`);
           console.log(`Failed to fetch watchers list.`);
