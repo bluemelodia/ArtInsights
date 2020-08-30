@@ -12,7 +12,6 @@ $max-deviation-width: 400px;
 
     .deviations-stats {
         padding: $large-spacing;
-        padding-top: $small-spacing;
 
         .stats-summary {
             @include flex-col($justify-content: flex-start);
