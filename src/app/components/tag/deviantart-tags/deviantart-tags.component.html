@@ -1,28 +1,29 @@
 <div class="no-matches" *ngIf="deviations.length === 0">No matching deviations were found.</div>
-<section *ngIf="deviations.length > 0">
-    <div class="deviations-stats">
-        <h3>DeviantArt</h3>
-        <div class="stats-summary">
-            <div class="favorites">
-                <img [src]="heartImg"/> 
-                <div class="stats">
-                    <span>Hi {{ favoriteStats.high }}</span>
-                    <span>Low {{ favoriteStats.low }}</span>
-                    <span>Mid {{ favoriteStats.average | number:'1.2-2' }}</span>
-                    <span>Avg {{ favoriteStats.median }}</span>
-                </div>
+
+<div class="deviations-stats">
+    <h3>DeviantArt</h3>
+    <div class="stats-summary">
+        <div class="favorites">
+            <img [src]="heartImg"/> 
+            <div class="stats">
+                <span>Hi {{ favoriteStats.high }}</span>
+                <span>Low {{ favoriteStats.low }}</span>
+                <span>Mid {{ favoriteStats.average | number:'1.2-2' }}</span>
+                <span>Avg {{ favoriteStats.median }}</span>
             </div>
-            <div class="comments">
-                <img [src]="commentImg"/>
-                <div class="stats">
-                    <span>Hi {{ commentStats.high }}</span>
-                    <span>Low {{ commentStats.low }}</span>
-                    <span>Mid {{ commentStats.median }}</span>
-                    <span>Avg {{ commentStats.average | number:'1.2-2' }}</span>
-                </div>
+        </div>
+        <div class="comments">
+            <img [src]="commentImg"/>
+            <div class="stats">
+                <span>Hi {{ commentStats.high }}</span>
+                <span>Low {{ commentStats.low }}</span>
+                <span>Mid {{ commentStats.median }}</span>
+                <span>Avg {{ commentStats.average | number:'1.2-2' }}</span>
             </div>
         </div>
     </div>
+</div>
+<section *ngIf="deviations.length > 0">
     <div class="deviations">
         <div class="deviation" *ngFor="let deviation of deviations">
             <img class="deviation-img" [src]="deviation.content.src"/>

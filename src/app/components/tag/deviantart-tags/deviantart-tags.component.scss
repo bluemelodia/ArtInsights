@@ -4,34 +4,35 @@
 $max-deviation-width: 400px;
 
 :host {
-    section {
-        @include deviantart-theme();
-        @include deviantart-container();
-        color: $light-text-color;
-        margin-top: $large-spacing;
+    @include deviantart-theme();
+    @include deviantart-container();
+    color: $light-text-color;
+    margin-top: $large-spacing;
 
-        .deviations-stats {
-            position: fixed;
+    .deviations-stats {
+        position: fixed;
 
-            .favorites, .comments {
-                @include flex-row-center($justify-content: flex-start);
+        .favorites, .comments {
+            @include flex-row-center($justify-content: flex-start);
 
-                img {
-                    width: $large-spacing;
-                    margin-right: $small-spacing;
-                }
+            img {
+                width: $large-spacing;
+                margin-right: $small-spacing;
+            }
 
-                .stats {
-                    @include flex-col($justify-content: flex-start);
-                }
+            .stats {
+                @include flex-col($justify-content: flex-start);
             }
         }
+    }
+
+    section {
+        max-height: $scroll-section-height;
+        overflow-y: scroll;
 
         .deviations {
             @include flex-col($justify-content: center);
-            max-height: $scroll-section-height;
-            overflow-y: scroll;
-            
+
             .deviation {
                 padding: $large-spacing;
                 margin: 0 auto;
