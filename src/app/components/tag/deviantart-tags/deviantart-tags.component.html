@@ -1,7 +1,7 @@
 
 <div class="deviations-stats">
     <h3>DeviantArt</h3>
-    <div class="no-matches" *ngIf="deviations.length === 0">{{ noMatchesMessage }}</div>
+    <div class="no-matches" *ngIf="!deviations || deviations.length === 0">{{ noMatchesMessage ? noMatchesMessage : defaultMessage }}</div>
     <div class="stats-summary" *ngIf="deviations.length > 0">
         <div class="favorites">
             <img [src]="heartImg"/> 
