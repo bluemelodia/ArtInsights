@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeviantArtTagService } from '../../services/deviant-art-tag.service';
+import { TagService } from '../../services/deviant-art-tag.service';
 import { Media, AlertType } from '../../app.consts';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
@@ -18,10 +18,13 @@ export class TagComponent implements OnInit {
   public faveStatsDA: DeviationEngagement;
   public noMatchesMessage: string;
 
+  public tumblrPosts: any[] = [];
+  public noTumblrPostsMessage: string;
+
   private tag = '';
 
   constructor(
-    private deviantTags: DeviantArtTagService,
+    private tagService: TagService,
     private auth: AuthService,
     private alertService: AlertService,
     private stat: StatService
@@ -63,10 +66,11 @@ export class TagComponent implements OnInit {
 
   private getTags(tag: string) {
     this.getDATags(tag);
+    this.getTumblrTags(tag);
   }
 
   private getDATags(tag: string) {
-    this.deviantTags.getDeviationsForTag(tag)
+    this.tagService.getDeviationsForTag(tag)
     .subscribe((taggedDeviations: UserResponse) => { 
       if (taggedDeviations.statusCode === 450) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
@@ -86,6 +90,32 @@ export class TagComponent implements OnInit {
           this.stat.calculateDeviationStats(this.deviations);
         } else {
           this.noMatchesMessage = 'No matching deviations were found.';
+        }
+      } 
+    });
+  }
+
+  private getTumblrTags(tag: string) {
+    this.tagService.getTumblrPostsForTag(tag)
+    .subscribe((taggedPosts: any) => { 
+      if (taggedPosts.statusCode === 450) {
+        this.auth.userUnauthForMedia(Media.Tumblr);
+      } else if (taggedPosts.statusCode === -1) {
+        this.alertService.showAlert(AlertType.Error, `Unable to fetch tagged Tumblr posts at this time, try again later.`);
+        console.log(`Failed to fetch tagged Tumblr posts.`);
+      } else  {
+        console.log("Tagged Tumblr posts: ", taggedPosts);
+        const tagData = taggedPosts.responseData as DeviantArtTagResponse;
+        if (tagData.results && tagData.results.length > 0) {
+          tagData.results.forEach((deviation: TaggedDeviation) => {
+              /* Include visual art only - literature will not have image content. */
+              if (deviation.content && deviation.content.src) {
+                this.deviations.push(deviation);
+              }
+          });
+          this.stat.calculateDeviationStats(this.deviations);
+        } else {
+          this.noTumblrPostsMessage = 'No matching deviations were found.';
         }
       } 
     });

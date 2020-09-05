@@ -104,7 +104,7 @@ export class TumblrComponent implements OnInit {
   public unfollowTumblr(blog: string) {
     this.tumblrFollowService.unfollowBlog(blog)
     .subscribe((res: any) => {
-      if (res.statusCode === 403) {
+      if (res.statusCode === 450) {
         this.auth.userUnauthForMedia(Media.Tumblr);
       } else if (res.statusCode !== 0) {
         console.log(`Failed to unfollow: ${blog}, `, res);
