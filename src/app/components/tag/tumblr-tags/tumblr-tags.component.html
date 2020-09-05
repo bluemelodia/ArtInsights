@@ -37,3 +37,17 @@
         </div>
     </div> 
 </section>
+<div class="tag-stats">
+    <div class="stats-summary" *ngIf="posts.length > 0">
+        <div *ngFor="let tag of engagement.tags" class="notes">
+            <img [src]="heartImg"/> 
+            <div class="stats">
+                <span>{{ tag }}</span>
+                <span>Hi {{ tag.stats.high }}</span>
+                <span>Low {{ tag.stats.low }}</span>
+                <span>Mid {{ tag.stats.average | number:'1.2-2' }}</span>
+                <span>Avg {{ tag.stats.median }}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@ $max-post-width: 400px;
     margin-top: $large-spacing;
     width: 100%;
 
-    .tumblr-stats {
+    .tumblr-stats, .tag-stats {
         padding: $large-spacing;
 
         .stats-summary {
@@ -28,7 +28,11 @@ $max-post-width: 400px;
                 .stats {
                     @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
                     
-                    span {
+                    :host-context(.tag-stats) {
+                        width: 20%;
+                    }
+
+                    :host-content(.tumblr-stats) {
                         width: 25%;
                     }
                 }
