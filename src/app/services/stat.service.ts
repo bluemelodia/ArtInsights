@@ -59,11 +59,13 @@ export class StatService {
     for(let i = 0; i < tags.length; i++) {
       const tag = tags[i];
       if (tags[tag]) {
-        tags[tag].count += 1;
+        tags[tag].count++;
         tags[tag].totalEngagements += engagement;
       } else {
-        tags[tag].count = 1;
-        tags[tag].totalEngagements = engagement;
+        tags[tag] = {
+          count: 1, 
+          totalEngagements: engagement
+        };
       }
       tags[tag].engagements.push(engagement);
     }

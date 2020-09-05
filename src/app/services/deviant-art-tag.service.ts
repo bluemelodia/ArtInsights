@@ -13,8 +13,11 @@ export class TagService {
   constructor(private http: HttpClient) { }
 
   public getDeviationsForTag(tag: string) {
-    const url = this.deviantArtTagURL + `/${tag}`;
-    console.log(`📗 Get deviations for tag ${tag}: `, url);
+    /* DA tags have no spaces. */
+    const daTag = tag.replace(/\s+/g, '');
+
+    const url = this.deviantArtTagURL + `/${daTag}`;
+    console.log(`📗 Get deviations for tag ${daTag}: `, url);
     return this.http.get<any>(url, { withCredentials: true });
   }
 
