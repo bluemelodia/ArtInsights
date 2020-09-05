@@ -21,10 +21,10 @@
             class="post-img" [src]="post.photos[0].original_size.url"/>
             <div class="post-data">
                 <h3 (click)="blogUtils.visitBlog(post.post_url)">{{ post.blog_name }}</h3>
-                <p [innerHTML]="post.caption"></p>
+                <p class="caption" [innerHTML]="post.caption"></p>
                  <div class="post-stats">
                     <div class="stats">
-                        <p>{{ blogUtils.dateForTimestamp(post.timestamp)  | date: 'short' }} </p>
+                        <p>Posted on {{ blogUtils.dateForTimestamp(post.timestamp)  | date: 'short' }} </p>
                         <div class="engagement">
                             <div class="notes">
                                 <img [src]="heartImg"/> 

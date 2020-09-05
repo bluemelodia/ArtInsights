@@ -37,7 +37,7 @@
                                     {{ deviation.author.username }}
                                 </span>
                         </div>
-                        <p>{{ blogUtils.dateForTimestamp(deviation.published_time)  | date: 'short' }} </p>
+                        <p>Posted on {{ blogUtils.dateForTimestamp(deviation.published_time)  | date: 'short' }} </p>
                         <div class="engagement">
                             <div class="favorites">
                                 <img [src]="heartImg"/> 

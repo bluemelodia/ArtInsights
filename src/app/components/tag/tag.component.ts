@@ -6,7 +6,6 @@ import { AlertService } from '../../services/alert.service';
 import { UserResponse } from '../../types/shared.types';
 import { DeviantArtTagResponse, TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement } from '../../types/tag.types';
 import { StatService } from '../../services/stat.service';
-import { TumblrModule } from '../tumblr/tumblr.module';
 
 @Component({
   selector: 'app-tag',
@@ -69,6 +68,10 @@ export class TagComponent implements OnInit {
     this.commentStatsDA = null;
     this.faveStatsDA = null;
     this.noMatchesMessage = null;
+
+    this.tumblrPosts = [];
+    this.tumblrStats = null;
+    this.noTumblrPostsMessage = null;
   }
 
   private getTags(tag: string) {

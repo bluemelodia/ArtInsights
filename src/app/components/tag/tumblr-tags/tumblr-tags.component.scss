@@ -68,6 +68,16 @@ $max-post-width: 400px;
                         }
                     }
 
+                    .caption::before {
+                        border: 1px solid $light-text-color;
+                        margin-top: $small-spacing / 2;
+                    }
+
+                    .caption::after {
+                        border: 1px solid $light-text-color;
+                        margin-bottom: $small-spacing / 2;
+                    }
+
                     .post-stats {
                         @include flex-row-center($justify-content: space-between);
 
