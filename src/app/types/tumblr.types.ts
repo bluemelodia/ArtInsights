@@ -4,15 +4,15 @@ export interface TumblrResponseData {
 }
 
 export interface TumblrUserInfo {
-    blogs: [TumblrUserBlog],
+    blogs: TumblrUserBlog[],
     following: number,
     likes: number, 
     name: string
 }
 
 export interface TumblrUserBlog {
-    admin: boolean, 
-    avatar: [AvatarImage],
+    admin?: boolean, 
+    avatar?: TumblrImage[],
     description: string,
     name: string, 
     title: string,
@@ -21,7 +21,7 @@ export interface TumblrUserBlog {
     uuid: string
 }
 
-export interface AvatarImage {
+export interface TumblrImage {
     width: number, 
     height: number, 
     url: string
@@ -40,6 +40,12 @@ export interface TumblrBlog {
     title: string,
     updated: number,
     url: string 
+}
+
+export interface TumblrPhotos {
+    alt_sizes: TumblrImage[],
+    caption: string,
+    original_size: TumblrImage
 }
 
 export interface TumblrBlogResponse {

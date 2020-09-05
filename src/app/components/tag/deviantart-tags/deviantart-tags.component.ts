@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TaggedDeviation, DeviationEngagement } from '../../../types/tag.types';
+import { TaggedDeviation, Engagement } from '../../../types/tag.types';
 import { BlogUtilsService } from '../../../services/blog-utils.service';
 import { UtilsService } from '../../../services/utils.service';
 
@@ -10,8 +10,8 @@ import { UtilsService } from '../../../services/utils.service';
 })
 export class DeviantartTagsComponent implements OnInit {
   @Input() deviations: TaggedDeviation[] = [];
-  @Input() commentStats: DeviationEngagement;
-  @Input() favoriteStats: DeviationEngagement;
+  @Input() commentStats: Engagement;
+  @Input() favoriteStats: Engagement;
 
   @Input() noMatchesMessage: string;
 

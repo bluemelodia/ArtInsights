@@ -10,10 +10,10 @@ import { UtilsService } from '../../../services/utils.service';
   styleUrls: ['./deviantart-follow.component.scss']
 })
 export class DeviantArtFollowComponent implements OnInit {
-  @Input() watchers: [DeviantWatcher];
+  @Input() watchers: DeviantWatcher[];
   @Input() watchersMap: { [user: string] : DeviantWatcher } = {};
 
-  @Input() watching: [DeviantFriend];
+  @Input() watching: DeviantFriend[];
   @Input() watchingMap: { [user: string] : DeviantFriend } = {};
 
   @Output() followBlog = new EventEmitter<string>();

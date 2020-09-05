@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TaggedDeviation, DeviationEngagement } from '../types/tag.types';
+import { TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement, TagStat, TagAggregate } from '../types/tag.types';
 import { Subject } from 'rxjs';
 import { Media } from '../app.consts';
 
@@ -7,11 +7,14 @@ import { Media } from '../app.consts';
   providedIn: 'root'
 })
 export class StatService {
-  private commentStats: DeviationEngagement;
-  private favoriteStats: DeviationEngagement;
+  private commentStats: Engagement;
+  private favoriteStats: Engagement;
+  private noteAndTagStats: TumblrEngagement;
+  private tagStats: TagAggregate = {};
 
-  private commentSubjectDA$ = new Subject<DeviationEngagement>();
-  private favoriteSubjectDA$ = new Subject<DeviationEngagement>();
+  private commentSubjectDA$ = new Subject<Engagement>();
+  private favoriteSubjectDA$ = new Subject<Engagement>();
+  private tumblrSubject$ = new Subject<TumblrEngagement>();
 
   constructor() {}
 
@@ -49,6 +52,38 @@ export class StatService {
       sum += num;
     });
     return sum/array.length;
+  }
+
+  /* First count total engagement / usage for each tag. */
+  compileTags(tags: string[], engagement: number) {
+    for(let i = 0; i < tags.length; i++) {
+      const tag = tags[i];
+      if (tags[tag]) {
+        tags[tag].count += 1;
+        tags[tag].totalEngagements += engagement;
+      } else {
+        tags[tag].count = 1;
+        tags[tag].totalEngagements = engagement;
+      }
+      tags[tag].engagements.push(engagement);
+    }
+  }
+
+  /* Average out the tag engagement levels. */
+  findTagEngagements() {
+    const tagStats = {};
+    Object.keys(this.tagStats).forEach((tag: string) => {
+      const tagStat = tagStats[tag];
+      const engagements: number[] = tagStat.engagements;
+      engagements.sort((a, b) => a - b);
+      tagStats[tag] = {
+        high: engagements[engagements.length - 1],
+        low: engagements[0],
+        average: tagStat.totalEngagements / tagStat.count,
+        median: this.findMedian(engagements)
+      }
+    });
+    return tagStats;
   }
 
   public calculateDeviationStats(deviations: TaggedDeviation[]) {
@@ -89,5 +124,33 @@ export class StatService {
     };
     console.log("Favorite stats: ", this.favoriteStats);
     this.favoriteSubject$(Media.DeviantArt).next(this.favoriteStats);
+  }
+
+  /* Calculations are an extension of DA's stats. */
+  public calculateTumblrStats(tumblrPosts: TumblrTagResponse[]) {
+    let noteCounts: number[] = [];
+    this.tagStats = {};
+
+    console.log("Tumblr: ", tumblrPosts);
+
+    for(let i = 0; i < tumblrPosts.length; i++) {
+      const tumblrPost: TumblrTagResponse = tumblrPosts[i];
+      noteCounts.push(tumblrPost.note_count);
+      this.compileTags(tumblrPost.tags, tumblrPost.note_count);
+    }
+
+    noteCounts.sort((a, b) => a - b);
+    console.log("Note counts: ", noteCounts);
+
+    this.noteAndTagStats = {
+      stats: {
+        high: noteCounts[noteCounts.length - 1],
+        low: noteCounts[0],
+        average: this.findAverage(noteCounts),
+        median: this.findMedian(noteCounts)
+      },
+      tags: this.findTagEngagements()
+    }
+    console.log("Tumblr stats: ", this.noteAndTagStats);
   }
 }

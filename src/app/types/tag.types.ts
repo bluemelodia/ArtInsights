@@ -1,10 +1,26 @@
 import { DeviantData } from './deviant.types';
+import { TumblrPhotos, TumblrUserBlog } from './tumblr.types';
+
+export interface TumblrTagResponse {
+    blog: TumblrUserBlog,
+    blog_name: string,
+    body: string,
+    date: string,
+    format: string,
+    id: string,
+    note_count: number,
+    photos: TumblrPhotos[]
+    post_url: string,
+    tags: string[],
+    timestamp: string,
+    type: string
+}
 
 export interface DeviantArtTagResponse {
     estimated_total: number,
     has_more: boolean, 
     next_offset: number,
-    results: [ TaggedDeviation ]
+    results: TaggedDeviation[]
 }
 
 export interface TaggedDeviation {
@@ -18,7 +34,7 @@ export interface TaggedDeviation {
     published_time: string,
     stats: DeviationStats,
     title: string, 
-    thumbs: [ DeviationContent ]
+    thumbs: DeviationContent[]
     url: string
 }
 
@@ -35,9 +51,24 @@ export interface DeviationStats {
     favourites: number
 }
 
-export interface DeviationEngagement {
+export interface Engagement {
     average: number, 
     high: number,
     low: number,
     median: number
+}
+
+export interface TagStat {
+    count: number,
+    engagements: number[],
+    totalEngagements: number
+}
+
+export interface TagAggregate { [tag: string] : TagStat };
+
+export interface TumblrEngagement {
+    stats: Engagement,
+    tags: {
+        [tag: string] : Engagement
+    }
 }

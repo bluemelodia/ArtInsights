@@ -20,7 +20,7 @@ export interface DeviantData {
 export interface DeviantListData {
     has_more: boolean,
     next_offset: number, 
-    results:[DeviantWatcher | DeviantFriend]
+    results: Array <DeviantWatcher | DeviantFriend>
 }
 
 export interface DeviantWatcher {
