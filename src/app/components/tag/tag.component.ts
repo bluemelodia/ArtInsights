@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { TagService } from '../../services/deviant-art-tag.service';
+import { TagService } from '../../services/tag.service';
 import { Media, AlertType } from '../../app.consts';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
 import { UserResponse } from '../../types/shared.types';
-import { DeviantArtTagResponse, TaggedDeviation, Engagement, TumblrTagResponse } from '../../types/tag.types';
+import { DeviantArtTagResponse, TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement } from '../../types/tag.types';
 import { StatService } from '../../services/stat.service';
+import { TumblrModule } from '../tumblr/tumblr.module';
 
 @Component({
   selector: 'app-tag',
@@ -19,6 +20,7 @@ export class TagComponent implements OnInit {
   public noMatchesMessage: string;
 
   public tumblrPosts: TumblrTagResponse[] = [];
+  public tumblrStats: TumblrEngagement;
   public noTumblrPostsMessage: string;
 
   private tag = '';
@@ -46,6 +48,11 @@ export class TagComponent implements OnInit {
     this.stat.favoriteSubject$(Media.DeviantArt)
     .subscribe((faveStats: Engagement) => {
       this.faveStatsDA = faveStats;
+    });
+
+    this.stat.favoriteSubject$(Media.Tumblr)
+    .subscribe((tumblrStats: TumblrEngagement) => {
+      this.tumblrStats = tumblrStats;
     });
   }
 

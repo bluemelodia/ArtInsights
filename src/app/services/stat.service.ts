@@ -25,10 +25,12 @@ export class StatService {
     }
   }
 
-  public favoriteSubject$(media: Media) {
+  public favoriteSubject$(media: Media): Subject<Engagement | TumblrEngagement> {
     switch (media) {
       case Media.DeviantArt:
         return this.favoriteSubjectDA$;
+      case Media.Tumblr:
+        return this.tumblrSubject$;
     }
   }
 
@@ -155,5 +157,6 @@ export class StatService {
       tags: this.findTagEngagements()
     }
     console.log("Tumblr stats: ", this.noteAndTagStats);
+    this.favoriteSubject$(Media.Tumblr).next(this.noteAndTagStats);
   }
 }
