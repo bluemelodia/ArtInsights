@@ -79,6 +79,7 @@ export class StatService {
     const tagStats = {};
     Object.keys(this.tagStats).forEach((tag: string) => {
       const tagStat = tagStats[tag];
+      console.log("Tag stats: ", tagStat, tag);
       const engagements: number[] = tagStat.engagements;
       engagements.sort((a, b) => a - b);
       tagStats[tag] = {
