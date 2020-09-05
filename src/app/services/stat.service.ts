@@ -59,7 +59,7 @@ export class StatService {
   /* First count total engagement / usage for each tag. */
   compileTags(tags: string[], engagement: number) {
     for(let i = 0; i < tags.length; i++) {
-      const tag = tags[i];
+      const tag = tags[i].toString();
       if (this.tagStats[tag]) {
         this.tagStats[tag].count++;
         this.tagStats[tag].totalEngagements += engagement;
