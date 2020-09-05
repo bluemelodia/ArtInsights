@@ -58,17 +58,17 @@ export class StatService {
   compileTags(tags: string[], engagement: number) {
     for(let i = 0; i < tags.length; i++) {
       const tag = tags[i];
-      if (tags[tag]) {
-        tags[tag].count++;
-        tags[tag].totalEngagements += engagement;
+      if (this.tagStats[tag]) {
+        this.tagStats[tag].count++;
+        this.tagStats[tag].totalEngagements += engagement;
       } else {
-        tags[tag] = {
+        this.tagStats[tag] = {
           count: 1, 
           totalEngagements: engagement,
           engagements: []
         };
       }
-      tags[tag].engagements.push(engagement);
+      this.tagStats[tag].engagements.push(engagement);
     }
   }
 
