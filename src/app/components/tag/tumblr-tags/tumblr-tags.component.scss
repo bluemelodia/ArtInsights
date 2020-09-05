@@ -17,7 +17,7 @@ $max-post-width: 400px;
             @include flex-col($justify-content: flex-start);
             padding-top: $large-spacing;
 
-            .favorites, .comments {
+            .notes {
                 @include flex-row-center($justify-content: flex-start);
     
                 img {

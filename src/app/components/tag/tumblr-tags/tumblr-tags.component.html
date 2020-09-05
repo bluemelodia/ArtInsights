@@ -3,7 +3,7 @@
     <div class="no-matches" *ngIf="!posts || posts.length === 0">{{ noMatchesMessage ? noMatchesMessage : defaultMessage }}</div>
     <h3 *ngIf="posts.length > 0">Tumblr</h3>
     <div class="stats-summary" *ngIf="posts.length > 0">
-        <div class="favorites">
+        <div class="notes">
             <img [src]="heartImg"/> 
             <div *ngIf="engagement && engagement.stats" class="stats">
                 <span>Hi {{ engagement.stats.high }}</span>
