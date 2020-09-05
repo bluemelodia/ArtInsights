@@ -64,7 +64,8 @@ export class StatService {
       } else {
         tags[tag] = {
           count: 1, 
-          totalEngagements: engagement
+          totalEngagements: engagement,
+          engagements: []
         };
       }
       tags[tag].engagements.push(engagement);
