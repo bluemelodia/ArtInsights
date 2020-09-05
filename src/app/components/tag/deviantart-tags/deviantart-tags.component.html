@@ -5,7 +5,7 @@
     <div class="stats-summary" *ngIf="deviations.length > 0">
         <div class="favorites">
             <img [src]="heartImg"/> 
-            <div class="stats">
+            <div *ngIf="favoriteStats" class="stats">
                 <span>Hi {{ favoriteStats.high }}</span>
                 <span>Low {{ favoriteStats.low }}</span>
                 <span>Mid {{ favoriteStats.average | number:'1.2-2' }}</span>
@@ -14,7 +14,7 @@
         </div>
         <div class="comments">
             <img [src]="commentImg"/>
-            <div class="stats">
+            <div *ngIf="commentStats" class="stats">
                 <span>Hi {{ commentStats.high }}</span>
                 <span>Low {{ commentStats.low }}</span>
                 <span>Mid {{ commentStats.median }}</span>

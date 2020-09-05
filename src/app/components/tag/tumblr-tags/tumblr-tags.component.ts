@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TumblrTagResponse, Engagement } from '../../../types/tag.types';
+import { TumblrTagResponse, TumblrEngagement } from '../../../types/tag.types';
 import { UtilsService } from '../../../services/utils.service';
 import { BlogUtilsService } from '../../../services/blog-utils.service';
 
@@ -10,8 +10,7 @@ import { BlogUtilsService } from '../../../services/blog-utils.service';
 })
 export class TumblrTagsComponent implements OnInit {
   @Input() posts: TumblrTagResponse[] = [];
-  @Input() commentStats: Engagement;
-  @Input() favoriteStats: Engagement;
+  @Input() engagement: TumblrEngagement;
 
   @Input() noMatchesMessage: string;
 

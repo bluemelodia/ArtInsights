@@ -1,24 +1,15 @@
 
 <div class="tumblr-stats">
     <div class="no-matches" *ngIf="!posts || posts.length === 0">{{ noMatchesMessage ? noMatchesMessage : defaultMessage }}</div>
-    <h3 *ngIf="posts.length > 0">DeviantArt</h3>
+    <h3 *ngIf="posts.length > 0">Tumblr</h3>
     <div class="stats-summary" *ngIf="posts.length > 0">
         <div class="favorites">
             <img [src]="heartImg"/> 
-            <div class="stats">
-                <span>Hi {{ favoriteStats.high }}</span>
-                <span>Low {{ favoriteStats.low }}</span>
-                <span>Mid {{ favoriteStats.average | number:'1.2-2' }}</span>
-                <span>Avg {{ favoriteStats.median }}</span>
-            </div>
-        </div>
-        <div class="comments">
-            <img [src]="commentImg"/>
-            <div class="stats">
-                <span>Hi {{ commentStats.high }}</span>
-                <span>Low {{ commentStats.low }}</span>
-                <span>Mid {{ commentStats.median }}</span>
-                <span>Avg {{ commentStats.average | number:'1.2-2' }}</span>
+            <div *ngIf="engagement && engagement.stats" class="stats">
+                <span>Hi {{ engagement.stats.high }}</span>
+                <span>Low {{ engagement.stats.low }}</span>
+                <span>Mid {{ engagement.stats.average | number:'1.2-2' }}</span>
+                <span>Avg {{ engagement.stats.median }}</span>
             </div>
         </div>
     </div>
