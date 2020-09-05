@@ -17,32 +17,23 @@
 <section *ngIf="posts.length > 0">
     <div class="posts">
         <div class="post" *ngFor="let post of posts">
-           <!--<img class="post-img" [src]="post.content.src"/>
+           <img *ngIf="post.photos && post.photos.length > 0" 
+            class="post-img" [src]="post.photos[0].original_size.url"/>
             <div class="post-data">
-                <h3 (click)="blogUtils.visitBlog(post.url)">{{ post.title }}</h3>
+                <h3 (click)="blogUtils.visitBlog(post.post_url)">{{ post.blog_name }}</h3>
+                <p [innerHTML]="post.caption"></p>
                  <div class="post-stats">
                     <div class="stats">
-                        <div>
-                            by <span class="author-link" 
-                                (click)="blogUtils.visitDeviantArt(post.author.username)">
-                                    {{ post.author.username }}
-                                </span>
-                        </div>
-                        <p>{{ blogUtils.dateForTimestamp(post.published_time)  | date: 'short' }} </p>
+                        <p>{{ blogUtils.dateForTimestamp(post.timestamp)  | date: 'short' }} </p>
                         <div class="engagement">
-                            <div class="favorites">
+                            <div class="notes">
                                 <img [src]="heartImg"/> 
-                                <span>{{ post.stats.favourites }}</span>
-                            </div>
-                            <div class="comments">
-                                <img [src]="commentImg"/>
-                                <span>{{ post.stats.comments }}</span>
+                                <span>{{ post.note_count }}</span>
                             </div>
                         </div>
                     </div>                   
-                    <img class="user-icon" [src]="post.author.usericon"/>
                 </div>
-            </div>--> 
+            </div>
         </div>
     </div> 
 </section>

@@ -5,6 +5,7 @@ export interface TumblrTagResponse {
     blog: TumblrUserBlog,
     blog_name: string,
     body: string,
+    caption: string
     date: string,
     format: string,
     id: string,

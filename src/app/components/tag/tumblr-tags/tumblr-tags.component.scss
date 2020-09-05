@@ -80,7 +80,7 @@ $max-post-width: 400px;
                         .engagement {
                             @include flex-row($justify-content: flex-start);
         
-                            .favorites, .comments {
+                            .notes {
                                 @include flex-row-center();
                                 margin-right: $small-spacing;
         
@@ -89,10 +89,6 @@ $max-post-width: 400px;
                                     margin-right: $small-spacing;
                                 }
                             }
-                        }
-    
-                        .user-icon {
-                            max-height: 50px;
                         }
                     }
                 }
