@@ -1,1 +1,57 @@
-<p>tumblr-tags works!</p>
+
+<div class="tumblr-stats">
+    <div class="no-matches" *ngIf="!posts || posts.length === 0">{{ noMatchesMessage ? noMatchesMessage : defaultMessage }}</div>
+    <h3 *ngIf="posts.length > 0">DeviantArt</h3>
+    <div class="stats-summary" *ngIf="posts.length > 0">
+        <div class="favorites">
+            <img [src]="heartImg"/> 
+            <div class="stats">
+                <span>Hi {{ favoriteStats.high }}</span>
+                <span>Low {{ favoriteStats.low }}</span>
+                <span>Mid {{ favoriteStats.average | number:'1.2-2' }}</span>
+                <span>Avg {{ favoriteStats.median }}</span>
+            </div>
+        </div>
+        <div class="comments">
+            <img [src]="commentImg"/>
+            <div class="stats">
+                <span>Hi {{ commentStats.high }}</span>
+                <span>Low {{ commentStats.low }}</span>
+                <span>Mid {{ commentStats.median }}</span>
+                <span>Avg {{ commentStats.average | number:'1.2-2' }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<section *ngIf="posts.length > 0">
+    <div class="posts">
+        <div class="post" *ngFor="let post of posts">
+           <!--<img class="post-img" [src]="post.content.src"/>
+            <div class="post-data">
+                <h3 (click)="blogUtils.visitBlog(post.url)">{{ post.title }}</h3>
+                 <div class="post-stats">
+                    <div class="stats">
+                        <div>
+                            by <span class="author-link" 
+                                (click)="blogUtils.visitDeviantArt(post.author.username)">
+                                    {{ post.author.username }}
+                                </span>
+                        </div>
+                        <p>{{ blogUtils.dateForTimestamp(post.published_time)  | date: 'short' }} </p>
+                        <div class="engagement">
+                            <div class="favorites">
+                                <img [src]="heartImg"/> 
+                                <span>{{ post.stats.favourites }}</span>
+                            </div>
+                            <div class="comments">
+                                <img [src]="commentImg"/>
+                                <span>{{ post.stats.comments }}</span>
+                            </div>
+                        </div>
+                    </div>                   
+                    <img class="user-icon" [src]="post.author.usericon"/>
+                </div>
+            </div>--> 
+        </div>
+    </div> 
+</section>

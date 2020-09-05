@@ -1,0 +1,102 @@
+@import '../../../../styles/mixins.scss';
+@import '../../../../styles/variables.scss';
+
+$max-post-width: 400px;
+
+:host {
+    @include tumblr-theme();
+    @include tumblr-container();
+    color: $light-text-color;
+    margin-top: $large-spacing;
+    width: 100%;
+
+    .tumblr-stats {
+        padding: $large-spacing;
+
+        .stats-summary {
+            @include flex-col($justify-content: flex-start);
+            padding-top: $large-spacing;
+
+            .favorites, .comments {
+                @include flex-row-center($justify-content: flex-start);
+    
+                img {
+                    width: $large-spacing;
+                    margin-right: $large-spacing;
+                }
+    
+                .stats {
+                    @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+                    
+                    span {
+                        width: 25%;
+                    }
+                }
+            }
+        }
+
+        .no-matches {
+            max-width: $max-width;
+            text-align: center;
+        }
+    }
+
+    section {
+        max-height: $scroll-section-height;
+        overflow-y: scroll;
+
+        .posts {
+            @include flex-col($justify-content: center);
+
+            .post {
+                padding: $large-spacing;
+                margin: 0 auto;
+
+                .post-img {
+                    width: $max-post-width;
+                    border: 2px solid $light-text-color;
+                    padding: $large-spacing;
+                }
+
+                .post-data {
+                    margin-top: $large-spacing;
+                    max-width: $max-post-width;
+
+                    h3 {
+                        &:hover {
+                            color: $deviantart-light;
+                        }
+                    }
+
+                    .post-stats {
+                        @include flex-row-center($justify-content: space-between);
+
+                        .author-link {
+                            &:hover {
+                                color: $deviantart-light;
+                            }
+                        }
+
+                        .engagement {
+                            @include flex-row($justify-content: flex-start);
+        
+                            .favorites, .comments {
+                                @include flex-row-center();
+                                margin-right: $small-spacing;
+        
+                                img {
+                                    width: $large-spacing;
+                                    margin-right: $small-spacing;
+                                }
+                            }
+                        }
+    
+                        .user-icon {
+                            max-height: 50px;
+                        }
+                    }
+                }
+            }  
+        }
+    }
+}
