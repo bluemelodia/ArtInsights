@@ -76,20 +76,20 @@ export class StatService {
 
   /* Average out the tag engagement levels. */
   findTagEngagements() {
-    const tagStats = {};
+    const tumblrStats = {};
     Object.keys(this.tagStats).forEach((tag: string) => {
-      const tagStat = tagStats[tag];
+      const tagStat = this.tagStats[tag];
       console.log("Tag stats: ", tagStat, tag);
       const engagements: number[] = tagStat.engagements;
       engagements.sort((a, b) => a - b);
-      tagStats[tag] = {
+      tumblrStats[tag] = {
         high: engagements[engagements.length - 1],
         low: engagements[0],
         average: tagStat.totalEngagements / tagStat.count,
         median: this.findMedian(engagements)
       }
     });
-    return tagStats;
+    return tumblrStats;
   }
 
   public calculateDeviationStats(deviations: TaggedDeviation[]) {
