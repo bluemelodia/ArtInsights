@@ -45,6 +45,11 @@ $max-post-width: 400px;
 
     .tag-stats {
         padding-right: 0;
+
+        .header {
+            @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+            padding-right: $large-spacing;
+        }
         
         h3 {
             margin-bottom: $small-spacing;
@@ -53,14 +58,6 @@ $max-post-width: 400px;
         .stats-container {
             max-height: 100px;
             overflow-y: scroll;
-
-            .stats-summary {
-                padding-right: $large-spacing;
-
-                .header {
-                    @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
-                }
-            }
         }
 
         span {

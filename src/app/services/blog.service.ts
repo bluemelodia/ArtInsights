@@ -60,6 +60,7 @@ export class BlogService {
         console.log("RECEIVED USER DATA: ", data);
         if (data && data.statusCode === 0 && data.responseData) {
           const tumblrUser = data.responseData as TumblrResponseData;
+          console.log("Tumblr response data: ", tumblrUser);
           console.log("Send tumblr user: ", tumblrUser.user);
           this.tumblrUserSubject$.next(tumblrUser.user);
         } else if (data && data.statusCode === 450) {

@@ -42,15 +42,15 @@
 </section>
 <div *ngIf="posts.length > 0" class="tag-stats">
     <h3>Engagement by Tag</h3>
+    <div class="header">
+        <span class="tag">Tag</span>
+        <span>High</span>
+        <span>Low</span>
+        <span>Median</span>
+        <span>Average</span>
+    </div>
     <div class="stats-container">
         <div class="stats-summary" *ngIf="posts.length > 0">
-            <div class="header">
-                <span class="tag">Tag</span>
-                <span>High</span>
-                <span>Low</span>
-                <span>Median</span>
-                <span>Average</span>
-            </div>
             <div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
                 <div class="stats">
                     <span class="tag">{{ tag.key | tag }}</span>
