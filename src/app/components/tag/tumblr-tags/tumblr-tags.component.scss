@@ -66,6 +66,8 @@ $max-post-width: 400px;
 
             &.tag {
                 width: 25%;
+                /* Prevents the tag crashing into the next column. */
+                padding-right: $small-spacing / 2;
             }
         }
     }
@@ -98,15 +100,11 @@ $max-post-width: 400px;
                     }
 
                     .caption {
-                        &:before {
-                            border: 1px solid $light-text-color;
-                            margin-top: $small-spacing / 2;
-                        }
-
-                        &:after {
-                            border: 1px solid $light-text-color;
-                            margin-bottom: $small-spacing / 2;
-                        }
+                        border-left: 4px solid $light-text-color;
+                        padding: $small-spacing;
+                        padding-left: $large-spacing;
+                        margin-top: $small-spacing;
+                        margin-bottom: $small-spacing;
                     }
 
                     .post-stats {
