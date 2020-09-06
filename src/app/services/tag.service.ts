@@ -7,8 +7,9 @@ import { Media, UserMediaAction } from '../app.consts';
   providedIn: 'root'
 })
 export class TagService {
-  public deviantArtTagURL = urlForSite(Media.DeviantArt, UserMediaAction.Tags);
-  public tumblrTagURL = urlForSite(Media.Tumblr, UserMediaAction.Tags);
+  private deviantArtTagURL = urlForSite(Media.DeviantArt, UserMediaAction.Tags);
+  private tumblrTagURL = urlForSite(Media.Tumblr, UserMediaAction.Tags);
+  private twitterTagURL = urlForSite(Media.Twitter, UserMediaAction.Tags);
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +24,13 @@ export class TagService {
 
   public getTumblrPostsForTag(tag: string) {
     const url = this.tumblrTagURL + `/${tag}`;
+    console.log(`📗 Get deviations for tag ${tag}: `, url);
+    return this.http.get<any>(url, { withCredentials: true });
+  }
+
+  /* No special logic needed on the client side. The server side will strip out all punctuation. */
+  public getTwitterPostsForTag(tag: string) {
+    const url = this.twitterTagURL + `/${tag}`;
     console.log(`📗 Get deviations for tag ${tag}: `, url);
     return this.http.get<any>(url, { withCredentials: true });
   }

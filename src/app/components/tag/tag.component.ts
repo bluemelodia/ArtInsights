@@ -22,6 +22,9 @@ export class TagComponent implements OnInit {
   public tumblrStats: TumblrEngagement;
   public noTumblrPostsMessage: string;
 
+  public twitterPosts: any = [];
+  public noTweetsMessage: string;
+
   private tag = '';
 
   constructor(
@@ -77,6 +80,7 @@ export class TagComponent implements OnInit {
   private getTags(tag: string) {
     this.getDATags(tag);
     this.getTumblrTags(tag);
+    this.getTwitterTags(tag);
   }
 
   private getDATags(tag: string) {
@@ -129,5 +133,27 @@ export class TagComponent implements OnInit {
         }
       } 
     });
+  }
+
+  /* No auth guards as we aren't using authenticated APIs for Twitter. */
+  private getTwitterTags(tag: string) {
+    this.tagService.getTwitterPostsForTag(tag)
+      .subscribe((tweets: any) => {
+        if (tweets.statusCode === -1) {
+          this.alertService.showAlert(AlertType.Error, `Unable to fetch tweets at this time, try again later.`);
+          console.log(`Failed to fetch tagged tweets.`);
+        } else  {
+          console.log("Tagged tweets: ", tweets);
+          const tweetData = tweets.responseData as [any];
+          if (tweetData && tweetData.length > 0) {
+            tweetData.forEach((tweet: any) => {
+                console.log("Tweet: ", tweet);
+            });
+            //this.stat.calculateTumblrStats(this.tumblrPosts);
+          } else {
+            this.noTumblrPostsMessage = 'No matching tweets were found.';
+          }
+        } 
+      });
   }
 }
