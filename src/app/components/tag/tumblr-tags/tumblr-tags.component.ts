@@ -14,7 +14,6 @@ export class TumblrTagsComponent implements OnInit {
 
   @Input() noMatchesMessage: string;
 
-  public commentImg = this.utils.getImagePath('comment');
   public heartImg = this.utils.getImagePath('heart');
   public tagImg = this.utils.getImagePath('tag');
   public defaultMessage = 'Type in a tag name to search for matching posts.';
@@ -25,5 +24,4 @@ export class TumblrTagsComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

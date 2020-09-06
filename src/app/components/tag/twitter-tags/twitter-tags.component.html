@@ -1,1 +1,64 @@
-<p>twitter-tags works!</p>
+<div class="twitter-stats">
+    <div class="no-matches" *ngIf="!tweets || tweets.length === 0">{{ noMatchesMessage ? noMatchesMessage : defaultMessage }}</div>
+    <h3 *ngIf="tweets.length > 0">Twitter</h3>
+    <div class="stats-summary" *ngIf="tweets.length > 0">
+        <div class="notes">
+            <img [src]="heartImg"/> 
+            <div *ngIf="engagement && engagement.stats" class="stats">
+                <span>Hi {{ engagement.stats.high }}</span>
+                <span>Low {{ engagement.stats.low }}</span>
+                <span>Mid {{ engagement.stats.average | number:'1.2-2' }}</span>
+                <span>Avg {{ engagement.stats.median }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<section *ngIf="tweets.length > 0">
+    <div class="tweets">
+        <!--<div class="tweet" *ngFor="let tweet of tweets">
+           <img *ngIf="tweet.photos && tweet.photos.length > 0" 
+            class="tweet-img" [src]="tweet.photos[0].original_size.url"/>
+            <div class="tweet-data">
+                <h3 (click)="blogUtils.visitBlog(tweet.post_url)">{{ tweet.blog_name }}</h3>
+                <p *ngIf="tweet.caption && tweet.caption.length > 0" 
+                    class="caption" 
+                    [innerHTML]="tweet.caption"></p>
+                <p class="tags-list" *ngIf="tweet.tags && tweet.tags.length > 0">#{{ tweet.tags.join(' #') }}</p>
+                 <div class="tweet-stats">
+                    <div class="stats">
+                        <p>Posted on {{ blogUtils.dateForTimestamp(tweet.timestamp)  | date: 'short' }} </p>
+                        <div class="engagement">
+                            <div class="notes">
+                                <img [src]="heartImg"/> 
+                                <span>{{ tweet.note_count }}</span>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>-->
+    </div> 
+</section>
+<div *ngIf="tweets.length > 0" class="tag-stats">
+    <h3>Engagement by Tag</h3>
+    <div class="header">
+        <span class="tag">Tag</span>
+        <span>High</span>
+        <span>Low</span>
+        <span>Median</span>
+        <span>Average</span>
+    </div>
+    <div class="stats-container">
+        <div class="stats-summary" *ngIf="tweets.length > 0">
+            <!--<div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
+                <div class="stats">
+                    <span class="tag">{{ tag.key | tag }}</span>
+                    <span>{{ tag.value.high }}</span>
+                    <span>{{ tag.value.low }}</span>
+                    <span>{{ tag.value.average | number:'1.2-2' }}</span>
+                    <span>{{ tag.value.median }}</span>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>

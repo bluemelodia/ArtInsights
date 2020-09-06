@@ -1,0 +1,148 @@
+@import '../../../../styles/mixins.scss';
+@import '../../../../styles/variables.scss';
+
+$max-tweet-width: 400px;
+
+:host {
+    @include twitter-theme();
+    @include twitter-container();
+    color: $light-text-color;
+    margin-top: $large-spacing;
+    width: 100%;
+
+    .twitter-stats, .tag-stats {
+        padding: $large-spacing;
+
+        .stats-summary {
+            @include flex-col($justify-content: flex-start);
+
+            .notes {
+                @include flex-row-center($justify-content: flex-start);
+    
+                img {
+                    width: $large-spacing;
+                    margin-right: $large-spacing;
+                }
+    
+                .stats {
+                    @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+                }
+            }
+        }
+
+        .no-matches {
+            max-width: $max-width;
+            text-align: center;
+        }
+    }
+
+    .twitter-stats {
+        span {
+            width: 25%;
+        }
+    }
+
+    .tag-stats {
+        padding-right: 0;
+
+        .header {
+            @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+            padding-right: $large-spacing;
+        }
+        
+        h3 {
+            margin-bottom: $small-spacing;
+        }
+
+        .stats-container {
+            max-height: 100px;
+            overflow-y: scroll;
+
+            .stats-summary {
+                padding-top: 0;
+            }
+        }
+
+        span {
+            width: 18.75%;
+            text-align: left;
+
+            &.tag {
+                width: 25%;
+                /* Prevents the tag crashing into the next column. */
+                padding-right: $small-spacing / 2;
+            }
+        }
+    }
+
+    section {
+        max-height: $scroll-section-height;
+        overflow-y: scroll;
+
+        .tweets {
+            @include flex-col($justify-content: center);
+
+            .tweet {
+                padding: $large-spacing;
+                margin: 0 auto;
+
+                .tweet-img {
+                    width: $max-tweet-width;
+                    border: 2px solid $light-text-color;
+                    padding: $large-spacing;
+                }
+
+                .tweet-data {
+                    margin-top: $large-spacing;
+                    max-width: $max-tweet-width;
+
+                    h3 {
+                        &:hover {
+                            color: $twitter-light;
+                        }
+                    }
+
+                    .caption {
+                        border-left: 4px solid $light-text-color;
+                        padding: $small-spacing;
+                        padding-left: $large-spacing;
+                        margin-top: $small-spacing;
+                        margin-bottom: $small-spacing;
+
+                        a {
+                            color: $light-text-color;
+
+                            &:hover {
+                                color: $twitter-light;
+                            }
+                        }
+                    }
+
+                    .tweet-stats {
+                        @include flex-row-center($justify-content: space-between);
+
+                        .author-link {
+                            &:hover {
+                                color: $twitter-light;
+                            }
+                        }
+
+                        .engagement {
+                            @include flex-row($justify-content: flex-start);
+        
+                            .notes {
+                                @include flex-row-center();
+                                margin-right: $small-spacing;
+        
+                                img {
+                                    width: $large-spacing;
+                                    margin-right: $small-spacing;
+                                }
+                            }
+                        }
+                    }
+                }
+            }  
+        }
+    }
+}

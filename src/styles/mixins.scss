@@ -122,14 +122,26 @@ $default-line-height: 0px;
     margin: 0 auto;
 }
 
+@mixin deviantart-container() {
+    background-color: $deviantart-bg;
+    @include user-container();
+}
+
 @mixin tumblr-container() {
     background-color: $tumblr-bg;
     @include user-container();
 }
 
-@mixin deviantart-container() {
-    background-color: $deviantart-bg;
+@mixin twitter-container() {
+    background-color: $twitter-bg;
     @include user-container();
+}
+
+@mixin twitter-theme {
+    background-color: $twitter-medium;
+    &:hover {
+        border: 2px solid $twitter-light;
+    }
 }
 
 @mixin tumblr-theme {
