@@ -76,6 +76,10 @@ export class TagComponent implements OnInit {
     this.tumblrPosts = [];
     this.tumblrStats = null;
     this.noTumblrPostsMessage = null;
+
+    this.twitterPosts = [];
+    this.twitterStats = null;
+    this.noTweetsMessage = null;
   }
 
   private getTags(tag: string) {
@@ -149,8 +153,9 @@ export class TagComponent implements OnInit {
           if (tweetData.statuses && tweetData.statuses.length > 0) {
             tweetData.statuses.forEach((tweet: TaggedTweet) => {
                 console.log("Tweet: ", tweet);
+                this.twitterPosts.push(tweet);
             });
-            //this.stat.calculateTumblrStats(this.tumblrPosts);
+            this.stat.calculateTwitterStats(this.twitterPosts);
           } else {
             this.noTweetsMessage = 'No matching tweets were found.';
           }

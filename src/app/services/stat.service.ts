@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement, TagStat, TagAggregate } from '../types/tag.types';
+import { TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement, TagStat, TagAggregate, TaggedTweet, TwitterEngagement, HashTagAggregate } from '../types/tag.types';
 import { Subject } from 'rxjs';
 import { Media } from '../app.consts';
+import { Hashtag } from '../types/twitter.types';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,17 @@ import { Media } from '../app.consts';
 export class StatService {
   private commentStats: Engagement;
   private favoriteStats: Engagement;
+
   private noteAndTagStats: TumblrEngagement;
   private tagStats: TagAggregate = {};
+
+  private tweetStats: TwitterEngagement;
+  private hashTagStats: HashTagAggregate = {};
 
   private commentSubjectDA$ = new Subject<Engagement>();
   private favoriteSubjectDA$ = new Subject<Engagement>();
   private tumblrSubject$ = new Subject<TumblrEngagement>();
+  private twitterSubject$ = new Subject<TwitterEngagement>();
 
   constructor() {}
 
@@ -25,12 +31,14 @@ export class StatService {
     }
   }
 
-  public favoriteSubject$(media: Media): Subject<Engagement | TumblrEngagement> {
+  public favoriteSubject$(media: Media): Subject<Engagement | TumblrEngagement | TwitterEngagement> {
     switch (media) {
       case Media.DeviantArt:
         return this.favoriteSubjectDA$;
       case Media.Tumblr:
         return this.tumblrSubject$;
+      case Media.Twitter:
+        return this.twitterSubject$;
     }
   }
 
@@ -74,6 +82,27 @@ export class StatService {
     }
   }
 
+  compileHashTags(hashtags: Hashtag[], faves: number, retweets: number) {
+    for(let i = 0; i < hashtags.length; i++) {
+      const tag = hashtags[i].toString();
+      if (this.hashTagStats[tag]) {
+        this.hashTagStats[tag].count++;
+        this.hashTagStats[tag].totalFavorites += faves;
+        this.hashTagStats[tag].totalRetweets += retweets;
+      } else {
+        this.hashTagStats[tag] = {
+          count: 1, 
+          favorites: [],
+          totalFavorites: faves,
+          retweets: [],
+          totalRetweets: retweets
+        };
+      }
+      this.hashTagStats[tag].favorites.push(faves);
+      this.hashTagStats[tag].retweets.push(retweets);
+    }
+  }
+
   /* Average out the tag engagement levels. */
   findTagEngagements() {
     const tumblrStats = {};
@@ -90,6 +119,35 @@ export class StatService {
       }
     });
     return tumblrStats;
+  }
+
+  findHashTagEngagements() {
+    const twitterStats = {};
+    Object.keys(this.hashTagStats).forEach((hashTag: string) => {
+      const hashTagStat = this.hashTagStats[hashTag];
+      console.log("HashTag stats: ", hashTagStat, hashTag);
+      
+      const faves: number[] = hashTagStat.favorites;
+      faves.sort((a, b) => a - b);
+      const retweets: number[] = hashTagStat.retweets;
+      retweets.sort((a, b) => a - b);
+
+      twitterStats[hashTag] = {
+        favorites: {
+          high: faves[faves.length - 1],
+          low: faves[0],
+          average: hashTagStat.totalFavorites / hashTagStat.count,
+          median: this.findMedian(faves)
+        },
+        retweets: {
+          high: retweets[retweets.length - 1],
+          low: retweets[0],
+          average: hashTagStat.totalRetweets / hashTagStat.count,
+          median: this.findMedian(retweets)
+        }
+      }
+    });
+    return twitterStats;
   }
 
   public calculateDeviationStats(deviations: TaggedDeviation[]) {
@@ -130,6 +188,48 @@ export class StatService {
     };
     console.log("Favorite stats: ", this.favoriteStats);
     this.favoriteSubject$(Media.DeviantArt).next(this.favoriteStats);
+  }
+
+  public calculateTwitterStats(tweets: TaggedTweet[]) {
+    let favoriteCounts: number[] = [];
+    let retweetCounts: number[] = [];
+    this.hashTagStats = {};
+
+    console.log("Twitter: ", tweets);
+
+    for(let i = 0; i < tweets.length; i++) {
+      const tweet: TaggedTweet = tweets[i];
+      favoriteCounts.push(tweet.favorite_count);
+      retweetCounts.push(tweet.retweet_count);
+
+      /* Not all tweets will have hashtags, and the API will only count hashtags within the first 140 chars. */
+      if (tweet.entities && tweet.entities.hashtags && tweet.entities.hashtags.length > 0) {
+        this.compileHashTags(tweet.entities.hashtags, tweet.favorite_count, tweet.retweet_count);
+      }
+    }
+
+    favoriteCounts.sort((a, b) => a - b);
+    retweetCounts.sort((a, b) => a - b);
+    console.log("Favorite counts: ", favoriteCounts);
+    console.log("Retweet counts: ", retweetCounts);
+
+    this.tweetStats = {
+      favoriteStats: {
+        high: favoriteCounts[favoriteCounts.length - 1],
+        low: favoriteCounts[0],
+        average: this.findAverage(favoriteCounts),
+        median: this.findMedian(favoriteCounts)
+      },
+      retweetStats: {
+        high: retweetCounts[retweetCounts.length - 1],
+        low: retweetCounts[0],
+        average: this.findAverage(retweetCounts),
+        median: this.findMedian(retweetCounts)
+      },
+      hashtags: this.findHashTagEngagements()
+    }
+    console.log("Twitter stats: ", this.tweetStats);
+    this.favoriteSubject$(Media.Twitter).next(this.tweetStats);
   }
 
   /* Calculations are an extension of DA's stats. */

@@ -82,6 +82,16 @@ export interface TagStat {
 
 export interface TagAggregate { [tag: string] : TagStat };
 
+export interface HashTagStat {
+    count: number, 
+    favorites: number[], 
+    totalFavorites: number,
+    retweets: number[]
+    totalRetweets: number
+}
+
+export interface HashTagAggregate { [tag: string] : HashTagStat };
+
 export interface DeviationStats {
     comments: number, 
     favourites: number
@@ -93,7 +103,8 @@ export interface TwitterStats {
 }
 
 export interface TwitterEngagement {
-    stats: Engagement,
+    favoriteStats: Engagement,
+    retweetStats: Engagement,
     hashtags: {
         [hashtag: string] : Engagement
     }

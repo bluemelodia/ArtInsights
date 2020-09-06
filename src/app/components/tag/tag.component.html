@@ -11,7 +11,10 @@
 <app-tumblr-tags
     [posts]="tumblrPosts"
     [engagement]="tumblrStats"
-    [noMatchesMessage]="noMatchesMessage">
+    [noMatchesMessage]="noTumblrPostsMessage">
 </app-tumblr-tags>
-<app-twitter-tags>
+<app-twitter-tags
+    [tweets]="twitterPosts"
+    [engagement]="twitterStats"
+    [noMatchesMessage]="noTweetsMessage">
 </app-twitter-tags>
