@@ -16,7 +16,7 @@ $max-tweet-width: 400px;
         .stats-summary {
             @include flex-col($justify-content: flex-start);
 
-            .notes {
+            .favorites, .retweets {
                 @include flex-row-center($justify-content: flex-start);
     
                 img {

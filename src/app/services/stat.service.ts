@@ -154,22 +154,14 @@ export class StatService {
     let commentCounts: number[] = [];
     let faveCounts: number[] = [];
 
-    console.log("Deviations: ", deviations);
-
     for(let i = 0; i < deviations.length; i++) {
       const deviation = deviations[i];
-      console.log("Deviation: ", deviation, deviation.stats);
       commentCounts.push(deviation.stats.comments);
       faveCounts.push(deviation.stats.favourites);
     }
 
-    console.log("Comment counts before sort: ", commentCounts);
-    console.log("Fave counts after sort: ", faveCounts);
-
     commentCounts.sort((a, b) => a - b);
     faveCounts.sort((a, b) => a - b);
-    console.log("Comment counts: ", commentCounts);
-    console.log("Fave counts: ", faveCounts);
 
     this.commentStats = {
       high: commentCounts[commentCounts.length - 1],
@@ -177,7 +169,6 @@ export class StatService {
       average: this.findAverage(commentCounts),
       median: this.findMedian(commentCounts)
     };
-    console.log("Comment stats: ", this.commentStats);
     this.commentSubject$(Media.DeviantArt).next(this.commentStats);
 
     this.favoriteStats = {
@@ -186,7 +177,6 @@ export class StatService {
       average: this.findAverage(faveCounts),
       median: this.findMedian(faveCounts)
     };
-    console.log("Favorite stats: ", this.favoriteStats);
     this.favoriteSubject$(Media.DeviantArt).next(this.favoriteStats);
   }
 
@@ -247,8 +237,6 @@ export class StatService {
     let noteCounts: number[] = [];
     this.tagStats = {};
 
-    console.log("Tumblr: ", tumblrPosts);
-
     for(let i = 0; i < tumblrPosts.length; i++) {
       const tumblrPost: TumblrTagResponse = tumblrPosts[i];
       noteCounts.push(tumblrPost.note_count);
@@ -256,7 +244,6 @@ export class StatService {
     }
 
     noteCounts.sort((a, b) => a - b);
-    console.log("Note counts: ", noteCounts);
 
     this.noteAndTagStats = {
       stats: {
@@ -267,7 +254,6 @@ export class StatService {
       },
       tags: this.findTagEngagements()
     }
-    console.log("Tumblr stats: ", this.noteAndTagStats);
     this.favoriteSubject$(Media.Tumblr).next(this.noteAndTagStats);
   }
 }
