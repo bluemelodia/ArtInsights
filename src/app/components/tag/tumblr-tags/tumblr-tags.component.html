@@ -44,14 +44,20 @@
     <h3>Engagement by Tag</h3>
     <div class="stats-container">
         <div class="stats-summary" *ngIf="posts.length > 0">
+            <div class="header">
+                <span class="tag">Tag</span>
+                <span>High</span>
+                <span>Low</span>
+                <span>Median</span>
+                <span>Average</span>
+            </div>
             <div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
-                <img [src]="tagImg"/> 
                 <div class="stats">
                     <span class="tag">{{ tag.key | tag }}</span>
-                    <span>Hi {{ tag.value.high }}</span>
-                    <span>Low {{ tag.value.low }}</span>
-                    <span>Mid {{ tag.value.average | number:'1.2-2' }}</span>
-                    <span>Avg {{ tag.value.median }}</span>
+                    <span>{{ tag.value.high }}</span>
+                    <span>{{ tag.value.low }}</span>
+                    <span>{{ tag.value.average | number:'1.2-2' }}</span>
+                    <span>{{ tag.value.median }}</span>
                 </div>
             </div>
         </div>
