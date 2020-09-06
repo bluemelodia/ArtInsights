@@ -100,6 +100,7 @@ export class StatService {
       }
       this.hashTagStats[tag].favorites.push(faves);
       this.hashTagStats[tag].retweets.push(retweets);
+      console.log("Hash tag stats: ", this.hashTagStats);
     }
   }
 
@@ -108,7 +109,6 @@ export class StatService {
     const tumblrStats = {};
     Object.keys(this.tagStats).forEach((tag: string) => {
       const tagStat = this.tagStats[tag];
-      console.log("Tag stats: ", tagStat, tag);
       const engagements: number[] = tagStat.engagements;
       engagements.sort((a, b) => a - b);
       tumblrStats[tag] = {
