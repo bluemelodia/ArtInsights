@@ -57,6 +57,11 @@ export class TagComponent implements OnInit {
     .subscribe((tumblrStats: TumblrEngagement) => {
       this.tumblrStats = tumblrStats;
     });
+
+    this.stat.favoriteSubject$(Media.Twitter)
+    .subscribe((twitterStats: TwitterEngagement) => {
+      this.twitterStats = twitterStats;
+    });
   }
 
   public userSearchedTag(tag: string) {
