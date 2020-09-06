@@ -45,9 +45,17 @@ $max-post-width: 400px;
     }
 
     .tag-stats {
+        h3 {
+            margin-bottom: $small-spacing;
+        }
+
         .stats-container {
             max-height: 100px;
             overflow-y: scroll;
+
+            .stats-summary {
+                padding-right: $large-spacing;
+            }
         }
 
         span {
