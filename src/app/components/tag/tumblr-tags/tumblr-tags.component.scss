@@ -45,8 +45,10 @@ $max-post-width: 400px;
     }
 
     .tag-stats {
-        max-height: 100px;
-        overflow-y: scroll;
+        .stats-container {
+            max-height: 100px;
+            overflow-y: scroll;
+        }
 
         span {
             width: 20%;
