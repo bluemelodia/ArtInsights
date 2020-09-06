@@ -61,11 +61,11 @@ $max-post-width: 400px;
         }
 
         span {
-            width: 20%;
-            text-align: right;
+            width: 18.75%;
+            text-align: left;
 
             &.tag {
-                text-align: left;
+                width: 25%;
             }
         }
     }
