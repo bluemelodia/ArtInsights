@@ -42,7 +42,7 @@
         <div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
             <img [src]="heartImg"/> 
             <div class="stats">
-                <span>{{ tag.key }}</span>
+                <span class="tag">{{ tag.key }}</span>
                 <span>Hi {{ tag.value.high }}</span>
                 <span>Low {{ tag.value.low }}</span>
                 <span>Mid {{ tag.value.average | number:'1.2-2' }}</span>
