@@ -32,8 +32,8 @@
                 <p *ngIf="tweet.retweeted_status.text && tweet.retweeted_status.text.length > 0" 
                     class="text" 
                     [innerHTML]="tweet.text"></p>
-                <p class="tags-list" *ngIf="tweet.retweeted_status.entities.hashtags && tweet.retweeted_status.entities.hashtags.length > 0">
-                    #{{ tweet.retweeted_status.entities.hashtags.join(' #') }}
+                <p class="tags-list" *ngIf="tweet.tags && tweet.tags.length > 0">
+                    #{{ tweet.tags.join(' #') }}
                 </p>
                  <div class="tweet-stats">
                     <div class="stats">
@@ -58,9 +58,8 @@
                 <p *ngIf="tweet.text && tweet.text.length > 0" 
                     class="text" 
                     [innerHTML]="tweet.text"></p>
-                <p class="tags-list" 
-                    *ngIf="tweet.entities.hashtags && tweet.entities.hashtags.length > 0">
-                        #{{ tweet.entities.hashtags.join(' #') }}
+                <p class="tags-list" *ngIf="tweet.tags && tweet.tags.length > 0">
+                    #{{ tweet.tags.join(' #') }}
                 </p>
                  <div class="tweet-stats">
                     <div class="stats">
