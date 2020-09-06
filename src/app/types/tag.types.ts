@@ -1,21 +1,6 @@
 import { DeviantData } from './deviant.types';
 import { TumblrPhotos, TumblrUserBlog } from './tumblr.types';
-
-export interface TumblrTagResponse {
-    blog: TumblrUserBlog,
-    blog_name: string,
-    body: string,
-    caption: string
-    date: string,
-    format: string,
-    id: string,
-    note_count: number,
-    photos: TumblrPhotos[]
-    post_url: string,
-    tags: string[],
-    timestamp: string,
-    type: string
-}
+import { TwitterUser, TwitterEntities } from './twitter.types';
 
 export interface DeviantArtTagResponse {
     estimated_total: number,
@@ -47,9 +32,39 @@ export interface DeviationContent {
     width: number
 }
 
-export interface DeviationStats {
-    comments: number, 
-    favourites: number
+export interface TumblrTagResponse {
+    blog: TumblrUserBlog,
+    blog_name: string,
+    body: string,
+    caption: string
+    date: string,
+    format: string,
+    id: string,
+    note_count: number,
+    photos: TumblrPhotos[]
+    post_url: string,
+    tags: string[],
+    timestamp: string,
+    type: string
+}
+
+export interface TwitterTagResponse {
+    statuses: TaggedTweet[]
+}
+
+export interface TaggedTweet {
+    created_at: string, 
+    entities: TwitterEntities,
+    favorite_count: number, 
+    id_str: string, 
+    in_reply_to_screen_name?: string, 
+    in_reply_to_status_id_str?: string,
+    in_reply_to_user_id_str?: string,
+    retweet_count: number, 
+    retweeted_status: TaggedTweet,
+    source: string, 
+    text: string, 
+    user: TwitterUser
 }
 
 export interface Engagement {
@@ -66,6 +81,23 @@ export interface TagStat {
 }
 
 export interface TagAggregate { [tag: string] : TagStat };
+
+export interface DeviationStats {
+    comments: number, 
+    favourites: number
+}
+
+export interface TwitterStats {
+    favorite_count: number, 
+    retweet_count: number
+}
+
+export interface TwitterEngagement {
+    stats: Engagement,
+    hashtags: {
+        [hashtag: string] : Engagement
+    }
+}
 
 export interface TumblrEngagement {
     stats: Engagement,

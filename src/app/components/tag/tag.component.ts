@@ -4,7 +4,7 @@ import { Media, AlertType } from '../../app.consts';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
 import { UserResponse } from '../../types/shared.types';
-import { DeviantArtTagResponse, TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement } from '../../types/tag.types';
+import { DeviantArtTagResponse, TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement, TwitterTagResponse, TaggedTweet, TwitterEngagement } from '../../types/tag.types';
 import { StatService } from '../../services/stat.service';
 
 @Component({
@@ -22,7 +22,8 @@ export class TagComponent implements OnInit {
   public tumblrStats: TumblrEngagement;
   public noTumblrPostsMessage: string;
 
-  public twitterPosts: any = [];
+  public twitterPosts: TaggedTweet[] = [];
+  public twitterStats: TwitterEngagement;
   public noTweetsMessage: string;
 
   private tag = '';
@@ -144,9 +145,9 @@ export class TagComponent implements OnInit {
           console.log(`Failed to fetch tagged tweets.`);
         } else  {
           console.log("Tagged tweets: ", tweets);
-          const tweetData = tweets.responseData as [any];
-          if (tweetData && tweetData.length > 0) {
-            tweetData.forEach((tweet: any) => {
+          const tweetData = tweets.responseData as TwitterTagResponse;
+          if (tweetData.statuses && tweetData.statuses.length > 0) {
+            tweetData.statuses.forEach((tweet: TaggedTweet) => {
                 console.log("Tweet: ", tweet);
             });
             //this.stat.calculateTumblrStats(this.tumblrPosts);

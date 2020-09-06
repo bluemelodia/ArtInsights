@@ -9,7 +9,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Add more animations (ex. loader on scroll, login page).
 - Refactor types - there's a lot of repetition.
 - Add responsive styles.
-- User intermittently loses access to Tumblr/DA in between requests.
+- User intermittently loses access to Tumblr/DA in between requests. 
+- User always loses access on Chrome - check if multiple sessions are supported.
 
 ## Development server
 

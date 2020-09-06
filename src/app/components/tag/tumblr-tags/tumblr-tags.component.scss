@@ -15,7 +15,6 @@ $max-post-width: 400px;
 
         .stats-summary {
             @include flex-col($justify-content: flex-start);
-            padding-top: $large-spacing;
 
             .notes {
                 @include flex-row-center($justify-content: flex-start);
@@ -58,6 +57,10 @@ $max-post-width: 400px;
         .stats-container {
             max-height: 100px;
             overflow-y: scroll;
+
+            .stats-summary {
+                padding-top: 0;
+            }
         }
 
         span {
