@@ -40,7 +40,7 @@
 <div *ngIf="posts.length > 0" class="tag-stats">
     <div class="stats-summary" *ngIf="posts.length > 0">
         <div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
-            <img [src]="heartImg"/> 
+            <img [src]="tagImg"/> 
             <div class="stats">
                 <span class="tag">{{ tag.key }}</span>
                 <span>Hi {{ tag.value.high }}</span>

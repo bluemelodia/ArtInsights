@@ -92,6 +92,8 @@ Icons made by:
 
 <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a>
 
+<a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a>
+
 <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a>
 from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
