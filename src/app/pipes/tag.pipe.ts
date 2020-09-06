@@ -7,7 +7,7 @@ export class TagPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
     if (value.length > 20) {
-      return `${value.substring(0, 20)}...`
+      return `${value.trim().substring(0, 20)}...`
     }
 
     return value;
