@@ -130,7 +130,7 @@ $max-tweet-width: 400px;
                         .engagement {
                             @include flex-row($justify-content: flex-start);
         
-                            .notes {
+                            .favorites, .retweets {
                                 @include flex-row-center();
                                 margin-right: $small-spacing;
         

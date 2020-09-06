@@ -94,10 +94,20 @@
             <div *ngFor="let tag of engagement.hashtags | keyvalue" class="notes">
                 <div class="stats">
                     <span class="tag">{{ tag.key | tag }}</span>
-                    <span>{{ tag.value.high }}</span>
-                    <span>{{ tag.value.low }}</span>
-                    <span>{{ tag.value.average | number:'1.2-2' }}</span>
-                    <span>{{ tag.value.median }}</span>
+                </div>
+                <div class="stats favorites">
+                    <span class="tag">Favorites</span>
+                    <span>{{ tag.value.favorites.high }}</span>
+                    <span>{{ tag.value.favorites.low }}</span>
+                    <span>{{ tag.value.favorites.average | number:'1.2-2' }}</span>
+                    <span>{{ tag.value.favorites.median }}</span>
+                </div>
+                <div class="stats retweets">
+                    <span class="tag">Retweets</span>
+                    <span>{{ tag.value.retweets.high }}</span>
+                    <span>{{ tag.value.retweets.low }}</span>
+                    <span>{{ tag.value.retweets.average | number:'1.2-2' }}</span>
+                    <span>{{ tag.value.retweets.median }}</span>
                 </div>
             </div>
         </div>
