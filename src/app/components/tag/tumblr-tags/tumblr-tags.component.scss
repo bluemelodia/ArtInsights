@@ -105,6 +105,14 @@ $max-post-width: 400px;
                         padding-left: $large-spacing;
                         margin-top: $small-spacing;
                         margin-bottom: $small-spacing;
+
+                        a {
+                            color: $light-text-color;
+
+                            &:hover {
+                                color: $tumblr-light;
+                            }
+                        }
                     }
 
                     .post-stats {
@@ -112,7 +120,7 @@ $max-post-width: 400px;
 
                         .author-link {
                             &:hover {
-                                color: $deviantart-light;
+                                color: $tumblr-light;
                             }
                         }
 
