@@ -31,7 +31,7 @@ export class TagService {
   /* No special logic needed on the client side. The server side will strip out all punctuation. */
   public getTwitterPostsForTag(tag: string) {
     const url = this.twitterTagURL + `/${tag}`;
-    console.log(`📗 Get deviations for tag ${tag}: `, url);
+    console.log(`📗 Get tweets for tag ${tag}: `, url);
     return this.http.get<any>(url, { withCredentials: true });
   }
 }
