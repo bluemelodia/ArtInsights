@@ -43,10 +43,10 @@
             <img [src]="heartImg"/> 
             <div class="stats">
                 <span>{{ tag.key }}</span>
-                <span>Hi {{ tag.value.stats.high }}</span>
-                <span>Low {{ tag.value.stats.low }}</span>
-                <span>Mid {{ tag.value.stats.average | number:'1.2-2' }}</span>
-                <span>Avg {{ tag.value.stats.median }}</span>
+                <span>Hi {{ tag.value.high }}</span>
+                <span>Low {{ tag.value.low }}</span>
+                <span>Mid {{ tag.value.average | number:'1.2-2' }}</span>
+                <span>Avg {{ tag.value.median }}</span>
             </div>
         </div>
     </div>
