@@ -153,7 +153,9 @@ export class TagComponent implements OnInit {
           if (tweetData.statuses && tweetData.statuses.length > 0) {
             tweetData.statuses.forEach((tweet: TaggedTweet) => {
                 console.log("Tweet: ", tweet);
-                this.twitterPosts.push(tweet);
+                if (!tweet.possibly_sensitive) {
+                  this.twitterPosts.push(tweet);
+                }
             });
             this.stat.calculateTwitterStats(this.twitterPosts);
           } else {

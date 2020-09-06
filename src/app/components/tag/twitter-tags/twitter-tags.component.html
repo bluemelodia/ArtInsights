@@ -2,41 +2,83 @@
     <div class="no-matches" *ngIf="!tweets || tweets.length === 0">{{ noMatchesMessage ? noMatchesMessage : defaultMessage }}</div>
     <h3 *ngIf="tweets.length > 0">Twitter</h3>
     <div class="stats-summary" *ngIf="tweets.length > 0">
-        <div class="notes">
+        <div class="favorites">
             <img [src]="heartImg"/> 
-            <div *ngIf="engagement && engagement.stats" class="stats">
-                <span>Hi {{ engagement.stats.high }}</span>
-                <span>Low {{ engagement.stats.low }}</span>
-                <span>Mid {{ engagement.stats.average | number:'1.2-2' }}</span>
-                <span>Avg {{ engagement.stats.median }}</span>
+            <div *ngIf="engagement && engagement.favoriteStats" class="stats">
+                <span>Hi {{ engagement.favoriteStats.high }}</span>
+                <span>Low {{ engagement.favoriteStats.low }}</span>
+                <span>Mid {{ engagement.favoriteStats.average | number:'1.2-2' }}</span>
+                <span>Avg {{ engagement.favoriteStats.median }}</span>
+            </div>
+        </div>
+        <div class="retweets">
+            <img [src]="retweetImg"/> 
+            <div *ngIf="engagement && engagement.retweetStats" class="stats">
+                <span>Hi {{ engagement.retweetStats.high }}</span>
+                <span>Low {{ engagement.retweetStats.low }}</span>
+                <span>Mid {{ engagement.retweetStats.average | number:'1.2-2' }}</span>
+                <span>Avg {{ engagement.retweetStats.median }}</span>
             </div>
         </div>
     </div>
 </div>
 <section *ngIf="tweets.length > 0">
     <div class="tweets">
-        <!--<div class="tweet" *ngFor="let tweet of tweets">
-           <img *ngIf="tweet.photos && tweet.photos.length > 0" 
-            class="tweet-img" [src]="tweet.photos[0].original_size.url"/>
-            <div class="tweet-data">
-                <h3 (click)="blogUtils.visitBlog(tweet.post_url)">{{ tweet.blog_name }}</h3>
-                <p *ngIf="tweet.caption && tweet.caption.length > 0" 
-                    class="caption" 
-                    [innerHTML]="tweet.caption"></p>
-                <p class="tags-list" *ngIf="tweet.tags && tweet.tags.length > 0">#{{ tweet.tags.join(' #') }}</p>
+        <div class="tweet" *ngFor="let tweet of tweets">
+            <div *ngIf="tweet.retweeted_status" class="tweet-data">
+                <h3 (click)="blogUtils.visitTwitter(tweet.retweeted_status.user.screen_name)">
+                        {{ tweet.retweeted_status.user.name }}
+                </h3>
+                <p *ngIf="tweet.retweeted_status.text && tweet.retweeted_status.text.length > 0" 
+                    class="text" 
+                    [innerHTML]="tweet.text"></p>
+                <p class="tags-list" *ngIf="tweet.retweeted_status.entities.hashtags && tweet.retweeted_status.entities.hashtags.length > 0">
+                    #{{ tweet.retweeted_status.entities.hashtags.join(' #') }}
+                </p>
                  <div class="tweet-stats">
                     <div class="stats">
-                        <p>Posted on {{ blogUtils.dateForTimestamp(tweet.timestamp)  | date: 'short' }} </p>
+                        <p>Posted on {{ tweet.retweeted_status.created_at  | date: 'short' }} </p>
                         <div class="engagement">
-                            <div class="notes">
+                            <div class="favorites">
                                 <img [src]="heartImg"/> 
-                                <span>{{ tweet.note_count }}</span>
+                                <span>{{ tweet.retweeted_status.favorite_count }}</span>
+                            </div>
+                            <div class="retweets">
+                                <img [src]="retweetImg"/>
+                                <span>{{ tweet.retweeted_status.retweet_count }}</span>
                             </div>
                         </div>
                     </div>                   
                 </div>
             </div>
-        </div>-->
+            <div *ngIf="!tweet.retweeted_status" class="tweet-data">
+                <h3 (click)="blogUtils.visitTwitter(tweet.user.screen_name)">
+                        {{ tweet.user.name }}
+                </h3>
+                <p *ngIf="tweet.text && tweet.text.length > 0" 
+                    class="text" 
+                    [innerHTML]="tweet.text"></p>
+                <p class="tags-list" 
+                    *ngIf="tweet.entities.hashtags && tweet.entities.hashtags.length > 0">
+                        #{{ tweet.entities.hashtags.join(' #') }}
+                </p>
+                 <div class="tweet-stats">
+                    <div class="stats">
+                        <p>Posted on {{ tweet.created_at  | date: 'short' }} </p>
+                        <div class="engagement">
+                            <div class="favorites">
+                                <img [src]="heartImg"/> 
+                                <span>{{ tweet.favorite_count }}</span>
+                            </div>
+                            <div class="retweets">
+                                <img [src]="retweetImg"/>
+                                <span>{{ tweet.retweet_count }}</span>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
     </div> 
 </section>
 <div *ngIf="tweets.length > 0" class="tag-stats">
@@ -50,7 +92,7 @@
     </div>
     <div class="stats-container">
         <div class="stats-summary" *ngIf="tweets.length > 0">
-            <!--<div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
+            <div *ngFor="let tag of engagement.hashtags | keyvalue" class="notes">
                 <div class="stats">
                     <span class="tag">{{ tag.key | tag }}</span>
                     <span>{{ tag.value.high }}</span>
@@ -59,6 +101,6 @@
                     <span>{{ tag.value.median }}</span>
                 </div>
             </div>
-        </div>-->
+        </div>
     </div>
 </div>

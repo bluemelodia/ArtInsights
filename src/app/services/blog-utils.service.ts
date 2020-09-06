@@ -16,6 +16,10 @@ export class BlogUtilsService {
     window.open(`https://${username}.deviantArt.com`, "_blank");
   }
 
+  public visitTwitter(username: string) {
+    window.open(`https://twitter.com/${username}`, "_blank");
+  }
+
   public dateForTimestamp(timestamp: number) {
       return new Date(timestamp * 1000);
   }

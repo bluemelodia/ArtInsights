@@ -13,10 +13,10 @@ export class TwitterTagsComponent implements OnInit {
   @Input() engagement: TwitterEngagement;
   @Input() noMatchesMessage: string;
 
-  public commentImg = this.utils.getImagePath('comment');
   public heartImg = this.utils.getImagePath('heart');
+  public retweetImg = this.utils.getImagePath('retweet');
   public tagImg = this.utils.getImagePath('tag');
-  public defaultMessage = 'Type in a tag name to search for matching posts.';
+  public defaultMessage = 'Type in a tag name to search for matching tweets.';
 
   constructor(
     public blogUtils: BlogUtilsService,

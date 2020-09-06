@@ -199,12 +199,22 @@ export class StatService {
 
     for(let i = 0; i < tweets.length; i++) {
       const tweet: TaggedTweet = tweets[i];
-      favoriteCounts.push(tweet.favorite_count);
-      retweetCounts.push(tweet.retweet_count);
+      /* If the tweet has been retweeted, use the fields under the retweeted_status. */
+      const favorites = tweet.retweeted_status ? tweet.retweeted_status.favorite_count : tweet.favorite_count;
+      const retweets = tweet.retweeted_status ? tweet.retweeted_status.retweet_count : tweet.retweet_count;
+      favoriteCounts.push(favorites);
+      retweetCounts.push(retweets);
 
       /* Not all tweets will have hashtags, and the API will only count hashtags within the first 140 chars. */
-      if (tweet.entities && tweet.entities.hashtags && tweet.entities.hashtags.length > 0) {
-        this.compileHashTags(tweet.entities.hashtags, tweet.favorite_count, tweet.retweet_count);
+      if ((tweet.retweeted_status && 
+          tweet.retweeted_status.entities && 
+          tweet.retweeted_status.entities.hashtags &&
+          tweet.retweeted_status.entities.hashtags.length > 0) 
+        || (tweet.entities && 
+        tweet.entities.hashtags && 
+        tweet.entities.hashtags.length > 0)) {
+        const hashtags = tweet.retweeted_status ? tweet.retweeted_status.entities.hashtags : tweet.entities.hashtags;
+        this.compileHashTags(hashtags, favorites, retweets);
       }
     }
 
