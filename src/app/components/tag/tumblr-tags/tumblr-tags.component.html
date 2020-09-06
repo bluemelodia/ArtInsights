@@ -22,7 +22,7 @@
             <div class="post-data">
                 <h3 (click)="blogUtils.visitBlog(post.post_url)">{{ post.blog_name }}</h3>
                 <p class="caption" [innerHTML]="post.caption"></p>
-                <p class="tags-list">{{ post.tags.join(' #') }}</p>
+                <p class="tags-list" *ngIf="post.tags && post.tags.length > 0">#{{ post.tags.join(' #') }}</p>
                  <div class="post-stats">
                     <div class="stats">
                         <p>Posted on {{ blogUtils.dateForTimestamp(post.timestamp)  | date: 'short' }} </p>
