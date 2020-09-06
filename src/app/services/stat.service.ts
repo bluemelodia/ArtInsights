@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement, TagStat, TagAggregate, TaggedTweet, TwitterEngagement, HashTagAggregate } from '../types/tag.types';
 import { Subject } from 'rxjs';
 import { Media } from '../app.consts';
-import { Hashtag } from '../types/twitter.types';
+import { HashTag } from '../types/twitter.types';
 
 @Injectable({
   providedIn: 'root'
@@ -82,7 +82,7 @@ export class StatService {
     }
   }
 
-  compileHashTags(hashtags: Hashtag[], faves: number, retweets: number) {
+  compileHashTags(hashtags: string[], faves: number, retweets: number) {
     for(let i = 0; i < hashtags.length; i++) {
       const tag = hashtags[i].toString();
       if (this.hashTagStats[tag]) {
@@ -203,7 +203,8 @@ export class StatService {
         || (tweet.entities && 
         tweet.entities.hashtags && 
         tweet.entities.hashtags.length > 0)) {
-        const hashtags = tweet.retweeted_status ? tweet.retweeted_status.entities.hashtags : tweet.entities.hashtags;
+        const hashtags: string[] = tweet.retweeted_status ? tweet.retweeted_status.tags 
+          : tweet.tags;
         this.compileHashTags(hashtags, favorites, retweets);
       }
     }

@@ -64,6 +64,7 @@ export interface TaggedTweet {
     retweet_count: number, 
     retweeted_status: TaggedTweet,
     source: string, 
+    tags?: string[], // we will move tags into this field
     text: string, 
     user: TwitterUser
 }

@@ -4,7 +4,16 @@ import { Media, AlertType } from '../../app.consts';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
 import { UserResponse } from '../../types/shared.types';
-import { DeviantArtTagResponse, TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement, TwitterTagResponse, TaggedTweet, TwitterEngagement } from '../../types/tag.types';
+import { 
+  DeviantArtTagResponse, 
+  TaggedDeviation, 
+  Engagement, 
+  TumblrTagResponse, 
+  TumblrEngagement, 
+  TwitterTagResponse, 
+  TaggedTweet, 
+  TwitterEngagement } from '../../types/tag.types';
+import { HashTag } from '../../types/twitter.types';
 import { StatService } from '../../services/stat.service';
 
 @Component({
@@ -159,6 +168,19 @@ export class TagComponent implements OnInit {
             tweetData.statuses.forEach((tweet: TaggedTweet) => {
                 console.log("Tweet: ", tweet);
                 if (!tweet.possibly_sensitive) {
+                  /* We don't need the indices, just extract the hashtags. */
+                  let hashTags: string[] = [];
+                  if (tweet.retweeted_status) {
+                    tweet.retweeted_status.entities.hashtags.forEach((tag: HashTag) => {
+                      hashTags.push(tag.text);
+                    });
+                    tweet.retweeted_status.tags = hashTags;
+                  } else {
+                    tweet.entities.hashtags.forEach((tag: HashTag) => {
+                      hashTags.push(tag.text);
+                    });
+                    tweet.tags = hashTags;
+                  }
                   this.twitterPosts.push(tweet);
                 }
             });

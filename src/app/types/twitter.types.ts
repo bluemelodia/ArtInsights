@@ -11,9 +11,9 @@ export interface TwitterUser {
 }
 
 export interface TwitterEntities {
-    hashtags: Hashtag[]
+    hashtags: HashTag[]
 }
 
-export interface Hashtag {
+export interface HashTag {
     text: string
 }
