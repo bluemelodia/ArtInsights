@@ -8,6 +8,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Background image takes a long time to load for the first time. 
 - Add more animations (ex. loader on scroll, login page).
 - Refactor types - there's a lot of repetition.
+- Add responsive styles.
+- User intermittently loses access to Tumblr/DA in between requests.
 
 ## Development server
 

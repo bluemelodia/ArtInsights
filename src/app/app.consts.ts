@@ -75,7 +75,7 @@ export const mediaData: { [id: string] : NavItem } = {
 
 export const navActions: { [id: string] : NavItem } = {
     Tags : {
-        iconName: 'promotion', 
+        iconName: 'tag', 
         alt: 'search by tag',
         link: '/tags'
     },
