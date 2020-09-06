@@ -27,14 +27,6 @@ $max-post-width: 400px;
     
                 .stats {
                     @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
-                    
-                    :host-context(.tag-stats) {
-                        width: 20%;
-                    }
-
-                    :host-content(.tumblr-stats) {
-                        width: 25%;
-                    }
                 }
             }
         }
@@ -42,6 +34,18 @@ $max-post-width: 400px;
         .no-matches {
             max-width: $max-width;
             text-align: center;
+        }
+    }
+
+    .tumblr-stats {
+        .stats {
+            width: 20%;
+        }
+    }
+
+    .tag-stats {
+        .stats {
+            width: 25%;
         }
     }
 

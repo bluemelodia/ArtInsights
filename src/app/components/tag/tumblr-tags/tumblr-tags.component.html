@@ -39,14 +39,14 @@
 </section>
 <div class="tag-stats">
     <div class="stats-summary" *ngIf="posts.length > 0">
-        <div *ngFor="let tag of engagement.tags" class="notes">
+        <div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
             <img [src]="heartImg"/> 
             <div class="stats">
-                <span>{{ tag }}</span>
-                <span>Hi {{ tag.stats.high }}</span>
-                <span>Low {{ tag.stats.low }}</span>
-                <span>Mid {{ tag.stats.average | number:'1.2-2' }}</span>
-                <span>Avg {{ tag.stats.median }}</span>
+                <span>{{ tag.key }}</span>
+                <span>Hi {{ tag.value.stats.high }}</span>
+                <span>Low {{ tag.value.stats.low }}</span>
+                <span>Mid {{ tag.value.stats.average | number:'1.2-2' }}</span>
+                <span>Avg {{ tag.value.stats.median }}</span>
             </div>
         </div>
     </div>
