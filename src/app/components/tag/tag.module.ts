@@ -6,10 +6,12 @@ import { DeviantartTagsComponent } from './deviantart-tags/deviantart-tags.compo
 import { SearchModule } from '../search/search.module';
 import { TumblrTagsComponent } from './tumblr-tags/tumblr-tags.component';
 import { TwitterTagsComponent } from './twitter-tags/twitter-tags.component';
+import { TagPipe } from '../../pipes/tag.pipe';
 
 @NgModule({
   declarations: [
     TagComponent,
+    TagPipe,
     DeviantartTagsComponent,
     TumblrTagsComponent,
     TwitterTagsComponent
@@ -18,6 +20,9 @@ import { TwitterTagsComponent } from './twitter-tags/twitter-tags.component';
     CommonModule,
     RouterModule,
     SearchModule
+  ],
+  providers: [
+    TagPipe
   ]
 })
 export class TagModule {}
