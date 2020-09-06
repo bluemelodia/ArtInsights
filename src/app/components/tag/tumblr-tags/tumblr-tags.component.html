@@ -37,7 +37,7 @@
         </div>
     </div> 
 </section>
-<div class="tag-stats">
+<div *ngIf="posts.length > 0" class="tag-stats">
     <div class="stats-summary" *ngIf="posts.length > 0">
         <div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
             <img [src]="heartImg"/> 
