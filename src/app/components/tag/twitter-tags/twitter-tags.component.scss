@@ -26,6 +26,12 @@ $max-tweet-width: 400px;
     
                 .stats {
                     @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+
+                    &.favorites, &.retweets {
+                        .tag {
+                            padding-left: $large-spacing;
+                        }
+                    }
                 }
             }
         }
