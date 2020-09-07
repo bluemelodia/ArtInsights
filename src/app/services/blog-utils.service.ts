@@ -43,6 +43,9 @@ export class BlogUtilsService {
       html = html.replace(link.toString(), '');
     }
 
+    html = html.replace('<a href>', '');
+    html = html.replace('</a>', '');
+
     return html;
   }
 }

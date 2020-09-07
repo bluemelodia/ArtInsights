@@ -35,6 +35,16 @@
                         {{ tweet.user.name }}
                 </h3>
                 <p>@{{ tweet.user.screen_name }}</p>
+                <div class="followership">
+                    <div class="followers">
+                        <img class="icon" [src]="retweetImg"/>
+                        <span>{{ tweet.retweet_count }}</span>
+                    </div>
+                    <div class="following">
+                        <img class="icon" [src]="retweetImg"/>
+                        <span>{{ tweet.retweet_count }}</span>
+                    </div>
+                </div>
                 <p *ngIf="tweet.text && tweet.text.length > 0" 
                         class="text" 
                         [innerHTML]="tweet.text"></p>

@@ -122,6 +122,17 @@ $max-tweet-width: 400px;
                         }
                     }
 
+                    .followership {
+                        @include flex-row-center($justify-content: flex-start);
+                        padding-top: $small-spacing;
+                        padding-bottom: $small-spacing;
+
+                        .followers, .following {
+                            @include flex-row-center($justify-content: flex-start);
+                            width: 50%;
+                        }
+                    }
+
                     .images {
                         margin-bottom: $large-spacing;
                     }
