@@ -67,7 +67,7 @@ $max-tweet-width: 400px;
             overflow-y: scroll;
 
             .stats-summary {
-                padding-top: 0;
+                padding-top: $large-spacing;
 
                 .tweets {
                     border-left: 4px solid $light-text-color;
