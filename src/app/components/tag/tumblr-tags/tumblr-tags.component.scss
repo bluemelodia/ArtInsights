@@ -91,7 +91,7 @@ $max-post-width: 400px;
                     border: 2px solid $light-text-color;
                     padding: $large-spacing;
 
-                    &.hover {
+                    &:hover {
                         border: 2px solid $tumblr-light;
                     }
                 }

@@ -11,7 +11,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Add responsive styles.
 - User intermittently loses access to Tumblr/DA in between requests. 
 - User always loses access on Chrome - check if multiple sessions are supported.
-- Add styling for innerHTML, ex. links.
 
 ## Development server
 
