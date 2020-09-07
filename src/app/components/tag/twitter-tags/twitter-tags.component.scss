@@ -78,7 +78,7 @@ $max-tweet-width: 400px;
                 /* Prevents the tag crashing into the next column. */
                 padding-right: $small-spacing / 2;
 
-                &.favorites, &.retweets {
+                &.header, &.favorites, &.retweets {
                     width: 25%;
                 }
             }
