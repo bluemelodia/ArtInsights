@@ -11,6 +11,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Add responsive styles.
 - User intermittently loses access to Tumblr/DA in between requests. 
 - User always loses access on Chrome - check if multiple sessions are supported.
+- Queue the messages so each one has sufficient time to be displayed.
 
 ## Development server
 
