@@ -207,9 +207,16 @@ export class TagComponent implements OnInit {
                   }
                 }
             });
-            this.stat.calculateTwitterStats(this.twitterPosts);
-          } else {
-            this.noTweetsMessage = 'No matching tweets were found.';
+
+            /* 
+            * Since we do a lot of filtering for twitter posts, we need to check if we
+            * have any tweets to show post-filter. 
+            */
+            if (this.twitterPosts.length < 1) {
+              this.noTweetsMessage = 'No matching tweets were found.';
+            } else {
+              this.stat.calculateTwitterStats(this.twitterPosts);
+            }
           }
         } 
       });
