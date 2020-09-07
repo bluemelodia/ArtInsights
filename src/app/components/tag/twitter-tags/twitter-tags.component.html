@@ -92,7 +92,7 @@
                 <div class="stats">
                     <span class="tag">{{ tag.key | tag }}</span>
                 </div>
-                <div class="stats">
+                <div class="stats favorites">
                     <img [src]="heartImg"/> 
                     <span class="tag favorites">Favorites</span>
                     <span>{{ tag.value.favorites.high }}</span>
@@ -100,7 +100,7 @@
                     <span>{{ tag.value.favorites.average | number:'1.2-2' }}</span>
                     <span>{{ tag.value.favorites.median }}</span>
                 </div>
-                <div class="stats">
+                <div class="stats retweets">
                     <img [src]="retweetImg"/> 
                     <span class="tag retweets">Retweets</span>
                     <span>{{ tag.value.retweets.high }}</span>
