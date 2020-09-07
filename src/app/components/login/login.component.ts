@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
           this.alertService.showAlert(AlertType.Success, message);
         } else {
           console.info("Login failed for: ", response);
-          this.alertService.showAlert(AlertType.Error, response.errorMsg);
+          this.alertService.showAlert(AlertType.Error, response.errorMsg ? response.errorMsg : "An error occured. Please try again.");
         }
       });
   }

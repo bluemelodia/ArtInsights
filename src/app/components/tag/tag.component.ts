@@ -161,8 +161,8 @@ export class TagComponent implements OnInit {
           });
           this.stat.calculateTumblrStats(this.tumblrPosts);
         } else {
-          this.noTumblrPostsMessage = 'No matching deviations were found.';
-        }
+        }          this.noTumblrPostsMessage = 'No matching deviations were found.';
+
       } 
     });
   }
