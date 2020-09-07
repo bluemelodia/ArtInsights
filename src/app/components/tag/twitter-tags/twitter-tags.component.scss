@@ -10,6 +10,11 @@ $max-tweet-width: 400px;
     margin-top: $large-spacing;
     width: 100%;
 
+    img {
+        width: $large-spacing;
+        margin-right: $small-spacing;
+    }
+
     .twitter-stats, .tag-stats {
         padding: $large-spacing;
 
@@ -18,11 +23,6 @@ $max-tweet-width: 400px;
 
             .favorites, .retweets {
                 @include flex-row-center($justify-content: flex-start);
-    
-                img {
-                    width: $large-spacing;
-                    margin-right: $large-spacing;
-                }
     
                 .stats {
                     @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
@@ -143,11 +143,6 @@ $max-tweet-width: 400px;
                             .favorites, .retweets {
                                 @include flex-row-center();
                                 margin-right: $small-spacing;
-        
-                                img {
-                                    width: $large-spacing;
-                                    margin-right: $small-spacing;
-                                }
                             }
                         }
                     }
