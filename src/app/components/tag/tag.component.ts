@@ -148,11 +148,11 @@ export class TagComponent implements OnInit {
                 /* First strip out the links from the caption. */
                 let captionFragments = tumblrPost.caption.split("<a href=");
                 let newCaptionFragments: string[] = [];
-                console.log("CAPTIONFRAGMENTS: ", captionFragments);
+                console.log("CAPTION FRAGMENTS: ", captionFragments);
                 captionFragments.forEach((str) => {
                   newCaptionFragments.push(str.slice(str.indexOf("</a>", "</a>".length)));
                 });
-                console.log("NEWCAPTIONFRAGMENTS: ", newCaptionFragments);
+                console.log("NEW CAPTION FRAGMENTS: ", newCaptionFragments);
                 tumblrPost.caption = newCaptionFragments.join('');
                 this.tumblrPosts.push(tumblrPost);
               }
