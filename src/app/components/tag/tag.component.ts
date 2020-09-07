@@ -16,6 +16,7 @@ import {
 import { HashTag, TwitterMedia } from '../../types/twitter.types';
 import { StatService } from '../../services/stat.service';
 import { BlogUtilsService } from '../../services/blog-utils.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-tag',
@@ -43,6 +44,7 @@ export class TagComponent implements OnInit {
     private tagService: TagService,
     private auth: AuthService,
     private alertService: AlertService,
+    private loginService: LoginService,
     private stat: StatService
   ) { }
 
@@ -107,7 +109,9 @@ export class TagComponent implements OnInit {
   private getDATags(tag: string) {
     this.tagService.getDeviationsForTag(tag)
     .subscribe((taggedDeviations: UserResponse) => { 
-      if (taggedDeviations.statusCode === 450) {
+      if (taggedDeviations.statusCode === 401) {
+        this.loginService.userNotAuthorizedToLogin();
+      } else if (taggedDeviations.statusCode === 450) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (taggedDeviations.statusCode === -1) {
         this.alertService.showAlert(AlertType.Error, `Unable to fetch tagged deviations at this time, try again later.`);
@@ -133,7 +137,9 @@ export class TagComponent implements OnInit {
   private getTumblrTags(tag: string) {
     this.tagService.getTumblrPostsForTag(tag)
     .subscribe((taggedPosts: UserResponse) => { 
-      if (taggedPosts.statusCode === 450) {
+      if (taggedPosts.statusCode === 401) {
+        this.loginService.userNotAuthorizedToLogin();
+      } else if (taggedPosts.statusCode === 450) {
         this.auth.userUnauthForMedia(Media.Tumblr);
       } else if (taggedPosts.statusCode === -1) {
         this.alertService.showAlert(AlertType.Error, `Unable to fetch tagged Tumblr posts at this time, try again later.`);
@@ -162,7 +168,7 @@ export class TagComponent implements OnInit {
           });
           this.stat.calculateTumblrStats(this.tumblrPosts);
         } else {
-          this.noTumblrPostsMessage = 'No matching deviations were found.';
+          this.noTumblrPostsMessage = 'No matching Tumblr posts were found.';
         }
       } 
     });

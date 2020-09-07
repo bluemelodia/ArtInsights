@@ -5,6 +5,7 @@ import { urlForAction } from '../app.endpoints';
 import { Observable, of, Subject } from 'rxjs';
 import { LoginPostResponse } from '../components/auth/auth.types';
 import { LocalStorageService } from './local-storage.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,13 @@ export class LoginService {
 
   constructor(
       private http: HttpClient,
+      private router: Router,
       private storage: LocalStorageService
   ) { }
+
+  public userNotAuthorizedToLogin() {
+    this.router.navigateByUrl('/login');
+  }
 
   public registerUser(username: string, password: string) {
     console.log("Register user: ", username, password);

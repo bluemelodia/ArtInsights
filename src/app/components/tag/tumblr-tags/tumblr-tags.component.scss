@@ -18,7 +18,8 @@ $max-post-width: 400px;
 
             .notes {
                 @include flex-row-center($justify-content: flex-start);
-    
+                padding-top: $large-spacing;
+
                 img {
                     width: $large-spacing;
                     margin-right: $large-spacing;
