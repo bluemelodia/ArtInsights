@@ -5,7 +5,6 @@ import { TaggedTweet } from '../types/tag.types';
   providedIn: 'root'
 })
 export class BlogUtilsService {
-
   constructor() { }
 
   /* Open in a tab. */
@@ -29,26 +28,5 @@ export class BlogUtilsService {
 
   public dateForTimestamp(timestamp: number) {
       return new Date(timestamp * 1000);
-  }
-
-  /* Captions have html. Disable the links. */
-  public stripLinks(html: string, hoverColor: string): string {
-    var htmlStr = html;
-    var div = document.createElement('div');
-    div.innerHTML = htmlStr;
-
-    let links = div.getElementsByTagName("a");
-    for (let i = 0; i < links.length; i++) {
-      const link = links[i];
-      html = html.replace(link.toString(), '');
-    }
-
-    console.log("Current content: ", html);
-
-    html = html.replace('<a href>', '');
-    html = html.replace('</a>', '');
-    console.log("Replaced content: ", html);
-
-    return html;
   }
 }

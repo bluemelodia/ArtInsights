@@ -146,7 +146,14 @@ export class TagComponent implements OnInit {
               /* Again filter for visual art. */
               if (tumblrPost.type === "photo") {
                 /* First strip out the links from the caption. */
-                tumblrPost.caption = this.blogUtils.stripLinks(tumblrPost.caption, '#74b9ff');
+                let captionFragments = tumblrPost.caption.split("<a href=");
+                let newCaptionFragments: string[] = [];
+                console.log("CAPTIONFRAGMENTS: ", captionFragments);
+                captionFragments.forEach((str) => {
+                  newCaptionFragments.push(str.slice(str.indexOf("</a>", "</a>".length)));
+                });
+                console.log("NEWCAPTIONFRAGMENTS: ", newCaptionFragments);
+                tumblrPost.caption = newCaptionFragments.join('');
                 this.tumblrPosts.push(tumblrPost);
               }
           });

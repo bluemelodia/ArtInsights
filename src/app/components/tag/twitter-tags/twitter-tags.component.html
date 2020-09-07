@@ -38,11 +38,11 @@
                 <div class="followership">
                     <div class="followers">
                         <img class="icon" [src]="followImg"/>
-                        <span>{{ tweet.user.followers_count }}</span>
+                        <span>{{ tweet.user.followers_count }} Followers</span>
                     </div>
                     <div class="following">
                         <img class="icon" [src]="followImg"/>
-                        <span>{{ tweet.user.friends_count }}</span>
+                        <span>{{ tweet.user.friends_count }} Following</span>
                     </div>
                 </div>
                 <p *ngIf="tweet.text && tweet.text.length > 0" 

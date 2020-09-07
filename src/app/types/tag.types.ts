@@ -40,6 +40,7 @@ export interface TumblrTagResponse {
     date: string,
     format: string,
     id: string,
+    link_url: string,
     note_count: number,
     photos: TumblrPhotos[]
     post_url: string,
