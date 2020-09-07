@@ -52,24 +52,22 @@ export interface MediaAction {
 export interface NavItem {
     iconName: string,
     alt: string,
-    link?: string
+    link?: string,
+    name?: string,
 }
 
 export const mediaData: { [id: string] : NavItem } = {
     DeviantArt : { 
         iconName: 'deviantart', 
         alt: 'deviantArt',
-        link: '/deviant-art'
-    },
-    Twitter: {
-        iconName: 'twitter', 
-        alt: 'twitter',
-        link: '/twitter'
+        link: '/deviant-art',
+        name: 'DeviantArt'
     },
     Tumblr: {
         iconName: 'tumblr',
         alt: 'tumblr',
-        link: '/tumblr'
+        link: '/tumblr',
+        name: 'Tumblr'
     }
 }
 
@@ -77,11 +75,13 @@ export const navActions: { [id: string] : NavItem } = {
     Tags : {
         iconName: 'tag', 
         alt: 'search by tag',
-        link: '/tags'
+        link: '/tags',
+        name: 'Tag Search'
     },
     Engagement : {
         iconName: 'heart', 
-        alt: 'post engagement'
+        alt: 'post engagement',
+        name: 'Analytics'
     }
 }
 
