@@ -15,6 +15,7 @@ import {
   TwitterEngagement } from '../../types/tag.types';
 import { HashTag } from '../../types/twitter.types';
 import { StatService } from '../../services/stat.service';
+import { BlogUtilsService } from '../../services/blog-utils.service';
 
 @Component({
   selector: 'app-tag',
@@ -38,6 +39,7 @@ export class TagComponent implements OnInit {
   private tag = '';
 
   constructor(
+    private blogUtils: BlogUtilsService,
     private tagService: TagService,
     private auth: AuthService,
     private alertService: AlertService,
@@ -143,6 +145,8 @@ export class TagComponent implements OnInit {
           tagData.forEach((tumblrPost: TumblrTagResponse) => {
               /* Again filter for visual art. */
               if (tumblrPost.type === "photo") {
+                /* First strip out the links from the caption. */
+                tumblrPost.caption = this.blogUtils.stripLinks(tumblrPost.caption);
                 this.tumblrPosts.push(tumblrPost);
               }
           });

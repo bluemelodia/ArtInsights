@@ -30,4 +30,9 @@ export class BlogUtilsService {
   public dateForTimestamp(timestamp: number) {
       return new Date(timestamp * 1000);
   }
+
+  /* Captions have html. Add our own styles to the links. */
+  public stripLinks(html: string): string {
+    return html.replace('<a href', '<a class="caption-link" href');
+  }
 }
