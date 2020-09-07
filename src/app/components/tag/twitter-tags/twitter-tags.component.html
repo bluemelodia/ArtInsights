@@ -29,6 +29,7 @@
                 <h3 (click)="blogUtils.visitTwitter(tweet.retweeted_status.user.screen_name)">
                         {{ tweet.retweeted_status.user.name }}
                 </h3>
+                <p>@{{ tweet.retweeted_status.user.screen_name}}</p>
                 <p *ngIf="tweet.retweeted_status.text && tweet.retweeted_status.text.length > 0" 
                     class="text" 
                     [innerHTML]="tweet.text"></p>
@@ -55,6 +56,7 @@
                 <h3 (click)="blogUtils.visitTwitter(tweet.user.screen_name)">
                         {{ tweet.user.name }}
                 </h3>
+                <p>@{{ tweet.user.screen_name}}</p>
                 <p *ngIf="tweet.text && tweet.text.length > 0" 
                     class="text" 
                     [innerHTML]="tweet.text"></p>
@@ -91,19 +93,19 @@
     </div>
     <div class="stats-container">
         <div class="stats-summary" *ngIf="tweets.length > 0">
-            <div *ngFor="let tag of engagement.hashtags | keyvalue" class="notes">
+            <div *ngFor="let tag of engagement.hashtags | keyvalue" class="tweets">
                 <div class="stats">
                     <span class="tag">{{ tag.key | tag }}</span>
                 </div>
-                <div class="stats favorites">
-                    <span class="tag">Favorites</span>
+                <div class="stats">
+                    <span class="tag favorites">Favorites</span>
                     <span>{{ tag.value.favorites.high }}</span>
                     <span>{{ tag.value.favorites.low }}</span>
                     <span>{{ tag.value.favorites.average | number:'1.2-2' }}</span>
                     <span>{{ tag.value.favorites.median }}</span>
                 </div>
-                <div class="stats retweets">
-                    <span class="tag">Retweets</span>
+                <div class="stats">
+                    <span class="tag retweets">Retweets</span>
                     <span>{{ tag.value.retweets.high }}</span>
                     <span>{{ tag.value.retweets.low }}</span>
                     <span>{{ tag.value.retweets.average | number:'1.2-2' }}</span>

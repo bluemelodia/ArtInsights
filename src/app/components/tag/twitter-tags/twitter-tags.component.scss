@@ -74,9 +74,14 @@ $max-tweet-width: 400px;
             text-align: left;
 
             &.tag {
-                width: 25%;
+                width: 100%;
                 /* Prevents the tag crashing into the next column. */
                 padding-right: $small-spacing / 2;
+
+                &.favorites, &.retweets {
+                    width: 25%;
+                    padding-left: $large-spacing;
+                }
             }
         }
     }
