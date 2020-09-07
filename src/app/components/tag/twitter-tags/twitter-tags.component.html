@@ -37,12 +37,11 @@
                 <p>@{{ tweet.user.screen_name }}</p>
                 <div class="followership">
                     <div class="followers">
-                        <img class="icon" [src]="retweetImg"/>
-                        <span>{{ tweet.retweet_count }}</span>
+                        <img class="icon" [src]="followImg"/>
+                        <span>{{ tweet.user.followers_count }}</span>
                     </div>
                     <div class="following">
-                        <img class="icon" [src]="retweetImg"/>
-                        <span>{{ tweet.retweet_count }}</span>
+                        <span>{{ tweet.user.friends_count }}</span>
                     </div>
                 </div>
                 <p *ngIf="tweet.text && tweet.text.length > 0" 
