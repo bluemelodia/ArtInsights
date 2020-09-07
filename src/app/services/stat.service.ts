@@ -61,7 +61,7 @@ export class StatService {
     array.forEach(num => {
       sum += num;
     });
-    return sum/ Math.round(array.length * 100)/100;
+    return sum / (Math.round(array.length * 100) / 100);
   }
 
   /* First count total engagement / usage for each tag. */
@@ -114,7 +114,7 @@ export class StatService {
       tumblrStats[tag] = {
         high: engagements[engagements.length - 1],
         low: engagements[0],
-        average: tagStat.totalEngagements / tagStat.count,
+        average: tagStat.totalEngagements / (Math.round(tagStat.count * 100)/100),
         median: this.findMedian(engagements)
       }
     });
