@@ -46,10 +46,10 @@ nav {
     }
 
     button:not(:first-child) {
-        margin-top: $large-spacing;
+        margin-top: $small-spacing;
     }
 
     button:last-child {
-        margin-bottom: $large-spacing;
+        margin-bottom: $small-spacing;
     }
 }

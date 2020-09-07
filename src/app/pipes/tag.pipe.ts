@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TagPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
-    if (value.length > 20) {
-      return `${value.trim().substring(0, 20)}...`
+    if (value.length > 18) {
+      return `${value.trim().substring(0, 18)}...`
     }
 
     return value;
