@@ -72,7 +72,6 @@ $max-tweet-width: 400px;
                 .tweets {
                     border-left: 4px solid $light-text-color;
                     margin-bottom: $large-spacing;
-                    padding-bottom: $large-spacing;
                 }
             }
         }
@@ -80,17 +79,13 @@ $max-tweet-width: 400px;
         span {
             width: 18.75%;
             text-align: left;
+            padding-left: $small-spacing;
 
             &.tag {
                 /* Prevents the tag crashing into the next column. */
-                padding-right: $small-spacing / 2;
-
                 &.header, &.favorites, &.retweets {
                     width: 25%;
-                }
-
-                &.favorites, &.retweets {
-                    padding-left: $small-spacing;
+                    padding-right: $small-spacing / 2;
                 }
             }
         }

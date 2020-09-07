@@ -55,6 +55,7 @@ export interface TwitterTagResponse {
 export interface TaggedTweet {
     created_at: string, 
     entities: TwitterEntities,
+    extended_entities?: TwitterEntities,
     favorite_count: number, 
     id_str: string, 
     in_reply_to_screen_name?: string, 

@@ -26,7 +26,8 @@
     <div class="tweets">
         <div class="tweet" *ngFor="let tweet of tweets">
             <div class="tweet-data">
-                <div class="images" *ngIf="tweet.entities.media && tweet.entities.media.length > 0">
+                <div class="images" 
+                    *ngIf="tweet.entities.media && tweet.entities.media.length > 0">
                     <img (click)="blogUtils.visitTweet(tweet)" *ngFor="let image of tweet.entities.media" 
                         class="tweet-img" [src]="image.media_url_https"/>
                 </div>
@@ -85,9 +86,8 @@
                     <span>{{ tag.value.favorites.median }}</span>
                 </div>
                 <div class="stats retweets">
-                    <img class="icon" [src]="retweetImg"/> 
                     <span class="tag retweets">
-                        <img class="icon" [src]="heartImg"/> 
+                        <img class="icon" [src]="retweetImg"/> 
                         <span>Retweets</span>
                     </span>
                     <span>{{ tag.value.retweets.high }}</span>

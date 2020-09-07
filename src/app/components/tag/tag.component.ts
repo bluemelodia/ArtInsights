@@ -13,7 +13,7 @@ import {
   TwitterTagResponse, 
   TaggedTweet, 
   TwitterEngagement } from '../../types/tag.types';
-import { HashTag } from '../../types/twitter.types';
+import { HashTag, TwitterMedia } from '../../types/twitter.types';
 import { StatService } from '../../services/stat.service';
 import { BlogUtilsService } from '../../services/blog-utils.service';
 
@@ -189,6 +189,20 @@ export class TagComponent implements OnInit {
                         hashTags.push(tag.text);
                       });
                     tweet.tags = hashTags;
+
+                    /* For easier access, move photos in extended_entites into the entities section. */
+                    if (tweet.extended_entities && tweet.extended_entities.media) {
+                      let extendedMedia: TwitterMedia[] = [];
+                      tweet.extended_entities.media.forEach((media) => {
+                        if (media.type === 'photo') {
+                          extendedMedia.push(media);
+                        }
+                      });
+                      if (extendedMedia.length > 0) {
+                        tweet.entities.media = extendedMedia;
+                      }
+                    }
+
                     this.twitterPosts.push(tweet);
                   }
                 }
