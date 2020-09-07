@@ -61,7 +61,7 @@ export const mediaData: { [id: string] : NavItem } = {
         iconName: 'deviantart', 
         alt: 'deviantArt',
         link: '/deviant-art',
-        name: 'DeviantArt'
+        name: 'Deviant Art'
     },
     Tumblr: {
         iconName: 'tumblr',
@@ -81,7 +81,7 @@ export const navActions: { [id: string] : NavItem } = {
     Engagement : {
         iconName: 'heart', 
         alt: 'post engagement',
-        name: 'Analytics'
+        name: 'Post Analytics'
     }
 }
 

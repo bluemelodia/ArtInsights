@@ -5,8 +5,8 @@
             [disableNav]="mediaStatus[media.key] !== authSuccess"
             [iconName]="media.value.iconName" 
             [altText]="media.value.alt"
-            [link]="media.value.link"></app-nav-item>
-        <span>{{ media.value.name }}</span>
+            [link]="media.value.link"
+            [name]="media.value.name"></app-nav-item>
     </button>
 </nav>
 <nav>
@@ -14,7 +14,7 @@
         <app-nav-item 
             [iconName]="action.value.iconName" 
             [altText]="action.value.alt"
-            [link]="action.value.link"></app-nav-item>
-        <span>{{ action.value.name }}</span>
+            [link]="action.value.link"
+            [name]="action.value.name"></app-nav-item>
     </button>
 </nav>

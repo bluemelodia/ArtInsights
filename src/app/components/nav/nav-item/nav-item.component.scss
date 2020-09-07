@@ -1,4 +1,9 @@
 @import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+:host {
+    @include flex-col-center($justify-content: center);
+}
 
 img {
     width: 100%;
