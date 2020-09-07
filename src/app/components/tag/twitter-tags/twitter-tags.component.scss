@@ -70,7 +70,7 @@ $max-tweet-width: 400px;
                 padding-top: 0;
 
                 .tweets {
-                    border-bottom: 2px solid $light-text-color;
+                    border-left: 4px solid $light-text-color;
                     margin-bottom: $large-spacing;
                     padding-bottom: $large-spacing;
                 }
@@ -87,6 +87,10 @@ $max-tweet-width: 400px;
 
                 &.header, &.favorites, &.retweets {
                     width: 25%;
+                }
+
+                &.favorites, &.retweets {
+                    padding-left: $small-spacing;
                 }
             }
         }
