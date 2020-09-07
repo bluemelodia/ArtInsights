@@ -32,7 +32,7 @@ export class BlogUtilsService {
   }
 
   /* Captions have html. Add our own styles to the links. */
-  public stripLinks(html: string): string {
-    return html.replace('<a href', '<a class="caption-link" href');
+  public stripLinks(html: string, hoverColor: string): string {
+    return html.replace('<a href', `<a style="color: white;" onMouseOver="this.style.color='${hoverColor}'" onMouseOut="this.style.color='white'" href`);
   }
 }

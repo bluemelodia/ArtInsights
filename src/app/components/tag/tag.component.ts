@@ -146,7 +146,7 @@ export class TagComponent implements OnInit {
               /* Again filter for visual art. */
               if (tumblrPost.type === "photo") {
                 /* First strip out the links from the caption. */
-                tumblrPost.caption = this.blogUtils.stripLinks(tumblrPost.caption);
+                tumblrPost.caption = this.blogUtils.stripLinks(tumblrPost.caption, '#74b9ff');
                 this.tumblrPosts.push(tumblrPost);
               }
           });
