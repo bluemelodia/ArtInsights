@@ -27,7 +27,7 @@
         <div class="tweet" *ngFor="let tweet of tweets">
             <div class="tweet-data">
                 <div class="images" *ngIf="tweet.entities.media && tweet.entities.media.length > 0">
-                    <img *ngFor="let image of tweet.entities.media" 
+                    <img (click)="blogUtils.visitTweet(tweet)" *ngFor="let image of tweet.entities.media" 
                         class="tweet-img" [src]="image.media_url_https"/>
                 </div>
                 <h3 (click)="blogUtils.visitTwitter(tweet.retweeted_status ? tweet.retweeted_status.user.screen_name : tweet.user.screen_name)">
@@ -78,7 +78,7 @@
     </div> 
 </section>
 <div *ngIf="tweets.length > 0" class="tag-stats">
-    <h3>Engagement by Tag</h3>
+    <h3>Engagement by Hashtag</h3>
     <div class="header">
         <span class="tag header">Tag</span>
         <span>High</span>

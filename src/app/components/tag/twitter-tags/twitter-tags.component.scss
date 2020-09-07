@@ -99,6 +99,10 @@ $max-tweet-width: 400px;
                     width: $max-tweet-width;
                     border: 2px solid $light-text-color;
                     padding: $large-spacing;
+
+                    &:hover {
+                        border: 2px solid $twitter-light;
+                    }
                 }
 
                 .tweet-data {
