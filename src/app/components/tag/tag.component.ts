@@ -151,8 +151,9 @@ export class TagComponent implements OnInit {
                 console.log("CAPTION FRAGMENTS: ", captionFragments);
                 captionFragments.forEach((str) => {
                   console.log("Original str: ", str);
-                  console.log("Sliced str: ", str.indexOf("</a>" + "</a>".length), str.slice(str.indexOf("</a>" + "</a>".length)));
-                  newCaptionFragments.push(str.slice(str.indexOf("</a>" + "</a>".length)));
+                  const slicedStr = str.slice(str.indexOf("</a>")+4);
+                  console.log("Sliced str: ", str.indexOf("</a>")+4, slicedStr);
+                  newCaptionFragments.push(slicedStr);
                 });
                 console.log("NEW CAPTION FRAGMENTS: ", newCaptionFragments);
                 tumblrPost.caption = newCaptionFragments.join('');
@@ -161,8 +162,8 @@ export class TagComponent implements OnInit {
           });
           this.stat.calculateTumblrStats(this.tumblrPosts);
         } else {
-        }          this.noTumblrPostsMessage = 'No matching deviations were found.';
-
+          this.noTumblrPostsMessage = 'No matching deviations were found.';
+        }
       } 
     });
   }
@@ -210,7 +211,6 @@ export class TagComponent implements OnInit {
                         tweet.entities.media = extendedMedia;
                       }
                     }
-
                     this.twitterPosts.push(tweet);
                   }
                 }
