@@ -171,6 +171,7 @@ export class TagComponent implements OnInit {
                   /* Focus on visual tweets. */
                   let hasPhotos = false;
                   tweet.entities.media.forEach((media) => {
+                    console.log("Tweet media: ", media);
                     if (media.type === 'photo') {
                       hasPhotos = true;
                     }
