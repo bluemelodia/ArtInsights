@@ -92,6 +92,9 @@ $max-tweet-width: 400px;
 
         .tweets {
             @include flex-col($justify-content: center);
+            border-bottom: 2px solid $light-text-color;
+            margin-bottom: $large-spacing;
+            padding-bottom: $large-spacing;
 
             .tweet {
                 padding: $large-spacing;
