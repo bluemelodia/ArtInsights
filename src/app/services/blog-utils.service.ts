@@ -24,10 +24,6 @@ export class BlogUtilsService {
   public visitTweet(tweet: TaggedTweet) {
     let user = tweet.user.id_str;
     let id = tweet.id_str;
-    if (tweet.retweeted_status) {
-      user = tweet.retweeted_status.user.id_str;
-      id = tweet.retweeted_status.id_str;
-    }
     window.open(`https://twitter.com/${user}/status/${id}`, "_blank");
   }
 

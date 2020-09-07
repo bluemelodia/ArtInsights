@@ -30,35 +30,17 @@
                     <img (click)="blogUtils.visitTweet(tweet)" *ngFor="let image of tweet.entities.media" 
                         class="tweet-img" [src]="image.media_url_https"/>
                 </div>
-                <h3 (click)="blogUtils.visitTwitter(tweet.retweeted_status ? tweet.retweeted_status.user.screen_name : tweet.user.screen_name)">
-                        {{ tweet.retweeted_status ? tweet.retweeted_status.user.name : tweet.user.name }}
+                <h3 (click)="blogUtils.visitTwitter(tweet.user.screen_name)">
+                        {{ tweet.user.name }}
                 </h3>
-                <p>@{{ tweet.retweeted_status ? tweet.retweeted_status.user.screen_name : tweet.user.screen_name }}</p>
-                <p *ngIf="tweet.retweeted_status && tweet.retweeted_status.text && tweet.retweeted_status.text.length > 0" 
-                    class="text" 
-                    [innerHTML]="tweet.text"></p>
-                <p *ngIf="!tweet.retweeted_status && tweet.text && tweet.text.length > 0" 
+                <p>@{{ tweet.user.screen_name }}</p>
+                <p *ngIf="tweet.text && tweet.text.length > 0" 
                         class="text" 
                         [innerHTML]="tweet.text"></p>
                 <p class="tags-list" *ngIf="tweet.tags && tweet.tags.length > 0">
                     #{{ tweet.tags.join(' #') }}
                 </p>
-                <div *ngIf="tweet.retweeted_status" class="tweet-stats">
-                    <div class="stats">
-                        <p>Posted on {{ tweet.retweeted_status.created_at  | date: 'short' }} </p>
-                        <div class="engagement">
-                            <div class="favorites">
-                                <img class="icon" [src]="heartImg"/> 
-                                <span>{{ tweet.retweeted_status.favorite_count }}</span>
-                            </div>
-                            <div class="retweets">
-                                <img class="icon" [src]="retweetImg"/>
-                                <span>{{ tweet.retweeted_status.retweet_count }}</span>
-                            </div>
-                        </div>
-                    </div>                   
-                </div>
-                <div *ngIf="!tweet.retweeted_status" class="tweet-stats">
+                <div class="tweet-stats">
                     <div class="stats">
                         <p>Posted on {{ tweet.created_at  | date: 'short' }} </p>
                         <div class="engagement">
