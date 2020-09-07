@@ -150,6 +150,8 @@ export class TagComponent implements OnInit {
                 let newCaptionFragments: string[] = [];
                 console.log("CAPTION FRAGMENTS: ", captionFragments);
                 captionFragments.forEach((str) => {
+                  console.log("Original str: ", str);
+                  console.log("Sliced str: ", str.indexOf("</a>" + "</a>".length), str.slice(str.indexOf("</a>" + "</a>".length)));
                   newCaptionFragments.push(str.slice(str.indexOf("</a>" + "</a>".length)));
                 });
                 console.log("NEW CAPTION FRAGMENTS: ", newCaptionFragments);
