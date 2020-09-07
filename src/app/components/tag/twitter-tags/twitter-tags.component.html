@@ -80,7 +80,7 @@
 <div *ngIf="tweets.length > 0" class="tag-stats">
     <h3>Engagement by Tag</h3>
     <div class="header">
-        <span class="tag">Tag</span>
+        <span class="tag header">Tag</span>
         <span>High</span>
         <span>Low</span>
         <span>Median</span>
@@ -90,7 +90,7 @@
         <div class="stats-summary" *ngIf="tweets.length > 0">
             <div *ngFor="let tag of engagement.hashtags | keyvalue" class="tweets">
                 <div class="stats">
-                    <span class="tag header">{{ tag.key | tag }}</span>
+                    <span class="tag">{{ tag.key | tag }}</span>
                 </div>
                 <div class="stats">
                     <img [src]="heartImg"/> 

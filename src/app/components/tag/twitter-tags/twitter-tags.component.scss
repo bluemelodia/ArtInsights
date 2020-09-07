@@ -11,7 +11,7 @@ $max-tweet-width: 400px;
     width: 100%;
 
     img {
-        width: $large-spacing;
+        height: $large-spacing;
         margin-right: $small-spacing;
     }
 
@@ -74,7 +74,6 @@ $max-tweet-width: 400px;
             text-align: left;
 
             &.tag {
-                width: 100%;
                 /* Prevents the tag crashing into the next column. */
                 padding-right: $small-spacing / 2;
 
