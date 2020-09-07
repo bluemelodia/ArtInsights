@@ -83,7 +83,7 @@
         <div class="stats-summary" *ngIf="tweets.length > 0">
             <div *ngFor="let tag of engagement.hashtags | keyvalue" class="tweets">
                 <div class="stats">
-                    <span class="tag">{{ tag.key | tag }}</span>
+                    <span class="tag">#{{ tag.key | tag }}</span>
                 </div>
                 <div class="stats favorites">
                     <span class="tag favorites">

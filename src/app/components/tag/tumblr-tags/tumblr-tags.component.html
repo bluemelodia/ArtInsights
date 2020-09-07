@@ -53,7 +53,7 @@
         <div class="stats-summary" *ngIf="posts.length > 0">
             <div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
                 <div class="stats">
-                    <span class="tag">{{ tag.key | tag }}</span>
+                    <span class="tag">#{{ tag.key | tag }}</span>
                     <span>{{ tag.value.high }}</span>
                     <span>{{ tag.value.low }}</span>
                     <span>{{ tag.value.average | number:'1.2-2' }}</span>
