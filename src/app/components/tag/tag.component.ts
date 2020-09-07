@@ -170,7 +170,6 @@ export class TagComponent implements OnInit {
           const tweetData = tweets.responseData as TwitterTagResponse;
           if (tweetData.statuses && tweetData.statuses.length > 0) {
             tweetData.statuses.forEach((tweet: TaggedTweet) => {
-                console.log("Tweet: ", tweet);
                 /* Do not count retweets. */
                 if (!tweet.possibly_sensitive && !tweet.retweeted_status 
                     && tweet.entities.media && tweet.entities.media.length > 0) {

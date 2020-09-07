@@ -16,6 +16,7 @@ export class TwitterTagsComponent implements OnInit {
   public heartImg = this.utils.getImagePath('heart');
   public retweetImg = this.utils.getImagePath('retweet');
   public tagImg = this.utils.getImagePath('tag');
+  public followImg = this.utils.getImagePath('follow');
   public defaultMessage = 'Type in a tag name to search for matching tweets.';
 
   constructor(
