@@ -3,7 +3,7 @@
     <h3 *ngIf="tweets.length > 0">Twitter</h3>
     <div class="stats-summary" *ngIf="tweets.length > 0">
         <div class="favorites">
-            <img [src]="heartImg"/> 
+            <img class="icon" [src]="heartImg"/> 
             <div *ngIf="engagement && engagement.favoriteStats" class="stats">
                 <span>Hi {{ engagement.favoriteStats.high }}</span>
                 <span>Low {{ engagement.favoriteStats.low }}</span>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="retweets">
-            <img [src]="retweetImg"/> 
+            <img class="icon" [src]="retweetImg"/> 
             <div *ngIf="engagement && engagement.retweetStats" class="stats">
                 <span>Hi {{ engagement.retweetStats.high }}</span>
                 <span>Low {{ engagement.retweetStats.low }}</span>
@@ -48,11 +48,11 @@
                         <p>Posted on {{ tweet.retweeted_status.created_at  | date: 'short' }} </p>
                         <div class="engagement">
                             <div class="favorites">
-                                <img [src]="heartImg"/> 
+                                <img class="icon" [src]="heartImg"/> 
                                 <span>{{ tweet.retweeted_status.favorite_count }}</span>
                             </div>
                             <div class="retweets">
-                                <img [src]="retweetImg"/>
+                                <img class="icon" [src]="retweetImg"/>
                                 <span>{{ tweet.retweeted_status.retweet_count }}</span>
                             </div>
                         </div>
@@ -63,11 +63,11 @@
                         <p>Posted on {{ tweet.created_at  | date: 'short' }} </p>
                         <div class="engagement">
                             <div class="favorites">
-                                <img [src]="heartImg"/> 
+                                <img class="icon" [src]="heartImg"/> 
                                 <span>{{ tweet.favorite_count }}</span>
                             </div>
                             <div class="retweets">
-                                <img [src]="retweetImg"/>
+                                <img class="icon" [src]="retweetImg"/>
                                 <span>{{ tweet.retweet_count }}</span>
                             </div>
                         </div>
