@@ -43,8 +43,11 @@ export class BlogUtilsService {
       html = html.replace(link.toString(), '');
     }
 
+    console.log("Current content: ", html);
+
     html = html.replace('<a href>', '');
     html = html.replace('</a>', '');
+    console.log("Replaced content: ", html);
 
     return html;
   }
