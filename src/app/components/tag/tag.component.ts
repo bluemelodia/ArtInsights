@@ -150,7 +150,7 @@ export class TagComponent implements OnInit {
                 let newCaptionFragments: string[] = [];
                 console.log("CAPTION FRAGMENTS: ", captionFragments);
                 captionFragments.forEach((str) => {
-                  newCaptionFragments.push(str.slice(str.indexOf("</a>", "</a>".length)));
+                  newCaptionFragments.push(str.slice(str.indexOf("</a>" + "</a>".length)));
                 });
                 console.log("NEW CAPTION FRAGMENTS: ", newCaptionFragments);
                 tumblrPost.caption = newCaptionFragments.join('');
