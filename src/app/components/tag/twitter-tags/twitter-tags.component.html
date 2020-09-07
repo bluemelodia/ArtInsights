@@ -7,8 +7,8 @@
             <div *ngIf="engagement && engagement.favoriteStats" class="stats">
                 <span>Hi {{ engagement.favoriteStats.high }}</span>
                 <span>Low {{ engagement.favoriteStats.low }}</span>
-                <span>Mid {{ engagement.favoriteStats.average | number:'1.2-2' }}</span>
-                <span>Avg {{ engagement.favoriteStats.median }}</span>
+                <span>Mid {{ engagement.favoriteStats.median }}</span>
+                <span>Avg {{ engagement.favoriteStats.average | number:'1.2-2' }}</span>
             </div>
         </div>
         <div class="retweets">
@@ -16,8 +16,8 @@
             <div *ngIf="engagement && engagement.retweetStats" class="stats">
                 <span>Hi {{ engagement.retweetStats.high }}</span>
                 <span>Low {{ engagement.retweetStats.low }}</span>
-                <span>Mid {{ engagement.retweetStats.average | number:'1.2-2' }}</span>
-                <span>Avg {{ engagement.retweetStats.median }}</span>
+                <span>Mid {{ engagement.retweetStats.median }}</span>
+                <span>Avg {{ engagement.retweetStats.average | number:'1.2-2' }}</span>
             </div>
         </div>
     </div>
@@ -92,8 +92,8 @@
                     </span>
                     <span>{{ tag.value.favorites.high }}</span>
                     <span>{{ tag.value.favorites.low }}</span>
-                    <span>{{ tag.value.favorites.average | number:'1.2-2' }}</span>
                     <span>{{ tag.value.favorites.median }}</span>
+                    <span>{{ tag.value.favorites.average | number:'1.2-2' }}</span>
                 </div>
                 <div class="stats retweets">
                     <span class="tag retweets">
@@ -102,8 +102,8 @@
                     </span>
                     <span>{{ tag.value.retweets.high }}</span>
                     <span>{{ tag.value.retweets.low }}</span>
-                    <span>{{ tag.value.retweets.average | number:'1.2-2' }}</span>
                     <span>{{ tag.value.retweets.median }}</span>
+                    <span>{{ tag.value.retweets.average | number:'1.2-2' }}</span>
                 </div>
             </div>
         </div>
