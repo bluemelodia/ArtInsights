@@ -167,21 +167,30 @@ export class TagComponent implements OnInit {
           if (tweetData.statuses && tweetData.statuses.length > 0) {
             tweetData.statuses.forEach((tweet: TaggedTweet) => {
                 console.log("Tweet: ", tweet);
-                if (!tweet.possibly_sensitive) {
-                  /* We don't need the indices, just extract the hashtags. */
-                  let hashTags: string[] = [];
-                  if (tweet.retweeted_status) {
-                    tweet.retweeted_status.entities.hashtags.forEach((tag: HashTag) => {
-                      hashTags.push(tag.text);
-                    });
-                    tweet.retweeted_status.tags = hashTags;
-                  } else {
-                    tweet.entities.hashtags.forEach((tag: HashTag) => {
-                      hashTags.push(tag.text);
-                    });
-                    tweet.tags = hashTags;
+                if (!tweet.possibly_sensitive && tweet.entities.media && tweet.entities.media.length > 0) {
+                  /* Focus on visual tweets. */
+                  let hasPhotos = false;
+                  tweet.entities.media.forEach((media) => {
+                    if (media.type === 'photo') {
+                      hasPhotos = true;
+                    }
+                  });
+                  if (hasPhotos) {
+                    /* We don't need the indices, just extract the hashtags. */
+                    let hashTags: string[] = [];
+                    if (tweet.retweeted_status) {
+                      tweet.retweeted_status.entities.hashtags.forEach((tag: HashTag) => {
+                        hashTags.push(tag.text);
+                      });
+                      tweet.retweeted_status.tags = hashTags;
+                    } else {
+                      tweet.entities.hashtags.forEach((tag: HashTag) => {
+                        hashTags.push(tag.text);
+                      });
+                      tweet.tags = hashTags;
+                    }
+                    this.twitterPosts.push(tweet);
                   }
-                  this.twitterPosts.push(tweet);
                 }
             });
             this.stat.calculateTwitterStats(this.twitterPosts);
