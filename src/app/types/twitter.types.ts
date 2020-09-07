@@ -11,9 +11,16 @@ export interface TwitterUser {
 }
 
 export interface TwitterEntities {
-    hashtags: HashTag[]
+    hashtags: HashTag[],
+    media: TwitterMedia[]
 }
 
 export interface HashTag {
     text: string
+}
+
+export interface TwitterMedia {
+    display_url: string, 
+    media_url_https: string,
+    type: string
 }
