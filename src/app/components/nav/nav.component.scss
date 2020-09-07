@@ -29,6 +29,8 @@ nav {
         border: none;
         color: $light-text-color;
 
+        padding: $small-spacing;
+
         &:hover {
             background-color: $app-light-nav;
             color: $dark-text-color;
