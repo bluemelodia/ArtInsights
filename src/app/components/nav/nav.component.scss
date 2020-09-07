@@ -27,9 +27,11 @@ nav {
     button {
         background-color: transparent;
         border: none;
+        color: $light-text-color;
 
         &:hover {
             background-color: $app-light-nav;
+            color: $dark-text-color;
         }
 
         &:disabled, &[disabled] {
