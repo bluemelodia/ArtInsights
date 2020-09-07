@@ -61,7 +61,7 @@ export class StatService {
     array.forEach(num => {
       sum += num;
     });
-    return sum/array.length;
+    return sum/ Math.round(array.length * 100)/100;
   }
 
   /* First count total engagement / usage for each tag. */
@@ -136,13 +136,13 @@ export class StatService {
         favorites: {
           high: faves[faves.length - 1],
           low: faves[0],
-          average: hashTagStat.totalFavorites / hashTagStat.count,
+          average: (Math.round(hashTagStat.totalFavorites * 100)/100) / hashTagStat.count,
           median: this.findMedian(faves)
         },
         retweets: {
           high: retweets[retweets.length - 1],
           low: retweets[0],
-          average: hashTagStat.totalRetweets / hashTagStat.count,
+          average: (Math.round(hashTagStat.totalRetweets * 100)/100) / hashTagStat.count,
           median: this.findMedian(retweets)
         }
       }
