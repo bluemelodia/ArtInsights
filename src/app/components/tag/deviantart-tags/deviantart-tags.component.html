@@ -26,7 +26,7 @@
 <section *ngIf="deviations.length > 0">
     <div class="deviations">
         <div class="deviation" *ngFor="let deviation of deviations">
-            <img class="deviation-img" [src]="deviation.content.src"/>
+            <img (click)="blogUtils.visitBlog(deviation.url)" class="deviation-img" [src]="deviation.content.src"/>
             <div class="deviation-data">
                 <h3 (click)="blogUtils.visitBlog(deviation.url)">{{ deviation.title }}</h3>
                  <div class="deviation-stats">

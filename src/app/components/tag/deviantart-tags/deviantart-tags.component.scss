@@ -56,6 +56,10 @@ $max-deviation-width: 400px;
                     width: $max-deviation-width;
                     border: 2px solid $light-text-color;
                     padding: $large-spacing;
+
+                    &:hover {
+                        border: 2px solid $deviantart-light;
+                    }
                 }
 
                 .deviation-data {
