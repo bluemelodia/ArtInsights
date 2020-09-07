@@ -23,8 +23,8 @@ body {
     /* Applying opacity on body itself would render all contents translucent. */
     &::before {
         @include full-screen-fixed();
-        background-color: $app-secondary;
-        opacity: 0.05;
+        background-color: $app-background;
+        opacity: 0.65;
         content: '';
     }
 }
