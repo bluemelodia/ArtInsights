@@ -31,8 +31,18 @@ export class BlogUtilsService {
       return new Date(timestamp * 1000);
   }
 
-  /* Captions have html. Add our own styles to the links. */
+  /* Captions have html. Disable the links. */
   public stripLinks(html: string, hoverColor: string): string {
-    return html.replace('<a href', `<a style="color: white;" onMouseOver="this.style.color='${hoverColor}'" onMouseOut="this.style.color='white'" href`);
+    var htmlStr = html;
+    var div = document.createElement('div');
+    div.innerHTML = htmlStr;
+
+    let links = div.getElementsByTagName("a");
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i];
+      html = html.replace(link.toString(), '');
+    }
+
+    return html;
   }
 }
