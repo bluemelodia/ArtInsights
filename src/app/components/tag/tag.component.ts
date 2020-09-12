@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TagService } from '../../services/tag.service';
-import { Media, AlertType } from '../../app.consts';
+import { Media, AlertType, mediaData, navActions } from '../../app.consts';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
 import { UserResponse } from '../../types/shared.types';
@@ -15,8 +15,9 @@ import {
   TwitterEngagement } from '../../types/tag.types';
 import { HashTag, TwitterMedia } from '../../types/twitter.types';
 import { StatService } from '../../services/stat.service';
-import { BlogUtilsService } from '../../services/blog-utils.service';
 import { LoginService } from '../../services/login.service';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { AuthStatus } from '../auth/auth.types';
 
 @Component({
   selector: 'app-tag',
@@ -24,6 +25,17 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./tag.component.scss']
 })
 export class TagComponent implements OnInit {
+  private TumblrOAuthSubject$ = this.storage.TumblrOAuthSubject$;
+  private DeviantArtOAuthSubject$ = this.storage.DeviantArtOAuthSubject$;
+
+  public mediaData = mediaData;
+  public deviantArt = Media.DeviantArt;
+  public tumblr = Media.Tumblr;
+  public navActions = navActions;
+  public authSuccess = AuthStatus.Success;
+
+  public mediaStatus = {};
+
   public deviations: TaggedDeviation[] = [];
   public commentStatsDA: Engagement;
   public faveStatsDA: Engagement;
@@ -40,16 +52,37 @@ export class TagComponent implements OnInit {
   private tag = '';
 
   constructor(
-    private blogUtils: BlogUtilsService,
     private tagService: TagService,
     private auth: AuthService,
     private alertService: AlertService,
     private loginService: LoginService,
-    private stat: StatService
+    private stat: StatService,
+    private storage: LocalStorageService
   ) { }
 
   ngOnInit() {
     this.setupSubscriptions();
+
+    Object.keys(mediaData).forEach((media) => {
+      console.log("Push media status: ", media);
+      this.mediaStatus[media] = AuthStatus.Unattempted;
+    });
+
+    /* Subscribe to changes in social media auth status, and enable/disable the
+     * navigation links accordingly. Twitter is always auth = true as only the 
+     * public API is used. */
+    this.TumblrOAuthSubject$.subscribe((tumblrStatus: AuthStatus) => {
+      this.mediaStatus[Media.Tumblr] = tumblrStatus;
+      console.log("🎯 Tumblr status: ", this.mediaStatus);
+    });
+
+    this.DeviantArtOAuthSubject$.subscribe((deviantArtStatus: AuthStatus) => {
+      this.mediaStatus[Media.DeviantArt] = deviantArtStatus;
+      console.log("🎯 DeviantArt status: ", this.mediaStatus);
+    });
+
+    this.mediaStatus[Media.Twitter] = AuthStatus.Success;
+    console.log("🎯 Media status: ", this.mediaStatus);
   }
 
   /* As the deviations are fetched asynchronously, and we only want to calc the stats

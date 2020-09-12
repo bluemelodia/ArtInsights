@@ -2,13 +2,15 @@
     [placeholder]="'Search Tag'"
     (onUserSearch)="userSearchedTag($event)">
 </app-search>
-<app-deviantart-tags
+<app-deviantart-tags 
+    *ngIf="mediaStatus[deviantArt] === authSuccess"
     [deviations]="deviations"
     [commentStats]="commentStatsDA"
     [favoriteStats]="faveStatsDA"
     [noMatchesMessage]="noMatchesMessage">
 </app-deviantart-tags>
 <app-tumblr-tags
+    *ngIf="mediaStatus[tumblr] === authSuccess"
     [posts]="tumblrPosts"
     [engagement]="tumblrStats"
     [noMatchesMessage]="noTumblrPostsMessage">
