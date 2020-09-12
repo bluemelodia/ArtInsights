@@ -71,6 +71,7 @@ export const mediaData: { [id: string] : NavItem } = {
     }
 }
 
+/* Don't really need anything beyond tag search at the moment. May add more if needed. */
 export const navActions: { [id: string] : NavItem } = {
     Tags : {
         iconName: 'tag', 
@@ -78,12 +79,12 @@ export const navActions: { [id: string] : NavItem } = {
         link: '/tags',
         name: 'Tag Search'
     },
-    Engagement : {
+    /* Engagement : {
         iconName: 'heart', 
         alt: 'post engagement',
         link: '/posts',
         name: 'Post Analytics'
-    }
+    } */
 }
 
 export const AuthTokenKey = 'auth_token';

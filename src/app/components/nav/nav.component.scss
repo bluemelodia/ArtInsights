@@ -41,6 +41,8 @@ nav {
 
             &:hover {
                 background-color: transparent;
+                /* Otherwise, it'll be barely visible. */
+                color: $light-text-color; 
             }
         }
     }

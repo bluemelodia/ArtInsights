@@ -134,8 +134,13 @@ export class TagComponent implements OnInit {
   }
 
   private getTags(tag: string) {
-    this.getDATags(tag);
-    this.getTumblrTags(tag);
+    if (this.auth.isAuthorizedForMedia(Media.DeviantArt)) {
+      this.getDATags(tag);
+    }
+
+    if (this.auth.isAuthorizedForMedia(Media.Tumblr)) {
+      this.getTumblrTags(tag);
+    }
     this.getTwitterTags(tag);
   }
 
