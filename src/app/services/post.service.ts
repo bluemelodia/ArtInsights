@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PostService {
-  private deviationsURL = urlForSite(Media.DeviantArt, UserMediaAction.Tags);
-  private tumblrPostsURL = urlForSite(Media.Tumblr, UserMediaAction.Tags);
+  private deviationsURL = urlForSite(Media.DeviantArt, UserMediaAction.Posts);
+  private tumblrPostsURL = urlForSite(Media.Tumblr, UserMediaAction.Posts);
 
   constructor(private http: HttpClient) { }
 
