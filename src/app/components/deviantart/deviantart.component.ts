@@ -38,7 +38,7 @@ export class DeviantArtComponent implements OnInit {
   }
 
   public deviant: DeviantData;
-  public deviations: Deviation[];
+  public deviations: Deviation[] = [];
   private deviantUserSubject$ = this.blogService.deviantSub$;
 
   public watchers: string[] = [];
@@ -67,6 +67,7 @@ export class DeviantArtComponent implements OnInit {
   }
 
   public getDeviations() {
+    this.deviations = [];
     this.postService.getDeviations(this.deviant.username)
       .subscribe((deviations: UserResponse) => {
         console.log("Deviations: ", deviations);
