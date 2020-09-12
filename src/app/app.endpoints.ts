@@ -8,7 +8,7 @@ const mediaActionMap: { [id: string] : MediaAction } = {
         [UserMediaAction.Follow]: 'watch',
         [UserMediaAction.Followers]: 'watchers', 
         [UserMediaAction.Following]: 'watching', 
-        [UserMediaAction.Posts]: '',
+        [UserMediaAction.Posts]: 'all',
         [UserMediaAction.Tags]: 'tag',
         [UserMediaAction.User]: 'user',
         [UserMediaAction.Unfollow]: 'unwatch'

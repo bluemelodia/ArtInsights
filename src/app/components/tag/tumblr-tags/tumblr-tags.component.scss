@@ -79,6 +79,7 @@ $max-post-width: 400px;
     section {
         max-height: $scroll-section-height;
         overflow-y: scroll;
+        overflow-x: hidden;
 
         .posts {
             @include flex-col($justify-content: center);

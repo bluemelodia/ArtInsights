@@ -5,6 +5,7 @@ import { DeviantArtFollowComponent } from './deviantart-follow/deviantart-follow
 import { DeviantComponent } from './deviant/deviant.component';
 import { BlogModule } from '../blog/blog.module';
 import { DeviantPipe } from '../../pipes/deviant.pipe';
+import { DeviantPostsComponent } from './deviant-posts/deviant-posts.component';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { DeviantPipe } from '../../pipes/deviant.pipe';
     DeviantComponent,
     DeviantArtComponent,
     DeviantArtFollowComponent,
+    DeviantPostsComponent,
     DeviantPipe
   ],
   imports: [

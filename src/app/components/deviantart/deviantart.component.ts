@@ -9,6 +9,7 @@ import { AlertType, Media } from '../../app.consts';
 import { DeviantArtFollowService } from '../../services/deviant-art-follow.service';
 import { UserResponse } from '../../types/shared.types';
 import { timer } from 'rxjs';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-deviantart',
@@ -20,6 +21,7 @@ export class DeviantArtComponent implements OnInit {
     private alertService: AlertService,
     private auth: AuthService,
     private blogService: BlogService,
+    private postService: PostService,
     private deviantFollowService: DeviantArtFollowService, 
     private router: Router
   ) {
@@ -57,7 +59,15 @@ export class DeviantArtComponent implements OnInit {
       .subscribe((deviant: DeviantData) => {
         console.log("Received DA user: ", deviant);
         this.deviant = deviant;
+        this.getDeviations();
         this.getWatchersAndFriends();
+      });
+  }
+
+  public getDeviations() {
+    this.postService.getDeviations(this.deviant.username)
+      .subscribe((data: any) => {
+        console.log("Deviations: ", data);
       });
   }
 
@@ -148,7 +158,6 @@ export class DeviantArtComponent implements OnInit {
 
   public addWatcher(watcher: DeviantWatcher) {
     if (watcher.user && watcher.user.username) {
-      console.log("Add watcher: ", watcher, watcher.user.username);
       this.watchers.push(watcher.user.username);
       this.watchersMap[watcher.user.username] = watcher;
     }
@@ -156,7 +165,6 @@ export class DeviantArtComponent implements OnInit {
 
   public addFriend(friend: DeviantFriend) {
     if (friend.user && friend.user.username) {
-      console.log("Add friend: ", friend, friend.user.username);
       this.friends.push(friend.user.username);
       this.friendsMap[friend.user.username] = friend;
     }

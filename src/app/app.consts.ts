@@ -81,6 +81,7 @@ export const navActions: { [id: string] : NavItem } = {
     Engagement : {
         iconName: 'heart', 
         alt: 'post engagement',
+        link: '/posts',
         name: 'Post Analytics'
     }
 }
