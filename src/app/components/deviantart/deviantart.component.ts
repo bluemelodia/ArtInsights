@@ -10,6 +10,7 @@ import { DeviantArtFollowService } from '../../services/deviant-art-follow.servi
 import { UserResponse } from '../../types/shared.types';
 import { timer } from 'rxjs';
 import { PostService } from '../../services/post.service';
+import { DeviantArtPostResponse, Deviation } from '../../types/post.types';
 
 @Component({
   selector: 'app-deviantart',
@@ -37,6 +38,7 @@ export class DeviantArtComponent implements OnInit {
   }
 
   public deviant: DeviantData;
+  public deviations: Deviation[];
   private deviantUserSubject$ = this.blogService.deviantSub$;
 
   public watchers: string[] = [];
@@ -66,8 +68,17 @@ export class DeviantArtComponent implements OnInit {
 
   public getDeviations() {
     this.postService.getDeviations(this.deviant.username)
-      .subscribe((data: any) => {
-        console.log("Deviations: ", data);
+      .subscribe((deviations: UserResponse) => {
+        console.log("Deviations: ", deviations);
+        if (deviations.statusCode === 0 
+          && deviations.responseData) {
+            const deviationData = deviations.responseData as DeviantArtPostResponse;
+            if (deviationData.metadata && deviationData.metadata.length > 0) {
+              deviationData.metadata.forEach((deviation) => {
+                  this.deviations.push(deviation);
+              });
+            }
+        }
       });
   }
 

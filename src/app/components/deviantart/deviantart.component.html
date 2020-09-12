@@ -2,6 +2,10 @@
     *ngIf="deviant" 
     [deviant]="deviant">
 </app-deviant>
+<app-deviant-posts
+    *ngIf="deviations.length > 0"
+    [deviations]="deviations">
+</app-deviant-posts>
 <app-deviantart-follow
     [watchers]="watchers"
     [watchersMap]="watchersMap"

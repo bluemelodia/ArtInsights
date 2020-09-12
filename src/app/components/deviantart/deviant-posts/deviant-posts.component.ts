@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../../../services/alert.service';
-import { Router, NavigationEnd } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
-import { BlogService } from '../../../services/blog.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Deviation } from '../../../types/post.types';
 
 @Component({
   selector: 'app-deviant-posts',
@@ -10,14 +7,11 @@ import { BlogService } from '../../../services/blog.service';
   styleUrls: ['./deviant-posts.component.scss']
 })
 export class DeviantPostsComponent implements OnInit {
-    constructor(
-      private alertService: AlertService,
-      private auth: AuthService,
-      private blogService: BlogService,
-      private router: Router
-    ) {}
+    @Input() deviations: Deviation[];
+
+    constructor() {}
 
     ngOnInit() {
-      
+
     }
 }
