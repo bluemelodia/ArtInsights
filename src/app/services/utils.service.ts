@@ -24,7 +24,7 @@ export class UtilsService {
             console.log("Sliced fragments: ", srcFragments);
             srcFragments[1] = str.slice(str.indexOf("\""));
             slicedStr = srcFragments.join('');
-            console.log("Sliced str after srcset: ", slicedStr);
+            console.log("Sliced str after srcset : ", slicedStr);
         }
 
         slicedStr = slicedStr.replace("</a>", "");
