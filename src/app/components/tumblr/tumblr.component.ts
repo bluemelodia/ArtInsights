@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { AlertType, Media } from '../../app.consts';
   templateUrl: './tumblr.component.html',
   styleUrls: ['./tumblr.component.scss']
 })
-export class TumblrComponent implements OnInit {
+export class TumblrComponent implements OnInit, OnDestroy {
   constructor(
     private alert: AlertService,
     private blog: BlogService,
