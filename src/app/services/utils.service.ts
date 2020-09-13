@@ -17,15 +17,15 @@ export class UtilsService {
       /* The first one might not have a link, push directly. */
       if (str.includes("</a>")) {
         let slicedStr = str.slice(str.indexOf(">") + 1);
+        slicedStr = slicedStr.replace("</a>", "");
 
         /* This logic is specific to DeviantArt, removing this attribute allows thumb images to be shown. */
         if (slicedStr.includes("srcset")) {
             console.log("Sliced str before srcset : ", slicedStr);
-            slicedStr.replace(slicedStr.slice(slicedStr.indexOf("srcset=\""), slicedStr.indexOf("sizes")), '');
+            slicedStr.slice(0, slicedStr.indexOf("data-src")) + slicedStr.slice(slicedStr.indexOf("sizes"), slicedStr.length);
             console.log("Sliced str after srcset : ", slicedStr);
         }
 
-        slicedStr = slicedStr.replace("</a>", "");
         newCaptionFragments.push(slicedStr);
       } else {
         newCaptionFragments.push(str);
