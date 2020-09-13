@@ -12,27 +12,12 @@ export class UtilsService {
   }
 
   public stripLinks(caption: string): string {
-    let captionWithoutHrefs = this.stripLinksUsingSplitter(caption, this.stripHrefLinks);
-    console.log("First split: ", captionWithoutHrefs);
-    let captionWithoutLinks = this.stripLinksUsingSplitter(captionWithoutHrefs, this.stripExternalLinks);
-    console.log("Second split: ", captionWithoutLinks);
-
-    return captionWithoutLinks;
-  }
-
-  private stripHrefLinks(caption: string) {
-    return caption.split("<a href=");
-  }
-
-  private stripExternalLinks(caption: string) {
-    return caption.split("<a class=\"external\" href=");
-  }
-
-  private stripLinksUsingSplitter(caption: string, splitter: Function) {
-    let captionFragments = splitter(caption);
+    let captionFragments = caption.split("<a");
     let newCaptionFragments: string[] = [];
     captionFragments.forEach((str: string) => {
-      const slicedStr = str.slice(str.indexOf("</a>")+4);
+      let slicedStr = str.slice(str.indexOf(">"));
+      console.log("Sliced off the <a> - start: ", slicedStr);
+      slicedStr = slicedStr.replace("</a>", "");
       newCaptionFragments.push(slicedStr);
     });
     return newCaptionFragments.join('');
