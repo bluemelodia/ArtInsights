@@ -3,6 +3,7 @@ import { TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement, TagSt
 import { Subject } from 'rxjs';
 import { Media } from '../app.consts';
 import { HashTag } from '../types/twitter.types';
+import { Deviation } from '../types/post.types';
 
 @Injectable({
   providedIn: 'root'
@@ -150,7 +151,7 @@ export class StatService {
     return twitterStats;
   }
 
-  public calculateDeviationStats(deviations: TaggedDeviation[]) {
+  public calculateDeviationStats(deviations: TaggedDeviation[] | Deviation[]) {
     let commentCounts: number[] = [];
     let faveCounts: number[] = [];
 

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Deviation } from '../../../types/post.types';
 import { BlogUtilsService } from '../../../services/blog-utils.service';
 import { UtilsService } from '../../../services/utils.service';
+import { Engagement } from '../../../types/tag.types';
 
 @Component({
   selector: 'app-deviant-posts',
@@ -10,6 +11,8 @@ import { UtilsService } from '../../../services/utils.service';
 })
 export class DeviantPostsComponent implements OnInit {
     @Input() deviations: Deviation[];
+    @Input() commentStats: Engagement;
+    @Input() favoriteStats: Engagement;
 
     public commentImg = this.utils.getImagePath('comment');
     public heartImg = this.utils.getImagePath('heart');

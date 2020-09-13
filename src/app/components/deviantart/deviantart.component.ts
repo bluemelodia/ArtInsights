@@ -12,6 +12,8 @@ import { timer } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { DeviantArtPostResponse, Deviation, DeviantTag } from '../../types/post.types';
 import { UtilsService } from '../../services/utils.service';
+import { StatService } from '../../services/stat.service';
+import { Engagement } from '../../types/tag.types';
 
 @Component({
   selector: 'app-deviantart',
@@ -20,11 +22,12 @@ import { UtilsService } from '../../services/utils.service';
 })
 export class DeviantArtComponent implements OnInit {
   constructor(
-    private alertService: AlertService,
+    private alert: AlertService,
     private auth: AuthService,
-    private blogService: BlogService,
-    private postService: PostService,
-    private deviantFollowService: DeviantArtFollowService, 
+    private blog: BlogService,
+    private post: PostService,
+    private deviantFollow: DeviantArtFollowService,
+    private stat: StatService,
     private utils: UtilsService,
     private router: Router
   ) {
@@ -34,14 +37,14 @@ export class DeviantArtComponent implements OnInit {
       console.log("Nav ending, should we get DeviantArt user? ", event);
       if (event instanceof NavigationEnd && event.url === "/deviant-art"){
         console.log("Nav ending, get Deviant: ", event);
-        this.blogService.getDeviant();
+        this.blog.getDeviant();
       }
    })
   }
 
   public deviant: DeviantData;
   public deviations: Deviation[] = [];
-  private deviantUserSubject$ = this.blogService.deviantSub$;
+  private deviantUserSubject$ = this.blog.deviantSub$;
 
   public watchers: string[] = [];
   public watchersMap: { [user: string] : any } = {};
@@ -52,6 +55,9 @@ export class DeviantArtComponent implements OnInit {
   public friendsMap: { [user: string] : any } = {};
   private friendOffset = 0;
   private hasMoreFriends = true;
+
+  public commentStatsDA: Engagement;
+  public faveStatsDA: Engagement;
 
   ngOnInit() {
   }
@@ -66,11 +72,24 @@ export class DeviantArtComponent implements OnInit {
         this.getWatchersAndFriends();
         this.getDeviations();
       });
+
+    this.stat.commentSubject$(Media.DeviantArt)
+      .subscribe((commentStats: Engagement) => {
+        this.commentStatsDA = commentStats;
+    });
+  
+    this.stat.favoriteSubject$(Media.DeviantArt)
+      .subscribe((faveStats: Engagement) => {
+        this.faveStatsDA = faveStats;
+    });
   }
 
   public getDeviations() {
     this.deviations = [];
-    this.postService.getDeviations(this.deviant.username)
+    this.commentStatsDA = null;
+    this.faveStatsDA = null;
+
+    this.post.getDeviations(this.deviant.username)
       .subscribe((deviations: UserResponse) => {
         console.log("Deviations: ", deviations);
         if (deviations.statusCode === 0 
@@ -92,9 +111,7 @@ export class DeviantArtComponent implements OnInit {
                   tagArr.push(tag.tag_name);
                 })
                 deviation.tags = tagArr;
-                console.log("About to strip link: ", deviation.description);
                 deviation.description = this.utils.stripLinks(deviation.description);
-                console.log("Stripped links: ", deviation.description);
 
                 if (deviationMap[deviation.deviationid]) {
                   const deviationData = deviationMap[deviation.deviationid];
@@ -108,6 +125,7 @@ export class DeviantArtComponent implements OnInit {
               });
             }
             console.log("Deviations: ", this.deviations);
+            this.stat.calculateDeviationStats(this.deviations);
         }
       });
   }
@@ -117,7 +135,7 @@ export class DeviantArtComponent implements OnInit {
       /* Reset stats. */
       this.resetDAStats();
 
-      this.alertService.showAlert(AlertType.Info, `Retrieving watchers and friends list for ${this.deviant.username}...`);
+      this.alert.showAlert(AlertType.Info, `Retrieving watchers and friends list for ${this.deviant.username}...`);
       this.getFriends();
       this.getWatchers();
     }
@@ -153,12 +171,12 @@ export class DeviantArtComponent implements OnInit {
 
   public getDAFriendsList(offset: number = 0) {
     console.log("GET MORE FRIENDS!", offset);
-    this.deviantFollowService.getDAFriendsList(this.deviant.username, offset)
+    this.deviantFollow.getDAFriendsList(this.deviant.username, offset)
     .subscribe((friendData: UserResponse) => { 
       if (friendData.statusCode === 450) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (friendData.statusCode === -1) {
-        this.alertService.showAlert(AlertType.Error, `Unable to fetch friends list at this time. Try again later.`);
+        this.alert.showAlert(AlertType.Error, `Unable to fetch friends list at this time. Try again later.`);
         console.log(`Failed to fetch friends list.`);
       } else {
         console.log("Friends: ", friendData);
@@ -176,12 +194,12 @@ export class DeviantArtComponent implements OnInit {
 
   public getDAFollowers(offset: number = 0) {
     console.log("GET MORE WATCHERS!", offset);
-    this.deviantFollowService.getDAWatchers(this.deviant.username, offset)
+    this.deviantFollow.getDAWatchers(this.deviant.username, offset)
       .subscribe((watcherData: UserResponse) => { 
         if (watcherData.statusCode === 450) {
           this.auth.userUnauthForMedia(Media.DeviantArt);
         } else if (watcherData.statusCode === -1) {
-          this.alertService.showAlert(AlertType.Error, `Unable to fetch watchers list at this time. Try again later.`);
+          this.alert.showAlert(AlertType.Error, `Unable to fetch watchers list at this time. Try again later.`);
           console.log(`Failed to fetch watchers list.`);
         } else  {
           console.log("Watchers: ", watcherData);
@@ -212,16 +230,16 @@ export class DeviantArtComponent implements OnInit {
   }
 
   public followDeviant(deviant: string) {
-    this.deviantFollowService.watch(deviant)
+    this.deviantFollow.watch(deviant)
     .subscribe((res: WatchResponse) => {
       console.log("FOLLOW RES: ", res);
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (res.statusCode !== 0 || res.responseData.status === 'error') {
-        this.alertService.showAlert(AlertType.Error, `Unable to watch ${deviant}.`);
+        this.alert.showAlert(AlertType.Error, `Unable to watch ${deviant}.`);
         console.log(`Failed to watch: ${deviant}, ${res}`);
       } else {
-        this.alertService.showAlert(AlertType.Success, `You followed ${deviant}.`);
+        this.alert.showAlert(AlertType.Success, `You followed ${deviant}.`);
         console.log(`Successfully followed: ${deviant}, refresh`);
         timer(1000).subscribe(() => {
           this.getWatchersAndFriends();
@@ -232,17 +250,17 @@ export class DeviantArtComponent implements OnInit {
   }
 
   public unfollowDeviant(deviant: string) {
-    this.deviantFollowService.unwatch(deviant)
+    this.deviantFollow.unwatch(deviant)
     .subscribe((res: WatchResponse) => {
       console.log("UNFOLLOW RES: ", res);
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (res.statusCode !== 0 || res.responseData.status === 'error') {
         console.log(`Failed to unwatch: ${deviant}, `, res);
-        this.alertService.showAlert(AlertType.Error, `Unable to unwatch ${deviant}.`);
+        this.alert.showAlert(AlertType.Error, `Unable to unwatch ${deviant}.`);
       } else {
         console.log(`Successfully unwatched: ${deviant}, refresh`);
-        this.alertService.showAlert(AlertType.Success, `You unwatched ${deviant}.`);
+        this.alert.showAlert(AlertType.Success, `You unwatched ${deviant}.`);
 
         timer(1000).subscribe(() => {
           this.getWatchersAndFriends();

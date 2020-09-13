@@ -15,8 +15,8 @@ import { AlertType, Media } from '../../app.consts';
 })
 export class TumblrComponent implements OnInit {
   constructor(
-    private alertService: AlertService,
-    private blogService: BlogService,
+    private alert: AlertService,
+    private blog: BlogService,
     private tumblrFollowService: TumblrFollowService, 
     private auth: AuthService,
     private router: Router
@@ -27,15 +27,15 @@ export class TumblrComponent implements OnInit {
       console.log("Nav ending, should we get Tumblr user? ", event);
       if (event instanceof NavigationEnd && event.url === "/tumblr"){
         console.log("Nav ending, get Tumblr user: ", event);
-        this.blogService.getTumblrUser();
+        this.blog.getTumblrUser();
       }
    })
   }
 
   public tumblrUser: TumblrUserInfo;
-  public blog: string;
+  public userBlog: string;
 
-  private tumblrUserSubject$ = this.blogService.tumblrUserSub$;
+  private tumblrUserSubject$ = this.blog.tumblrUserSub$;
 
   /*
   * The Tumblr API total_blogs and total_users fields do not reflect the actual number
@@ -71,17 +71,17 @@ export class TumblrComponent implements OnInit {
 
   public onBlogSearch(blog: string) {
     /* New blog search, reset all. */
-    if (this.tumblrUser && blog !== this.blog) {
-      this.blog = blog;
-      this.alertService.showAlert(AlertType.Info, `Retrieving data for ${this.blog}...`);
+    if (this.tumblrUser && blog !== this.userBlog) {
+      this.userBlog = blog;
+      this.alert.showAlert(AlertType.Info, `Retrieving data for ${this.blog}...`);
       this.getTumblrFollowersAndFollowing();
     }
   }
 
   public getTumblrFollowersAndFollowing() {
     this.resetTumblrStats();
-    this.getTumblrFollowers(this.blog, this.tumblrFollowerOffset);
-    this.getTumblrFollowing(this.blog, this.tumblrFollowingOffset);
+    this.getTumblrFollowers(this.userBlog, this.tumblrFollowerOffset);
+    this.getTumblrFollowing(this.userBlog, this.tumblrFollowingOffset);
   }
 
   public followTumblr(blog: string) {
@@ -90,10 +90,10 @@ export class TumblrComponent implements OnInit {
         if (res.statusCode === 403) {
           this.auth.userUnauthForMedia(Media.Tumblr);
         } else if (res.statusCode !== 0) {
-          this.alertService.showAlert(AlertType.Error, `Unable to follow ${blog}.`);
+          this.alert.showAlert(AlertType.Error, `Unable to follow ${blog}.`);
           console.log(`Failed to follow: ${blog}, ${res}`);
         } else {
-          this.alertService.showAlert(AlertType.Success, `You followed ${blog}.`);
+          this.alert.showAlert(AlertType.Success, `You followed ${blog}.`);
           console.log(`Successfully followed: ${blog}, refresh`);
           this.getTumblrFollowersAndFollowing();
         }
@@ -108,10 +108,10 @@ export class TumblrComponent implements OnInit {
         this.auth.userUnauthForMedia(Media.Tumblr);
       } else if (res.statusCode !== 0) {
         console.log(`Failed to unfollow: ${blog}, `, res);
-        this.alertService.showAlert(AlertType.Error, `Unable to unfollow ${blog}.`);
+        this.alert.showAlert(AlertType.Error, `Unable to unfollow ${blog}.`);
       } else {
         console.log(`Successfully unfollowed: ${blog}, refresh`);
-        this.alertService.showAlert(AlertType.Success, `You unfollowed ${blog}.`);
+        this.alert.showAlert(AlertType.Success, `You unfollowed ${blog}.`);
         this.getTumblrFollowersAndFollowing();
       }
       console.log("Try to unfollow: ", res);
@@ -120,7 +120,7 @@ export class TumblrComponent implements OnInit {
 
   /* Get next page of followers/followings. */
   public getNextFollowers() {
-    this.getMoreTumblrFollowers(this.blog);
+    this.getMoreTumblrFollowers(this.userBlog);
   }
 
   private getMoreTumblrFollowers(blog: string) {
@@ -130,7 +130,7 @@ export class TumblrComponent implements OnInit {
   }
 
   public getNextFollowing() {
-    this.getMoreTumblrFollowing(this.blog);
+    this.getMoreTumblrFollowing(this.userBlog);
   }
 
   private getMoreTumblrFollowing(blog: string) {

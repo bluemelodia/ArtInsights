@@ -20,10 +20,10 @@ export class AuthComponent {
   private authRedirectSubject$: Subject<AuthRedirectResponse>;
 
   constructor(
-    private alertService: AlertService,
-    public authService: AuthService, 
+    private alert: AlertService,
+    public auth: AuthService, 
     private storage: LocalStorageService,
-    private redirectService: RedirectService,
+    private redirect: RedirectService,
     private router: Router,
     private utils: UtilsService
   ) {
@@ -34,8 +34,8 @@ export class AuthComponent {
     delete this.mediaData[Media.Twitter];
   }
 
-  public auth(forMedia: Media) {
-    this.authService.authenticateUser(forMedia);
+  public authUser(forMedia: Media) {
+    this.auth.authenticateUser(forMedia);
   }
 
   public loginUser() {
@@ -50,7 +50,7 @@ export class AuthComponent {
 
   public getStylesForMediaButton(media: Media) {
     let mediaStyle = [];
-    if (this.authService.isAuthorizedForMedia(media)) {
+    if (this.auth.isAuthorizedForMedia(media)) {
       mediaStyle.push('auth-success');
     }
 
@@ -70,30 +70,30 @@ export class AuthComponent {
   }
 
   public setupRedirectSubscriptions() {
-    this.authRedirectSubject$ = this.authService.authRedirectSubject$;
+    this.authRedirectSubject$ = this.auth.authRedirectSubject$;
     this.authRedirectSubject$
       .subscribe((redirectLink: AuthRedirectResponse) => {
         console.info("Prepare to redirect to auth link: ", redirectLink);
         if (redirectLink.redirect) {
-          this.alertService.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
-          this.redirectService.redirect(redirectLink.redirect);
+          this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
+          this.redirect.redirect(redirectLink.redirect);
         } else {
-          this.alertService.showAlert(AlertType.Error, `We are unable to connect to ${redirectLink.mediaType} at this time. Please try again later.`);
+          this.alert.showAlert(AlertType.Error, `We are unable to connect to ${redirectLink.mediaType} at this time. Please try again later.`);
         }
     });
   }
 
   public setupAuthSubscription() {
-    this.authSubject$ = this.authService.authSubject$;
+    this.authSubject$ = this.auth.authSubject$;
     this.authSubject$
       .subscribe((response: AuthPostResponse) => {
         if (response && response.statusCode === 0) {
           console.info("Auth successful for ", response);
-          this.alertService.showAlert(AlertType.Success, `${response.mediaType} authorization successful.`);
+          this.alert.showAlert(AlertType.Success, `${response.mediaType} authorization successful.`);
           this.storage.setOAuthKey(response.mediaType, AuthStatus.Success);
         } else {
           console.info("Auth failed for: ", response);
-          this.alertService.showAlert(AlertType.Error, `${response.mediaType} authorization failed. Please try again.`);
+          this.alert.showAlert(AlertType.Error, `${response.mediaType} authorization failed. Please try again.`);
           this.storage.setOAuthKey(response.mediaType, AuthStatus.Failed);
         }
       });

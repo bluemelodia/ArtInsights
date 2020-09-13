@@ -50,15 +50,15 @@ export class TagComponent implements OnInit {
   public twitterStats: TwitterEngagement;
   public noTweetsMessage: string;
 
-  private tag = '';
+  private currentTag = '';
 
   constructor(
-    private tagService: TagService,
     private auth: AuthService,
-    private alertService: AlertService,
-    private loginService: LoginService,
+    private alert: AlertService,
+    private login: LoginService,
     private stat: StatService,
     private storage: LocalStorageService,
+    private tags: TagService,
     private utils: UtilsService
   ) { }
 
@@ -113,7 +113,7 @@ export class TagComponent implements OnInit {
   }
 
   public userSearchedTag(tag: string) {
-    if (tag && tag.length > 0 && tag !== this.tag) {
+    if (tag && tag.length > 0 && tag !== this.currentTag) {
       console.log("Search tag: ", tag);
       this.resetTagData();
       this.getTags(tag);
@@ -147,14 +147,14 @@ export class TagComponent implements OnInit {
   }
 
   private getDATags(tag: string) {
-    this.tagService.getDeviationsForTag(tag)
+    this.tags.getDeviationsForTag(tag)
     .subscribe((taggedDeviations: UserResponse) => { 
       if (taggedDeviations.statusCode === 401) {
-        this.loginService.userNotAuthorizedToLogin();
+        this.login.userNotAuthorizedToLogin();
       } else if (taggedDeviations.statusCode === 450) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (taggedDeviations.statusCode === -1) {
-        this.alertService.showAlert(AlertType.Error, `Unable to fetch tagged deviations at this time, try again later.`);
+        this.alert.showAlert(AlertType.Error, `Unable to fetch tagged deviations at this time, try again later.`);
         console.log(`Failed to fetch tagged deviations.`);
       } else  {
         console.log("Tagged deviations: ", taggedDeviations);
@@ -175,14 +175,14 @@ export class TagComponent implements OnInit {
   }
 
   private getTumblrTags(tag: string) {
-    this.tagService.getTumblrPostsForTag(tag)
+    this.tags.getTumblrPostsForTag(tag)
     .subscribe((taggedPosts: UserResponse) => { 
       if (taggedPosts.statusCode === 401) {
-        this.loginService.userNotAuthorizedToLogin();
+        this.login.userNotAuthorizedToLogin();
       } else if (taggedPosts.statusCode === 450) {
         this.auth.userUnauthForMedia(Media.Tumblr);
       } else if (taggedPosts.statusCode === -1) {
-        this.alertService.showAlert(AlertType.Error, `Unable to fetch tagged Tumblr posts at this time, try again later.`);
+        this.alert.showAlert(AlertType.Error, `Unable to fetch tagged Tumblr posts at this time, try again later.`);
         console.log(`Failed to fetch tagged Tumblr posts.`);
       } else  {
         console.log("Tagged Tumblr posts: ", taggedPosts);
@@ -206,10 +206,10 @@ export class TagComponent implements OnInit {
 
   /* No auth guards as we aren't using authenticated APIs for Twitter. */
   private getTwitterTags(tag: string) {
-    this.tagService.getTwitterPostsForTag(tag)
+    this.tags.getTwitterPostsForTag(tag)
       .subscribe((tweets: any) => {
         if (tweets.statusCode === -1) {
-          this.alertService.showAlert(AlertType.Error, `Unable to fetch tweets at this time, try again later.`);
+          this.alert.showAlert(AlertType.Error, `Unable to fetch tweets at this time, try again later.`);
           console.log(`Failed to fetch tagged tweets.`);
         } else  {
           console.log("Tagged tweets: ", tweets);

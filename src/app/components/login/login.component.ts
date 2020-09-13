@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   private loginSubject$: Subject<LoginPostResponse>;
 
   constructor(
-    private alertService: AlertService,
+    private alert: AlertService,
     private fb: FormBuilder, 
     private login: LoginService,
     private router: Router) { }
@@ -67,10 +67,10 @@ export class LoginComponent implements OnInit {
               message = 'Registration successful. Please log in using your credentials.';
               break;
           }
-          this.alertService.showAlert(AlertType.Success, message);
+          this.alert.showAlert(AlertType.Success, message);
         } else {
           console.info("Login failed for: ", response);
-          this.alertService.showAlert(AlertType.Error, response.errorMsg ? response.errorMsg : "An error occured. Please try again.");
+          this.alert.showAlert(AlertType.Error, response.errorMsg ? response.errorMsg : "An error occured. Please try again.");
         }
       });
   }

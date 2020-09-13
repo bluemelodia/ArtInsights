@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
   private DeviantArtOAuthSubject$ = this.storage.DeviantArtOAuthSubject$;
 
   constructor(
-      public authService: AuthService,
+      public auth: AuthService,
       private storage: LocalStorageService) { }
 
   ngOnInit(): void {

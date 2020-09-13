@@ -4,7 +4,9 @@
 </app-deviant>
 <app-deviant-posts
     *ngIf="deviations.length > 0"
-    [deviations]="deviations">
+    [deviations]="deviations"
+    [commentStats]="commentStatsDA"
+    [favoriteStats]="faveStatsDA">
 </app-deviant-posts>
 <app-deviantart-follow
     [watchers]="watchers"

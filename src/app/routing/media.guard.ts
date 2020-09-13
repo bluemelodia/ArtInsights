@@ -11,15 +11,14 @@ import { Media } from '../app.consts';
 })
 export class MediaGuard implements CanActivate {
   constructor(
-    private router: Router,
-    private authService: AuthService
+    private auth: AuthService
   ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     console.log("🚔 Is the user OAuth for this media?");
-    if (this.authService.isAuthorizedForMedia(next.data.media as Media)) { return true; }
+    if (this.auth.isAuthorizedForMedia(next.data.media as Media)) { return true; }
 
     console.log("🚔 Not auth for this media, bye!");
 
