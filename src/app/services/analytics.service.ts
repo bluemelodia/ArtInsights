@@ -24,7 +24,8 @@ export class AnalyticsService {
     });
     console.log("Analytics so far: ", this.deviantArtAnalytics);
 
-    /* Average out all the analtyics. */
+    /* Average out all the analytics. */
+    return this.computeDeviationStats();
   }
 
   private compileDeviationStats(stats: DeviationStats, tags: (string | DeviantTag)[], time: string) {
@@ -67,7 +68,6 @@ export class AnalyticsService {
       this.deviantArtAnalytics[tag].comments.push(stats.comments);
     });
     console.log("Analytics: ", this.deviantArtAnalytics);
-    this.computeDeviationStats();
   }
 
   private computeDeviationStats() {
