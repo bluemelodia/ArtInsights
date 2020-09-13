@@ -51,7 +51,7 @@
     </div>
     <div class="stats-container">
         <div class="stats-summary" *ngIf="posts.length > 0">
-            <div *ngFor="let tag of engagement.tags | keyvalue" class="notes">
+            <div *ngFor="let tag of engagement.tags | keyvalue" class="tag-stats">
                 <div class="stats">
                     <span class="tag">#{{ tag.key | tag }}</span>
                     <span>{{ tag.value.high }}</span>

@@ -16,9 +16,8 @@ $max-post-width: 400px;
         .stats-summary {
             @include flex-col($justify-content: flex-start);
 
-            .notes {
+            .notes, .tag-stats {
                 @include flex-row-center($justify-content: flex-start);
-                padding-top: $large-spacing;
 
                 img {
                     width: $large-spacing;
@@ -28,6 +27,10 @@ $max-post-width: 400px;
                 .stats {
                     @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
                 }
+            }
+
+            .notes {
+                padding-top: $large-spacing;
             }
         }
 

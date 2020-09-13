@@ -9,4 +9,16 @@ export class UtilsService {
   public getImagePath(imageName: string): string {
     return `./images/${imageName}.png`;
   }
+
+  public stripLinks(caption: string): string {
+    let captionFragments = caption.split("<a href=");
+    let newCaptionFragments: string[] = [];
+    captionFragments.forEach((str) => {
+      const slicedStr = str.slice(str.indexOf("</a>")+4);
+      newCaptionFragments.push(slicedStr + '...');
+    });
+    return newCaptionFragments.join('');
+  }
+
+  
 }

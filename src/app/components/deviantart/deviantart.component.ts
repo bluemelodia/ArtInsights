@@ -11,6 +11,7 @@ import { UserResponse } from '../../types/shared.types';
 import { timer } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { DeviantArtPostResponse, Deviation, DeviantTag } from '../../types/post.types';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-deviantart',
@@ -24,6 +25,7 @@ export class DeviantArtComponent implements OnInit {
     private blogService: BlogService,
     private postService: PostService,
     private deviantFollowService: DeviantArtFollowService, 
+    private utils: UtilsService,
     private router: Router
   ) {
     this.setupDASubscription();
@@ -90,6 +92,7 @@ export class DeviantArtComponent implements OnInit {
                   tagArr.push(tag.tag_name);
                 })
                 deviation.tags = tagArr;
+                deviation.description = this.utils.stripLinks(deviation.description);
 
                 if (deviationMap[deviation.deviationid]) {
                   const deviationData = deviationMap[deviation.deviationid];

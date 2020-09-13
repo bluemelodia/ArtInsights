@@ -18,6 +18,7 @@ import { StatService } from '../../services/stat.service';
 import { LoginService } from '../../services/login.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AuthStatus } from '../auth/auth.types';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-tag',
@@ -57,7 +58,8 @@ export class TagComponent implements OnInit {
     private alertService: AlertService,
     private loginService: LoginService,
     private stat: StatService,
-    private storage: LocalStorageService
+    private storage: LocalStorageService,
+    private utils: UtilsService
   ) { }
 
   ngOnInit() {
@@ -190,17 +192,7 @@ export class TagComponent implements OnInit {
               /* Again filter for visual art. */
               if (tumblrPost.type === "photo") {
                 /* First strip out the links from the caption. */
-                let captionFragments = tumblrPost.caption.split("<a href=");
-                let newCaptionFragments: string[] = [];
-                console.log("CAPTION FRAGMENTS: ", captionFragments);
-                captionFragments.forEach((str) => {
-                  console.log("Original str: ", str);
-                  const slicedStr = str.slice(str.indexOf("</a>")+4);
-                  console.log("Sliced str: ", str.indexOf("</a>")+4, slicedStr);
-                  newCaptionFragments.push(slicedStr);
-                });
-                console.log("NEW CAPTION FRAGMENTS: ", newCaptionFragments);
-                tumblrPost.caption = newCaptionFragments.join('');
+                tumblrPost.caption = this.utils.stripLinks(tumblrPost.caption);
                 this.tumblrPosts.push(tumblrPost);
               }
           });

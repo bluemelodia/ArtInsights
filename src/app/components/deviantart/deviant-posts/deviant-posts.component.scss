@@ -88,6 +88,10 @@ $max-deviation-width: 400px;
                         }
                     }
 
+                    .tags-list {
+                        margin-bottom: $small-spacing;
+                    }
+
                     .deviation-stats {
                         @include flex-row-center($justify-content: space-between);
 
