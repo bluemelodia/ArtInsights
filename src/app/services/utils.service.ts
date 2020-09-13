@@ -17,6 +17,7 @@ export class UtilsService {
       const slicedStr = str.slice(str.indexOf("</a>")+4);
       newCaptionFragments.push(slicedStr);
     });
+    console.log("NEW CAP FRAGMENTS: ", newCaptionFragments);
     return newCaptionFragments.join('');
   }
 
