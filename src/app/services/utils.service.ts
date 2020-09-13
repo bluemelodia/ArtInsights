@@ -21,9 +21,9 @@ export class UtilsService {
 
         /* This logic is specific to DeviantArt, removing this attribute allows thumb images to be shown. */
         if (slicedStr.includes("srcset")) {
-            console.log("Sliced str before srcset : ", slicedStr);
+            console.log("Sliced before srcset : ", slicedStr);
             slicedStr.slice(0, slicedStr.indexOf("data-src")) + slicedStr.slice(slicedStr.indexOf("sizes"), slicedStr.length);
-            console.log("Sliced str after srcset : ", slicedStr);
+            console.log("Sliced after srcset : ", slicedStr);
         }
 
         newCaptionFragments.push(slicedStr);
