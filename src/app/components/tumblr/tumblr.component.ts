@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 import { AlertService } from '../../services/alert.service';
 import { BlogService } from '../../services/blog.service';
 import { TumblrFollowService } from '../../services/tumblr-follow.service';
 import { AuthService } from '../../services/auth.service';
 import { TumblrUserInfo, TumblrUser, TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing } from '../../types/tumblr.types';
 import { AlertType, Media } from '../../app.consts';
-
 
 @Component({
   selector: 'app-tumblr',
@@ -22,15 +23,9 @@ export class TumblrComponent implements OnInit {
     private router: Router
   ) {
     this.setupTumblrSubscription();
-
-    this.router.events.subscribe(event =>{
-      console.log("Nav ending, should we get Tumblr user? ", event);
-      if (event instanceof NavigationEnd && event.url === "/tumblr"){
-        console.log("Nav ending, get Tumblr user: ", event);
-        this.blog.getTumblrUser();
-      }
-   })
   }
+
+  private routeObserver: Subscription;
 
   public tumblrUser: TumblrUserInfo;
   public userBlog: string;
@@ -54,6 +49,17 @@ export class TumblrComponent implements OnInit {
   private hasMoreTumblrFollowing = true;
 
   ngOnInit() {
+    this.routeObserver = this.router.events.subscribe(event =>{
+      console.log("Nav ending, should we get Tumblr user? ", event);
+      if (event instanceof NavigationEnd && event.url === "/tumblr"){
+        console.log("Nav ending, get Tumblr user: ", event);
+        this.blog.getTumblrUser();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.routeObserver.unsubscribe();
   }
 
   public setupTumblrSubscription() {
