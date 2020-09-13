@@ -3,11 +3,10 @@ import { TagService } from '../../services/tag.service';
 import { Media, AlertType, mediaData, navActions } from '../../app.consts';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
-import { UserResponse } from '../../types/shared.types';
+import { UserResponse, Engagement } from '../../types/shared.types';
 import { 
   DeviantArtTagResponse, 
   TaggedDeviation, 
-  Engagement, 
   TumblrTagResponse, 
   TumblrEngagement, 
   TwitterTagResponse, 

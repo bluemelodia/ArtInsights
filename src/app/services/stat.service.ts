@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { TaggedDeviation, Engagement, TumblrTagResponse, TumblrEngagement, TagAggregate, TaggedTweet, TwitterEngagement, HashTagAggregate } from '../types/tag.types';
+import { TaggedDeviation, TumblrTagResponse, TumblrEngagement, TagAggregate, TaggedTweet, TwitterEngagement, HashTagAggregate } from '../types/tag.types';
 import { Subject } from 'rxjs';
 import { Media } from '../app.consts';
 import { Deviation } from '../types/post.types';
+import { Engagement } from '../types/shared.types';
 
 @Injectable({
   providedIn: 'root'

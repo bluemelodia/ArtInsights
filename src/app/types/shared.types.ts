@@ -16,3 +16,10 @@ export interface DeviationContent {
     transparency: boolean, 
     width: number
 }
+
+export interface Engagement {
+    average: number, 
+    high: number,
+    low: number,
+    median: number
+}

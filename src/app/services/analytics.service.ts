@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { DeviantArtAnalytics, DeviationStats } from '../types/tag.types';
+import { DeviationTotalStats, DeviationAnalytics, DeviationStats } from '../types/tag.types';
 import { DayOfWeek } from '../types/time.types';
 import { Deviation, DeviantTag } from '../types/post.types';
 import { StatService } from './stat.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalyticsService {
-  private deviantArtAnalytics: DeviantArtAnalytics;
+  private deviantArtAnalytics: DeviationTotalStats;
+  public deviationSubject$ = new Subject<DeviationAnalytics>();
 
   constructor(private stat: StatService) { }
 
@@ -25,7 +27,7 @@ export class AnalyticsService {
     console.log("Analytics so far: ", this.deviantArtAnalytics);
 
     /* Average out all the analytics. */
-    return this.computeDeviationStats();
+    return this.deviationSubject$.next(this.computeDeviationStats());
   }
 
   private compileDeviationStats(stats: DeviationStats, tags: (string | DeviantTag)[], time: string) {
@@ -70,7 +72,7 @@ export class AnalyticsService {
     console.log("Analytics: ", this.deviantArtAnalytics);
   }
 
-  private computeDeviationStats() {
+  private computeDeviationStats(): DeviationAnalytics {
     const artStats = {
       tags: {},
       days: {},

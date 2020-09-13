@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Deviation } from '../../../types/post.types';
 import { BlogUtilsService } from '../../../services/blog-utils.service';
 import { UtilsService } from '../../../services/utils.service';
-import { Engagement } from '../../../types/tag.types';
+import { Engagement } from '../../../types/shared.types';
 
 @Component({
   selector: 'app-deviant-posts',

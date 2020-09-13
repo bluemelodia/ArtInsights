@@ -9,12 +9,12 @@ import { AuthService } from '../../services/auth.service';
 import { DeviantData, DeviantFriend, DeviantListData, DeviantWatcher, WatchResponse } from '../../types/deviant.types';
 import { AlertType, Media } from '../../app.consts';
 import { DeviantArtFollowService } from '../../services/deviant-art-follow.service';
-import { UserResponse } from '../../types/shared.types';
+import { UserResponse, Engagement } from '../../types/shared.types';
 import { PostService } from '../../services/post.service';
 import { DeviantArtPostResponse, Deviation, DeviantTag } from '../../types/post.types';
 import { UtilsService } from '../../services/utils.service';
 import { StatService } from '../../services/stat.service';
-import { Engagement } from '../../types/tag.types';
+import { DeviationAnalytics } from '../../types/tag.types';
 import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
@@ -51,6 +51,7 @@ export class DeviantArtComponent implements OnInit {
 
   public deviant: DeviantData;
   public deviations: Deviation[] = [];
+  public deviationStats: DeviationAnalytics;
   private deviantUserSubject$ = this.blog.deviantSub$;
 
   public watchers: string[] = [];

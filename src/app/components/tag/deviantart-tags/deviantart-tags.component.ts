@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TaggedDeviation, Engagement } from '../../../types/tag.types';
+import { TaggedDeviation } from '../../../types/tag.types';
 import { BlogUtilsService } from '../../../services/blog-utils.service';
 import { UtilsService } from '../../../services/utils.service';
+import { Engagement } from '../../../types/shared.types';
 
 @Component({
   selector: 'app-deviantart-tags',

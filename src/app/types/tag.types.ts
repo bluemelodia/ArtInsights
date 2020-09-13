@@ -1,8 +1,7 @@
 import { DeviantData } from './deviant.types';
 import { TumblrPhotos, TumblrUserBlog } from './tumblr.types';
 import { TwitterUser, TwitterEntities } from './twitter.types';
-import { DeviationContent } from './shared.types';
-import { DayOfWeek } from './time.types';
+import { DeviationContent, Engagement } from './shared.types';
 
 export interface DeviantArtTagResponse {
     estimated_total: number,
@@ -65,13 +64,6 @@ export interface TaggedTweet {
     user: TwitterUser
 }
 
-export interface Engagement {
-    average: number, 
-    high: number,
-    low: number,
-    median: number
-}
-
 export interface TagStat {
     count: number,
     engagements: number[],
@@ -105,7 +97,7 @@ export interface DeviationStats {
 *
 * https://stackoverflow.com/questions/56293650/duplicate-string-index-signature-ts2374
 */
-export interface DeviantArtAnalytics { 
+export interface DeviationTotalStats { 
     tags: {
         [tag: string] : {
             views: number[],
@@ -125,6 +117,30 @@ export interface DeviantArtAnalytics {
             views: number[],
             favorites: number[],
             comments: number[]
+        }
+    }
+}
+
+export interface DeviationAnalytics {
+    tags: {
+        [tag: string] : {
+            views: Engagement,
+            favorites: Engagement,
+            comments: Engagement
+        }
+    },
+    days: {
+        [day: number] : {
+            views: Engagement,
+            favorites: Engagement,
+            comments: Engagement
+        }
+    },
+    times: {
+        [times: number] : {
+            views: Engagement,
+            favorites: Engagement,
+            comments: Engagement
         }
     }
 }
