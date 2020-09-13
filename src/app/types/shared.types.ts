@@ -8,3 +8,11 @@ export interface UserResponse {
     responseData?: TumblrResponseData | DeviantData | DeviantListData | 
         DeviantArtTagResponse | TumblrTagResponse[] | DeviantArtPostResponse
 }
+
+export interface DeviationContent {
+    filesize?: number,
+    height: number, 
+    src: string, 
+    transparency: boolean, 
+    width: number
+}

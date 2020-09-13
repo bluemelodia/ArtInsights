@@ -1,6 +1,7 @@
 import { DeviantData } from './deviant.types';
 import { TumblrPhotos, TumblrUserBlog } from './tumblr.types';
 import { TwitterUser, TwitterEntities } from './twitter.types';
+import { DeviationContent } from './shared.types';
 
 export interface DeviantArtTagResponse {
     estimated_total: number,
@@ -22,14 +23,6 @@ export interface TaggedDeviation {
     title: string, 
     thumbs: DeviationContent[]
     url: string
-}
-
-export interface DeviationContent {
-    filesize?: number,
-    height: number, 
-    src: string, 
-    transparency: boolean, 
-    width: number
 }
 
 export interface TumblrTagResponse {

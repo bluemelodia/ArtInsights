@@ -1,0 +1,106 @@
+@import '../../../../styles/mixins.scss';
+@import '../../../../styles/variables.scss';
+
+$max-deviation-width: 400px;
+
+:host {
+    @include deviantart-theme();
+    @include deviantart-container();
+    color: $light-text-color;
+    margin-top: $large-spacing;
+    width: 100%;
+
+    .deviations-stats {
+        padding: $large-spacing;
+
+        .stats-summary {
+            @include flex-col($justify-content: flex-start);
+            padding-top: $large-spacing;
+
+            .favorites, .comments {
+                @include flex-row-center($justify-content: flex-start);
+    
+                img {
+                    width: $large-spacing;
+                    margin-right: $large-spacing;
+                }
+    
+                .stats {
+                    @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+                    
+                    span {
+                        width: 25%;
+                    }
+                }
+            }
+        }
+
+        .no-matches {
+            max-width: $max-width;
+            text-align: center;
+        }
+    }
+
+    section {
+        max-height: $scroll-section-height;
+        overflow-y: scroll;
+
+        .deviations {
+            @include flex-col($justify-content: center);
+
+            .deviation {
+                padding: $large-spacing;
+                margin: 0 auto;
+
+                .deviation-img {
+                    width: $max-deviation-width;
+                    border: 2px solid $light-text-color;
+                    padding: $large-spacing;
+
+                    &:hover {
+                        border: 2px solid $deviantart-light;
+                    }
+                }
+
+                .deviation-data {
+                    margin-top: $large-spacing;
+                    max-width: $max-deviation-width;
+
+                    h3 {
+                        &:hover {
+                            color: $deviantart-light;
+                        }
+                    }
+
+                    .deviation-stats {
+                        @include flex-row-center($justify-content: space-between);
+
+                        .author-link {
+                            &:hover {
+                                color: $deviantart-light;
+                            }
+                        }
+
+                        .engagement {
+                            @include flex-row($justify-content: flex-start);
+        
+                            .favorites, .comments {
+                                @include flex-row-center();
+                                margin-right: $small-spacing;
+        
+                                img {
+                                    width: $large-spacing;
+                                    margin-right: $small-spacing;
+                                }
+                            }
+                        }
+    
+                        .user-icon {
+                            max-height: 50px;
+                        }
+                    }
+                }
+            }  
+        }
+    }
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Deviation } from '../../../types/post.types';
+import { BlogUtilsService } from '../../../services/blog-utils.service';
 
 @Component({
   selector: 'app-deviant-posts',
@@ -9,7 +10,7 @@ import { Deviation } from '../../../types/post.types';
 export class DeviantPostsComponent implements OnInit {
     @Input() deviations: Deviation[];
 
-    constructor() {}
+    constructor(public blogUtils: BlogUtilsService) {}
 
     ngOnInit() {
 

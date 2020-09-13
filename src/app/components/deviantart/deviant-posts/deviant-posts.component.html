@@ -1,1 +1,56 @@
-<p>deviant-posts works!</p>
+
+<div class="deviations-stats">
+    <h3>Deviations</h3>
+    <div class="stats-summary" *ngIf="deviations.length > 0">
+        <div class="favorites">
+            <img [src]="heartImg"/> 
+            <div *ngIf="favoriteStats" class="stats">
+                <span>Hi {{ favoriteStats.high }}</span>
+                <span>Low {{ favoriteStats.low }}</span>
+                <span>Mid {{ favoriteStats.median }}</span>
+                <span>Avg {{ favoriteStats.average | number:'1.2-2' }}</span>
+            </div>
+        </div>
+        <div class="comments">
+            <img [src]="commentImg"/>
+            <div *ngIf="commentStats" class="stats">
+                <span>Hi {{ commentStats.high }}</span>
+                <span>Low {{ commentStats.low }}</span>
+                <span>Mid {{ commentStats.median }}</span>
+                <span>Avg {{ commentStats.average | number:'1.2-2' }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<section *ngIf="deviations.length > 0">
+    <div class="deviations">
+        <div class="deviation" *ngFor="let deviation of deviations">
+            <img (click)="blogUtils.visitBlog(deviation.url)" class="deviation-img" [src]="deviation.content.src"/>
+            <div class="deviation-data">
+                <h3 (click)="blogUtils.visitBlog(deviation.url)">{{ deviation.title }}</h3>
+                 <div class="deviation-stats">
+                    <div class="stats">
+                        <div>
+                            by <span class="author-link" 
+                                (click)="blogUtils.visitDeviantArt(deviation.author.username)">
+                                    {{ deviation.author.username }}
+                                </span>
+                        </div>
+                        <p>Posted on {{ blogUtils.dateForTimestamp(deviation.published_time)  | date: 'short' }} </p>
+                        <div class="engagement">
+                            <div class="favorites">
+                                <img [src]="heartImg"/> 
+                                <span>{{ deviation.stats.favourites }}</span>
+                            </div>
+                            <div class="comments">
+                                <img [src]="commentImg"/>
+                                <span>{{ deviation.stats.comments }}</span>
+                            </div>
+                        </div>
+                    </div>                   
+                    <img class="user-icon" [src]="deviation.author.usericon"/>
+                </div>
+            </div>
+        </div>
+    </div> 
+</section>

@@ -74,11 +74,27 @@ export class DeviantArtComponent implements OnInit {
         if (deviations.statusCode === 0 
           && deviations.responseData) {
             const deviationData = deviations.responseData as DeviantArtPostResponse;
-            if (deviationData.metadata && deviationData.metadata.length > 0) {
-              deviationData.metadata.forEach((deviation) => {
-                  this.deviations.push(deviation);
+            const deviationMap = {};
+            if (deviationData.deviations && deviationData.deviations.length > 0) {
+              /* Make a dictionary for easier parsing. */
+              deviationData.deviations.forEach((deviation: Deviation) => {
+                deviationMap[deviation.deviationid] = deviation;
               });
             }
+            if (deviationData.metadata && deviationData.metadata.length > 0) {
+              deviationData.metadata.forEach((deviation) => { 
+                if (deviationMap[deviation.deviationid]) {
+                  const deviationData = deviationMap[deviation.deviationid];
+                  deviation.category = deviationData.category;
+                  deviation.category_path = deviationData.category_path;
+                  deviation.content = deviationData.content; 
+                  deviation.published_time = deviationData.published_time;
+                  deviation.url = deviationData.url; 
+                }
+                this.deviations.push(deviation);
+              });
+            }
+            console.log("Deviations: ", this.deviations);
         }
       });
   }
