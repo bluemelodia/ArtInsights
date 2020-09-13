@@ -21,7 +21,8 @@ export class UtilsService {
         /* This logic is specific to DeviantArt, removing this attribute allows thumb images to be shown. */
         if (slicedStr.includes("srcset")) {
             let srcFragments = str.split("srcset=\"");
-            srcFragments[1] = str.slice(str.indexOf("sizes"));
+            console.log("Sliced fragments: ", srcFragments);
+            srcFragments[1] = str.slice(str.indexOf("\""));
             slicedStr = srcFragments.join('');
             console.log("Sliced str after srcset: ", slicedStr);
         }
