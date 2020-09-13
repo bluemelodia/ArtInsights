@@ -2,6 +2,7 @@ import { DeviantData } from './deviant.types';
 import { TumblrPhotos, TumblrUserBlog } from './tumblr.types';
 import { TwitterUser, TwitterEntities } from './twitter.types';
 import { DeviationContent } from './shared.types';
+import { DayOfWeek } from './time.types';
 
 export interface DeviantArtTagResponse {
     estimated_total: number,
@@ -92,6 +93,27 @@ export interface HashTagAggregate { [tag: string] : HashTagStat };
 export interface DeviationStats {
     comments: number, 
     favourites: number
+}
+
+/*
+* When you use index types you are just telling typescript 
+* what return type you get when a custom type is indexed.
+*
+* So you just need to tell Typescript that when you index 
+* account with a string type, a string type will be returned.
+*
+* https://stackoverflow.com/questions/56293650/duplicate-string-index-signature-ts2374
+*/
+export interface DeviantArtAnalytics { 
+    tags: {
+        [tag: string] : DeviationStats[]
+    },
+    days: {
+        [day: number] : DeviationStats[]
+    },
+    times: {
+        [times: number] : DeviationStats[]
+    }
 }
 
 export interface TwitterStats {

@@ -14,6 +14,7 @@ import { DeviantArtPostResponse, Deviation, DeviantTag } from '../../types/post.
 import { UtilsService } from '../../services/utils.service';
 import { StatService } from '../../services/stat.service';
 import { Engagement } from '../../types/tag.types';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-deviantart',
@@ -23,6 +24,7 @@ import { Engagement } from '../../types/tag.types';
 export class DeviantArtComponent implements OnInit {
   constructor(
     private alert: AlertService,
+    private analytics: AnalyticsService,
     private auth: AuthService,
     private blog: BlogService,
     private post: PostService,
@@ -126,6 +128,7 @@ export class DeviantArtComponent implements OnInit {
             }
             console.log("Deviations: ", this.deviations);
             this.stat.calculateDeviationStats(this.deviations);
+            this.analytics.analyzeDeviations(this.deviations);
         }
       });
   }
