@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { timer, Subscription, ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { AlertService } from '../../services/alert.service';
 import { BlogService } from '../../services/blog.service';
@@ -8,7 +10,6 @@ import { DeviantData, DeviantFriend, DeviantListData, DeviantWatcher, WatchRespo
 import { AlertType, Media } from '../../app.consts';
 import { DeviantArtFollowService } from '../../services/deviant-art-follow.service';
 import { UserResponse } from '../../types/shared.types';
-import { timer, Subscription } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { DeviantArtPostResponse, Deviation, DeviantTag } from '../../types/post.types';
 import { UtilsService } from '../../services/utils.service';
@@ -34,9 +35,19 @@ export class DeviantArtComponent implements OnInit {
     private router: Router
   ) {
     this.setupDASubscription();
+    this.routeObserver = this.router.events
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(event => {
+        console.log("Nav ending, should we get DeviantArt user? ", event);
+        if (event instanceof NavigationEnd && event.url === "/deviant-art"){
+          console.log("Nav ending, get Deviant: ", event);
+          this.blog.getDeviant();
+        }
+      });
   }
 
   private routeObserver: Subscription;
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
   public deviant: DeviantData;
   public deviations: Deviation[] = [];
@@ -55,18 +66,11 @@ export class DeviantArtComponent implements OnInit {
   public commentStatsDA: Engagement;
   public faveStatsDA: Engagement;
 
-  ngOnInit() {
-    this.routeObserver = this.router.events.subscribe(event =>{
-      console.log("Nav ending, should we get DeviantArt user? ", event);
-      if (event instanceof NavigationEnd && event.url === "/deviant-art"){
-        console.log("Nav ending, get Deviant: ", event);
-        this.blog.getDeviant();
-      }
-   })
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
-    this.routeObserver.unsubscribe();
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   /* Since there can only be one DA user, as soon as the user info is received, 

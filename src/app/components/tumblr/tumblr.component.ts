@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { AlertService } from '../../services/alert.service';
 import { BlogService } from '../../services/blog.service';
@@ -23,9 +24,18 @@ export class TumblrComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.setupTumblrSubscription();
+    this.router.events
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(event => {
+        console.log("Nav ending, should we get Tumblr user? ", event);
+        if (event instanceof NavigationEnd && event.url === "/deviant-art"){
+          console.log("Nav ending, get Tumblr user: ", event);
+          this.blog.getTumblrUser();
+        }
+    });
   }
 
-  private routeObserver: Subscription;
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
   public tumblrUser: TumblrUserInfo;
   public userBlog: string;
@@ -49,17 +59,11 @@ export class TumblrComponent implements OnInit, OnDestroy {
   private hasMoreTumblrFollowing = true;
 
   ngOnInit() {
-    this.routeObserver = this.router.events.subscribe(event =>{
-      console.log("Nav ending, should we get Tumblr user? ", event);
-      if (event instanceof NavigationEnd && event.url === "/tumblr"){
-        console.log("Nav ending, get Tumblr user: ", event);
-        this.blog.getTumblrUser();
-      }
-    });
   }
 
   ngOnDestroy() {
-    this.routeObserver.unsubscribe();
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   public setupTumblrSubscription() {
