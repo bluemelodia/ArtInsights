@@ -19,6 +19,14 @@ export class UtilsService {
       if (str.includes("</a>")) {
         let slicedStr = str.slice(str.indexOf(">") + 1);
         console.log("Sliced off the <a> - start: ", slicedStr);
+
+        if (slicedStr.includes("srcset")) {
+            let srcFragments = str.split("srcset=\"");
+            srcFragments[1] = str.slice(str.indexOf("sizes"));
+            slicedStr = srcFragments.join('');
+            console.log("Sliced str after srcset: ", slicedStr);
+        }
+
         slicedStr = slicedStr.replace("</a>", "");
         newCaptionFragments.push(slicedStr);
       } else {
