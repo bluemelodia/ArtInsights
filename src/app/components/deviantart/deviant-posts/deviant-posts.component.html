@@ -28,7 +28,11 @@
             <img (click)="blogUtils.visitBlog(deviation.url)" class="deviation-img" [src]="deviation.content.src"/>
             <div class="deviation-data">
                 <h3 (click)="blogUtils.visitBlog(deviation.url)">{{ deviation.title }}</h3>
-                 <div class="deviation-stats">
+                <p *ngIf="deviation.description && deviation.description.length > 0" 
+                    class="caption" 
+                    [innerHTML]="deviation.description"></p>
+                <p class="tags-list" *ngIf="deviation.tags && deviation.tags.length > 0">#{{ deviation.tags.join(' #') }}</p>
+                <div class="deviation-stats">
                     <div class="stats">
                         <div>
                             by <span class="author-link" 

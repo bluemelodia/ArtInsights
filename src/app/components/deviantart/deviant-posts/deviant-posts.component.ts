@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Deviation } from '../../../types/post.types';
 import { BlogUtilsService } from '../../../services/blog-utils.service';
+import { UtilsService } from '../../../services/utils.service';
 
 @Component({
   selector: 'app-deviant-posts',
@@ -10,7 +11,10 @@ import { BlogUtilsService } from '../../../services/blog-utils.service';
 export class DeviantPostsComponent implements OnInit {
     @Input() deviations: Deviation[];
 
-    constructor(public blogUtils: BlogUtilsService) {}
+    public commentImg = this.utils.getImagePath('comment');
+    public heartImg = this.utils.getImagePath('heart');
+
+    constructor(public blogUtils: BlogUtilsService, private utils: UtilsService) {}
 
     ngOnInit() {
 

@@ -10,7 +10,7 @@ import { DeviantArtFollowService } from '../../services/deviant-art-follow.servi
 import { UserResponse } from '../../types/shared.types';
 import { timer } from 'rxjs';
 import { PostService } from '../../services/post.service';
-import { DeviantArtPostResponse, Deviation } from '../../types/post.types';
+import { DeviantArtPostResponse, Deviation, DeviantTag } from '../../types/post.types';
 
 @Component({
   selector: 'app-deviantart',
@@ -83,6 +83,14 @@ export class DeviantArtComponent implements OnInit {
             }
             if (deviationData.metadata && deviationData.metadata.length > 0) {
               deviationData.metadata.forEach((deviation) => { 
+                const tagArr: string[] = [];
+
+                /* Simply tag structure so it's easier to iterate through in the template. */
+                deviation.tags.forEach((tag: DeviantTag) => {
+                  tagArr.push(tag.tag_name);
+                })
+                deviation.tags = tagArr;
+
                 if (deviationMap[deviation.deviationid]) {
                   const deviationData = deviationMap[deviation.deviationid];
                   deviation.category = deviationData.category;

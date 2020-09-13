@@ -16,7 +16,7 @@ export interface Deviation {
     published_time?: string,
     stats: DeviationStats,
     submission: DeviationSubmission,
-    tags: DeviantTags[],
+    tags?: Array<string | DeviantTag>,
     title: string,
     url?: string
 }
@@ -31,6 +31,6 @@ export interface DeviationSubmission {
     creation_time: string
 }
 
-export interface DeviantTags {
+export interface DeviantTag {
     tag_name: string;
 }
