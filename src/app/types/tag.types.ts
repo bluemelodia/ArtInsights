@@ -92,7 +92,8 @@ export interface HashTagAggregate { [tag: string] : HashTagStat };
 
 export interface DeviationStats {
     comments: number, 
-    favourites: number
+    favourites: number, 
+    views?: number
 }
 
 /*
@@ -106,13 +107,25 @@ export interface DeviationStats {
 */
 export interface DeviantArtAnalytics { 
     tags: {
-        [tag: string] : DeviationStats[]
+        [tag: string] : {
+            views: number[],
+            favorites: number[],
+            comments: number[]
+        }
     },
     days: {
-        [day: number] : DeviationStats[]
+        [day: number] : {
+            views: number[],
+            favorites: number[],
+            comments: number[]
+        }
     },
     times: {
-        [times: number] : DeviationStats[]
+        [times: number] : {
+            views: number[],
+            favorites: number[],
+            comments: number[]
+        }
     }
 }
 

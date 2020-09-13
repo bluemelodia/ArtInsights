@@ -1,5 +1,6 @@
 import { DeviantData } from './deviant.types';
 import { DeviationContent } from './shared.types';
+import { DeviationStats } from './tag.types';
 
 export interface DeviantArtPostResponse {
     metadata: Deviation[],
@@ -21,11 +22,6 @@ export interface Deviation {
     url?: string
 }
 
-export interface DeviationStats {
-    comments: number, 
-    favourites: number, 
-    views: number
-}
 export interface DeviationSubmission {
     category: string,
     creation_time: string
