@@ -3,5 +3,5 @@
     <ng-content select="[media-type=deviantArt]"></ng-content>
 </div>
 <div class="follow-button" (click)="updateBlogFollowStatus()">
-    {{ isFollowing? "Unfollow" : "Follow" }}
+    {{ isFollowing? unfollowText : followText }}
 </div>

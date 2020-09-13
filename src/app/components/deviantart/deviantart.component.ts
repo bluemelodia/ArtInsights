@@ -61,8 +61,8 @@ export class DeviantArtComponent implements OnInit {
       .subscribe((deviant: DeviantData) => {
         console.log("Received DA user: ", deviant);
         this.deviant = deviant;
-        this.getDeviations();
         this.getWatchersAndFriends();
+        this.getDeviations();
       });
   }
 

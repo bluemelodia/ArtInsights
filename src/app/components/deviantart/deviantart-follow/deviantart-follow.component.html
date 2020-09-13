@@ -6,6 +6,8 @@
             <app-blog *ngFor="let watcher of watchersMap | keyvalue"
                 [isFollowing]="watcher.value.is_watching"
                 [mediaType]="mediaType"
+                [followText]="'Watch'"
+                [unfollowText]="'Unwatch'"
                 (onUserAction)="onUserAction($event, watcher.key)">
                 <div media-type="deviantArt">
                     <div class="da-style">

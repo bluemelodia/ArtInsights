@@ -9,6 +9,8 @@ import { Media, UserMediaAction } from '../../app.consts';
 export class BlogComponent implements OnInit {
   @Input() isFollowing: boolean;
   @Input() mediaType: Media;
+  @Input() followText: string = 'Follow';
+  @Input() unfollowText: string = 'Unfollow';
 
   @Output() onUserAction = new EventEmitter<UserMediaAction>();
 
