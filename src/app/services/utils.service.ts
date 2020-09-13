@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +17,8 @@ export class UtilsService {
       /* The first one might not have a link, push directly. */
       if (str.includes("</a>")) {
         let slicedStr = str.slice(str.indexOf(">") + 1);
-        console.log("Sliced off the <a> - start: ", slicedStr);
 
+        /* This logic is specific to DeviantArt, removing this attribute allows thumb images to be shown. */
         if (slicedStr.includes("srcset")) {
             let srcFragments = str.split("srcset=\"");
             srcFragments[1] = str.slice(str.indexOf("sizes"));
