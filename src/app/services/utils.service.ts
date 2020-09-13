@@ -15,10 +15,15 @@ export class UtilsService {
     let captionFragments = caption.split("<a");
     let newCaptionFragments: string[] = [];
     captionFragments.forEach((str: string) => {
-      let slicedStr = str.slice(str.indexOf(">"));
-      console.log("Sliced off the <a> - start: ", slicedStr);
-      slicedStr = slicedStr.replace("</a>", "");
-      newCaptionFragments.push(slicedStr);
+      /* The first one might not have a link, push directly. */
+      if (str.includes("</a>")) {
+        let slicedStr = str.slice(str.indexOf(">") + 1);
+        console.log("Sliced off the <a> - start: ", slicedStr);
+        slicedStr = slicedStr.replace("</a>", "");
+        newCaptionFragments.push(slicedStr);
+      } else {
+        newCaptionFragments.push(str);
+      }
     });
     return newCaptionFragments.join('');
   }

@@ -114,7 +114,8 @@ $max-post-width: 400px;
                     .caption {
                         border-left: 4px solid $light-text-color;
                         padding: $small-spacing;
-                        padding-left: $large-spacing;
+                        /* Need a larger padding so bulleted lists can clear the border. */
+                        padding-left: $large-spacing * 2;
                         margin-top: $small-spacing;
                         margin-bottom: $small-spacing;
 
