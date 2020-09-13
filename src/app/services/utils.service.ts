@@ -15,10 +15,10 @@ export class UtilsService {
     let newCaptionFragments: string[] = [];
     captionFragments.forEach((str) => {
       const slicedStr = str.slice(str.indexOf("</a>")+4);
-      newCaptionFragments.push(slicedStr + '...');
+      newCaptionFragments.push(slicedStr);
     });
     return newCaptionFragments.join('');
   }
 
-  
+
 }
