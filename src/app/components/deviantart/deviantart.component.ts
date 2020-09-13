@@ -92,7 +92,9 @@ export class DeviantArtComponent implements OnInit {
                   tagArr.push(tag.tag_name);
                 })
                 deviation.tags = tagArr;
+                console.log("About to strip link: ", deviation.description);
                 deviation.description = this.utils.stripLinks(deviation.description);
+                console.log("Stripped links: ", deviation.description);
 
                 if (deviationMap[deviation.deviationid]) {
                   const deviationData = deviationMap[deviation.deviationid];
