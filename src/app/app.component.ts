@@ -24,12 +24,12 @@ export class AppComponent {
     this.auth.authSuccess(event.data);
   }
 
-  /* Log out the user, clearing local storage when they close the window. */
-  @HostListener('window:beforeunload', ['$event'])
-  beforeunloadHandler(event: any) {
-      console.log("Window closing. Log out the user.");
-      this.login.logoutUser();
-  }
+  // /* Log out the user, clearing local storage when they close the window. */
+  // @HostListener('window:beforeunload', ['$event'])
+  // beforeunloadHandler(event: any) {
+  //     console.log("Window closing. Log out the user.");
+  //     this.login.logoutUser();
+  // }
 
   constructor(
       private auth: AuthService, 
