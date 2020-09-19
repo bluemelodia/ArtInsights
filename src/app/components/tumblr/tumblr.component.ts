@@ -28,7 +28,7 @@ export class TumblrComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
         console.log("Nav ending, should we get Tumblr user? ", event);
-        if (event instanceof NavigationEnd && event.url === "/deviant-art"){
+        if (event instanceof NavigationEnd && event.url === "/home/tumblr"){
           console.log("Nav ending, get Tumblr user: ", event);
           this.blog.getTumblrUser();
         }

@@ -39,7 +39,7 @@ export class DeviantArtComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
         console.log("Nav ending, should we get DeviantArt user? ", event);
-        if (event instanceof NavigationEnd && event.url === "/deviant-art"){
+        if (event instanceof NavigationEnd && event.url === "/home/deviant-art"){
           console.log("Nav ending, get Deviant: ", event);
           this.blog.getDeviant();
         }
