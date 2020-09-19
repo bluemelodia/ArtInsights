@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { LoginService } from '../../services/login.service';
 import { LoginPostResponse } from '../auth/auth.types';
-import { Subject } from 'rxjs';
+import { Subject, Subscription, ReplaySubject } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import { AlertType, UserAction } from '../../app.consts';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +19,25 @@ export class LoginComponent implements OnInit {
 
   public newUser = true;
   private loginSubject$: Subject<LoginPostResponse>;
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  private routeObserver: Subscription;
 
   constructor(
     private alert: AlertService,
     private fb: FormBuilder, 
     private login: LoginService,
-    private router: Router) { }
+    private router: Router) {
+      this.routeObserver = this.router.events
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(event => {
+        console.log("Nav ending, should we logout? ", event);
+        if (event instanceof NavigationEnd && event.url === "/login"){
+          console.log("Nav ending, log out!");
+          /* Kill the previous session. */
+          this.login.logoutUser();
+        }
+      });
+    }
 
   ngOnInit() {
     /* 
@@ -43,6 +57,11 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
     this.setupLoginSubscription();
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   /* Returns the form controls of the login form. */

@@ -88,7 +88,7 @@ export const navActions: NavItem[] = [
     {
         iconName: 'logout',
         alt: 'log out',
-        link: '/logout',
+        link: '/login',
         name: 'Logout'
     }
     /* Engagement : {
