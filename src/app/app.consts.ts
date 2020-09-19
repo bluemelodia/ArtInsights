@@ -60,13 +60,13 @@ export const mediaData: { [id: string] : NavItem } = {
     DeviantArt : { 
         iconName: 'deviantart', 
         alt: 'deviantArt',
-        link: '/deviant-art',
+        link: '/home/deviant-art',
         name: 'Deviant Art'
     },
     Tumblr: {
         iconName: 'tumblr',
         alt: 'tumblr',
-        link: '/tumblr',
+        link: '/home/tumblr',
         name: 'Tumblr'
     }
 }
@@ -76,9 +76,15 @@ export const navActions: { [id: string] : NavItem } = {
     Tags : {
         iconName: 'tag', 
         alt: 'search by tag',
-        link: '/tags',
+        link: '/home/tags',
         name: 'Tag Search'
     },
+    Logout: {
+        iconName: 'logout',
+        alt: 'log out',
+        link: '/logout',
+        name: 'Logout'
+    }
     /* Engagement : {
         iconName: 'heart', 
         alt: 'post engagement',
