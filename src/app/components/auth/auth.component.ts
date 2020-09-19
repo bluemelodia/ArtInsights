@@ -38,6 +38,10 @@ export class AuthComponent {
     this.auth.authenticateUser(forMedia);
   }
 
+  public unauthUser(forMedia: Media) {
+    this.auth.unauthenticateUser(forMedia);
+  }
+
   public loginUser() {
     if (this.storage.isUserAuth()) {
       this.router.navigateByUrl('/home');

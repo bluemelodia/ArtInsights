@@ -70,6 +70,11 @@ export class AuthService {
       });
   }
 
+  /* Calling this indicates the user does not want to use this social media. Erase the key from local storage. */
+  unauthenticateUser(socialMedia: Media) {
+    this.storage.setOAuthKey(socialMedia, AuthStatus.Unattempted);
+  }
+
   showAuthorizationPage(socialMedia: Media): Observable<any> {
     switch (socialMedia) {
       case Media.DeviantArt:

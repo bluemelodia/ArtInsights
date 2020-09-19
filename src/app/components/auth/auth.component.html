@@ -6,9 +6,8 @@
     <div class="nav-section">
         <button class="nav-button" 
             *ngFor="let media of mediaData | keyvalue"
-            (click)="authUser(media.key)" 
+            (click)="auth.isAuthorizedForMedia(media.key) ? unauthUser(media.key) : authUser(media.key)" 
             [ngClass]="getStylesForMediaButton(media.key)"
-            [disabled]="auth.isAuthorizedForMedia(media.key)"
             [attr.alt]="'Authenticate with ' + media.value.alt">
             <button>
                 <img class="sm-icon" [src]="getIconName(media.value.iconName)"/>
