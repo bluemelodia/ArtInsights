@@ -47,7 +47,7 @@ $max-post-width: 400px;
     }
 
     .tag-stats {
-        padding: 0;
+        padding-right: 0;
 
         .header {
             @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
@@ -64,6 +64,10 @@ $max-post-width: 400px;
 
             .stats-summary {
                 padding-top: 0;
+
+                .tag-stats {
+                    padding: 0;
+                }
             }
         }
 

@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
         console.log("Nav ending, should we logout? ", event);
-        if ((event instanceof NavigationEnd || event instanceof NavigationStart) && 
-            event.url === "/login"){
+        if (event instanceof NavigationEnd && 
+          (event.url === "/login" || event.urlAfterRedirects === "/login")){
           console.log("Nav ending, log out!");
           /* Kill the previous session. */
           this.login.logoutUser();

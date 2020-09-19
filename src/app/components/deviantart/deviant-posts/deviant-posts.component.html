@@ -69,7 +69,7 @@
     </div>
     <div class="stats-container">
         <div class="stats-summary" *ngIf="stats.tags">
-            <div *ngFor="let tag of stats.tags | keyvalue" class="tag-stats">
+            <div *ngFor="let tag of stats.tags | keyvalue" class="tag-stats deviation">
                 <div class="stats">
                     <span class="tag">#{{ tag.key | tag }}</span>
                 </div>

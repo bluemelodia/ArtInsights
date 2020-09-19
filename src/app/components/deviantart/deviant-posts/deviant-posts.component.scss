@@ -60,7 +60,11 @@ $max-deviation-width: 400px;
             .stats-summary {
                 padding-top: $large-spacing;
 
-                .tweets {
+                .tag-stats {
+                    padding: 0;
+                }
+
+                .deviation {
                     border-left: 4px solid $light-text-color;
                     margin-bottom: $large-spacing;
                 }
