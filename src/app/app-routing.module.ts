@@ -12,33 +12,30 @@ import { TumblrComponent } from './components/tumblr/tumblr.component';
 import { TagComponent } from './components/tag/tag.component';
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/home', pathMatch: 'full' },
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LoginComponent, canActivate: [LogoutGuard] },
   { path: 'auth', component: AuthComponent, canActivate: [LoginGuard] },
   { path: 'home', 
+    canActivate: [LoginGuard, AuthGuard],
     children: [
       {
         path: '',
-        component: HomeComponent,
-        canActivate: [LoginGuard, AuthGuard],
+        component: HomeComponent
       },
       { 
         path: 'tumblr', 
         component: TumblrComponent, 
-        data: { media: [Media.Tumblr] },
-        canActivate: [LoginGuard, AuthGuard], 
+        data: { media: [Media.Tumblr] }
       },
       { 
         path: 'deviant-art', 
         component: DeviantArtComponent, 
-        data: { media: [Media.DeviantArt] },
-        canActivate: [LoginGuard, AuthGuard],
+        data: { media: [Media.DeviantArt] }
       },
       { 
         path: 'tags',
-        component: TagComponent,
-        canActivate: [LoginGuard, AuthGuard],
+        component: TagComponent
       }
     ] 
   }
