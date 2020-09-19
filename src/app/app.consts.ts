@@ -80,6 +80,12 @@ export const navActions: NavItem[] = [
         name: 'Tag Search'
     },
     {
+        iconName: 'auth',
+        alt: 'authenticate social medias',
+        link: '/auth',
+        name: 'Add Social Media'
+    },
+    {
         iconName: 'logout',
         alt: 'log out',
         link: '/logout',

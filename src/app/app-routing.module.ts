@@ -17,25 +17,28 @@ const routes: Routes = [
   { path: 'logout', component: LoginComponent, canActivate: [LogoutGuard] },
   { path: 'auth', component: AuthComponent, canActivate: [LoginGuard] },
   { path: 'home', 
-    canActivate: [LoginGuard, AuthGuard],
     children: [
       {
         path: '',
-        component: HomeComponent 
+        component: HomeComponent,
+        canActivate: [LoginGuard, AuthGuard],
       },
       { 
         path: 'tumblr', 
         component: TumblrComponent, 
-        data: { media: [Media.Tumblr] } 
+        data: { media: [Media.Tumblr] },
+        canActivate: [LoginGuard, AuthGuard], 
       },
       { 
         path: 'deviant-art', 
         component: DeviantArtComponent, 
-        data: { media: [Media.DeviantArt] }
+        data: { media: [Media.DeviantArt] },
+        canActivate: [LoginGuard, AuthGuard],
       },
       { 
         path: 'tags',
-        component: TagComponent
+        component: TagComponent,
+        canActivate: [LoginGuard, AuthGuard],
       }
     ] 
   }
