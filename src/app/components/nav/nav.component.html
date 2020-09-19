@@ -10,11 +10,11 @@
     </button>
 </nav>
 <nav>
-    <button *ngFor="let action of navActions | keyvalue">
+    <button *ngFor="let action of navActions">
         <app-nav-item 
-            [iconName]="action.value.iconName" 
-            [altText]="action.value.alt"
-            [link]="action.value.link"
-            [name]="action.value.name"></app-nav-item>
+            [iconName]="action.iconName" 
+            [altText]="action.alt"
+            [link]="action.link"
+            [name]="action.name"></app-nav-item>
     </button>
 </nav>

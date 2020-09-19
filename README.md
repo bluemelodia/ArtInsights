@@ -7,7 +7,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Make reauth more graceful / easier for the user. 
 - Engagement by time/day posted/day of week.
 
-- Directly visiting deviant-art, tumblr URLs causes auth token erasure and logout.
 - Add more animations (ex. loader on scroll, login page).
 - Refactor types - there's a lot of repetition.
 - Add responsive styles.
