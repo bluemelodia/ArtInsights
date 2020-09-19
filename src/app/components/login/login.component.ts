@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 import { LoginService } from '../../services/login.service';
 import { LoginPostResponse } from '../auth/auth.types';
@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
         console.log("Nav ending, should we logout? ", event);
-        if (event instanceof NavigationEnd && event.url === "/login"){
+        if ((event instanceof NavigationEnd || event instanceof NavigationStart) && 
+            event.url === "/login"){
           console.log("Nav ending, log out!");
           /* Kill the previous session. */
           this.login.logoutUser();
