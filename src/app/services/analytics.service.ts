@@ -59,15 +59,15 @@ export class AnalyticsService {
 
     tags.forEach((tag: string) => {
       if (!this.deviantArtAnalytics.tags[tag]) {
-        this.deviantArtAnalytics[tag] = {
+        this.deviantArtAnalytics.tags[tag] = {
           views: [],
           favorites: [],
           comments: []
         };
       } 
-      this.deviantArtAnalytics[tag].views.push(stats.views);
-      this.deviantArtAnalytics[tag].favorites.push(stats.favourites);
-      this.deviantArtAnalytics[tag].comments.push(stats.comments);
+      this.deviantArtAnalytics.tags[tag].views.push(stats.views);
+      this.deviantArtAnalytics.tags[tag].favorites.push(stats.favourites);
+      this.deviantArtAnalytics.tags[tag].comments.push(stats.comments);
     });
     console.log("Analytics: ", this.deviantArtAnalytics);
   }
