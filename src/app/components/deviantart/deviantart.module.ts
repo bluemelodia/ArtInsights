@@ -4,8 +4,8 @@ import { DeviantArtComponent } from './deviantart.component';
 import { DeviantArtFollowComponent } from './deviantart-follow/deviantart-follow.component';
 import { DeviantComponent } from './deviant/deviant.component';
 import { BlogModule } from '../blog/blog.module';
-import { DeviantPipe } from '../../pipes/deviant.pipe';
 import { DeviantPostsComponent } from './deviant-posts/deviant-posts.component';
+import { PipeModule } from '../../pipes/pipe.module';
 
 
 @NgModule({
@@ -13,13 +13,12 @@ import { DeviantPostsComponent } from './deviant-posts/deviant-posts.component';
     DeviantComponent,
     DeviantArtComponent,
     DeviantArtFollowComponent,
-    DeviantPostsComponent,
-    DeviantPipe
+    DeviantPostsComponent
   ],
   imports: [
     CommonModule,
-    BlogModule
-  ],
-  providers: [ DeviantPipe ]
+    BlogModule,
+    PipeModule
+  ]
 })
 export class DeviantArtModule {}

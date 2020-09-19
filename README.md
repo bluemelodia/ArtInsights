@@ -13,6 +13,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - User intermittently loses access to Tumblr/DA in between requests. 
 - User always loses access on Chrome - check if multiple sessions are supported.
 - Queue the messages so each one has sufficient time to be displayed.
+- DA calls seem to fail on Chrome, Tumblr auth falsely checked - doesn't happen on Safari. 
+
+- Instead of refreshing on every watch/unwatch, update the individual users and provide a refresh button.
+
 
 ## Development server
 

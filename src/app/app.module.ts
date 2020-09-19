@@ -17,6 +17,8 @@ import { LoginComponent } from './components/login/login.component';
 import { NavModule } from './components/nav/nav.module';
 import { TumblrModule } from './components/tumblr/tumblr.module';
 import { TagModule } from './components/tag/tag.module';
+import { TagPipe } from './pipes/tag.pipe';
+import { PipeModule } from './pipes/pipe.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { TagModule } from './components/tag/tag.module';
     NavModule,
     TagModule,
     TumblrModule,
+    PipeModule,
     ReactiveFormsModule
   ],
   /* We can have several different interceptors, which is why we provide the interceptor

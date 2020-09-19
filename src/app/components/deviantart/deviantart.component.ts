@@ -53,6 +53,7 @@ export class DeviantArtComponent implements OnInit {
   public deviations: Deviation[] = [];
   public deviationStats: DeviationAnalytics;
   private deviantUserSubject$ = this.blog.deviantSub$;
+  private deviantStatsSubject$ = this.analytics.deviationSubject$;
 
   public watchers: string[] = [];
   public watchersMap: { [user: string] : any } = {};
@@ -83,6 +84,12 @@ export class DeviantArtComponent implements OnInit {
         this.deviant = deviant;
         this.getWatchersAndFriends();
         this.getDeviations();
+      });
+
+    this.deviantStatsSubject$
+      .subscribe((stats: DeviationAnalytics) => {
+        console.log("Received DA analytics: ", stats);
+        this.deviationStats = stats;
       });
 
     this.stat.commentSubject$(Media.DeviantArt)
