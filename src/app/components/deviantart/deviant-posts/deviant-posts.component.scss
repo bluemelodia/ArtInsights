@@ -10,14 +10,14 @@ $max-deviation-width: 400px;
     margin-bottom: $large-spacing;
     width: 100%;
 
-    .deviations-stats {
+    .deviations-stats, .tag-stats {
         padding: $large-spacing;
 
         .stats-summary {
             @include flex-col($justify-content: flex-start);
             padding-top: $large-spacing;
 
-            .favorites, .comments {
+            .favorites, .comments, .tag-stats {
                 @include flex-row-center($justify-content: flex-start);
     
                 img {
@@ -38,6 +38,39 @@ $max-deviation-width: 400px;
         .no-matches {
             max-width: $max-width;
             text-align: center;
+        }
+    }
+
+    .tag-stats {
+        padding-right: 0;
+
+        .header {
+            @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+            padding-right: $large-spacing;
+        }
+        
+        h3 {
+            margin-bottom: $small-spacing;
+        }
+
+        .stats-container {
+            max-height: 100px;
+            overflow-y: scroll;
+
+            .stats-summary {
+                padding-top: 0;
+            }
+        }
+
+        span {
+            width: 18.75%;
+            text-align: left;
+
+            &.tag {
+                width: 25%;
+                /* Prevents the tag crashing into the next column. */
+                padding-right: $small-spacing / 2;
+            }
         }
     }
 

@@ -72,10 +72,10 @@
             <div *ngFor="let tag of stats.tags | keyvalue" class="tag-stats">
                 <div class="stats">
                     <span class="tag">#{{ tag.key | tag }}</span>
-                    <span>{{ tag.value.high }}</span>
-                    <span>{{ tag.value.low }}</span>
-                    <span>{{ tag.value.median }}</span>
-                    <span>{{ tag.value.average | number:'1.2-2' }}</span>
+                    <span>{{ tag.value.comment.high }}</span>
+                    <span>{{ tag.value.comment.low }}</span>
+                    <span>{{ tag.value.comment.median }}</span>
+                    <span>{{ tag.value.comment.average | number:'1.2-2' }}</span>
                 </div>
             </div>
         </div>
