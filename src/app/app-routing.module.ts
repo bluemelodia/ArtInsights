@@ -11,31 +11,39 @@ import { TumblrComponent } from './components/tumblr/tumblr.component';
 import { TagComponent } from './components/tag/tag.component';
 
 const routes: Routes = [
+  { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'auth', component: AuthComponent, canActivate: [LoginGuard] },
-  { path: 'home', component: HomeComponent, canActivate: [LoginGuard, AuthGuard] },
-  { 
-    path: 'tumblr', 
-    component: TumblrComponent, 
-    canActivate: [LoginGuard, AuthGuard], 
-    data: { media: [Media.Tumblr] } 
-  },
-  { 
-    path: 'deviant-art', 
-    component: DeviantArtComponent, 
-    canActivate: [LoginGuard, AuthGuard],
-    data: { media: [Media.DeviantArt] }
-  },
-  { 
-    path: 'tags',
-    component: TagComponent,
-    canActivate: [LoginGuard, AuthGuard],
-  },
-  { path: '',   redirectTo: '/login', pathMatch: 'full', canActivate: [LoginGuard] },
+  { path: 'home', 
+    children: [
+      {
+        path: '',
+        component: HomeComponent, 
+        canActivate: [LoginGuard, AuthGuard]
+      },
+      { 
+        path: 'tumblr', 
+        component: TumblrComponent, 
+        canActivate: [LoginGuard, AuthGuard], 
+        data: { media: [Media.Tumblr] } 
+      },
+      { 
+        path: 'deviant-art', 
+        component: DeviantArtComponent, 
+        canActivate: [LoginGuard, AuthGuard],
+        data: { media: [Media.DeviantArt] }
+      },
+      { 
+        path: 'tags',
+        component: TagComponent,
+        canActivate: [LoginGuard, AuthGuard],
+      }
+    ] 
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
