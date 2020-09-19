@@ -49,6 +49,6 @@ export class AppComponent {
     });
 
     /* Wipe old local storage cookies. */
-    this.login.newSession();
+    // this.login.newSession();
   }
 }
