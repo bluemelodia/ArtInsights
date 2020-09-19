@@ -72,6 +72,32 @@
             <div *ngFor="let tag of stats.tags | keyvalue" class="tag-stats">
                 <div class="stats">
                     <span class="tag">#{{ tag.key | tag }}</span>
+                </div>
+                <div class="stats views">
+                    <span class="tag views">
+                        <img class="icon" [src]="viewImg"/> 
+                        <span>Views</span>
+                    </span>
+                    <span>{{ tag.value.views.high }}</span>
+                    <span>{{ tag.value.views.low }}</span>
+                    <span>{{ tag.value.views.median }}</span>
+                    <span>{{ tag.value.views.average | number:'1.2-2' }}</span>
+                </div>
+                <div class="stats favorites">
+                    <span class="tag favorites">
+                        <img class="icon" [src]="heartImg"/> 
+                        <span>Favorites</span>
+                    </span>
+                    <span>{{ tag.value.favorites.high }}</span>
+                    <span>{{ tag.value.favorites.low }}</span>
+                    <span>{{ tag.value.favorites.median }}</span>
+                    <span>{{ tag.value.favorites.average | number:'1.2-2' }}</span>
+                </div>
+                <div class="stats comments">
+                    <span class="tag comments">
+                        <img class="icon" [src]="commentImg"/> 
+                        <span>Comments</span>
+                    </span>
                     <span>{{ tag.value.comment.high }}</span>
                     <span>{{ tag.value.comment.low }}</span>
                     <span>{{ tag.value.comment.median }}</span>

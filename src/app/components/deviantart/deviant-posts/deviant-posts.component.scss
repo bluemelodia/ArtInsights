@@ -58,18 +58,26 @@ $max-deviation-width: 400px;
             overflow-y: scroll;
 
             .stats-summary {
-                padding-top: 0;
+                padding-top: $large-spacing;
+
+                .tweets {
+                    border-left: 4px solid $light-text-color;
+                    margin-bottom: $large-spacing;
+                }
             }
         }
 
         span {
             width: 18.75%;
             text-align: left;
+            padding-left: $small-spacing;
 
             &.tag {
-                width: 25%;
                 /* Prevents the tag crashing into the next column. */
-                padding-right: $small-spacing / 2;
+                &.header, &.favorites, &.retweets {
+                    width: 25%;
+                    padding-right: $small-spacing / 2;
+                }
             }
         }
     }

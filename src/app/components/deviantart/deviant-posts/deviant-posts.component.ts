@@ -18,6 +18,7 @@ export class DeviantPostsComponent implements OnInit {
 
     public commentImg = this.utils.getImagePath('comment');
     public heartImg = this.utils.getImagePath('heart');
+    public viewImg = this.utils.getImagePath('view');
 
     constructor(public blogUtils: BlogUtilsService, private utils: UtilsService) {}
 
