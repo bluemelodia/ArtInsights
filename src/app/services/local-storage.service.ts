@@ -41,6 +41,18 @@ export class LocalStorageService {
     }
   }
 
+  /* This is not a reset. It's used to let all subscribers know the 
+   * current OAuth status for each social media. We need this because on user
+   * page refresh, the nav bar, auth pages, etc. will not have the up to date
+   * info on the auth statuses. */
+  public refreshOAuthStatuses() {
+    const deviantArtStatus = localStorage.getItem(DeviantArtOAuthKey) as AuthStatus;
+    this.DeviantArtOAuthSubject$.next(deviantArtStatus);
+
+    const tumblrStatus = localStorage.getItem(TumblrOAuthKey) as AuthStatus;
+    this.TumblrOAuthSubject$.next(tumblrStatus);
+  }
+
   public oAuthStatusForMedia(mediaType: Media): AuthStatus {
     let key: AuthStatus;
     switch (mediaType) {

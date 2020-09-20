@@ -31,11 +31,12 @@ export class LoginComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
         console.log("Nav ending, should we logout? ", event);
-        if (event instanceof NavigationEnd && 
-          (event.url === "/login" || event.urlAfterRedirects === "/login")){
-          console.log("Nav ending, log out!");
-          /* Kill the previous session. */
-          this.login.logoutUser();
+        if (event instanceof NavigationEnd) {     
+          if (event.url === "/login" || event.urlAfterRedirects === "/login") {
+            /* Kill the previous session. */
+            console.log("Nav ending, log out!");
+            this.login.logoutUser();
+          } 
         }
       });
     }

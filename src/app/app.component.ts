@@ -2,7 +2,8 @@ import { Component, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { Environment } from './app.consts';
-import { LoginService } from './services/login.service';
+import { ReplaySubject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 declare const ENVIRONMENT: Environment;
 
@@ -13,6 +14,9 @@ declare const ENVIRONMENT: Environment;
 })
 export class AppComponent {
   title = 'ArtInsights';
+
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  private routeObserver: Subscription;
 
   @HostListener('window:message', ['$event'])
   receivedPostedMessage(event: any) {
@@ -31,9 +35,13 @@ export class AppComponent {
   //     this.login.logoutUser();
   // }
 
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
   constructor(
       private auth: AuthService, 
-      private login: LoginService,
       public router: Router
   ) {
     /* Condtionally apply styles to the body depending on our environment. */
@@ -41,10 +49,18 @@ export class AppComponent {
       document.body.style.backgroundImage = 'url(./images/login.png)';
     }
 
-    /* Conditionally apply styles to the body depending on which route we are in. */
-    router.events.forEach((event) => {
-      if(event instanceof NavigationEnd) {
+    this.routeObserver = this.router.events
+    .pipe(takeUntil(this.destroyed$))
+    .subscribe(event => {
+      if (event instanceof NavigationEnd) { 
+        /* Conditionally apply styles to the body depending on which route we are in. */
         document.body.className = router.url === '/login' || router.url === '/auth' ? 'full-width' : '';
+    
+        if (event.url !== "/login" && event.urlAfterRedirects !== "/login") {
+          /* Check local storage and re-enable the nav buttons. */
+          console.log("Refresh auth statuses!");
+          this.auth.refreshAuthStatuses();
+        } 
       }
     });
 
