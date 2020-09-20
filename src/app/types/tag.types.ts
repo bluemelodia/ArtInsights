@@ -113,12 +113,19 @@ export interface DeviationTotalStats {
             comments: number[]
         }
     },
-    times: {
-        [times: number] : {
-            views: number[],
-            favorites: number[],
-            comments: number[],
-            day: DayOfWeek[]
+    faveTimes: {
+        [day: number] : {
+            [time: number] : number[]
+        }
+    },
+    viewTimes: {
+        [day: number] : {
+            [time: number] : number[]
+        }
+    },
+    commentTimes: {
+        [day: number] : {
+            [time: number] : number[]
         }
     }
 }
@@ -138,11 +145,19 @@ export interface DeviationAnalytics {
             comments: Engagement
         }
     },
-    times: {
-        [times: number] : {
-            views: Engagement,
-            favorites: Engagement,
-            comments: Engagement
+    faveTimes: {
+        [day: number] : {
+            [time: number] : number
+        }
+    },
+    viewTimes: {
+        [day: number] : {
+            [time: number] : number
+        }
+    },
+    commentTimes: {
+        [day: number] : {
+            [time: number] : number
         }
     }
 }

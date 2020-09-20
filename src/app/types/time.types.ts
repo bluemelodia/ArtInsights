@@ -17,3 +17,13 @@ export const DayOfWeekString: string[] = [
     'Friday',
     'Saturday'
 ];
+
+export const DayOfWeekShortString: string[] = [
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
+    'Sun'
+];

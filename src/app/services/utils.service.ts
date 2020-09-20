@@ -10,6 +10,14 @@ export class UtilsService {
     return `./images/${imageName}.png`;
   }
 
+  public fillArray(start: number, end: number) {
+    const arr = [];
+    for (let i = start; i <= end; i++) {
+      arr.push(i);
+    }
+    return arr;
+  }
+
   public stripLinks(caption: string): string {
     let captionFragments = caption.split("<a");
     let newCaptionFragments: string[] = [];

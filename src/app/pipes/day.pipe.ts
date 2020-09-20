@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DayOfWeekString } from '../types/time.types';
-
 @Pipe({
   name: 'day'
 })

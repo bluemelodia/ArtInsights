@@ -18,7 +18,9 @@ export class AnalyticsService {
     this.deviantArtAnalytics = {
       tags: {},
       days: {},
-      times: {}
+      faveTimes: this.createTimeStruct(),
+      viewTimes: this.createTimeStruct(),
+      commentTimes: this.createTimeStruct()
     };
 
     deviations.forEach((deviation) => {
@@ -46,21 +48,25 @@ export class AnalyticsService {
     this.deviantArtAnalytics.days[dayOfWeek].favorites.push(stats.favourites);
     this.deviantArtAnalytics.days[dayOfWeek].comments.push(stats.comments);
 
-    if (!this.deviantArtAnalytics.times[timeOfDay]) {
-      this.deviantArtAnalytics.times[timeOfDay] = {
-        views: [],
-        favorites: [],
-        comments: [],
-        day: []
-      };
-    }
-    this.deviantArtAnalytics.times[timeOfDay].views.push(stats.views);
-    this.deviantArtAnalytics.times[timeOfDay].favorites.push(stats.favourites);
-    this.deviantArtAnalytics.times[timeOfDay].comments.push(stats.comments);
+    const commentTimes = this.deviantArtAnalytics.commentTimes[dayOfWeek];
+    const viewTimes = this.deviantArtAnalytics.viewTimes[dayOfWeek];
+    const faveTimes = this.deviantArtAnalytics.faveTimes[dayOfWeek];
 
-    /* Include day of week info. Don't merge this with day info as we want it to be
-    * calculated / shown independently. */
-    this.deviantArtAnalytics.times[timeOfDay].day.push(dayOfWeek);
+    if (!commentTimes[timeOfDay]) {
+      commentTimes[timeOfDay] = [];
+    }
+
+    if (!viewTimes[timeOfDay]) {
+      viewTimes[timeOfDay] = [];
+    }
+
+    if (!faveTimes[timeOfDay]) {
+      faveTimes[timeOfDay] = [];
+    }
+
+    commentTimes[timeOfDay].push(stats.comments);
+    viewTimes[timeOfDay].push(stats.views);
+    faveTimes[timeOfDay].push(stats.favourites);
 
     tags.forEach((tag: string) => {
       if (!this.deviantArtAnalytics.tags[tag]) {
@@ -82,7 +88,9 @@ export class AnalyticsService {
     const artStats = {
       tags: {},
       days: {},
-      times: {}
+      commentTimes: {},
+      viewTimes: {},
+      faveTimes: {}
     };
     Object.keys(this.deviantArtAnalytics.tags).forEach((tag: string) => {
       const tagStat = this.deviantArtAnalytics.tags[tag];
@@ -96,11 +104,10 @@ export class AnalyticsService {
       artStats.days[day] = stats;
     });
 
-    Object.keys(this.deviantArtAnalytics.times).forEach((time: string) => {
-      const timeStat = this.deviantArtAnalytics.times[time];
-      const stats = this.getStatistics(timeStat.views, timeStat.favorites, timeStat.comments);
-      artStats.times[time] = stats;
-    });
+    artStats.commentTimes = this.createTimeStruct();
+    artStats.faveTimes = this.createTimeStruct();
+    artStats.viewTimes = this.createTimeStruct();
+
     return artStats;
   }
 
@@ -141,5 +148,17 @@ export class AnalyticsService {
 
   getTime(date: Date) {
     return date.getHours();
+  }
+
+  createTimeStruct() {
+    return {
+      [DayOfWeek.Sunday]: {},
+      [DayOfWeek.Monday]: {},
+      [DayOfWeek.Tuesday]: {},
+      [DayOfWeek.Wednesday]: {},
+      [DayOfWeek.Thursday]: {},
+      [DayOfWeek.Friday]: {},
+      [DayOfWeek.Saturday]: {}
+    };
   }
 }

@@ -12,12 +12,12 @@ import { AlertComponent } from './components/alert/alert.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { BlogModule } from './components/blog/blog.module';
 import { DeviantArtModule } from './components/deviantart/deviantart.module';
+import { HeatmapModule } from './components/heatmap/heatmap.module';
 import { HomeModule } from './components/home-dashboard/home.module';
 import { LoginComponent } from './components/login/login.component';
 import { NavModule } from './components/nav/nav.module';
 import { TumblrModule } from './components/tumblr/tumblr.module';
 import { TagModule } from './components/tag/tag.module';
-import { TagPipe } from './pipes/tag.pipe';
 import { PipeModule } from './pipes/pipe.module';
 
 @NgModule({
@@ -35,6 +35,7 @@ import { PipeModule } from './pipes/pipe.module';
     AppRoutingModule,
     BlogModule,
     HomeModule,
+    HeatmapModule,
     DeviantArtModule,
     NavModule,
     TagModule,

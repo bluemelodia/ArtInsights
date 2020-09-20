@@ -1,0 +1,20 @@
+<section class="heat-map">
+    <div *ngFor="let xAxis of mapAxes.mainAxis" class="col">
+        <div class="x-legend">{{ xAxis | shortDay }}</div>
+        <div *ngFor="let yAxis of mapAxes.secondAxis; let indexOfElement = index" class="row">
+            <div *ngIf="indexOfElement === 0" class="y-legend">{{ yAxis | shortTime }}</div>
+            <div class="data-point">Hello</div>
+        </div>
+    </div>
+</section>
+
+<!-- 
+
+<span *ngFor="let secondaryData of mainData.main.data" class="row">
+        {{ secondaryData }}
+    </span>
+    <div *ngFor="let mainData of mapData" class="legend">
+        {{ mainData.main.label }}
+    </div>
+
+-->
