@@ -9,7 +9,7 @@ import { UtilsService } from '../../services/utils.service';
   styleUrls: ['./heatmap.component.scss']
 })
 export class HeatmapComponent implements OnInit {
-  @Input() mapTitle: string;
+  @Input() mapTitle: string = 'Map';
   @Input() xLabel: string = 'Times';
   @Input() yLabel: string = 'Days';
 
@@ -22,7 +22,6 @@ export class HeatmapComponent implements OnInit {
   /* Map of days and times, used to create the heat map legend. */
   @Input() mapAxes: MapAxes = {
     mainAxis: [ 
-      -1, /* Filler. */
       DayOfWeek.Sunday,
       DayOfWeek.Monday, 
       DayOfWeek.Tuesday, 
@@ -31,7 +30,7 @@ export class HeatmapComponent implements OnInit {
       DayOfWeek.Friday,
       DayOfWeek.Saturday
     ],
-    secondAxis: this.utils.fillArray(-1, 23)
+    secondAxis: this.utils.fillArray(0, 23)
   };
 
 
