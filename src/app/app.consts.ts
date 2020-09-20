@@ -81,7 +81,7 @@ export const navActions: NavItem[] = [
     },
     {
         iconName: 'auth',
-        alt: 'change social media authentication settings',
+        alt: 'social media authentication settings',
         link: '/auth',
         name: 'Social Media Settings'
     },
