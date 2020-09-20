@@ -1,0 +1,10 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+h3 {
+    margin-bottom: $small-spacing;
+}
+
+.heat-map {
+    @include flex-row(space-between);
+}

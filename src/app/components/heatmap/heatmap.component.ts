@@ -9,6 +9,8 @@ import { UtilsService } from '../../services/utils.service';
   styleUrls: ['./heatmap.component.scss']
 })
 export class HeatmapComponent implements OnInit {
+  @Input() mapTitle: string;
+  
   /* Users must pass a structure like this: 
    *  { 0: { 21: [], 23: [] } , 1: { 2: [], 5: [] } }
    * The number of outer arrys 
@@ -18,6 +20,7 @@ export class HeatmapComponent implements OnInit {
   /* Map of days and times, used to create the heat map legend. */
   @Input() mapAxes: MapAxes = {
     mainAxis: [ 
+      -1, /* Filler. */
       DayOfWeek.Sunday,
       DayOfWeek.Monday, 
       DayOfWeek.Tuesday, 

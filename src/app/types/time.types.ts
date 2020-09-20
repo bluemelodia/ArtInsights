@@ -19,11 +19,11 @@ export const DayOfWeekString: string[] = [
 ];
 
 export const DayOfWeekShortString: string[] = [
+    'Sun',
     'Mon',
     'Tue',
     'Wed',
     'Thu',
     'Fri',
-    'Sat',
-    'Sun'
+    'Sat'
 ];
