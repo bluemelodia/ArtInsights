@@ -40,9 +40,6 @@ export class HeatmapComponent implements OnInit {
   }
 
   getMapData(x: number, y: number, forDisplay: boolean) {
-    console.log("x and y: ", x, y);
-    console.log("X: ", this.mapData[x]);
-
     if (this.mapData[x][y]) {
       return this.mapData[x][y];
     }

@@ -9,12 +9,13 @@ export class ShortTimePipe implements PipeTransform {
     console.log("LEGEND VALUE: ", value);
     if (value >= 0 && value <= 23) {
       let suffix = value < 12? 'am' : 'pm';
-      let prefix = '';
+      let prefix;
       if (value === 0) {
-        prefix = '12';
+        prefix = 12;
       } else if (value > 12) {
         /* the pm numbers */
-        prefix = `${value-12}`; 
+        console.log("LEGEND PREFIX: ", (value as number) -12);
+        prefix = (value as number) -12; 
       }
 
       return `${prefix}${suffix}`;
