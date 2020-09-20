@@ -6,7 +6,11 @@ h3 {
 }
 
 .heat-map {
-    @include flex-row(space-between);
+    @include flex-row(center);
+
+    .x-legend {
+        text-align: center;
+    }
 
     .data-point {
         @include flex-row-center($justify-content: center);
