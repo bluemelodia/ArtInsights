@@ -10,6 +10,8 @@ import { UtilsService } from '../../services/utils.service';
 })
 export class HeatmapComponent implements OnInit {
   @Input() mapTitle: string;
+  @Input() xLabel: string = 'Times';
+  @Input() yLabel: string = 'Days';
 
   /* Users must pass a structure like this: 
    *  { 0: { 21: [], 23: [] } , 1: { 2: [], 5: [] } }
