@@ -11,6 +11,9 @@ import { HeatmapComponent } from './heatmap.component';
   imports: [
     CommonModule,
     PipeModule
+  ],
+  exports: [
+      HeatmapComponent
   ]
 })
 export class HeatmapModule {}

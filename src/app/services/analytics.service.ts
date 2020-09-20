@@ -108,6 +108,27 @@ export class AnalyticsService {
     artStats.faveTimes = this.createTimeStruct();
     artStats.viewTimes = this.createTimeStruct();
 
+    /* Average out the times. */
+    for(let i = 0; i <= 6; i++) {
+      const comments = this.deviantArtAnalytics.commentTimes[i];
+      const faves = this.deviantArtAnalytics.faveTimes[i];
+      const views = this.deviantArtAnalytics.viewTimes[i];
+
+      for(let j = 0; j <= 23; j++) {
+        if (comments[j] && comments[j].length > 0) {
+          artStats.commentTimes[i][j] = comments[j].reduce(this.sum, 0) / comments[j].length;
+        }
+
+        if (faves[j] && faves[j].length > 0) {
+          artStats.faveTimes[i][j] = faves[j].reduce(this.sum, 0) / faves[j].length;
+        }
+
+        if (views[j] && views[j].length > 0) {
+          artStats.viewTimes[i][j] = views[j].reduce(this.sum, 0) / views[j].length;
+        }
+      }
+    }
+
     return artStats;
   }
 

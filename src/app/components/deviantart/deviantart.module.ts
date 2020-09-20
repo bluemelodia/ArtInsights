@@ -6,7 +6,7 @@ import { DeviantComponent } from './deviant/deviant.component';
 import { BlogModule } from '../blog/blog.module';
 import { DeviantPostsComponent } from './deviant-posts/deviant-posts.component';
 import { PipeModule } from '../../pipes/pipe.module';
-
+import { HeatmapModule } from '../heatmap/heatmap.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import { PipeModule } from '../../pipes/pipe.module';
   imports: [
     CommonModule,
     BlogModule,
+    HeatmapModule,
     PipeModule
   ]
 })

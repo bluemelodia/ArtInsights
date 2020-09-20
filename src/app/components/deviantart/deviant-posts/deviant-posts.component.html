@@ -160,3 +160,8 @@
         </div>
     </div>
 </div>
+<div *ngIf="stats" class="heatmaps">
+    <app-heatmap [mapData]="stats.viewTimes"></app-heatmap>
+    <app-heatmap [mapData]="stats.faveTimes"></app-heatmap>
+    <app-heatmap [mapData]="stats.commentTimes"></app-heatmap>
+</div>
