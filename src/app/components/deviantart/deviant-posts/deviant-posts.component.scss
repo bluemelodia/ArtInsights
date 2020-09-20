@@ -54,7 +54,7 @@ $max-deviation-width: 400px;
         }
 
         .stats-container {
-            max-height: 100px;
+            max-height: 250px;
             overflow-y: scroll;
 
             .stats-summary {
@@ -68,6 +68,10 @@ $max-deviation-width: 400px;
                     @include flex-col();
                     border-left: 4px solid $light-text-color;
                     margin-bottom: $large-spacing;
+
+                    .icon {
+                        margin-right: 0;
+                    }
 
                     .tag {
                         .views, .favorites, .comments {

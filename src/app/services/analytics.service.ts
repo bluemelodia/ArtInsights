@@ -69,6 +69,7 @@ export class AnalyticsService {
       this.deviantArtAnalytics.tags[tag].favorites.push(stats.favourites);
       this.deviantArtAnalytics.tags[tag].comments.push(stats.comments);
     });
+
     console.log("Final analytics: ", this.deviantArtAnalytics);
   }
 
