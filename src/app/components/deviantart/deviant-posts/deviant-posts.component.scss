@@ -65,14 +65,21 @@ $max-deviation-width: 400px;
                 }
 
                 .deviation {
+                    @include flex-col();
                     border-left: 4px solid $light-text-color;
                     margin-bottom: $large-spacing;
+
+                    .tag {
+                        .views, .favorites, .comments {
+                            width: 20%;
+                        }
+                    } 
                 }
             }
         }
 
         span {
-            width: 18.75%;
+            width: 20%;
             text-align: left;
             padding-left: $small-spacing;
 
