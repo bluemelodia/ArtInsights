@@ -1,10 +1,10 @@
 <h3>{{ mapTitle }}</h3>
 <section class="heat-map">
     <div *ngFor="let xAxis of mapAxes.secondAxis; let indexOfTime = index" class="col">
-        <div class="x-legend">{{ xAxis | shortDay }}</div>
+        <div class="x-legend">{{ xAxis | shortTime }}</div>
         <div *ngFor="let yAxis of mapAxes.mainAxis; let indexOfDay = index" class="row">
             <div *ngIf="indexOfDay === -1 && indexOfTime === -1" class="y-legend"> {{ xLabel }}/{{ yLabel }} </div> 
-            <div *ngIf="indexOfDay === -1 && indexOfTime !== -1" class="y-legend">{{ yAxis | shortTime }}</div> 
+            <div *ngIf="indexOfDay === -1 && indexOfTime !== -1" class="y-legend">{{ yAxis | shortDay }}</div> 
             <div *ngIf="indexOfDay !== -1"
                 [ngClass]="getDataStyle(getMapData(indexOfDay, indexOfTime, true))"
                 class="data-point">
