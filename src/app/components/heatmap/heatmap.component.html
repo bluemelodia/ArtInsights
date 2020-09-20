@@ -6,9 +6,9 @@
             <div *ngIf="indexOfDay === -1 && indexOfTime === -1" class="y-legend"> {{ xLabel }}/{{ yLabel }} </div> 
             <div *ngIf="indexOfDay === -1 && indexOfTime !== -1" class="y-legend">{{ yAxis | shortTime }}</div> 
             <div *ngIf="indexOfDay !== -1"
-                [ngClass]="getDataStyle(mapData[indexOfDay][indexOfTime] ? mapData[indexOfDay][indexOfTime] : -1)"
+                [ngClass]="getDataStyle(getMapData(indexOfDay, indexOfTime, true))"
                 class="data-point">
-                {{ mapData[indexOfDay][indexOfTime] ? mapData[indexOfDay][indexOfTime] : '-' }}
+                {{ getMapData(indexOfDay, indexOfTime, true) }}
             </div>
         </div>
     </div>
