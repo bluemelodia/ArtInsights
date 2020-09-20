@@ -161,7 +161,7 @@
     </div>
 </div>
 <div *ngIf="stats" class="heatmaps">
-    <app-heatmap [mapTitle]="'View Heat Map'" [mapData]="stats.viewTimes"></app-heatmap>
-    <app-heatmap [mapTitle]="'Favorites Heat Map'" [mapData]="stats.faveTimes"></app-heatmap>
-    <app-heatmap [mapTitle]="'Comments Heat Map'" [mapData]="stats.commentTimes"></app-heatmap>
+    <app-heatmap mapTitle="View Map" [mapData]="stats.viewTimes"></app-heatmap>
+    <app-heatmap mapTitle="Favorites Map" [mapData]="stats.faveTimes"></app-heatmap>
+    <app-heatmap mapTitle="Comments Map" [mapData]="stats.commentTimes"></app-heatmap>
 </div>
