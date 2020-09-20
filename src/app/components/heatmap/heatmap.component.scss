@@ -6,7 +6,7 @@ h3 {
 }
 
 .heat-map {
-    @include flex-row(center);
+    display: flex;
     overflow-x: scroll;
     margin: $large-spacing;
 
