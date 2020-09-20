@@ -45,6 +45,8 @@ $max-post-width: 400px;
                 padding-top: 0;
 
                 .tag-stats {
+                    border: 1px solid $light-text-color;
+                    margin-top: $large-spacing;
                     padding: 0;
                 }
             }

@@ -49,6 +49,8 @@ $max-tweet-width: 400px;
 
     .tag-stats {
         @include tag-stats();
+        border: 1px solid white;
+        margin-top: $large-spacing;
 
         .stats-container {
             max-height: 100px;
