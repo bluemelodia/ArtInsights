@@ -1,9 +1,8 @@
+<h3>{{mapTitle}}</h3>
 <section class="heat-map">
-    <h3>{{mapTitle}}</h3>
-    {{ mapAxes.mainAxis }} {{ mapAxes.secondAxis }}
-    <div *ngFor="let xAxis of mapAxes.mainAxis; let indexOfDay = index" class="col">
+    <div *ngFor="let xAxis of mapAxes.secondAxis; let indexOfDay = index" class="col">
         <div class="x-legend">{{ xAxis | shortDay }}</div>
-        <div *ngFor="let yAxis of mapAxes.secondAxis; let indexOfTime = index" class="row">
+        <div *ngFor="let yAxis of mapAxes.mainAxis; let indexOfTime = index" class="row">
             <div *ngIf="indexOfDay === -1 && indexOfTime === -1" class="y-legend"></div> 
             <div *ngIf="indexOfDay === -1 && indexOfTime !== -1" class="y-legend">{{ yAxis | shortTime }}</div> 
             <div *ngIf="indexOfDay !== -1"
