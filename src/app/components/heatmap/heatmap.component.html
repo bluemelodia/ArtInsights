@@ -6,9 +6,9 @@
         <div *ngFor="let yAxis of mapAxes.secondAxis; let indexOfTime = index" class="row">
             <div *ngIf="indexOfDay === 0 && indexOfTime === 0" class="y-legend">{{ yAxis | shortTime }}</div>
             <div *ngIf="indexOfDay !== 0 || indexOfTime !== 0"
-                ng-class="getDataStyle(mapData[xAxis][yAxis] ? mapData[xAxis][yAxis] : -1)"
+                ng-class="getDataStyle(mapData[indexOfDay][indexOfTime] ? mapData[indexOfDay][indexOfTime] : -1)"
                 class="data-point">
-                {{ mapData[xAxis][yAxis] ? mapData[xAxis][yAxis] : '-' }}
+                {{ mapData[indexOfDay][indexOfTime] ? mapData[indexOfDay][indexOfTime] : '-' }}
             </div>
         </div>
     </div>
