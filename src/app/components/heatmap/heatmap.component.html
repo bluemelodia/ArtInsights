@@ -7,12 +7,12 @@
                 {{ xLabel }}/{{ yLabel }} 
             </div> 
             <div *ngIf="indexOfTime === 0" class="y-legend">
-                {{ indexOfDay-1 | shortDay }}
+                {{ indexOfDay | shortDay }}
             </div> 
             <div *ngIf="indexOfTime !== 0"
-                [ngClass]="getDataStyle(getMapData(indexOfDay-1, indexOfTime-1, false))"
+                [ngClass]="getDataStyle(getMapData(indexOfDay, indexOfTime-1, false))"
                 class="data-point">
-                {{ getMapData(indexOfDay-1, indexOfTime-1, true) }}
+                {{ getMapData(indexOfDay, indexOfTime-1, true) }}
             </div>
         </div>
     </div>
