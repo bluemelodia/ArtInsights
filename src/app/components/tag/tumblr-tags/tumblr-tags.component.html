@@ -18,7 +18,7 @@
     <div class="posts">
         <div class="post" *ngFor="let post of posts">
            <img (click)="blogUtils.visitBlog(post.post_url)" *ngIf="post.photos && post.photos.length > 0" 
-            class="post-img" [src]="post.photos[0].original_size.url"/>
+            class="post-image" [src]="post.photos[0].original_size.url"/>
             <div class="post-data">
                 <h3 (click)="blogUtils.visitBlog(post.blog.url)">{{ post.blog_name }}</h3>
                 <p *ngIf="post.caption && post.caption.length > 0" 
