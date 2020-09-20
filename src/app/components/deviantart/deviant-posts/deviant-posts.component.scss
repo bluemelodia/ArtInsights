@@ -42,16 +42,7 @@ $max-deviation-width: 400px;
     }
 
     .tag-stats {
-        padding-right: 0;
-
-        .header {
-            @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
-            padding-right: $large-spacing;
-        }
-        
-        h3 {
-            margin-bottom: $small-spacing;
-        }
+        @include tag-stats();
 
         .stats-container {
             max-height: 250px;
@@ -105,44 +96,17 @@ $max-deviation-width: 400px;
             @include flex-col($justify-content: center);
 
             .deviation {
-                padding: $large-spacing;
-                margin: 0 auto;
+                @include media-content-image-positioning();
 
                 .deviation-img {
-                    width: $max-deviation-width;
-                    border: 2px solid $light-text-color;
-                    padding: $large-spacing;
-
-                    &:hover {
-                        border: 2px solid $deviantart-light;
-                    }
+                    @include media-content-image($max-deviation-width, $deviantart-light);
                 }
 
                 .deviation-data {
-                    margin-top: $large-spacing;
-                    max-width: $max-deviation-width;
-
-                    h3 {
-                        &:hover {
-                            color: $deviantart-light;
-                        }
-                    }
+                    @include media-content-data($max-deviation-width, $deviantart-light);
 
                     .caption {
-                        border-left: 4px solid $light-text-color;
-                        padding: $small-spacing;
-                        /* Need a larger padding so bulleted lists can clear the border. */
-                        padding-left: $large-spacing * 2;
-                        margin-top: $small-spacing;
-                        margin-bottom: $small-spacing;
-
-                        .caption-link {
-                            color: $light-text-color;
-
-                            &:hover {
-                                color: $deviantart-light;
-                            }
-                        }
+                        @include caption($deviantart-light);
                     }
 
                     .tags-list {
@@ -162,13 +126,7 @@ $max-deviation-width: 400px;
                             @include flex-row($justify-content: flex-start);
         
                             .favorites, .comments {
-                                @include flex-row-center();
-                                margin-right: $small-spacing;
-        
-                                img {
-                                    width: $large-spacing;
-                                    margin-right: $small-spacing;
-                                }
+                                @include engagement();
                             }
                         }
     

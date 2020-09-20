@@ -157,3 +157,73 @@ $default-line-height: 0px;
         border: 2px solid $deviantart-light;
     }
 }
+
+@mixin tag-stats {
+    padding-right: 0;
+    border: 1px solid $light-text-color;
+    margin-top: $large-spacing;
+
+    .header {
+        @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+        padding-right: $large-spacing;
+    }
+        
+    h3 {
+        margin-bottom: $small-spacing;
+    }
+}
+
+@mixin caption($hover-color) {
+    border-left: 4px solid $light-text-color;
+    padding: $small-spacing;
+    
+    /* Need a larger padding so bulleted lists can clear the border. */
+    padding-left: $large-spacing * 2;
+    margin-top: $small-spacing;
+    margin-bottom: $small-spacing;
+
+    .caption-link {
+        color: $light-text-color;
+
+        &:hover {
+            color: $hover-color;
+        }
+    }
+}
+
+/* Ex. for displaying deviations, Tumblr posts, tweet images. */
+@mixin media-content-image-positioning() {
+    padding: $large-spacing;
+    margin: 0 auto;
+}
+
+@mixin media-content-image($max-width, $hover-color) {
+    width: $max-width;
+    border: 2px solid $light-text-color;
+    padding: $large-spacing;
+
+    &:hover {
+        border: 2px solid $hover-color;
+    }
+}
+
+@mixin media-content-data($max-width, $hover-color) {
+    margin-top: $large-spacing;
+    max-width: $max-width;
+
+    h3 {
+        &:hover {
+            color: $hover-color;
+        }
+    }
+}
+
+@mixin engagement() {
+    @include flex-row-center();
+    margin-right: $small-spacing;
+        
+    img {
+        width: $large-spacing;
+        margin-right: $small-spacing;
+    }
+}

@@ -47,16 +47,7 @@ $max-post-width: 400px;
     }
 
     .tag-stats {
-        padding-right: 0;
-
-        .header {
-            @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
-            padding-right: $large-spacing;
-        }
-        
-        h3 {
-            margin-bottom: $small-spacing;
-        }
+        @include tag-stats();
 
         .stats-container {
             max-height: 100px;
@@ -92,44 +83,17 @@ $max-post-width: 400px;
             @include flex-col($justify-content: center);
 
             .post {
-                padding: $large-spacing;
-                margin: 0 auto;
+                @include media-content-image-positioning();
 
-                .post-img {
-                    width: $max-post-width;
-                    border: 2px solid $light-text-color;
-                    padding: $large-spacing;
-
-                    &:hover {
-                        border: 2px solid $tumblr-light;
-                    }
+                .post-image {
+                    @include media-content-image($max-post-width, $tumblr-light);
                 }
 
                 .post-data {
-                    margin-top: $large-spacing;
-                    max-width: $max-post-width;
-
-                    h3 {
-                        &:hover {
-                            color: $tumblr-light;
-                        }
-                    }
+                    @include media-content-data($max-post-width, $tumblr-light);
 
                     .caption {
-                        border-left: 4px solid $light-text-color;
-                        padding: $small-spacing;
-                        /* Need a larger padding so bulleted lists can clear the border. */
-                        padding-left: $large-spacing * 2;
-                        margin-top: $small-spacing;
-                        margin-bottom: $small-spacing;
-
-                        .caption-link {
-                            color: $light-text-color;
-
-                            &:hover {
-                                color: $tumblr-light;
-                            }
-                        }
+                        @include caption($tumblr-light);
                     }
 
                     .post-stats {
@@ -145,13 +109,7 @@ $max-post-width: 400px;
                             @include flex-row($justify-content: flex-start);
         
                             .notes {
-                                @include flex-row-center();
-                                margin-right: $small-spacing;
-        
-                                img {
-                                    width: $large-spacing;
-                                    margin-right: $small-spacing;
-                                }
+                                @include engagement();
                             }
                         }
                     }

@@ -50,12 +50,17 @@ export class AnalyticsService {
       this.deviantArtAnalytics.times[timeOfDay] = {
         views: [],
         favorites: [],
-        comments: []
+        comments: [],
+        day: []
       };
     }
     this.deviantArtAnalytics.times[timeOfDay].views.push(stats.views);
     this.deviantArtAnalytics.times[timeOfDay].favorites.push(stats.favourites);
     this.deviantArtAnalytics.times[timeOfDay].comments.push(stats.comments);
+
+    /* Include day of week info. Don't merge this with day info as we want it to be
+    * calculated / shown independently. */
+    this.deviantArtAnalytics.times[timeOfDay].day.push(dayOfWeek);
 
     tags.forEach((tag: string) => {
       if (!this.deviantArtAnalytics.tags[tag]) {

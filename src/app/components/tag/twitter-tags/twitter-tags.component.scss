@@ -51,16 +51,7 @@ $max-tweet-width: 400px;
     }
 
     .tag-stats {
-        padding-right: 0;
-
-        .header {
-            @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
-            padding-right: $large-spacing;
-        }
-        
-        h3 {
-            margin-bottom: $small-spacing;
-        }
+        @include tag-stats();
 
         .stats-container {
             max-height: 100px;
@@ -99,28 +90,14 @@ $max-tweet-width: 400px;
             @include flex-col($justify-content: center);
 
             .tweet {
-                padding: $large-spacing;
-                margin: 0 auto;
+                @include media-content-image-positioning();
 
                 .tweet-img {
-                    width: $max-tweet-width;
-                    border: 2px solid $light-text-color;
-                    padding: $large-spacing;
-
-                    &:hover {
-                        border: 2px solid $twitter-light;
-                    }
+                    @include media-content-image($max-tweet-width, $twitter-light);
                 }
 
                 .tweet-data {
-                    margin-top: $large-spacing;
-                    max-width: $max-tweet-width;
-
-                    h3 {
-                        &:hover {
-                            color: $twitter-light;
-                        }
-                    }
+                    @include media-content-data($max-tweet-width, $twitter-light);
 
                     .followership {
                         @include flex-row-center($justify-content: flex-start);

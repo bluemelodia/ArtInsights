@@ -2,6 +2,7 @@ import { DeviantData } from './deviant.types';
 import { TumblrPhotos, TumblrUserBlog } from './tumblr.types';
 import { TwitterUser, TwitterEntities } from './twitter.types';
 import { DeviationContent, Engagement } from './shared.types';
+import { DayOfWeek } from './time.types';
 
 export interface DeviantArtTagResponse {
     estimated_total: number,
@@ -116,7 +117,8 @@ export interface DeviationTotalStats {
         [times: number] : {
             views: number[],
             favorites: number[],
-            comments: number[]
+            comments: number[],
+            day: DayOfWeek[]
         }
     }
 }
