@@ -49,7 +49,7 @@ $max-tweet-width: 400px;
 
     .tag-stats {
         @include tag-stats();
-        border: 1px solid white;
+        border: 1px solid $light-text-color;
         margin-top: $large-spacing;
 
         .stats-container {
