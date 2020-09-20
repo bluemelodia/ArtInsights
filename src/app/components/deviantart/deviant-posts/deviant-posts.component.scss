@@ -26,11 +26,6 @@ $max-deviation-width: 400px;
                     }
                 }
             }
-
-            .tag-stats {
-                border: 1px solid $light-text-color;
-                margin-top: $large-spacing;
-            }
         }
 
         @include no-matches();
@@ -39,7 +34,12 @@ $max-deviation-width: 400px;
     .tag-stats {
         @include tag-stats();
 
-        .stats-container {
+        &.outer-container {
+            border: 1px solid $light-text-color;
+            margin-top: $large-spacing;
+        }
+
+        .inner-container {
             max-height: 250px;
             overflow-y: scroll;
 
