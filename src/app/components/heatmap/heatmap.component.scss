@@ -12,6 +12,12 @@ h3 {
 
     .x-legend {
         text-align: center;
+        margin: $small-spacing/2;
+    }
+
+    .y-legend {
+        @include flex-row-center($justify-content: center);
+        min-height: 44px;
     }
 
     .data-point {

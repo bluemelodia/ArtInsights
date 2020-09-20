@@ -3,7 +3,7 @@
     <div *ngFor="let xAxis of mapAxes.secondAxis; let indexOfTime = index" class="col">
         <div class="x-legend">{{ indexOfTime-1 | shortTime }}</div>
         <div *ngFor="let yAxis of mapAxes.mainAxis; let indexOfDay = index" class="row">
-            <div *ngIf="indexOfDay === 0 && indexOfTime === 0" class="y-legend">
+            <div *ngIf="indexOfDay === 0 && indexOfTime === 0" class="chart-legend">
                 {{ xLabel }}/{{ yLabel }} 
             </div> 
             <div *ngIf="indexOfTime === 0" class="y-legend">
