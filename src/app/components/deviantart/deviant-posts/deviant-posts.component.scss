@@ -74,7 +74,7 @@ $max-deviation-width: 400px;
 
             &.tag {
                 /* Prevents the tag crashing into the next column. */
-                &.header, &.favorites, &.retweets {
+                &.header, &.favorites {
                     width: 25%;
                     padding-right: $small-spacing / 2;
                 }
@@ -113,7 +113,7 @@ $max-deviation-width: 400px;
                         .engagement {
                             @include flex-row($justify-content: flex-start);
         
-                            .favorites, .comments {
+                            .favorites, .comments, .views {
                                 @include engagement();
                             }
                         }

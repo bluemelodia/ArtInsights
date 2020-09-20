@@ -42,6 +42,10 @@
                         </div>
                         <p>Posted on {{ blogUtils.dateForTimestamp(deviation.published_time)  | date: 'short' }} </p>
                         <div class="engagement">
+                            <div class="views">
+                                <img [src]="viewImg"/> 
+                                <span>{{ deviation.stats.views }}</span>
+                            </div>
                             <div class="favorites">
                                 <img [src]="heartImg"/> 
                                 <span>{{ deviation.stats.favourites }}</span>
