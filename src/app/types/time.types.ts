@@ -7,3 +7,13 @@ export enum DayOfWeek {
     Friday,
     Saturday
 }
+
+export const DayOfWeekString: string[] = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday', 
+    'Friday',
+    'Saturday'
+];

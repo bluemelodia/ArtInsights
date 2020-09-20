@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DayOfWeek } from '../types/time.types';
+import { DayOfWeekString } from '../types/time.types';
 
 @Pipe({
   name: 'day'
@@ -7,7 +7,10 @@ import { DayOfWeek } from '../types/time.types';
 export class DayPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
-    return value as DayOfWeek;
+    if (value >= 0 && value <= 6) {
+      return DayOfWeekString[value];
+    }
+    return '';
   }
 
 }

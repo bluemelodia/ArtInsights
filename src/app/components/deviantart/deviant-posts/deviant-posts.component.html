@@ -59,7 +59,7 @@
     </div> 
 </section>
 <div *ngIf="deviations.length > 0" class="tag-stats">
-    <h3>Engagement by Most Used Tags</h3>
+    <h3>Engagement by Tag</h3>
     <div class="header">
         <span class="tag">Tag</span>
         <span>High</span>
@@ -110,7 +110,7 @@
 <div *ngIf="deviations.length > 0" class="tag-stats">
     <h3>Engagement by Day</h3>
     <div class="header">
-        <span class="tag">Tag</span>
+        <span class="tag">Day</span>
         <span>High</span>
         <span>Low</span>
         <span>Median</span>
@@ -120,7 +120,7 @@
         <div class="stats-summary" *ngIf="stats.days">
             <div *ngFor="let day of stats.days | keyvalue" class="tag-stats deviation">
                 <div class="stats">
-                    <span class="tag">#{{ day.key | day }}</span>
+                    <span class="tag">{{ day.key | day }}</span>
                 </div>
                 <div class="stats views">
                     <span class="tag views">
