@@ -18,27 +18,22 @@ $max-deviation-width: 400px;
             padding-top: $large-spacing;
 
             .favorites, .comments, .tag-stats {
-                @include flex-row-center($justify-content: flex-start);
+                @include social-media-stats();
     
-                img {
-                    width: $large-spacing;
-                    margin-right: $large-spacing;
-                }
-    
-                .stats {
-                    @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
-                    
+                .stats {                    
                     span {
                         width: 25%;
                     }
                 }
             }
+
+            .tag-stats {
+                border: 1px solid $light-text-color;
+                margin-top: $large-spacing;
+            }
         }
 
-        .no-matches {
-            max-width: $max-width;
-            text-align: center;
-        }
+        @include no-matches();
     }
 
     .tag-stats {
@@ -57,8 +52,7 @@ $max-deviation-width: 400px;
 
                 .deviation {
                     @include flex-col();
-                    border-left: 4px solid $light-text-color;
-                    margin-bottom: $large-spacing;
+                    @include post-left-border();
 
                     .icon {
                         margin-right: 0;
@@ -114,13 +108,7 @@ $max-deviation-width: 400px;
                     }
 
                     .deviation-stats {
-                        @include flex-row-center($justify-content: space-between);
-
-                        .author-link {
-                            &:hover {
-                                color: $deviantart-light;
-                            }
-                        }
+                        @include post-stats($deviantart-light);
 
                         .engagement {
                             @include flex-row($justify-content: flex-start);

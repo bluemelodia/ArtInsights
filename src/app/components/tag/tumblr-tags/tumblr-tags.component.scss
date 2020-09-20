@@ -17,16 +17,7 @@ $max-post-width: 400px;
             @include flex-col($justify-content: flex-start);
 
             .notes, .tag-stats {
-                @include flex-row-center($justify-content: flex-start);
-
-                img {
-                    width: $large-spacing;
-                    margin-right: $large-spacing;
-                }
-    
-                .stats {
-                    @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
-                }
+                @include social-media-stats();
             }
 
             .notes {
@@ -34,10 +25,7 @@ $max-post-width: 400px;
             }
         }
 
-        .no-matches {
-            max-width: $max-width;
-            text-align: center;
-        }
+        @include no-matches();
     }
 
     .tumblr-stats {
@@ -97,13 +85,7 @@ $max-post-width: 400px;
                     }
 
                     .post-stats {
-                        @include flex-row-center($justify-content: space-between);
-
-                        .author-link {
-                            &:hover {
-                                color: $tumblr-light;
-                            }
-                        }
+                        @include post-stats($tumblr-light);
 
                         .engagement {
                             @include flex-row($justify-content: flex-start);

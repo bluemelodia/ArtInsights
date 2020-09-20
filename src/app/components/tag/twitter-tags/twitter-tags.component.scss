@@ -38,10 +38,7 @@ $max-tweet-width: 400px;
             }
         }
 
-        .no-matches {
-            max-width: $max-width;
-            text-align: center;
-        }
+        @include no-matches();
     }
 
     .twitter-stats {
@@ -61,8 +58,7 @@ $max-tweet-width: 400px;
                 padding-top: $large-spacing;
 
                 .tweets {
-                    border-left: 4px solid $light-text-color;
-                    margin-bottom: $large-spacing;
+                    @include post-left-border();
                 }
             }
         }
@@ -131,13 +127,7 @@ $max-tweet-width: 400px;
                     }
 
                     .tweet-stats {
-                        @include flex-row-center($justify-content: space-between);
-
-                        .author-link {
-                            &:hover {
-                                color: $twitter-light;
-                            }
-                        }
+                        @include post-stats($twitter-light);
 
                         .engagement {
                             @include flex-row($justify-content: flex-start);
