@@ -83,7 +83,7 @@ export class TumblrComponent implements OnInit, OnDestroy {
     /* New blog search, reset all. */
     if (this.tumblrUser && blog !== this.userBlog) {
       this.userBlog = blog;
-      this.alert.showAlert(AlertType.Info, `Retrieving data for ${this.blog}...`);
+      this.alert.showAlert(AlertType.Info, `Retrieving Tumblr blog data...`);
       this.getTumblrFollowersAndFollowing();
     }
   }
