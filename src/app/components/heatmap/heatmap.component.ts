@@ -53,15 +53,15 @@ export class HeatmapComponent implements OnInit {
   getDataStyle(stat: number) {
     if (stat < 0) {
       return 'none';
-    } else if (stat < 50) {
+    } else if (stat < 25) {
       return 'very-low';
-    } else if (stat < 100) {
+    } else if (stat < 50) {
       return 'low';
-    } else if (stat < 150) {
+    } else if (stat < 100) {
       return 'low-mid';
-    } else if (stat < 200) {
-      return 'mid';
     } else if (stat < 250) {
+      return 'mid';
+    } else if (stat < 500) {
       return 'mid-high';
     } else {
       return 'high';
