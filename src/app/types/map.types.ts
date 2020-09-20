@@ -7,6 +7,6 @@ export interface MapAxes {
 
 export interface MapData {
     [day: number] : {
-        [time: number] : number[]
+        [time: number] : number
     }
 }

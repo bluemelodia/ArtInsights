@@ -30,7 +30,7 @@ export class HeatmapComponent implements OnInit {
       DayOfWeek.Friday,
       DayOfWeek.Saturday
     ],
-    secondAxis: this.utils.fillArray(0, 23)
+    secondAxis: this.utils.fillArray(0, 24)
   };
 
 
