@@ -13,5 +13,33 @@ h3 {
         border: 1px solid $light-text-color;
         min-height: 44px; 
         min-width: 44px;
+
+        &.none {
+            color: $none;
+        }
+
+        &.very-low {
+            color: $very-low;
+        }
+
+        &.low {
+            color: $low;
+        }
+        
+        &.low-mid {
+            color: $low-med;
+        }
+
+        &.mid {
+            color: $med
+        }
+
+        &.mid-high {
+            color: $med-high;
+        }
+
+        &.high {
+            color: $high;
+        }
     }
 }

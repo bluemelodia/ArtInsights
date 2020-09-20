@@ -1,10 +1,13 @@
 <section class="heat-map">
     <h3>{{mapTitle}}</h3>
+    {{ mapAxes.mainAxis }} {{ mapAxes.secondAxis }}
     <div *ngFor="let xAxis of mapAxes.mainAxis; let indexOfDay = index" class="col">
         <div class="x-legend">{{ xAxis | shortDay }}</div>
         <div *ngFor="let yAxis of mapAxes.secondAxis; let indexOfTime = index" class="row">
             <div *ngIf="indexOfDay === 0 && indexOfTime === 0" class="y-legend">{{ yAxis | shortTime }}</div>
-            <div *ngIf="indexOfDay !== 0 || indexOfTime !== 0"class="data-point">
+            <div *ngIf="indexOfDay !== 0 || indexOfTime !== 0"
+                ng-class="getDataStyle(mapData[xAxis][yAxis] ? mapData[xAxis][yAxis] : -1)"
+                class="data-point">
                 {{ mapData[xAxis][yAxis] ? mapData[xAxis][yAxis] : '-' }}
             </div>
         </div>

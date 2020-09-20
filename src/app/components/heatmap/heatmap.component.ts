@@ -10,7 +10,7 @@ import { UtilsService } from '../../services/utils.service';
 })
 export class HeatmapComponent implements OnInit {
   @Input() mapTitle: string;
-  
+
   /* Users must pass a structure like this: 
    *  { 0: { 21: [], 23: [] } , 1: { 2: [], 5: [] } }
    * The number of outer arrys 
@@ -38,4 +38,21 @@ export class HeatmapComponent implements OnInit {
   ngOnInit() {
   }
 
+  getDataStyle(stat: number) {
+    if (stat < 0) {
+      return 'none';
+    } else if (stat < 50) {
+      return 'very-low';
+    } else if (stat < 100) {
+      return 'low';
+    } else if (stat < 150) {
+      return 'low-mid';
+    } else if (stat < 200) {
+      return 'mid';
+    } else if (stat < 250) {
+      return 'mid-high';
+    } else {
+      return 'high';
+    }
+  }
 }
