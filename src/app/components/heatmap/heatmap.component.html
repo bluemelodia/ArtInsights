@@ -6,7 +6,7 @@
             <div *ngIf="indexOfDay === -1 && indexOfTime === -1" class="y-legend"></div> 
             <div *ngIf="indexOfDay === -1 && indexOfTime !== -1" class="y-legend">{{ yAxis | shortTime }}</div> 
             <div *ngIf="indexOfDay !== -1"
-                ng-class="getDataStyle(mapData[indexOfDay][indexOfTime] ? mapData[indexOfDay][indexOfTime] : -1)"
+                [ngClass]="getDataStyle(mapData[indexOfDay][indexOfTime] ? mapData[indexOfDay][indexOfTime] : -1)"
                 class="data-point">
                 {{ mapData[indexOfDay][indexOfTime] ? mapData[indexOfDay][indexOfTime] : '-' }}
             </div>
