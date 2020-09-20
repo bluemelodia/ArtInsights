@@ -173,6 +173,7 @@ $default-line-height: 0px;
     }
 }
 
+/* Post/deviation/tweet description (written by the content creator) gets special formatting. */
 @mixin caption($hover-color) {
     border-left: 4px solid $light-text-color;
     padding: $small-spacing;
@@ -191,7 +192,13 @@ $default-line-height: 0px;
     }
 }
 
-/* Ex. for displaying deviations, Tumblr posts, tweet images. */
+@mixin post-left-border() {
+    border-left: 4px solid $light-text-color;
+    margin-bottom: $large-spacing;
+}
+
+/* Shared logic for post/deviation/tweet information (not related to stats). 
+ * Ex. for displaying deviations, Tumblr posts, tweet images. */
 @mixin media-content-image-positioning() {
     padding: $large-spacing;
     margin: 0 auto;
@@ -218,6 +225,17 @@ $default-line-height: 0px;
     }
 }
 
+/* Shared logic for post/deviation/tweet stats. */
+@mixin post-stats($hover-color) {
+    @include flex-row-center($justify-content: space-between);
+
+    .author-link {
+        &:hover {
+            color: $hover-color;
+        }
+    }
+}
+
 @mixin engagement() {
     @include flex-row-center();
     margin-right: $small-spacing;
@@ -225,5 +243,27 @@ $default-line-height: 0px;
     img {
         width: $large-spacing;
         margin-right: $small-spacing;
+    }
+}
+
+/* Shared styles for the top (header) and bottom (footer) stat sections. */
+@mixin social-media-stats() {
+    @include flex-row-center($justify-content: flex-start);
+
+    img {
+        width: $large-spacing;
+        margin-right: $large-spacing;
+    }
+    
+    .stats {
+        @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+    }
+}
+
+/* What to show if there are no matching deviations, tweets, and posts. */
+@mixin no-matches() {
+    .no-matches {
+        max-width: $max-width;
+        text-align: center;
     }
 }
