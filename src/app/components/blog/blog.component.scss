@@ -4,11 +4,7 @@
 :host {
     @include flex-col();
 
-    @include desktop() {
-        @include flex-row(space-between);
-    }
-
-    @include tablet() {
+    @include large-screen() {
         @include flex-row(space-between);
     }
 

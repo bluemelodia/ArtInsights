@@ -30,11 +30,7 @@
             height: 0;
             width: 0;
 
-            @include tablet() {
-                @include user-profile-img();
-            }
-
-            @include desktop() {
+            @include large-screen() {
                 @include user-profile-img();
             }
         }

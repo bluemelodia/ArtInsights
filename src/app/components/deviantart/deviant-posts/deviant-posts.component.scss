@@ -102,11 +102,19 @@ $max-deviation-width: 400px;
                 @include media-content-image-positioning();
 
                 .deviation-img {
-                    @include media-content-image($max-deviation-width, $deviantart-light);
+                    @include media-content-image(100%, $deviantart-light);
+
+                    @include large-screen() {
+                        @include media-content-image($max-deviation-width, $deviantart-light);
+                    }
                 }
 
                 .deviation-data {
-                    @include media-content-data($max-deviation-width, $deviantart-light);
+                    @include media-content-data(100%, $deviantart-light);
+
+                    @include large-screen() {
+                        @include media-content-data($max-deviation-width, $deviantart-light);
+                    }
 
                     .caption {
                         @include caption($deviantart-light);

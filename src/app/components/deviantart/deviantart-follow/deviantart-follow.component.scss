@@ -29,7 +29,7 @@
             }
     
             .da-style {
-                @include flex-row();
+                @include flex-row($justify-content: flex-start);
             }
     
             .watcher-icon {

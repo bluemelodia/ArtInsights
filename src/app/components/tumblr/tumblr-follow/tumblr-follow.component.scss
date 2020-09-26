@@ -5,12 +5,8 @@
     @include flex-row();
     width: 100%;
 
-    @include tablet() {
+    @include large-screen() {
         max-width: $max-width;
-    }
-
-    @include desktop() {
-        max-width: $max-wide-width;
     }
 }
 
@@ -18,11 +14,7 @@
     @include tumblr-container();
     @include flex-col();
 
-    @include desktop() {
-        @include flex-row(space-around);
-    }
-
-    @include tablet() {
+    @include large-screen() {
         @include flex-row(space-around);
     }
 
@@ -48,14 +40,10 @@
     
         .scrollable-list {
             padding-right: $large-spacing;
-            max-height: scroll-section-height-small;
+            max-height: $scroll-section-height-small;
             overflow-y: scroll;
 
-            @include tablet() {
-                max-height: $scroll-section-height;
-            }
-
-            @include desktop() {
+            @include large-screen() {
                 max-height: $scroll-section-height;
             }
         }
@@ -65,11 +53,7 @@
         margin-right: $large-spacing;
         margin-bottom: $large-spacing;
 
-        @include desktop() {
-            margin-bottom: 0;
-        }
-
-        @include tablet() {
+        @include large-screen() {
             margin-bottom: 0;
         }
     }
