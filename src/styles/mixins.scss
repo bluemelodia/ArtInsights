@@ -75,6 +75,11 @@
     align-items: center;
 }
 
+@mixin flex-col-percent-width($width: 100%, $justify-content: flex-start) {
+    @include flex-col($justify-content);
+    width: $width;
+}
+
 @mixin wide-and-center($width: 100%) {
     @include full-width-limited($width: $width);
     @include flex-col($justify-content: center);
@@ -146,8 +151,14 @@ $default-line-height: 0px;
 }
 
 @mixin user-container() {
-    margin: $large-spacing;
-    padding: $large-spacing;
+    margin: $small-spacing/2;
+    padding: $small-spacing/2;
+
+    @include large-screen() {
+        margin: $large-spacing;
+        padding: $large-spacing;
+    }
+
     border: 3px solid $widget-border;
 
     width: 100%;
@@ -238,8 +249,13 @@ $default-line-height: 0px;
 /* Shared logic for post/deviation/tweet information (not related to stats). 
  * Ex. for displaying deviations, Tumblr posts, tweet images. */
 @mixin media-content-image-positioning() {
-    padding: $large-spacing;
-    margin: 0 auto;
+    padding: $small-spacing/2;
+    margin: 0;
+
+    @include large-screen() {
+        padding: $large-spacing;
+        margin: 0 auto;
+    }
 }
 
 @mixin media-content-image($max-width, $hover-color) {
@@ -294,7 +310,11 @@ $default-line-height: 0px;
     }
     
     .stats {
-        @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+        @include flex-col();
+
+        @include large-screen() {
+            @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
+        }
     }
 }
 
