@@ -26,7 +26,11 @@ $max-deviation-width: 400px;
     
                 .stats {                    
                     span {
-                        width: 25%;
+                        width: 100%;
+
+                        @include large-screen() {
+                            width: 25%;
+                        }
                     }
                 }
             }
@@ -56,7 +60,13 @@ $max-deviation-width: 400px;
 
                 .deviation {
                     @include flex-col();
+                    align-items: flex-start;
+
                     @include post-left-border();
+
+                    @include large-screen() {
+                        align-items: center;
+                    }
 
                     .icon {
                         margin-right: 0;
@@ -81,6 +91,26 @@ $max-deviation-width: 400px;
                 &.header, &.favorites {
                     width: 25%;
                     padding-right: $small-spacing / 2;
+                }
+
+                /* 
+                * The column is not useful on small screens. Show the
+                * metrix next to each value instead. 
+                */
+                .header {
+                    display: none;
+
+                    @include large-screen() {
+                        display: block;
+                    }
+                }
+
+                .tag-metric {
+                    display: block;
+
+                    @include large-screen() {
+                        display: none;
+                    }
                 }
             }
         }
