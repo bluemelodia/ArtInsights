@@ -3,6 +3,12 @@ export enum Environment {
     Production = 'production'
 }
 
+export const viewTiers = [0, 50, 100, 250, 500, 1000];
+export const faveTiers = [0, 25, 50, 100, 250, 500];
+
+/* Comments are the rarest form of engagement, so make the tiers the most lenient. */
+export const commentTiers = [0, 5, 10, 25, 50, 100];
+
 export enum UserAction {
     Login = 'login',
     Logout = 'logout',

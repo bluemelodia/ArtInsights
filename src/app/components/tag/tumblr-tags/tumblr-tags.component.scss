@@ -37,6 +37,11 @@ $max-post-width: 400px;
     .tag-stats {
         @include tag-stats();
 
+        &.outer-container {
+            border: 1px solid $light-text-color;
+            margin-top: $large-spacing;
+        }
+
         .stats-container {
             max-height: 100px;
             overflow-y: scroll;
@@ -66,11 +71,6 @@ $max-post-width: 400px;
         max-height: $scroll-section-height;
         overflow-y: scroll;
         overflow-x: hidden;
-
-        .tag-stats {
-            border: 1px solid $light-text-color;
-            margin-top: $large-spacing;
-        }
 
         .posts {
             @include flex-col($justify-content: center);

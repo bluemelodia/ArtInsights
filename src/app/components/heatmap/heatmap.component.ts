@@ -13,6 +13,10 @@ export class HeatmapComponent implements OnInit {
   @Input() xLabel: string = 'Times';
   @Input() yLabel: string = 'Days';
 
+  /* Users can pass in their own array to indicate 
+  * what qualifies for each engagement tier. */
+  @Input() engagementLevels: number[] = [0, 25, 50, 100, 250, 500];
+
   /* Users must pass a structure like this: 
    *  { 0: { 21: [], 23: [] } , 1: { 2: [], 5: [] } }
    * The number of outer arrys 
@@ -48,17 +52,17 @@ export class HeatmapComponent implements OnInit {
   }
 
   getDataStyle(stat: number) {
-    if (stat < 0) {
+    if (stat < this.engagementLevels[0]) {
       return 'none';
-    } else if (stat < 25) {
+    } else if (stat < this.engagementLevels[1]) {
       return 'very-low';
-    } else if (stat < 50) {
+    } else if (stat < this.engagementLevels[2]) {
       return 'low';
-    } else if (stat < 100) {
+    } else if (stat < this.engagementLevels[3]) {
       return 'low-mid';
-    } else if (stat < 250) {
+    } else if (stat < this.engagementLevels[4]) {
       return 'mid';
-    } else if (stat < 500) {
+    } else if (stat < this.engagementLevels[5]) {
       return 'mid-high';
     } else {
       return 'high';
