@@ -7,9 +7,7 @@
     .deviant-art-follows {
         @include deviantart-container();
         @include flex-row(space-around);
-    
         margin-bottom: $large-spacing;
-        margin: 0 auto;
     
         & .followers, & .following {
             color: $light-text-color;

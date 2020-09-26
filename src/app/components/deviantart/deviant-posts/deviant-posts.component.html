@@ -102,10 +102,10 @@
                         <img class="icon" [src]="commentImg"/> 
                         <span>Comments</span>
                     </span>
-                    <span>{{ tag.value.comment.high }}</span>
-                    <span>{{ tag.value.comment.low }}</span>
-                    <span>{{ tag.value.comment.median }}</span>
-                    <span>{{ tag.value.comment.average | number:'1.2-2' }}</span>
+                    <span><span class="tag-metric">Hi </span>{{ tag.value.comment.high }}</span>
+                    <span><span class="tag-metric">Low </span>{{ tag.value.comment.low }}</span>
+                    <span><span class="tag-metric">Mid </span>{{ tag.value.comment.median }}</span>
+                    <span><span class="tag-metric">Avg </span>{{ tag.value.comment.average | number:'1.2-2' }}</span>
                 </div>
             </div>
         </div>
@@ -131,30 +131,30 @@
                         <img class="icon" [src]="viewImg"/> 
                         <span>Views</span>
                     </span>
-                    <span>{{ day.value.views.high }}</span>
-                    <span>{{ day.value.views.low }}</span>
-                    <span>{{ day.value.views.median }}</span>
-                    <span>{{ day.value.views.average | number:'1.2-2' }}</span>
+                    <span><span class="tag-metric">Hi </span>{{ day.value.views.high }}</span>
+                    <span><span class="tag-metric">Low </span>{{ day.value.views.low }}</span>
+                    <span><span class="tag-metric">Mid </span>{{ day.value.views.median }}</span>
+                    <span><span class="tag-metric">Avg </span>{{ day.value.views.average | number:'1.2-2' }}</span>
                 </div>
                 <div class="stats favorites">
                     <span class="tag favorites">
                         <img class="icon" [src]="heartImg"/> 
                         <span>Favorites</span>
                     </span>
-                    <span>{{ day.value.favorites.high }}</span>
-                    <span>{{ day.value.favorites.low }}</span>
-                    <span>{{ day.value.favorites.median }}</span>
-                    <span>{{ day.value.favorites.average | number:'1.2-2' }}</span>
+                    <span><span class="tag-metric">Hi </span>{{ day.value.favorites.high }}</span>
+                    <span><span class="tag-metric">Low </span>{{ day.value.favorites.low }}</span>
+                    <span><span class="tag-metric">Mid </span>{{ day.value.favorites.median }}</span>
+                    <span><span class="tag-metric">Avg </span>{{ day.value.favorites.average | number:'1.2-2' }}</span>
                 </div>
                 <div class="stats comments">
                     <span class="tag comments">
                         <img class="icon" [src]="commentImg"/> 
                         <span>Comments</span>
                     </span>
-                    <span>{{ day.value.comment.high }}</span>
-                    <span>{{ day.value.comment.low }}</span>
-                    <span>{{ day.value.comment.median }}</span>
-                    <span>{{ day.value.comment.average | number:'1.2-2' }}</span>
+                    <span><span class="tag-metric">Hi </span>{{ day.value.comment.high }}</span>
+                    <span><span class="tag-metric">Low </span>{{ day.value.comment.low }}</span>
+                    <span><span class="tag-metric">Mid </span>{{ day.value.comment.median }}</span>
+                    <span><span class="tag-metric">Avg </span>{{ day.value.comment.average | number:'1.2-2' }}</span>
                 </div>
             </div>
         </div>
