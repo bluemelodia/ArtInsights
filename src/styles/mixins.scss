@@ -151,8 +151,8 @@ $default-line-height: 0px;
 }
 
 @mixin user-container() {
-    margin: $small-spacing/2;
-    padding: $small-spacing/2;
+    margin: $small-spacing;
+    padding: $small-spacing;
 
     @include large-screen() {
         margin: $large-spacing;

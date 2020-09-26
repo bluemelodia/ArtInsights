@@ -11,7 +11,7 @@ $max-deviation-width: 400px;
     width: 100%;
 
     .deviations-stats, .tag-stats {
-        padding: $small-spacing/2;
+        padding: $small-spacing;
 
         @include large-screen() {
             padding: $large-spacing;
@@ -138,16 +138,24 @@ $max-deviation-width: 400px;
                 .deviation-img {
                     @include media-content-image(100%, $deviantart-light);
 
-                    @include large-screen() {
+                    @include tablet() {
                         @include media-content-image($max-deviation-width, $deviantart-light);
+                    }
+
+                    @include desktop() {
+                        @include media-content-image($max-deviation-width*2, $deviantart-light);
                     }
                 }
 
                 .deviation-data {
                     @include media-content-data(100%, $deviantart-light);
 
-                    @include large-screen() {
+                    @include tablet() {
                         @include media-content-data($max-deviation-width, $deviantart-light);
+                    }
+
+                    @include desktop() {
+                        @include media-content-data($max-deviation-width*2, $deviantart-light);   
                     }
 
                     .caption {
