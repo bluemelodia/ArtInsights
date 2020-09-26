@@ -153,8 +153,12 @@ $default-line-height: 0px;
     width: 100%;
     margin: 0 auto;
 
-    @include large-screen() {
+    @include tablet() {
         max-width: $max-width;
+    }
+
+    @include desktop() {
+        max-width: $max-wide-width;
     }
 }
 

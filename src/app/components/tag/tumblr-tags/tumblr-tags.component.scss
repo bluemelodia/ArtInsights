@@ -79,11 +79,19 @@ $max-post-width: 400px;
                 @include media-content-image-positioning();
 
                 .post-image {
-                    @include media-content-image($max-post-width, $tumblr-light);
+                    @include media-content-image(100%, $tumblr-light);
+
+                    @include large-screen() {
+                        @include media-content-image($max-post-width, $tumblr-light);
+                    }
                 }
 
                 .post-data {
-                    @include media-content-data($max-post-width, $tumblr-light);
+                    @include media-content-data(100%, $tumblr-light);
+
+                    @include large-screen() {
+                        @include media-content-data($max-post-width, $tumblr-light);
+                    }
 
                     .caption {
                         @include caption($tumblr-light);

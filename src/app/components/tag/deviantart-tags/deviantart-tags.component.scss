@@ -47,15 +47,19 @@ $max-deviation-width: 400px;
 
         .deviations {
             @include flex-col($justify-content: center);
-
+            
             .deviation {
                 padding: $large-spacing;
                 margin: 0 auto;
 
                 .deviation-img {
-                    width: $max-deviation-width;
                     border: 2px solid $light-text-color;
                     padding: $large-spacing;
+                    width: 100%;
+
+                    @include large-screen() {
+                        width: $max-deviation-width;
+                    }
 
                     &:hover {
                         border: 2px solid $deviantart-light;
@@ -64,7 +68,11 @@ $max-deviation-width: 400px;
 
                 .deviation-data {
                     margin-top: $large-spacing;
-                    max-width: $max-deviation-width;
+                    width: 100%;
+
+                    @include large-screen() {
+                        max-width: $max-deviation-width;
+                    }
 
                     h3 {
                         &:hover {
