@@ -1,5 +1,20 @@
 @import './variables.scss';
 
+/* Device mixins. */
+@mixin tablet() {
+    @media only screen 
+    and (min-device-width : 768px) 
+    and (max-device-width : 1024px)  { 
+        @content;
+    } 
+}
+
+@mixin desktop() {
+    @media (min-width : 1400px) { 
+        @content;
+    }
+}
+
 @mixin full-background($url: url, $position: center) {
     background-image: url($url);
     background-size: cover;
@@ -25,6 +40,7 @@
 
 @mixin flex-row($justify-content: center) {
     display: flex;
+    flex-direction: row;
     justify-content: $justify-content;
 }
 
@@ -113,13 +129,24 @@ $default-line-height: 0px;
     box-shadow: inset 0 0 0 2px $app-dark-nav;
 }
 
+@mixin user-profile-img() {
+    height: 80px;
+    width: 80px;
+    display: block;
+}
+
 @mixin user-container() {
     margin: $large-spacing;
     padding: $large-spacing;
     border: 3px solid $widget-border;
 
+    width: 100%;
     max-width: $max-width;
     margin: 0 auto;
+
+    @include desktop() {
+        max-width: $max-wide-width;
+    }
 }
 
 @mixin deviantart-container() {

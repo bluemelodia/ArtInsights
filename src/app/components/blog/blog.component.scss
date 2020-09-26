@@ -2,7 +2,15 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    @include flex-row(space-between);
+    @include flex-col();
+
+    @include desktop() {
+        @include flex-row(space-between);
+    }
+
+    @include tablet() {
+        @include flex-row(space-between);
+    }
 
     margin-top: $small-spacing;
     margin-bottom: $small-spacing;
@@ -12,6 +20,7 @@
     & .follow-button {
         color: $light-text-color;
         font-weight: bold;
+        text-align: right;
     }
 
     &.tumblr-theme {

@@ -4,5 +4,4 @@
 /* Center both sub-components. */
 :host {
     @include flex-col-center($justify-content: center);
-    height: 95vh;
 }

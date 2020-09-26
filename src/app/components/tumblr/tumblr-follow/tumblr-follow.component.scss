@@ -1,9 +1,32 @@
 @import '../../../../styles/mixins.scss';
 @import '../../../../styles/variables.scss';
 
+:host {
+    @include flex-row();
+    width: 100%;
+
+    @include tablet() {
+        max-width: $max-width;
+    }
+
+    @include desktop() {
+        max-width: $max-wide-width;
+    }
+}
+
 .tumblr-follows {
     @include tumblr-container();
-    @include flex-row(space-around);
+    @include flex-col();
+
+    @include desktop() {
+        @include flex-row(space-around);
+    }
+
+    @include tablet() {
+        @include flex-row(space-around);
+    }
+
+    width: 100%;
 
     & .followers, & .following {
         color: $light-text-color;
@@ -24,14 +47,31 @@
         }
     
         .scrollable-list {
-            max-height: $scroll-section-height;
             padding-right: $large-spacing;
+            max-height: scroll-section-height-small;
             overflow-y: scroll;
+
+            @include tablet() {
+                max-height: $scroll-section-height;
+            }
+
+            @include desktop() {
+                max-height: $scroll-section-height;
+            }
         }
     }
     
     & .followers {
         margin-right: $large-spacing;
+        margin-bottom: $large-spacing;
+
+        @include desktop() {
+            margin-bottom: 0;
+        }
+
+        @include tablet() {
+            margin-bottom: 0;
+        }
     }
     
     & .following {

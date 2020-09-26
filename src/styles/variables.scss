@@ -11,6 +11,7 @@ $app-light-nav: $app-tertiary;
 $app-selected-nav: #c8d6e5;
 
 $scroll-section-height: 700px;
+$scroll-section-height-small: 400px;
 
 $tumblr-bg: #2a4259;
 $tumblr-medium: #41668b;
@@ -56,3 +57,7 @@ $large-line-height: $large-font * 2;
 $title-line-height: $large-line-height * 1.5;
 
 $max-width: 700px;
+$max-wide-width: 1200px;
+
+$breakpoint-tablet: 768px;
+$breakpoint-phone: 320px;

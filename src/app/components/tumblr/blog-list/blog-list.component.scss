@@ -26,7 +26,17 @@
         }
     
         img {
-            height: 80px;
+            /* Hidden on small screens. */
+            height: 0;
+            width: 0;
+
+            @include tablet() {
+                @include user-profile-img();
+            }
+
+            @include desktop() {
+                @include user-profile-img();
+            }
         }
     }
 }
