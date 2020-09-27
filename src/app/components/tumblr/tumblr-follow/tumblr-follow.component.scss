@@ -17,11 +17,11 @@
 .tumblr-follows {
     @include tumblr-container();
     @include flex-col();
-    
+
     margin: 0;
     margin-top: $large-spacing;
 
-    @include large-screen() {
+    @include medium-phone() {
         @include flex-row(space-around);
     }
 

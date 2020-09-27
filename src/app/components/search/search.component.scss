@@ -18,6 +18,10 @@ $search-background-color: #dfe6e9;
     @include flex-row();
     @include full-width-limited();
 
+    @include desktop() {
+        @include full-width-limited($limit: $max-wide-width, $width: 100%);
+    }
+
     height: $search-bar-height;
     background-color: $search-background-color;
     border: 2px solid $search-bar-border;

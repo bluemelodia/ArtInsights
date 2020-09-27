@@ -329,5 +329,9 @@ $default-line-height: 0px;
     .no-matches {
         max-width: $max-width;
         text-align: center;
+
+        @include desktop() {
+            max-width: $max-wide-width;
+        }
     }
 }
