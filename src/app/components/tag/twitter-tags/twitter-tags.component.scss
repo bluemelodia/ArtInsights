@@ -63,6 +63,10 @@ $max-tweet-width: 400px;
             .stats-summary {
                 padding-top: $large-spacing;
 
+                .top-stats {
+                    @include engagement-cols($width: 20%);
+                }
+
                 .tweets {
                     @include post-left-border();
                 }

@@ -83,20 +83,20 @@
                         <img class="icon" [src]="heartImg"/> 
                         <span>Favorites</span>
                     </span>
-                    <span>{{ tag.value.favorites.high }}</span>
-                    <span>{{ tag.value.favorites.low }}</span>
-                    <span>{{ tag.value.favorites.median }}</span>
-                    <span>{{ tag.value.favorites.average | number:'1.2-2' }}</span>
+                    <span class="top-stats">Hi {{ tag.value.favorites.high }}</span>
+                    <span class="top-stats">Low {{ tag.value.favorites.low }}</span>
+                    <span class="top-stats">Mid {{ tag.value.favorites.median }}</span>
+                    <span class="top-stats">Avg {{ tag.value.favorites.average | number:'1.2-2' }}</span>
                 </div>
                 <div class="stats retweets">
                     <span class="tag retweets">
                         <img class="icon" [src]="retweetImg"/> 
                         <span>Retweets</span>
                     </span>
-                    <span>{{ tag.value.retweets.high }}</span>
-                    <span>{{ tag.value.retweets.low }}</span>
-                    <span>{{ tag.value.retweets.median }}</span>
-                    <span>{{ tag.value.retweets.average | number:'1.2-2' }}</span>
+                    <span class="top-stats">Hi {{ tag.value.retweets.high }}</span>
+                    <span class="top-stats">Low {{ tag.value.retweets.low }}</span>
+                    <span class="top-stats">Mid {{ tag.value.retweets.median }}</span>
+                    <span class="top-stats">Avg {{ tag.value.retweets.average | number:'1.2-2' }}</span>
                 </div>
             </div>
         </div>
