@@ -6,9 +6,9 @@
         <div class="notes">
             <img [src]="heartImg"/> 
             <div *ngIf="engagement && engagement.stats" class="stats">
-                <span class="top-stats">Hi {{ engagement.stats.high }}</span>
-                <span class="top-stats">Low {{ engagement.stats.low }}</span>
-                <span class="top-stats">Mid {{ engagement.stats.median }}</span>
+                <span class="top-stats">Hi {{ engagement.stats.high | number:'1.0-0' }}</span>
+                <span class="top-stats">Low {{ engagement.stats.low | number:'1.0-0' }}</span>
+                <span class="top-stats">Mid {{ engagement.stats.median | number:'1.0-0' }}</span>
                 <span class="top-stats">Avg {{ engagement.stats.average | number:'1.0-0' }}</span>
             </div>
         </div>

@@ -6,18 +6,18 @@
         <div class="favorites">
             <img [src]="heartImg"/> 
             <div *ngIf="favoriteStats" class="stats">
-                <span class="top-stats">Hi {{ favoriteStats.high }}</span>
-                <span class="top-stats">Low {{ favoriteStats.low }}</span>
-                <span class="top-stats">Mid {{ favoriteStats.median }}</span>
+                <span class="top-stats">Hi {{ favoriteStats.high | number:'1.0-0' }}</span>
+                <span class="top-stats">Low {{ favoriteStats.low | number:'1.0-0' }}</span>
+                <span class="top-stats">Mid {{ favoriteStats.median | number:'1.0-0' }}</span>
                 <span class="top-stats">Avg {{ favoriteStats.average | number:'1.0-0' }}</span>
             </div>
         </div>
         <div class="comments">
             <img [src]="commentImg"/>
             <div *ngIf="commentStats" class="stats">
-                <span class="top-stats">Hi {{ commentStats.high }}</span>
-                <span class="top-stats">Low {{ commentStats.low }}</span>
-                <span class="top-stats">Mid {{ commentStats.median }}</span>
+                <span class="top-stats">Hi {{ commentStats.high | number:'1.0-0' }}</span>
+                <span class="top-stats">Low {{ commentStats.low | number:'1.0-0' }}</span>
+                <span class="top-stats">Mid {{ commentStats.median | number:'1.0-0' }}</span>
                 <span class="top-stats">Avg {{ commentStats.average | number:'1.0-0' }}</span>
             </div>
         </div>
