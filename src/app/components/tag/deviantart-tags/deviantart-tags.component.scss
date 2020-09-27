@@ -27,7 +27,7 @@ $max-deviation-width: 400px;
                 .stats {
                     @include flex-col-percent-width($width: 100%, $justify-content: flex-start);
 
-                    @include tablet() {
+                    @include medium-phone() {
                         @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
                     }
                     
