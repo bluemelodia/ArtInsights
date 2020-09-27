@@ -100,7 +100,7 @@ $max-post-width: 400px;
                 .post-image {
                     @include media-content-image(100%, $tumblr-light);
 
-                    @include large-screen() {
+                    @include desktop() {
                         @include media-content-image($max-post-width*2, $tumblr-light);
                     }
                 }
@@ -108,7 +108,7 @@ $max-post-width: 400px;
                 .post-data {
                     @include media-content-data(100%, $tumblr-light);
 
-                    @include large-screen() {
+                    @include desktop() {
                         @include media-content-data($max-post-width*2, $tumblr-light);
                     }
 

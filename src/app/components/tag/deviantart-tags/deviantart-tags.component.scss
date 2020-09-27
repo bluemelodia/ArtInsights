@@ -59,7 +59,7 @@ $max-deviation-width: 400px;
                     padding: $large-spacing;
                     width: 100%;
 
-                    @include large-screen() {
+                    @include desktop() {
                         width: $max-deviation-width*2;
                     }
 
@@ -72,7 +72,7 @@ $max-deviation-width: 400px;
                     margin-top: $large-spacing;
                     width: 100%;
 
-                    @include large-screen() {
+                    @include desktop() {
                         max-width: $max-deviation-width*2;
                     }
 

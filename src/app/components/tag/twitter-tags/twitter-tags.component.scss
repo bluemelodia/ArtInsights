@@ -103,11 +103,19 @@ $max-tweet-width: 400px;
                 @include media-content-image-positioning();
 
                 .tweet-img {
-                    @include media-content-image($max-tweet-width*2, $twitter-light);
+                    @include media-content-image(100%, $twitter-light);
+
+                    @include desktop() {
+                        @include media-content-image($max-tweet-width*2, $twitter-light);
+                    }
                 }
 
                 .tweet-data {
-                    @include media-content-data($max-tweet-width*2, $twitter-light);
+                    @include media-content-data(100%, $twitter-light);
+
+                    @include desktop() {
+                        @include media-content-data($max-tweet-width*2, $twitter-light);
+                    }
 
                     .followership {
                         @include flex-row-center($justify-content: flex-start);
