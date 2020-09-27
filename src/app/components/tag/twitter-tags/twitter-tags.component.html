@@ -79,9 +79,8 @@
                     <span class="tag">#{{ tag.key | tag }}</span>
                 </div>
                 <div class="stats favorites">
-                    <span class="tag favorites">
+                    <span class="tag favorites tag-indicator">
                         <img class="icon" [src]="heartImg"/> 
-                        <span>Favorites</span>
                     </span>
                     <span class="top-stats">Hi {{ tag.value.favorites.high }}</span>
                     <span class="top-stats">Low {{ tag.value.favorites.low }}</span>
@@ -89,9 +88,8 @@
                     <span class="top-stats">Avg {{ tag.value.favorites.average | number:'1.2-2' }}</span>
                 </div>
                 <div class="stats retweets">
-                    <span class="tag retweets">
+                    <span class="tag retweets tag-indicator">
                         <img class="icon" [src]="retweetImg"/> 
-                        <span>Retweets</span>
                     </span>
                     <span class="top-stats">Hi {{ tag.value.retweets.high }}</span>
                     <span class="top-stats">Low {{ tag.value.retweets.low }}</span>

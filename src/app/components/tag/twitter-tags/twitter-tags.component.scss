@@ -17,7 +17,7 @@ $max-tweet-width: 400px;
 
     .twitter-stats, .tag-stats {
         @include stats-padding();
-        
+
         .stats-summary {
             @include flex-col($justify-content: flex-start);
 
@@ -69,6 +69,14 @@ $max-tweet-width: 400px;
 
                 .top-stats {
                     @include engagement-cols($width: 20%);
+                }
+
+                .tag-metric {
+                    @include engagement-cols($width: 30%);
+                }
+
+                .tag-indicator {
+                    @include engagement-cols($width: 10%);
                 }
 
                 .tweets {
