@@ -5,8 +5,12 @@
     @include flex-row();
     width: 100%;
 
-    @include large-screen() {
+    @include tablet() {
         max-width: $max-width;
+    }
+
+    @include desktop() {
+        max-width: $max-wide-width;
     }
 }
 
