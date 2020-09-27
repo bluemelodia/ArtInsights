@@ -327,8 +327,11 @@ $default-line-height: 0px;
 /* What to show if there are no matching deviations, tweets, and posts. */
 @mixin no-matches() {
     .no-matches {
-        max-width: $max-width;
         text-align: center;
+
+        @include tablet() {
+            max-width: $max-width;
+        }
 
         @include desktop() {
             max-width: $max-wide-width;
