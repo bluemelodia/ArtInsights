@@ -15,6 +15,12 @@
     }
 }
 
+@mixin medium-phone() {
+    @media (min-width : 475px) { 
+        @content;
+    }
+}
+
 @mixin large-screen() {
     @include desktop() {
         @content;

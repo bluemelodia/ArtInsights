@@ -64,7 +64,7 @@ $max-deviation-width: 400px;
 
                     @include post-left-border();
 
-                    @include large-screen() {
+                    @include medium-phone() {
                         align-items: center;
                     }
 
