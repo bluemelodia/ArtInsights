@@ -65,10 +65,15 @@ $max-post-width: 400px;
                     padding: 0;
 
                     .stats {
+                        @include flex-col-percent-width($width: 100%, $justify-content: flex-start);
                         margin-bottom: $large-spacing;
 
                         @include medium-phone() {
                             margin-bottom: 0;
+                        }
+
+                        @include tablet() {
+                            @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
                         }
                     }
                 }
