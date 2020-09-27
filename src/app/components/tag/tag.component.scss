@@ -2,5 +2,5 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    @include flex-col();
+    @include flex-col-center($justify-content: center);
 }

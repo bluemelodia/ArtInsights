@@ -12,11 +12,16 @@ $search-background-color: #dfe6e9;
 
 :host {
     @include flex-row();
+    width: 100%;
 }
 
 .search-bar {
     @include flex-row();
     @include full-width-limited();
+
+    @include tablet() {
+        @include full-width-limited($limit: $max-width, $width: 100%);
+    }
 
     @include desktop() {
         @include full-width-limited($limit: $max-wide-width, $width: 100%);
