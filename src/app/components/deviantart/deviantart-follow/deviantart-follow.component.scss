@@ -3,6 +3,7 @@
 
 :host {
     width: 100%;
+    @include flex-col-center($justify-content: center);
 
     .deviant-art-follows {
         @include deviantart-container();

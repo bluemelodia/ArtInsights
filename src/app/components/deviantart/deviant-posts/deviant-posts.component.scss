@@ -28,7 +28,7 @@ $max-deviation-width: 400px;
                     span {
                         width: 100%;
 
-                        @include large-screen() {
+                        @include desktop() {
                             width: 25%;
                         }
                     }
@@ -45,6 +45,18 @@ $max-deviation-width: 400px;
         &.outer-container {
             border: 1px solid $light-text-color;
             margin-top: $large-spacing;
+
+            /* 
+            * The column is not useful on small screens. Show the
+            * metrix next to each value instead. 
+            */
+            .header {
+                display: none;
+
+                @include desktop() {
+                    display: block;
+                }
+            }
         }
 
         .inner-container {
@@ -93,22 +105,10 @@ $max-deviation-width: 400px;
                     padding-right: $small-spacing / 2;
                 }
 
-                /* 
-                * The column is not useful on small screens. Show the
-                * metrix next to each value instead. 
-                */
-                .header {
-                    display: none;
-
-                    @include large-screen() {
-                        display: block;
-                    }
-                }
-
                 .tag-metric {
                     display: block;
 
-                    @include large-screen() {
+                    @include desktop() {
                         display: none;
                     }
                 }
