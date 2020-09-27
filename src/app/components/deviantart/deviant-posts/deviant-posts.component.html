@@ -71,9 +71,8 @@
                     <span class="tag">#{{ tag.key | tag }}</span>
                 </div>
                 <div class="stats views">
-                    <span class="tag views">
+                    <span class="tag views tag-indicator">
                         <img class="icon" [src]="viewImg"/> 
-                        <span>Views</span>
                     </span>
                     <span><span class="tag-metric">Hi </span>{{ tag.value.views.high }}</span>
                     <span><span class="tag-metric">Low </span>{{ tag.value.views.low }}</span>
@@ -81,9 +80,8 @@
                     <span><span class="tag-metric">Avg </span>{{ tag.value.views.average | number:'1.2-2' }}</span>
                 </div>
                 <div class="stats favorites">
-                    <span class="tag favorites">
+                    <span class="tag favorites tag-indicator">
                         <img class="icon" [src]="heartImg"/> 
-                        <span>Favorites</span>
                     </span>
                     <span><span class="tag-metric">Hi </span>{{ tag.value.favorites.high }}</span>
                     <span><span class="tag-metric">Low </span>{{ tag.value.favorites.low }}</span>
@@ -91,9 +89,8 @@
                     <span><span class="tag-metric">Avg </span>{{ tag.value.favorites.average | number:'1.2-2' }}</span>
                 </div>
                 <div class="stats comments">
-                    <span class="tag comments">
+                    <span class="tag comments tag-indicator">
                         <img class="icon" [src]="commentImg"/> 
-                        <span>Comments</span>
                     </span>
                     <span><span class="tag-metric">Hi </span>{{ tag.value.comment.high }}</span>
                     <span><span class="tag-metric">Low </span>{{ tag.value.comment.low }}</span>
@@ -113,9 +110,8 @@
                     <span class="tag">{{ day.key | day }}</span>
                 </div>
                 <div class="stats views">
-                    <span class="tag views">
+                    <span class="tag views tag-indicator">
                         <img class="icon" [src]="viewImg"/> 
-                        <span>Views</span>
                     </span>
                     <span><span class="tag-metric">Hi </span>{{ day.value.views.high }}</span>
                     <span><span class="tag-metric">Low </span>{{ day.value.views.low }}</span>
@@ -123,9 +119,8 @@
                     <span><span class="tag-metric">Avg </span>{{ day.value.views.average | number:'1.2-2' }}</span>
                 </div>
                 <div class="stats favorites">
-                    <span class="tag favorites">
+                    <span class="tag favorites tag-indicator">
                         <img class="icon" [src]="heartImg"/> 
-                        <span>Favorites</span>
                     </span>
                     <span><span class="tag-metric">Hi </span>{{ day.value.favorites.high }}</span>
                     <span><span class="tag-metric">Low </span>{{ day.value.favorites.low }}</span>
@@ -133,9 +128,8 @@
                     <span><span class="tag-metric">Avg </span>{{ day.value.favorites.average | number:'1.2-2' }}</span>
                 </div>
                 <div class="stats comments">
-                    <span class="tag comments">
+                    <span class="tag comments tag-indicator">
                         <img class="icon" [src]="commentImg"/> 
-                        <span>Comments</span>
                     </span>
                     <span><span class="tag-metric">Hi </span>{{ day.value.comment.high }}</span>
                     <span><span class="tag-metric">Low </span>{{ day.value.comment.low }}</span>
