@@ -14,10 +14,10 @@
         <div class="comments">
             <img [src]="commentImg"/>
             <div *ngIf="commentStats" class="stats">
-                <span>Hi {{ commentStats.high }}</span>
-                <span>Low {{ commentStats.low }}</span>
-                <span>Mid {{ commentStats.median }}</span>
-                <span>Avg {{ commentStats.average | number:'1.0-0' }}</span>
+                <span class="top-stats">Hi {{ commentStats.high }}</span>
+                <span class="top-stats">Low {{ commentStats.low }}</span>
+                <span class="top-stats">Mid {{ commentStats.median }}</span>
+                <span class="top-stats">Avg {{ commentStats.average | number:'1.0-0' }}</span>
             </div>
         </div>
     </div>
