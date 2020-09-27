@@ -338,3 +338,11 @@ $default-line-height: 0px;
         }
     }
 }
+
+@mixin engagement-cols($width: 20%) {
+    width: 100%;
+
+    @include medium-phone() {
+        width: $width;
+    }
+}

@@ -5,10 +5,10 @@
         <div class="favorites">
             <img [src]="heartImg"/> 
             <div *ngIf="favoriteStats" class="stats">
-                <span>Hi {{ favoriteStats.high }}</span>
-                <span>Low {{ favoriteStats.low }}</span>
-                <span>Mid {{ favoriteStats.median }}</span>
-                <span>Avg {{ favoriteStats.average | number:'1.0-0' }}</span>
+                <span class="top-stats">Hi {{ favoriteStats.high }}</span>
+                <span class="top-stats">Low {{ favoriteStats.low }}</span>
+                <span class="top-stats">Mid {{ favoriteStats.median }}</span>
+                <span class="top-stats">Avg {{ favoriteStats.average | number:'1.0-0' }}</span>
             </div>
         </div>
         <div class="comments">

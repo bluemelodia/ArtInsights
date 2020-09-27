@@ -24,21 +24,17 @@ $max-deviation-width: 400px;
             .favorites, .comments, .tag-stats {
                 @include social-media-stats();
     
-                .stats {                    
+                .stats {   
+                    .top-stats {
+                        @include engagement-cols($width: 20%);
+                    }
+                    
                     .tag-metric {
-                        width: 100%;
-
-                        @include medium-phone() {
-                            width: 30%;
-                        }
+                        @include engagement-cols($width: 30%);
                     }
 
                     .tag-indicator {
-                        width: 100%;
-
-                        @include medium-phone() {
-                            width: 10%;
-                        }
+                        @include engagement-cols($width: 10%);
                     }
                 }
             }
