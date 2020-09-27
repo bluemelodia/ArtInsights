@@ -59,7 +59,7 @@ $max-post-width: 400px;
                     .stats {
                         margin-bottom: $large-spacing;
 
-                        @include tablet() {
+                        @include desktop() {
                             margin-bottom: 0;
                         }
                     }
