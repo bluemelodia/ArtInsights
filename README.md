@@ -6,11 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 UX Improvements/Features
 - Make reauth more graceful / easier for the user. 
-- Engagement by time/day posted/day of week - Tumblr only.
 - Instead of refreshing on every watch/unwatch, update the individual users and provide a refresh button (or just refresh only when the user moves pages, there's no real need to refresh watcher by watcher).
-- Add a border around every section for the DA posts...
 - Add more animations (ex. loader on scroll, login page).
-- Add responsive styles.
 - Queue the messages so each one has sufficient time to be displayed.
 
 Cross-Browser Issues
