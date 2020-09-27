@@ -10,7 +10,7 @@
     @include tumblr-container();
     @include flex-col();
 
-    @include tablet() {
+    @include large-screen() {
         @include flex-row(space-around);
     }
 
