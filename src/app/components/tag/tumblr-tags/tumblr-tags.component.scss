@@ -32,7 +32,7 @@ $max-post-width: 400px;
                 }
 
                 .top-stats {
-                    @include engagement-cols($width: 20%);
+                    @include engagement-cols($width: 23%);
                 }
             }
         }
