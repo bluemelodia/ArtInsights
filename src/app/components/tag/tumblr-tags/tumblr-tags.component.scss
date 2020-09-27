@@ -55,16 +55,31 @@ $max-post-width: 400px;
 
                 .tag-stats {
                     padding: 0;
+
+                    .stats {
+                        margin-bottom: $large-spacing;
+
+                        @include tablet() {
+                            margin-bottom: 0;
+                        }
+                    }
                 }
             }
         }
 
         span {
-            width: 18.75%;
+            width: 100%;
             text-align: left;
 
+            @include tablet() {
+                width: 18.75%;
+            }
+
             &.tag {
-                width: 25%;
+                @include tablet() {
+                    width: 25%;
+                }
+
                 /* Prevents the tag crashing into the next column. */
                 padding-right: $small-spacing / 2;
             }
