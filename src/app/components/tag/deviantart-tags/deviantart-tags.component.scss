@@ -10,7 +10,11 @@ $max-deviation-width: 400px;
     margin-top: $large-spacing;
 
     .deviations-stats {
-        padding: $large-spacing;
+        padding: $small-spacing;
+
+        @include large-screen() {
+            padding: $large-spacing;
+        }
 
         .stats-summary {
             @include flex-col($justify-content: flex-start);
@@ -51,8 +55,7 @@ $max-deviation-width: 400px;
             @include flex-col($justify-content: center);
             
             .deviation {
-                padding: $large-spacing;
-                margin: 0 auto;
+                @include media-content-image-positioning();
 
                 .deviation-img {
                     border: 2px solid $light-text-color;
