@@ -91,11 +91,11 @@ $max-tweet-width: 400px;
                 @include media-content-image-positioning();
 
                 .tweet-img {
-                    @include media-content-image($max-tweet-width, $twitter-light);
+                    @include media-content-image($max-tweet-width*2, $twitter-light);
                 }
 
                 .tweet-data {
-                    @include media-content-data($max-tweet-width, $twitter-light);
+                    @include media-content-data($max-tweet-width*2, $twitter-light);
 
                     .followership {
                         @include flex-row-center($justify-content: flex-start);
