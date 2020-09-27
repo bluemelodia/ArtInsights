@@ -25,15 +25,19 @@ $max-deviation-width: 400px;
                 @include social-media-stats();
     
                 .stats {                    
-                    span {
+                    .tag-metric {
                         width: 100%;
 
                         @include medium-phone() {
                             width: 30%;
-         
-                            &.tag-indicator {
-                                width: 10%;
-                            }
+                        }
+                    }
+
+                    .tag-indicator {
+                        width: 100%;
+
+                        @include medium-phone() {
+                            width: 10%;
                         }
                     }
                 }
