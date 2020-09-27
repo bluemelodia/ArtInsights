@@ -22,6 +22,10 @@ $max-post-width: 400px;
 
             .notes {
                 padding-top: $large-spacing;
+
+                .top-stats {
+                    @include engagement-cols($width: 20%);
+                }
             }
         }
 

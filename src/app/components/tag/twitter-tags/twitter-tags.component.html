@@ -72,13 +72,6 @@
 </section>
 <div *ngIf="tweets.length > 0" class="tag-stats">
     <h3>Engagement by Hashtag</h3>
-    <div class="header">
-        <span class="tag header">Tag</span>
-        <span>High</span>
-        <span>Low</span>
-        <span>Median</span>
-        <span>Average</span>
-    </div>
     <div class="stats-container">
         <div class="stats-summary" *ngIf="tweets.length > 0">
             <div *ngFor="let tag of engagement.hashtags | keyvalue" class="tweets">
