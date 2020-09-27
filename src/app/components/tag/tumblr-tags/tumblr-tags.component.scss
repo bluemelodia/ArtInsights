@@ -26,7 +26,7 @@ $max-post-width: 400px;
                 .stats {
                     @include flex-col-percent-width($width: 100%, $justify-content: flex-start);
 
-                    @include tablet() {
+                    @include medium-phone() {
                         @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
                     }
                 }
@@ -67,7 +67,7 @@ $max-post-width: 400px;
                     .stats {
                         margin-bottom: $large-spacing;
 
-                        @include tablet() {
+                        @include medium-phone() {
                             margin-bottom: 0;
                         }
                     }
