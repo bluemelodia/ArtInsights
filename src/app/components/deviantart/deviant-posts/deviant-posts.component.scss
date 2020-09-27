@@ -30,8 +30,10 @@ $max-deviation-width: 400px;
 
                         @include medium-phone() {
                             width: 30%;
-
-                           
+         
+                            &.tag-indicator {
+                                width: 10%;
+                            }
                         }
                     }
                 }
@@ -116,10 +118,6 @@ $max-deviation-width: 400px;
 
             .deviation {
                 @include media-content-image-positioning();
-                
-                .tag-indicator {
-                    width: 10%;
-                }
 
                 .deviation-img {
                     @include media-content-image(100%, $deviantart-light);
