@@ -28,7 +28,9 @@ $max-deviation-width: 400px;
                     @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
                     
                     span {
-                        width: 25%;
+                        &.top-stats {
+                            @include engagement-cols($width: 20%);
+                        }
                     }
                 }
             }

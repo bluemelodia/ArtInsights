@@ -5,19 +5,19 @@
         <div class="favorites">
             <img class="icon" [src]="heartImg"/> 
             <div *ngIf="engagement && engagement.favoriteStats" class="stats">
-                <span>Hi {{ engagement.favoriteStats.high }}</span>
-                <span>Low {{ engagement.favoriteStats.low }}</span>
-                <span>Mid {{ engagement.favoriteStats.median }}</span>
-                <span>Avg {{ engagement.favoriteStats.average | number:'1.2-2' }}</span>
+                <span class="top-stats">Hi {{ engagement.favoriteStats.high }}</span>
+                <span class="top-stats">Low {{ engagement.favoriteStats.low }}</span>
+                <span class="top-stats">Mid {{ engagement.favoriteStats.median }}</span>
+                <span class="top-stats">Avg {{ engagement.favoriteStats.average | number:'1.2-2' }}</span>
             </div>
         </div>
         <div class="retweets">
             <img class="icon" [src]="retweetImg"/> 
             <div *ngIf="engagement && engagement.retweetStats" class="stats">
-                <span>Hi {{ engagement.retweetStats.high }}</span>
-                <span>Low {{ engagement.retweetStats.low }}</span>
-                <span>Mid {{ engagement.retweetStats.median }}</span>
-                <span>Avg {{ engagement.retweetStats.average | number:'1.2-2' }}</span>
+                <span class="top-stats">Hi {{ engagement.retweetStats.high }}</span>
+                <span class="top-stats">Low {{ engagement.retweetStats.low }}</span>
+                <span class="top-stats">Mid {{ engagement.retweetStats.median }}</span>
+                <span class="top-stats">Avg {{ engagement.retweetStats.average | number:'1.2-2' }}</span>
             </div>
         </div>
     </div>
