@@ -27,7 +27,7 @@ $max-tweet-width: 400px;
                 .stats {
                     @include flex-col-percent-width($width: 100%, $justify-content: flex-start);
 
-                    @include tablet() {
+                    @include medium-phone() {
                         @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
                     }
                     
@@ -100,6 +100,8 @@ $max-tweet-width: 400px;
             padding-left: $small-spacing;
 
             &.tag {
+                width: 100%;
+
                 /* Prevents the tag crashing into the next column. */
                 &.header, &.favorites, &.retweets {
                     width: 25%;
