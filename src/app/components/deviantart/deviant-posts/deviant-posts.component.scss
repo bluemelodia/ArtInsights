@@ -28,7 +28,7 @@ $max-deviation-width: 400px;
                     span {
                         width: 100%;
 
-                        @include desktop() {
+                        @include medium-phone() {
                             width: 25%;
                         }
                     }

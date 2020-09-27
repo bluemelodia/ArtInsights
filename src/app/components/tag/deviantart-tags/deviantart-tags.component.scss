@@ -35,10 +35,7 @@ $max-deviation-width: 400px;
             }
         }
 
-        .no-matches {
-            max-width: $max-width;
-            text-align: center;
-        }
+        @include no-matches();
     }
 
     section {
