@@ -10,11 +10,7 @@ $max-deviation-width: 400px;
     margin-top: $large-spacing;
 
     .deviations-stats {
-        padding: $small-spacing;
-
-        @include large-screen() {
-            padding: $large-spacing;
-        }
+        @include stats-padding();
 
         .stats-summary {
             @include flex-col($justify-content: flex-start);

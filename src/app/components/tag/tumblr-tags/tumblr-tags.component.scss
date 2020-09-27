@@ -11,7 +11,7 @@ $max-post-width: 400px;
     width: 100%;
 
     .tumblr-stats, .tag-stats {
-        padding: $large-spacing;
+        @include stats-padding();
 
         .stats-summary {
             @include flex-col($justify-content: flex-start);

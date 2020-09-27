@@ -337,10 +337,19 @@ $default-line-height: 0px;
     }
 }
 
+/* Logic for responsive layouts. */
 @mixin engagement-cols($width: 20%) {
     width: 100%;
 
     @include medium-phone() {
         width: $width;
+    }
+}
+
+@mixin stats-padding() {
+    padding: $small-spacing;
+
+    @include large-screen() {
+        padding: $large-spacing;
     }
 }

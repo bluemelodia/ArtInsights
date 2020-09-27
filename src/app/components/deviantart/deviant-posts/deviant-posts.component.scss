@@ -11,11 +11,7 @@ $max-deviation-width: 400px;
     width: 100%;
 
     .deviations-stats, .tag-stats {
-        padding: $small-spacing;
-
-        @include large-screen() {
-            padding: $large-spacing;
-        }
+        @include stats-padding();
 
         .stats-summary {
             @include flex-col($justify-content: flex-start);
