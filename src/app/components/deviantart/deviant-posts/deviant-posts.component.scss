@@ -20,7 +20,9 @@ $max-deviation-width: 400px;
             .favorites, .comments, .tag-stats {
                 @include social-media-stats();
     
-                .stats {   
+                .stats {
+                    margin-bottom: $small-spacing;
+                    
                     .top-stats {
                         @include engagement-cols($width: 20%);
                     }

@@ -70,6 +70,7 @@ $max-tweet-width: 400px;
                 .stats {
                     @include flex-col-center($justify-content: flex-start);
                     align-items: flex-start;
+                    margin-bottom: $small-spacing;
 
                     @include medium-phone() {
                         @include flex-row-center($justify-content: flex-start);

@@ -14,8 +14,7 @@ Cross-Browser Issues
 - User intermittently loses access to Tumblr/DA in between requests. 
 - User always loses access on Chrome - check if multiple sessions are supported.
 - DA calls seem to fail on Chrome, Tumblr auth falsely checked - doesn't happen on Safari. 
-
-
+- Auth doesn't work on iOS Safari.
 
 ## Development server
 
