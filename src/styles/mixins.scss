@@ -318,7 +318,7 @@ $default-line-height: 0px;
     .stats {
         @include flex-col();
 
-        @include tablet() {
+        @include medium-phone() {
             @include flex-row-percent-width($width: 100%, $justify-content: flex-start);
         }
     }
