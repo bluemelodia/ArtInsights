@@ -264,9 +264,7 @@ export class DeviantArtComponent implements OnInit {
       } else {
         this.alert.showAlert(AlertType.Success, `You followed ${deviant}.`);
         console.log(`Successfully followed: ${deviant}, refresh`);
-        timer(1000).subscribe(() => {
-          this.getWatchersAndFriends();
-        });
+        this.updateWatchersStatus(deviant, true);
       }
       console.log("Try to watch: ", res);
     })
@@ -284,13 +282,28 @@ export class DeviantArtComponent implements OnInit {
       } else {
         console.log(`Successfully unwatched: ${deviant}, refresh`);
         this.alert.showAlert(AlertType.Success, `You unwatched ${deviant}.`);
-
-        timer(1000).subscribe(() => {
-          this.getWatchersAndFriends();
-        });
+        this.updateWatchersStatus(deviant, false);
       }
       console.log("Try to unwatch: ", res);
     })  
+  }
+
+  /*
+  * We don't need the watch list to be up to date, the user will get a new
+  * list once they refresh. Instead of making additional service calls each
+  * time we watch/unwatch someone, when the service returns with success,
+  * we update the maps locally.
+  */
+  private updateWatchersStatus(deviant: string, isWatching: boolean) {
+    if (this.watchersMap[deviant]) {
+      this.watchersMap[deviant].is_watching = isWatching;
+      console.log("UPDATED WATCHER MAP: ", this.watchersMap[deviant]);
+    }
+
+    if (this.friendsMap[deviant]) {
+      this.friendsMap[deviant].is_watching = isWatching;
+      console.log("UPDATED FRIENDS MAP: ", this.friendsMap[deviant]);
+    }
   }
 }
 
