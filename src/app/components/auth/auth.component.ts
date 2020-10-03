@@ -4,7 +4,7 @@ import { authMediaData, AuthPostResponse, AuthStatus, AuthRedirectResponse } fro
 import { AuthService } from '../../services/auth.service';
 import { RedirectService } from '../../services/redirect.service';
 import { UtilsService } from '../../services/utils.service';
-import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -16,8 +16,8 @@ import { LocalStorageService } from '../../services/local-storage.service';
 })
 export class AuthComponent {
   public mediaData = Object.assign({}, mediaData);
-  private authSubject$: Subject<AuthPostResponse>;
-  private authRedirectSubject$: Subject<AuthRedirectResponse>;
+  private auth$: Observable<AuthPostResponse>;
+  private authRedirect$: Observable<AuthRedirectResponse>;
 
   constructor(
     private alert: AlertService,
@@ -74,8 +74,8 @@ export class AuthComponent {
   }
 
   public setupRedirectSubscriptions() {
-    this.authRedirectSubject$ = this.auth.authRedirectSubject$;
-    this.authRedirectSubject$
+    this.authRedirect$ = this.auth.authRedirect$;
+    this.authRedirect$
       .subscribe((redirectLink: AuthRedirectResponse) => {
         console.info("Prepare to redirect to auth link: ", redirectLink);
         if (redirectLink.redirect) {
@@ -88,8 +88,8 @@ export class AuthComponent {
   }
 
   public setupAuthSubscription() {
-    this.authSubject$ = this.auth.authSubject$;
-    this.authSubject$
+    this.auth$ = this.auth.auth$;
+    this.auth$
       .subscribe((response: AuthPostResponse) => {
         if (response && response.statusCode === 0) {
           console.info("Auth successful for ", response);

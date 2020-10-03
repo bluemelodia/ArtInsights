@@ -3,16 +3,20 @@ import { DeviationTotalStats, DeviationAnalytics, DeviationStats } from '../type
 import { DayOfWeek } from '../types/time.types';
 import { Deviation, DeviantTag } from '../types/post.types';
 import { StatService } from './stat.service';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalyticsService {
   private deviantArtAnalytics: DeviationTotalStats;
-  public deviationSubject$ = new Subject<DeviationAnalytics>();
+  private deviationSubject$ = new Subject<DeviationAnalytics>();
 
   constructor(private stat: StatService) { }
+
+  public deviationSubject(): Observable<DeviationAnalytics> {
+    return this.deviationSubject$.asObservable();
+  }
 
   public analyzeDeviations(deviations: Deviation[]) {
     this.deviantArtAnalytics = {

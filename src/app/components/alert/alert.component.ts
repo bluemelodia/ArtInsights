@@ -1,6 +1,6 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../services/alert.service';
-import { Subject, timer } from 'rxjs';
+import { timer, Observable } from 'rxjs';
 import { Alert, AlertType } from '../../app.consts';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 
@@ -26,7 +26,7 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
   ]
 })
 export class AlertComponent implements OnInit {
-  private alertSub$: Subject<Alert>;
+  private alertSub$: Observable<Alert>;
 
   public alertMessage = '...';
   public alertStyle = '';
@@ -44,7 +44,7 @@ export class AlertComponent implements OnInit {
   }
 
   private setupAlertSubscription() {
-    this.alertSub$ = this.alert.alertSubscriber$;
+    this.alertSub$ = this.alert.alertSubscriber;
     this.alertSub$
       .subscribe((alert: Alert) => {
         /* Dismiss the previous alert. */

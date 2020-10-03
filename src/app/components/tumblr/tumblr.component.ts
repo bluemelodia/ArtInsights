@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subscription, ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AlertService } from '../../services/alert.service';
@@ -40,7 +40,7 @@ export class TumblrComponent implements OnInit, OnDestroy {
   public tumblrUser: TumblrUserInfo;
   public userBlog: string;
 
-  private tumblrUserSubject$ = this.blog.tumblrUserSub$;
+  private tumblrUser$: Observable<TumblrUserInfo> = this.blog.tumblrUserSub;
 
   /*
   * The Tumblr API total_blogs and total_users fields do not reflect the actual number
@@ -67,7 +67,7 @@ export class TumblrComponent implements OnInit, OnDestroy {
   }
 
   public setupTumblrSubscription() {
-    this.tumblrUserSubject$
+    this.tumblrUser$
       .subscribe((user: TumblrUserInfo) => {
         console.log("Received Tumblr user: ", user);
         this.tumblrUser = user;

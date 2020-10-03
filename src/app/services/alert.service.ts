@@ -10,8 +10,11 @@ export class AlertService {
 
   constructor() { }
 
-  public get alertSubscriber$() {
-    return this.alertSubject$;
+  /* 
+  * Return an observable so that only the service can emit on the subject. 
+  */
+  public get alertSubscriber() {
+    return this.alertSubject$.asObservable();
   }
 
   public showAlert(type: AlertType, message: string) {
@@ -19,6 +22,6 @@ export class AlertService {
         type: type, 
         message: message
       };
-      this.alertSubscriber$.next(alert);
+      this.alertSubject$.next(alert);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TaggedDeviation, TumblrTagResponse, TumblrEngagement, TagAggregate, TaggedTweet, TwitterEngagement, HashTagAggregate } from '../types/tag.types';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Media } from '../app.consts';
 import { Deviation } from '../types/post.types';
 import { Engagement } from '../types/shared.types';
@@ -25,21 +25,21 @@ export class StatService {
 
   constructor() {}
 
-  public commentSubject$(media: Media) {
+  public comment$(media: Media) {
     switch (media) {
       case Media.DeviantArt:
-        return this.commentSubjectDA$;
+        return this.commentSubjectDA$.asObservable();
     }
   }
 
-  public favoriteSubject$(media: Media): Subject<Engagement | TumblrEngagement | TwitterEngagement> {
+  public favorite$(media: Media): Observable<Engagement | TumblrEngagement | TwitterEngagement> {
     switch (media) {
       case Media.DeviantArt:
-        return this.favoriteSubjectDA$;
+        return this.favoriteSubjectDA$.asObservable();
       case Media.Tumblr:
-        return this.tumblrSubject$;
+        return this.tumblrSubject$.asObservable();
       case Media.Twitter:
-        return this.twitterSubject$;
+        return this.twitterSubject$.asObservable();
     }
   }
 
@@ -170,7 +170,7 @@ export class StatService {
       average: this.findAverage(commentCounts),
       median: this.findMedian(commentCounts)
     };
-    this.commentSubject$(Media.DeviantArt).next(this.commentStats);
+    this.commentSubjectDA$.next(this.commentStats);
 
     this.favoriteStats = {
       high: faveCounts[faveCounts.length - 1],
@@ -178,7 +178,7 @@ export class StatService {
       average: this.findAverage(faveCounts),
       median: this.findMedian(faveCounts)
     };
-    this.favoriteSubject$(Media.DeviantArt).next(this.favoriteStats);
+    this.favoriteSubjectDA$.next(this.favoriteStats);
   }
 
   public calculateTwitterStats(tweets: TaggedTweet[]) {
@@ -225,7 +225,7 @@ export class StatService {
       hashtags: this.findHashTagEngagements()
     }
     console.log("Twitter stats: ", this.tweetStats);
-    this.favoriteSubject$(Media.Twitter).next(this.tweetStats);
+    this.twitterSubject$.next(this.tweetStats);
   }
 
   /* Calculations are an extension of DA's stats. */
@@ -250,6 +250,6 @@ export class StatService {
       },
       tags: this.findTagEngagements()
     }
-    this.favoriteSubject$(Media.Tumblr).next(this.noteAndTagStats);
+    this.tumblrSubject$.next(this.noteAndTagStats);
   }
 }

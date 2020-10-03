@@ -90,22 +90,22 @@ export class TagComponent implements OnInit {
    * after the entire batch has returned, subscribe to the comment/favorite subjects, 
    * whose values will be piped to listeners after the stats have been calculated. */
   private setupSubscriptions() {
-    this.stat.commentSubject$(Media.DeviantArt)
+    this.stat.comment$(Media.DeviantArt)
     .subscribe((commentStats: Engagement) => {
       this.commentStatsDA = commentStats;
     });
 
-    this.stat.favoriteSubject$(Media.DeviantArt)
+    this.stat.favorite$(Media.DeviantArt)
     .subscribe((faveStats: Engagement) => {
       this.faveStatsDA = faveStats;
     });
 
-    this.stat.favoriteSubject$(Media.Tumblr)
+    this.stat.favorite$(Media.Tumblr)
     .subscribe((tumblrStats: TumblrEngagement) => {
       this.tumblrStats = tumblrStats;
     });
 
-    this.stat.favoriteSubject$(Media.Twitter)
+    this.stat.favorite$(Media.Twitter)
     .subscribe((twitterStats: TwitterEngagement) => {
       this.twitterStats = twitterStats;
     });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { timer, Subscription, ReplaySubject } from 'rxjs';
+import { timer, Subscription, ReplaySubject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AlertService } from '../../services/alert.service';
@@ -52,8 +52,8 @@ export class DeviantArtComponent implements OnInit {
   public deviant: DeviantData;
   public deviations: Deviation[] = [];
   public deviationStats: DeviationAnalytics;
-  private deviantUserSubject$ = this.blog.deviantSub$;
-  private deviantStatsSubject$ = this.analytics.deviationSubject$;
+  private deviantUser$ = this.blog.deviantSub;
+  private deviantStats$: Observable<DeviationAnalytics> = this.analytics.deviationSubject();
 
   public watchers: string[] = [];
   public watchersMap: { [user: string] : any } = {};
@@ -78,7 +78,7 @@ export class DeviantArtComponent implements OnInit {
   /* Since there can only be one DA user, as soon as the user info is received, 
    * we can make the get watches call. */
   public setupDASubscription() {
-    this.deviantUserSubject$
+    this.deviantUser$
       .subscribe((deviant: DeviantData) => {
         console.log("Received DA user: ", deviant);
         this.deviant = deviant;
@@ -86,18 +86,18 @@ export class DeviantArtComponent implements OnInit {
         this.getDeviations();
       });
 
-    this.deviantStatsSubject$
+    this.deviantStats$
       .subscribe((stats: DeviationAnalytics) => {
         console.log("Received DA analytics: ", stats);
         this.deviationStats = stats;
       });
 
-    this.stat.commentSubject$(Media.DeviantArt)
+    this.stat.comment$(Media.DeviantArt)
       .subscribe((commentStats: Engagement) => {
         this.commentStatsDA = commentStats;
     });
   
-    this.stat.favoriteSubject$(Media.DeviantArt)
+    this.stat.favorite$(Media.DeviantArt)
       .subscribe((faveStats: Engagement) => {
         this.faveStatsDA = faveStats;
     });

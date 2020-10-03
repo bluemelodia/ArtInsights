@@ -24,12 +24,12 @@ export class AuthService {
     private storage: LocalStorageService,
     private router: Router) { }
 
-  public get authRedirectSubject$() {
-    return this.mediaLoginRedirectSubject$;
+  public get authRedirect$() {
+    return this.mediaLoginRedirectSubject$.asObservable();
   }
 
-  public get authSubject$() {
-    return this.mediaAuthSubject$;
+  public get auth$() {
+    return this.mediaAuthSubject$.asObservable();
   }
 
   public isAuthorized() {
@@ -58,7 +58,7 @@ export class AuthService {
       .subscribe((data: string) => {
         if (data) {
           console.log("Prepare to redirect: ", data);
-          this.authRedirectSubject$.next({
+          this.mediaLoginRedirectSubject$.next({
             redirect: data, 
             mediaType: socialMedia
           });
@@ -67,7 +67,7 @@ export class AuthService {
         }
       }, 
       (error: Error) => {
-        this.authRedirectSubject$.next({
+        this.mediaLoginRedirectSubject$.next({
           redirect: null,
           mediaType: socialMedia
         });
@@ -97,6 +97,6 @@ export class AuthService {
 
   authSuccess(data: AuthPostResponse) {
     console.log("Auth succeeded: ", data);
-    this.authSubject$.next(data);
+    this.mediaAuthSubject$.next(data);
   }
 }

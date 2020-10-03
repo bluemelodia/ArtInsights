@@ -24,12 +24,12 @@ export class BlogService {
     private auth: AuthService
   ) { }
 
-  get tumblrUserSub$() {
-    return this.tumblrUserSubject$;
+  get tumblrUserSub() {
+    return this.tumblrUserSubject$.asObservable();
   }
 
-  get deviantSub$() {
-    return this.deviantSubject$;
+  get deviantSub() {
+    return this.deviantSubject$.asObservable();
   }
 
   getDeviant() {
@@ -39,18 +39,18 @@ export class BlogService {
         if (data && data.statusCode === 0 && data.responseData) {
           const deviant = data.responseData as DeviantData;
           console.log("Send deviant: ", deviant);
-          this.deviantSub$.next(deviant);
+          this.deviantSubject$.next(deviant);
         } else if (data && data.statusCode === 450) {
           /* Keep this here in case the user un-auths mid-session. */
           this.auth.userUnauthForMedia(Media.DeviantArt);
-          this.deviantSub$.next(null);
+          this.tumblrUserSubject$.next(null);
         } else {
           throw new Error(`Failed to get Deviant.`);
         }
       }, 
       (error: Error) => {
         console.log("ERROR: ", error);
-        this.deviantSub$.next(null);
+        this.deviantSubject$.next(null);
       });
   }
 

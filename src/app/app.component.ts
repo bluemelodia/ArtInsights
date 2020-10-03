@@ -2,8 +2,9 @@ import { Component, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { Environment } from './app.consts';
-import { ReplaySubject, Subscription } from 'rxjs';
+import { ReplaySubject, Subscription, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LoadingService } from './services/loading.service';
 
 declare const ENVIRONMENT: Environment;
 
@@ -14,8 +15,10 @@ declare const ENVIRONMENT: Environment;
 })
 export class AppComponent {
   title = 'ArtInsights';
+  showLoader = false;
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  private loader$: Observable<boolean> = this.loader.loadingSubscriber$;
   private routeObserver: Subscription;
 
   @HostListener('window:message', ['$event'])
@@ -42,7 +45,8 @@ export class AppComponent {
 
   constructor(
       private auth: AuthService, 
-      public router: Router
+      public router: Router,
+      public loader: LoadingService
   ) {
     /* Condtionally apply styles to the body depending on our environment. */
     if (ENVIRONMENT === Environment.Production) {
@@ -63,6 +67,12 @@ export class AppComponent {
         } 
       }
     });
+
+    this.loader$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(showLoader => {
+        this.showLoader = showLoader;
+      });
 
     /* Wipe old local storage cookies. */
     // this.login.newSession();
