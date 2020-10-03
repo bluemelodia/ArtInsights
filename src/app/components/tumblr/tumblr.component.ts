@@ -9,6 +9,7 @@ import { TumblrFollowService } from '../../services/tumblr-follow.service';
 import { AuthService } from '../../services/auth.service';
 import { TumblrUserInfo, TumblrUser, TumblrBlog, TumblrBlogResponse, TumblrFollowers, TumblrFollowing } from '../../types/tumblr.types';
 import { AlertType, Media } from '../../app.consts';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-tumblr',
@@ -18,9 +19,10 @@ import { AlertType, Media } from '../../app.consts';
 export class TumblrComponent implements OnInit, OnDestroy {
   constructor(
     private alert: AlertService,
-    private blog: BlogService,
-    private tumblrFollowService: TumblrFollowService, 
     private auth: AuthService,
+    private blog: BlogService,
+    private loading: LoadingService,
+    private tumblrFollowService: TumblrFollowService, 
     private router: Router
   ) {
     this.setupTumblrSubscription();
@@ -31,6 +33,7 @@ export class TumblrComponent implements OnInit, OnDestroy {
         if (event instanceof NavigationEnd && event.url === "/home/tumblr"){
           console.log("Nav ending, get Tumblr user: ", event);
           this.blog.getTumblrUser();
+          this.loading.hideLoader();
         }
     });
   }
