@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
+import { LoadingService } from './loading.service';
 
 /* 
 * Used to redirect to an external resource. 
@@ -14,6 +15,7 @@ export class RedirectService {
 
   constructor(
     readonly router: Router, 
+    private loading: LoadingService,
     @Inject(DOCUMENT) readonly document: Document
   ) {}
     /* 
@@ -53,5 +55,6 @@ export class RedirectService {
 
    public route(path: string) {
       this.router.navigateByUrl(path);
+      this.loading.showLoader();
    }
 }

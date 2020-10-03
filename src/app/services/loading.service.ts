@@ -14,10 +14,12 @@ export class LoadingService {
   }
 
   public showLoader() {
-      this.loadingSubject$.next(true);
+    this.loadingSubject$.next(true);
+    console.log("SHOW LOADER");
   }
 
   public hideLoader() {
     this.loadingSubject$.next(false);
+    console.log("HIDE LOADER");
   }
 }

@@ -16,6 +16,7 @@ import { UtilsService } from '../../services/utils.service';
 import { StatService } from '../../services/stat.service';
 import { DeviationAnalytics } from '../../types/tag.types';
 import { AnalyticsService } from '../../services/analytics.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-deviantart',
@@ -28,6 +29,7 @@ export class DeviantArtComponent implements OnInit {
     private analytics: AnalyticsService,
     private auth: AuthService,
     private blog: BlogService,
+    private loading: LoadingService,
     private post: PostService,
     private deviantFollow: DeviantArtFollowService,
     private stat: StatService,
@@ -82,6 +84,7 @@ export class DeviantArtComponent implements OnInit {
       .subscribe((deviant: DeviantData) => {
         console.log("Received DA user: ", deviant);
         this.deviant = deviant;
+        this.loading.hideLoader();
         this.getWatchersAndFriends();
         this.getDeviations();
       });

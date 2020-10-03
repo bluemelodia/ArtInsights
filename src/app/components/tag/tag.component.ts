@@ -18,7 +18,10 @@ import { LoginService } from '../../services/login.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AuthStatus } from '../auth/auth.types';
 import { UtilsService } from '../../services/utils.service';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
+import { LoadingService } from '../../services/loading.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tag',
@@ -28,6 +31,7 @@ import { Observable } from 'rxjs';
 export class TagComponent implements OnInit {
   private TumblrOAuth$: Observable<AuthStatus> = this.storage.tumblrOAuth$();
   private DeviantArtOAuth$: Observable<AuthStatus> = this.storage.deviantArtOAuth$();
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
   public mediaData = mediaData;
   public deviantArt = Media.DeviantArt;
@@ -55,7 +59,9 @@ export class TagComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private alert: AlertService,
+    private loading: LoadingService,
     private login: LoginService,
+    private router: Router,
     private stat: StatService,
     private storage: LocalStorageService,
     private tags: TagService,
@@ -63,6 +69,14 @@ export class TagComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.router.events
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(event => {
+        if (event instanceof NavigationEnd && event.url === "/home/tags"){
+          this.loading.hideLoader();
+        }
+    });
+
     this.setupSubscriptions();
 
     Object.keys(mediaData).forEach((media) => {
@@ -85,6 +99,11 @@ export class TagComponent implements OnInit {
 
     this.mediaStatus[Media.Twitter] = AuthStatus.Success;
     console.log("🎯 Media status: ", this.mediaStatus);
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   /* As the deviations are fetched asynchronously, and we only want to calc the stats
