@@ -8,6 +8,7 @@ import { Media, UserMediaAction } from '../app.consts';
 import { TumblrUserInfo, TumblrResponseData } from '../types/tumblr.types';
 import { DeviantData } from '../types/deviant.types';
 import { UserResponse } from '../types/shared.types';
+import { RedirectService } from './redirect.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class BlogService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService
+    private auth: AuthService,
+    private redirect: RedirectService
   ) { }
 
   get tumblrUserSub() {
@@ -46,6 +48,7 @@ export class BlogService {
           this.tumblrUserSubject$.next(null);
         } else {
           throw new Error(`Failed to get Deviant.`);
+          this.redirect.route('/login');
         }
       }, 
       (error: Error) => {
@@ -69,6 +72,7 @@ export class BlogService {
           this.tumblrUserSubject$.next(null);
         } else {
           throw new Error(`Failed to get Tumblr user.`);
+          this.redirect.route('/login');
         }
       }, 
       (error: Error) => {
