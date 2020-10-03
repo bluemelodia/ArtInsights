@@ -1,6 +1,5 @@
 <!-- update the template with the form control using the formControl binding provided by the 
     FormControlDirective (also included in ReactiveFormsModule) -->
-<app-loader></app-loader>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <header class="instructions">
         <h1 class="login-header">{{ newUser? "Sign Up" : "Login" }}</h1>
