@@ -4,7 +4,7 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 import { LoginService } from '../../services/login.service';
 import { LoginPostResponse } from '../auth/auth.types';
-import { Subject, Subscription, ReplaySubject } from 'rxjs';
+import { Subscription, ReplaySubject, Observable } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import { AlertType, UserAction } from '../../app.consts';
 import { takeUntil } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup; 
 
   public newUser = true;
-  private loginSubject$: Subject<LoginPostResponse>;
+  private login$: Observable<LoginPostResponse>;
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   private routeObserver: Subscription;
 
@@ -72,8 +72,8 @@ export class LoginComponent implements OnInit {
   }
 
   public setupLoginSubscription() {
-    this.loginSubject$ = this.login.loginSubject$;
-    this.loginSubject$
+    this.login$ = this.login.login$;
+    this.login$
       .subscribe((response: LoginPostResponse) => {
         if (response && response.statusCode === 0) {
           console.info("Login/registration successful for ", response);

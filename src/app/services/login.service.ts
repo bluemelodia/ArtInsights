@@ -44,8 +44,8 @@ export class LoginService {
     this.storage.resetKeys();
   }
 
-  public get loginSubject$() {
-    return this.userLoginSubject$;
+  public get login$() {
+    return this.userLoginSubject$.asObservable();
   }
 
   private loginOrRegisterUser(userAction: UserAction, body: any) {

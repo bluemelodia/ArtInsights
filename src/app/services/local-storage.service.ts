@@ -9,8 +9,16 @@ import { BehaviorSubject } from 'rxjs';
 export class LocalStorageService {
   constructor() { }
 
-  public TumblrOAuthSubject$ = new BehaviorSubject(AuthStatus.Unattempted);
-  public DeviantArtOAuthSubject$ = new BehaviorSubject(AuthStatus.Unattempted);
+  private TumblrOAuthSubject$ = new BehaviorSubject(AuthStatus.Unattempted);
+  private DeviantArtOAuthSubject$ = new BehaviorSubject(AuthStatus.Unattempted);
+
+  public tumblrOAuth$() {
+    return this.TumblrOAuthSubject$.asObservable();
+  }
+
+  public deviantArtOAuth$() {
+    return this.DeviantArtOAuthSubject$.asObservable();
+  }
 
   /* Store the auth token returned from the server. To be sent on each post-login request. */
   public storeAuthToken(token: string) {

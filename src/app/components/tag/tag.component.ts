@@ -18,6 +18,7 @@ import { LoginService } from '../../services/login.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AuthStatus } from '../auth/auth.types';
 import { UtilsService } from '../../services/utils.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tag',
@@ -25,8 +26,8 @@ import { UtilsService } from '../../services/utils.service';
   styleUrls: ['./tag.component.scss']
 })
 export class TagComponent implements OnInit {
-  private TumblrOAuthSubject$ = this.storage.TumblrOAuthSubject$;
-  private DeviantArtOAuthSubject$ = this.storage.DeviantArtOAuthSubject$;
+  private TumblrOAuth$: Observable<AuthStatus> = this.storage.tumblrOAuth$();
+  private DeviantArtOAuth$: Observable<AuthStatus> = this.storage.deviantArtOAuth$();
 
   public mediaData = mediaData;
   public deviantArt = Media.DeviantArt;
@@ -72,12 +73,12 @@ export class TagComponent implements OnInit {
     /* Subscribe to changes in social media auth status, and enable/disable the
      * navigation links accordingly. Twitter is always auth = true as only the 
      * public API is used. */
-    this.TumblrOAuthSubject$.subscribe((tumblrStatus: AuthStatus) => {
+    this.TumblrOAuth$.subscribe((tumblrStatus: AuthStatus) => {
       this.mediaStatus[Media.Tumblr] = tumblrStatus;
       console.log("🎯 Tumblr status: ", this.mediaStatus);
     });
 
-    this.DeviantArtOAuthSubject$.subscribe((deviantArtStatus: AuthStatus) => {
+    this.DeviantArtOAuth$.subscribe((deviantArtStatus: AuthStatus) => {
       this.mediaStatus[Media.DeviantArt] = deviantArtStatus;
       console.log("🎯 DeviantArt status: ", this.mediaStatus);
     });
