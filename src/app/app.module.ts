@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavModule } from './components/nav/nav.module';
 import { TumblrModule } from './components/tumblr/tumblr.module';
 import { TagModule } from './components/tag/tag.module';
+import { LoaderComponent } from './components/loader/loader.component';
 import { PipeModule } from './pipes/pipe.module';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { PipeModule } from './pipes/pipe.module';
     AppComponent,
     AuthComponent,
     AlertComponent,
-    LoginComponent
+    LoginComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
