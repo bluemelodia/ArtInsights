@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../services/local-storage.service';
+import { RedirectService } from '../services/redirect.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import { LocalStorageService } from '../services/local-storage.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private redirect: RedirectService
   ) {}
 
   canActivate(
@@ -20,7 +22,7 @@ export class AuthGuard implements CanActivate {
 
     console.log("🚔 No social media auth, bye!");
 
-    this.router.navigateByUrl('/auth');
+    this.redirect.route('/auth');
     return false;
   }
 }

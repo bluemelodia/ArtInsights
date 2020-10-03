@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UtilsService } from '../../../services/utils.service';
 import { Router } from '@angular/router';
+import { RedirectService } from '../../../services/redirect.service';
 
 @Component({
   selector: 'app-nav-item',
@@ -19,7 +20,11 @@ export class NavItemComponent implements OnInit {
 
   public iconPath: string;
 
-  constructor(private utils: UtilsService, private router: Router) { }
+  constructor(
+    private utils: UtilsService, 
+    private redirect: RedirectService, 
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -28,7 +33,7 @@ export class NavItemComponent implements OnInit {
     console.log("Route the user to: ", this.link, this.disableNav);
     if (!this.disableNav) {
       console.log("Route the user!!!!!!! ", this.link);
-      this.router.navigateByUrl(this.link);
+      this.redirect.route(this.link);
     }
   }
 }

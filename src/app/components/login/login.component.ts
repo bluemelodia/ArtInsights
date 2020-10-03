@@ -8,6 +8,7 @@ import { Subscription, ReplaySubject, Observable } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import { AlertType, UserAction } from '../../app.consts';
 import { takeUntil } from 'rxjs/operators';
+import { RedirectService } from '../../services/redirect.service';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     private alert: AlertService,
     private fb: FormBuilder, 
     private login: LoginService,
+    private redirect: RedirectService,
     private router: Router) {
       this.routeObserver = this.router.events
       .pipe(takeUntil(this.destroyed$))
@@ -82,7 +84,7 @@ export class LoginComponent implements OnInit {
             case UserAction.Login:
               message = 'Welcome to Art Insights!';
               console.info("Navigate to auth page");
-              this.router.navigateByUrl('/auth');
+              this.redirect.route('/auth');
               break;
             case UserAction.Register:
               message = 'Registration successful. Please log in using your credentials.';

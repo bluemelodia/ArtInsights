@@ -12,7 +12,10 @@ import { Observable } from 'rxjs';
 })
 export class RedirectService {
 
-  constructor(readonly router: Router, @Inject(DOCUMENT) readonly document: Document) {}
+  constructor(
+    readonly router: Router, 
+    @Inject(DOCUMENT) readonly document: Document
+  ) {}
     /* 
     * The Window object from Document defaultView.
     */
@@ -46,5 +49,9 @@ export class RedirectService {
       } catch (error) {
         return error;
       }
+   }
+
+   public route(path: string) {
+      this.router.navigateByUrl(path);
    }
 }

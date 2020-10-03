@@ -7,6 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { AlertService } from './alert.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
+import { RedirectService } from './redirect.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class AuthService {
     private http: HttpClient, 
     private alert: AlertService,
     private storage: LocalStorageService,
+    private redirect: RedirectService,
     private router: Router) { }
 
   public get authRedirect$() {
@@ -48,7 +50,7 @@ export class AuthService {
   public userUnauthForMedia(media: Media) {
     this.storage.setOAuthKey(media, AuthStatus.Unattempted);
     this.alert.showAlert(AlertType.Error, `Failed to get user information. Please grant access to your ${media} account.`);
-    this.router.navigateByUrl('/auth');
+    this.redirect.route('/auth');
   }
 
   authenticateUser(socialMedia: Media) {

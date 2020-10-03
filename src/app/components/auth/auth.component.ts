@@ -44,7 +44,7 @@ export class AuthComponent {
 
   public loginUser() {
     if (this.storage.isUserAuth()) {
-      this.router.navigateByUrl('/home');
+      this.redirect.route('/home');
     }
   }
 

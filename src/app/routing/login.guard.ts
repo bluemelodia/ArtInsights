@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthTokenKey } from '../app.consts';
+import { RedirectService } from '../services/redirect.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
   constructor(
-    private router: Router
+    private router: Router,
+    private redirect: RedirectService
   ) {}
 
   canActivate(
@@ -19,7 +21,7 @@ export class LoginGuard implements CanActivate {
 
     console.log("🚔 No auth token, bye!");
 
-    this.router.navigateByUrl('/login');
+    this.redirect.route('/login');
     return false;
   }
 }
