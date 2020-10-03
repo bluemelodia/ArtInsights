@@ -66,17 +66,18 @@ export class TagComponent implements OnInit {
     private storage: LocalStorageService,
     private tags: TagService,
     private utils: UtilsService
-  ) { }
+  ) {
+    this.router.events
+    .pipe(takeUntil(this.destroyed$))
+    .subscribe(event => {
+      console.log("NAV ENDING< TAGS? ", event);
+      if (event instanceof NavigationEnd && event.url === "/home/tags"){
+        this.loading.hideLoader();
+      }
+  });
+  }
 
   ngOnInit() {
-    this.router.events
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(event => {
-        if (event instanceof NavigationEnd && event.url === "/home/tags"){
-          this.loading.hideLoader();
-        }
-    });
-
     this.setupSubscriptions();
 
     Object.keys(mediaData).forEach((media) => {
