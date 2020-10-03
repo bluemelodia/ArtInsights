@@ -38,7 +38,8 @@ export class AuthComponent {
     this.routeObserver = this.router.events
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
-        if (event instanceof NavigationEnd) {     
+        if (event instanceof NavigationEnd) {
+          console.log("EVENT URL AUTH? ", event.url);     
           if (event.url === "/auth") {
             this.loading.hideLoader();
           } 
