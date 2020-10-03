@@ -4,10 +4,12 @@ import { authMediaData, AuthPostResponse, AuthStatus, AuthRedirectResponse } fro
 import { AuthService } from '../../services/auth.service';
 import { RedirectService } from '../../services/redirect.service';
 import { UtilsService } from '../../services/utils.service';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject, Subscription } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { LoadingService } from '../../services/loading.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth',
@@ -18,10 +20,13 @@ export class AuthComponent {
   public mediaData = Object.assign({}, mediaData);
   private auth$: Observable<AuthPostResponse>;
   private authRedirect$: Observable<AuthRedirectResponse>;
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  private routeObserver: Subscription;
 
   constructor(
     private alert: AlertService,
     public auth: AuthService, 
+    private loading: LoadingService,
     private storage: LocalStorageService,
     private redirect: RedirectService,
     private router: Router,
@@ -30,8 +35,23 @@ export class AuthComponent {
     this.setupRedirectSubscriptions();
     this.setupAuthSubscription();
 
+    this.routeObserver = this.router.events
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(event => {
+        if (event instanceof NavigationEnd) {     
+          if (event.url === "/auth") {
+            this.loading.hideLoader();
+          } 
+        }
+    });
+
     /* We don't need Twitter auth as we are only going to be accessing public data. */
     delete this.mediaData[Media.Twitter];
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   public authUser(forMedia: Media) {

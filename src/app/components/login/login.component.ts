@@ -9,6 +9,7 @@ import { AlertService } from '../../services/alert.service';
 import { AlertType, UserAction } from '../../app.consts';
 import { takeUntil } from 'rxjs/operators';
 import { RedirectService } from '../../services/redirect.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
     private alert: AlertService,
     private fb: FormBuilder, 
     private login: LoginService,
+    private loading: LoadingService,
     private redirect: RedirectService,
     private router: Router) {
       this.routeObserver = this.router.events
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
             /* Kill the previous session. */
             console.log("Nav ending, log out!");
             this.login.logoutUser();
+            this.loading.hideLoader();
           } 
         }
       });
