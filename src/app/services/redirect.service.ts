@@ -54,8 +54,10 @@ export class RedirectService {
    }
 
    public route(path: string) {
-      this.router.navigateByUrl(path);
-      this.loading.showLoader();
-      console.log("ROUTE & SHOW THE LOADER");
+      if (this.router.url !== path) {
+        this.loading.showLoader();
+        this.router.navigateByUrl(path);
+        console.log("ROUTE & SHOW THE LOADER");
+      }
    }
 }
