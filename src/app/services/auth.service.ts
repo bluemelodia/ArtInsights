@@ -85,8 +85,9 @@ export class AuthService {
     switch (socialMedia) {
       case Media.DeviantArt:
         console.log("📘 Initiate DeviantArt authentication: ", this.deviantArtAuthURL);
-        return this.http.get(this.deviantArtAuthURL,
-          {responseType: 'text'});
+        return this.http.get(
+          this.deviantArtAuthURL,
+          {responseType: 'text', withCredentials: true });
       case Media.Tumblr:
         console.log("📘 Initiate Tumblr authentication: ", this.tumblrAuthURL);
         return this.http.get(
