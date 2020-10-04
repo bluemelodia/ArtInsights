@@ -2,8 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
-## Issues
-- User loses access to Tumblr/DA on Chrome - Desktop & Safari - iOS (other browser are fine even when run at the same time, which suggests multiple sessions are supported). 
+The application can be run on: Safari (desktop), Firefox (both desktop & mobile). Chrome and Safari mobile are not supported as when these browsers are used, req.session.id is not persisted on the server side in-between requests.
+
+- Auth icons are not always responsive on click.
+- Don't add event listeners when you aren't on mobile - opens tons of new tabs. 
 
 ## Development server
 
