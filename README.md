@@ -3,16 +3,8 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
 ## Issues/TODOs
-
-UX Improvements/Features
-- Make reauth more graceful / easier for the user. 
-- Queue the messages so each one has sufficient time to be displayed.
-
-Cross-Browser Issues
-- User intermittently loses access to Tumblr/DA in between requests. 
-- User always loses access on Chrome - check if multiple sessions are supported.
-- DA calls seem to fail on Chrome, Tumblr auth falsely checked - doesn't happen on Safari. 
-- Auth doesn't work on iOS Safari.
+- User loses access to Tumblr/DA on Chrome (Firefox & Safari are fine even when run at the same time, which suggests multiple sessions are supported). 
+- Auth doesn't work on iOS Safari - but it works on mobile Chrome & the issue above doesn't happen on mobile Chrome.
 
 ## Development server
 
