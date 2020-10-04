@@ -111,7 +111,9 @@ export class AuthComponent {
             window.open(redirectLink.redirect);
           };
           this.tabOpener.nativeElement.addEventListener('click touchstart', clickListener);
-          this.tabOpener.nativeElement.click();
+          setTimeout(() => {
+            this.tabOpener.nativeElement.click();
+          }, 0);
           console.log("===> CLICKED ON TAB OPENER LISTENER: ", redirectLink.redirect);
           setTimeout(() => {
             console.log("===> REMOVE TAB OPENER LISTENER");
