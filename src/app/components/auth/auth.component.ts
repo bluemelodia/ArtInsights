@@ -107,6 +107,7 @@ export class AuthComponent {
 
           /* This is needed to get the window opening functionality to work on mobile Safari. */
           var clickListener = () => { 
+            console.log("==> OPEN WINDOW!");
             window.open(redirectLink.redirect);
           };
           this.tabOpener.nativeElement.addEventListener('click touchstart', clickListener);
