@@ -105,7 +105,11 @@ export class AuthComponent {
           this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
           this.redirect.redirect(redirectLink.redirect);
 
-          /* This is needed to get the window opening functionality to work on mobile Safari. */
+          /* 
+          * This is needed to get the window opening functionality to work on mobile Safari.
+          * For click events on Safari to work, the listener has to be directly attached to the
+          * element. Remove the event listener after click to avoid adding multiple listeners.
+          */
           var clickListener = () => { 
             console.log("==> OPEN WINDOW!");
             window.open(redirectLink.redirect);
