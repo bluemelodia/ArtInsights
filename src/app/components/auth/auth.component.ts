@@ -23,10 +23,6 @@ export class AuthComponent {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   private routeObserver: Subscription;
 
-  private clickListener = (redirectLink: string) => { 
-    window.open(redirectLink);
-  };
-
   @ViewChild('tabOpener', {static: false}) tabOpener: ElementRef;
 
   constructor(
@@ -110,12 +106,15 @@ export class AuthComponent {
           this.redirect.redirect(redirectLink.redirect);
 
           /* This is needed to get the window opening functionality to work on mobile Safari. */
-          this.tabOpener.nativeElement.addEventListener('click', this.clickListener(redirectLink.redirect));
+          var clickListener = () => { 
+            window.open(redirectLink.redirect);
+          };
+          this.tabOpener.nativeElement.addEventListener('click', clickListener);
           this.tabOpener.nativeElement.click();
-          console.log("CLICKED ON TAB OPENER LISTENER");
+          console.log("===> CLICKED ON TAB OPENER LISTENER: ", redirectLink.redirect);
           setTimeout(() => {
-            console.log("REMOVE TAB OPENER LISTENER");
-            this.tabOpener.nativeElement.removeEventListener('click', this.clickListener(redirectLink.redirect));
+            console.log("===> REMOVE TAB OPENER LISTENER");
+            this.tabOpener.nativeElement.removeEventListener('click', clickListener);
           }, 3000);
         } else {
           this.alert.showAlert(AlertType.Error, `We are unable to connect to ${redirectLink.mediaType} at this time. Please try again later.`);
