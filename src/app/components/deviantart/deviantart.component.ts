@@ -40,9 +40,7 @@ export class DeviantArtComponent implements OnInit {
     this.routeObserver = this.router.events
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
-        console.log("Nav ending, should we get DeviantArt user? ", event);
         if (event instanceof NavigationEnd && event.url === "/home/deviant-art"){
-          console.log("Nav ending, get Deviant: ", event);
           this.blog.getDeviant();
         }
       });
@@ -82,7 +80,6 @@ export class DeviantArtComponent implements OnInit {
   public setupDASubscription() {
     this.deviantUser$
       .subscribe((deviant: DeviantData) => {
-        console.log("Received DA user: ", deviant);
         this.deviant = deviant;
         this.loading.hideLoader();
         this.getWatchersAndFriends();
@@ -91,7 +88,6 @@ export class DeviantArtComponent implements OnInit {
 
     this.deviantStats$
       .subscribe((stats: DeviationAnalytics) => {
-        console.log("Received DA analytics: ", stats);
         this.deviationStats = stats;
       });
 
@@ -113,7 +109,6 @@ export class DeviantArtComponent implements OnInit {
 
     this.post.getDeviations(this.deviant.username)
       .subscribe((deviations: UserResponse) => {
-        console.log("Deviations: ", deviations);
         if (deviations.statusCode === 0 
           && deviations.responseData) {
             const deviationData = deviations.responseData as DeviantArtPostResponse;
@@ -146,7 +141,6 @@ export class DeviantArtComponent implements OnInit {
                 this.deviations.push(deviation);
               });
             }
-            console.log("Deviations: ", this.deviations);
             this.stat.calculateDeviationStats(this.deviations);
             this.analytics.analyzeDeviations(this.deviations);
         }
@@ -177,32 +171,25 @@ export class DeviantArtComponent implements OnInit {
   }
 
   public getFriends($event?: Event) {
-    console.log("Get more friends: ", this.friendOffset);
     if (this.hasMoreFriends) {
-      console.log("WE have more friends! Get them: ");
       this.getDAFriendsList(++this.friendOffset);
     }
   }
 
   public getWatchers($event?: Event) {
-    console.log("Get more watchers: ", this.watcherOffset);
     if (this.hasMoreWatchers) {
-      console.log("WE have more watchers! Get them: ");
       this.getDAFollowers(++this.watcherOffset);
     }
   }
 
   public getDAFriendsList(offset: number = 0) {
-    console.log("GET MORE FRIENDS!", offset);
     this.deviantFollow.getDAFriendsList(this.deviant.username, offset)
     .subscribe((friendData: UserResponse) => { 
       if (friendData.statusCode === 450) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (friendData.statusCode === -1) {
         this.alert.showAlert(AlertType.Error, `Unable to fetch friends list at this time. Try again later.`);
-        console.log(`Failed to fetch friends list.`);
       } else {
-        console.log("Friends: ", friendData);
         const responseData = friendData.responseData as DeviantListData;
         if (!responseData.has_more || responseData.results.length < 1) {
           this.hasMoreFriends = false;
@@ -210,22 +197,18 @@ export class DeviantArtComponent implements OnInit {
         responseData.results.forEach((friend: DeviantFriend) => {
           this.addFriend(friend);
         });
-        console.log("Friends so far: ", this.watchers);
       }
     })
   }
 
   public getDAFollowers(offset: number = 0) {
-    console.log("GET MORE WATCHERS!", offset);
     this.deviantFollow.getDAWatchers(this.deviant.username, offset)
       .subscribe((watcherData: UserResponse) => { 
         if (watcherData.statusCode === 450) {
           this.auth.userUnauthForMedia(Media.DeviantArt);
         } else if (watcherData.statusCode === -1) {
           this.alert.showAlert(AlertType.Error, `Unable to fetch watchers list at this time. Try again later.`);
-          console.log(`Failed to fetch watchers list.`);
         } else  {
-          console.log("Watchers: ", watcherData);
           const responseData = watcherData.responseData as DeviantListData;
           if (!responseData.has_more || responseData.results.length < 1) {
             this.hasMoreWatchers = false;
@@ -233,7 +216,6 @@ export class DeviantArtComponent implements OnInit {
           responseData.results.forEach((watcher: DeviantWatcher) => {
             this.addWatcher(watcher);
           });
-          console.log("Watchers so far: ", this.watchers);
         }
       })
   }
@@ -255,36 +237,28 @@ export class DeviantArtComponent implements OnInit {
   public followDeviant(deviant: string) {
     this.deviantFollow.watch(deviant)
     .subscribe((res: WatchResponse) => {
-      console.log("FOLLOW RES: ", res);
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (res.statusCode !== 0 || res.responseData.status === 'error') {
         this.alert.showAlert(AlertType.Error, `Unable to watch ${deviant}.`);
-        console.log(`Failed to watch: ${deviant}, ${res}`);
       } else {
         this.alert.showAlert(AlertType.Success, `You followed ${deviant}.`);
-        console.log(`Successfully followed: ${deviant}, refresh`);
         this.updateWatchersStatus(deviant, true);
       }
-      console.log("Try to watch: ", res);
     })
   }
 
   public unfollowDeviant(deviant: string) {
     this.deviantFollow.unwatch(deviant)
     .subscribe((res: WatchResponse) => {
-      console.log("UNFOLLOW RES: ", res);
       if (res.statusCode === 403) {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (res.statusCode !== 0 || res.responseData.status === 'error') {
-        console.log(`Failed to unwatch: ${deviant}, `, res);
         this.alert.showAlert(AlertType.Error, `Unable to unwatch ${deviant}.`);
       } else {
-        console.log(`Successfully unwatched: ${deviant}, refresh`);
         this.alert.showAlert(AlertType.Success, `You unwatched ${deviant}.`);
         this.updateWatchersStatus(deviant, false);
       }
-      console.log("Try to unwatch: ", res);
     })  
   }
 
@@ -297,12 +271,10 @@ export class DeviantArtComponent implements OnInit {
   private updateWatchersStatus(deviant: string, isWatching: boolean) {
     if (this.watchersMap[deviant]) {
       this.watchersMap[deviant].is_watching = isWatching;
-      console.log("UPDATED WATCHER MAP: ", this.watchersMap[deviant]);
     }
 
     if (this.friendsMap[deviant]) {
       this.friendsMap[deviant].is_watching = isWatching;
-      console.log("UPDATED FRIENDS MAP: ", this.friendsMap[deviant]);
     }
   }
 }

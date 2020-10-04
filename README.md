@@ -3,8 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
 ## Issues
-- User loses access to Tumblr/DA on Chrome (Firefox & Safari are fine even when run at the same time, which suggests multiple sessions are supported). 
-- Auth doesn't work on iOS Safari - but it works on mobile Chrome & the issue above doesn't happen on mobile Chrome.
+- User loses access to Tumblr/DA on Chrome - Desktop & Safari - iOS (other browser are fine even when run at the same time, which suggests multiple sessions are supported). 
 
 ## Development server
 

@@ -29,9 +29,7 @@ export class TumblrComponent implements OnInit, OnDestroy {
     this.router.events
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
-        console.log("Nav ending, should we get Tumblr user? ", event);
         if (event instanceof NavigationEnd && event.url === "/home/tumblr"){
-          console.log("Nav ending, get Tumblr user: ", event);
           this.blog.getTumblrUser();
           this.loading.hideLoader();
         }
@@ -72,7 +70,6 @@ export class TumblrComponent implements OnInit, OnDestroy {
   public setupTumblrSubscription() {
     this.tumblrUser$
       .subscribe((user: TumblrUserInfo) => {
-        console.log("Received Tumblr user: ", user);
         this.tumblrUser = user;
 
         /* Get results for the first blog by default. */
@@ -104,13 +101,10 @@ export class TumblrComponent implements OnInit, OnDestroy {
           this.auth.userUnauthForMedia(Media.Tumblr);
         } else if (res.statusCode !== 0) {
           this.alert.showAlert(AlertType.Error, `Unable to follow ${blog}.`);
-          console.log(`Failed to follow: ${blog}, ${res}`);
         } else {
           this.alert.showAlert(AlertType.Success, `You followed ${blog}.`);
-          console.log(`Successfully followed: ${blog}, refresh`);
           this.getTumblrFollowersAndFollowing();
         }
-        console.log("Try to follow: ", res);
     })
   }
 
@@ -120,14 +114,11 @@ export class TumblrComponent implements OnInit, OnDestroy {
       if (res.statusCode === 450) {
         this.auth.userUnauthForMedia(Media.Tumblr);
       } else if (res.statusCode !== 0) {
-        console.log(`Failed to unfollow: ${blog}, `, res);
         this.alert.showAlert(AlertType.Error, `Unable to unfollow ${blog}.`);
       } else {
-        console.log(`Successfully unfollowed: ${blog}, refresh`);
         this.alert.showAlert(AlertType.Success, `You unfollowed ${blog}.`);
         this.getTumblrFollowersAndFollowing();
       }
-      console.log("Try to unfollow: ", res);
     })  
   }
 
@@ -179,7 +170,6 @@ export class TumblrComponent implements OnInit, OnDestroy {
               this.addTumblrFollower(user);
             }
           });
-          console.log("TumblrFollowers 🙌🏼: ", blogData, this.tumblrFollowers)
         }
       })
   }
@@ -211,7 +201,6 @@ export class TumblrComponent implements OnInit, OnDestroy {
               this.addTumblrFollowing(blog);
             }
           });
-          console.log("TumblrFollowing 🎀: ", blogData, this.tumblrFollowing);
         }
       })
   }

@@ -30,7 +30,6 @@ export class AnalyticsService {
     deviations.forEach((deviation) => {
       this.compileDeviationStats(deviation.stats, deviation.tags, deviation.published_time);
     });
-    console.log("Analytics so far: ", this.deviantArtAnalytics);
 
     /* Average out all the analytics. */
     return this.deviationSubject$.next(this.computeDeviationStats());
@@ -84,8 +83,6 @@ export class AnalyticsService {
       this.deviantArtAnalytics.tags[tag].favorites.push(stats.favourites);
       this.deviantArtAnalytics.tags[tag].comments.push(stats.comments);
     });
-
-    console.log("Final analytics: ", this.deviantArtAnalytics);
   }
 
   private computeDeviationStats(): DeviationAnalytics {

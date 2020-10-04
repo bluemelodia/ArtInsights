@@ -36,7 +36,6 @@ export class TumblrFollowComponent implements OnInit {
   public onFollowerScroll(event: any) {
     this.userNearBottomFollowers = this.isUserNearBottom(this.followerScroll);
     if (this.userNearBottomFollowers) {
-      console.log("Time to get the next batch!");
       this.fetchMoreFollowers.emit();
     }
   }
@@ -44,7 +43,6 @@ export class TumblrFollowComponent implements OnInit {
   public onFollowingScroll(event: any) {
     this.userNearBottomFollowing = this.isUserNearBottom(this.followingScroll);
     if (this.userNearBottomFollowing) {
-      console.log("Time to get the next batch!");
       this.fetchMoreFollowing.emit();
     }
   }
@@ -64,13 +62,11 @@ export class TumblrFollowComponent implements OnInit {
     const threshold = 150;
     const position = container.nativeElement.scrollHeight - container.nativeElement.scrollTop;
     const height = container.nativeElement.clientHeight;
-    console.log("Reload? ", position, height, position > height - threshold);
     return position < height + threshold;
   }
 
   /* Generic callback for when user clicks on a button in the blog component. */
   public onUserAction(action: UserMediaAction, blog: string) {
-    console.log("On user action: ", action, blog);
     switch(action) {
       case UserMediaAction.Follow:
         this.followBlog.emit(blog);

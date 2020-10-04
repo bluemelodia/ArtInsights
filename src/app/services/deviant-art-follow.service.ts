@@ -18,25 +18,21 @@ export class DeviantArtFollowService {
 
   public getDAWatchers(username: string, offset: number = 0): Observable<any> {
     const url = this.deviantArtWatchers + `/${username}/offset/${offset}`;
-    console.log(`📗 Get DA watchers for ${username}: `, url);
     return this.http.get<any>(url, { withCredentials: true });
   }
 
   public getDAFriendsList(username: string, offset: number = 0): Observable<any> {
     const url = this.deviantArtFriends + `/${username}/offset/${offset}`;
-    console.log(`📗 Get DA friends for ${username}: `, url);
     return this.http.get<any>(url, { withCredentials: true });
   }
 
   public watch(deviant: string): Observable<any> {
     const url = this.watchDeviant + `/${deviant}`;
-    console.log(`📘 Watch ${deviant}: `, url);
     return this.http.get<any>(url, { withCredentials: true });
   }
 
   public unwatch(deviant: string): Observable<any> {
     const url = this.unwatchDeviant + `/${deviant}`;
-    console.log(`📘 Unwatch ${deviant}: `, url);
     return this.http.get<any>(url, { withCredentials: true });
   }
 }

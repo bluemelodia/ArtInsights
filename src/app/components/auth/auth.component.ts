@@ -41,7 +41,6 @@ export class AuthComponent {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
         if (event instanceof NavigationEnd) {
-          console.log("EVENT URL AUTH? ", event.url);     
           if (event.url === "/auth") {
             this.loading.hideLoader();
           } 
@@ -100,7 +99,6 @@ export class AuthComponent {
     this.authRedirect$ = this.auth.authRedirect$;
     this.authRedirect$
       .subscribe((redirectLink: AuthRedirectResponse) => {
-        console.info("Prepare to redirect to auth link: ", redirectLink);
         if (redirectLink.redirect) {
           this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
           this.redirect.redirect(redirectLink.redirect);
@@ -111,16 +109,13 @@ export class AuthComponent {
           * element. Remove the event listener after click to avoid adding multiple listeners.
           */
           var clickListener = () => { 
-            console.log("==> OPEN WINDOW!");
             window.open(redirectLink.redirect);
           };
           this.tabOpener.nativeElement.addEventListener('click', clickListener);
           setTimeout(() => {
             this.tabOpener.nativeElement.click();
           }, 0);
-          console.log("===> CLICKED ON TAB OPENER LISTENER: ", redirectLink.redirect);
           setTimeout(() => {
-            console.log("===> REMOVE TAB OPENER LISTENER");
             this.tabOpener.nativeElement.removeEventListener('click', clickListener);
           }, 3000);
         } else {

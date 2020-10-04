@@ -29,7 +29,6 @@ export class TumblrBlogListComponent implements OnInit {
   }
 
   getFollows(blog: string) {
-    console.log("Get follows for: ", blog);
     this.getFollowers.emit(blog);
   }
 }

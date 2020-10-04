@@ -70,7 +70,6 @@ export class TagComponent implements OnInit {
     this.router.events
     .pipe(takeUntil(this.destroyed$))
     .subscribe(event => {
-      console.log("NAV ENDING< TAGS? ", event);
       if (event instanceof NavigationEnd && event.url === "/home/tags"){
         this.loading.hideLoader();
       }
@@ -81,7 +80,6 @@ export class TagComponent implements OnInit {
     this.setupSubscriptions();
 
     Object.keys(mediaData).forEach((media) => {
-      console.log("Push media status: ", media);
       this.mediaStatus[media] = AuthStatus.Unattempted;
     });
 
@@ -134,7 +132,6 @@ export class TagComponent implements OnInit {
 
   public userSearchedTag(tag: string) {
     if (tag && tag.length > 0 && tag !== this.currentTag) {
-      console.log("Search tag: ", tag);
       this.resetTagData();
       this.getTags(tag);
     }
@@ -175,9 +172,7 @@ export class TagComponent implements OnInit {
         this.auth.userUnauthForMedia(Media.DeviantArt);
       } else if (taggedDeviations.statusCode === -1) {
         this.alert.showAlert(AlertType.Error, `Unable to fetch tagged deviations at this time, try again later.`);
-        console.log(`Failed to fetch tagged deviations.`);
       } else  {
-        console.log("Tagged deviations: ", taggedDeviations);
         const tagData = taggedDeviations.responseData as DeviantArtTagResponse;
         if (tagData.results && tagData.results.length > 0) {
           tagData.results.forEach((deviation: TaggedDeviation) => {
@@ -203,9 +198,7 @@ export class TagComponent implements OnInit {
         this.auth.userUnauthForMedia(Media.Tumblr);
       } else if (taggedPosts.statusCode === -1) {
         this.alert.showAlert(AlertType.Error, `Unable to fetch tagged Tumblr posts at this time, try again later.`);
-        console.log(`Failed to fetch tagged Tumblr posts.`);
       } else  {
-        console.log("Tagged Tumblr posts: ", taggedPosts);
         const tagData = taggedPosts.responseData as [TumblrTagResponse];
         if (tagData && tagData.length > 0) {
           tagData.forEach((tumblrPost: TumblrTagResponse) => {
@@ -230,9 +223,7 @@ export class TagComponent implements OnInit {
       .subscribe((tweets: any) => {
         if (tweets.statusCode === -1) {
           this.alert.showAlert(AlertType.Error, `Unable to fetch tweets at this time, try again later.`);
-          console.log(`Failed to fetch tagged tweets.`);
         } else  {
-          console.log("Tagged tweets: ", tweets);
           const tweetData = tweets.responseData as TwitterTagResponse;
           if (tweetData.statuses && tweetData.statuses.length > 0) {
             tweetData.statuses.forEach((tweet: TaggedTweet) => {
@@ -242,7 +233,6 @@ export class TagComponent implements OnInit {
                   /* Focus on visual tweets. */
                   let hasPhotos = false;
                   tweet.entities.media.forEach((media) => {
-                    console.log("Tweet media: ", media);
                     if (media.type === 'photo') {
                       hasPhotos = true;
                     }

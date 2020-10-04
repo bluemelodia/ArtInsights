@@ -15,7 +15,6 @@ export class PostService {
   /* Don't need to get all deviations, just recent ones. */
   public getDeviations(username: string) {
     const url = this.deviationsURL + `/${username}`;
-    console.log(`📗 Get deviations for ${username}: `, url);
     return this.http.get<any>(url, { withCredentials: true });
   }
 }

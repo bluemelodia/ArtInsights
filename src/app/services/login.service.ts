@@ -29,12 +29,10 @@ export class LoginService {
   }
 
   public registerUser(username: string, password: string) {
-    console.log("Register user: ", username, password);
     this.loginOrRegisterUser(UserAction.Register, { username: username, password: password});
   }
 
   public loginUser(username: string, password: string) {
-    console.log("Login user: ", username, password);
     this.loginOrRegisterUser(UserAction.Login, { username: username, password: password});
   }
 
@@ -56,7 +54,6 @@ export class LoginService {
       .subscribe((data: LoginPostResponse) => {
         if (data) {
           data.userAction = userAction;
-          console.log("Action Succeeded: ", data);
           if (userAction === UserAction.Login) {
             this.storage.storeAuthToken(data.responseData);
           }
@@ -66,7 +63,6 @@ export class LoginService {
         }
       }, 
       (error: Error) => {
-        console.log("ERROR: ", error);
         this.userLoginSubject$.next(null);
       });
   }

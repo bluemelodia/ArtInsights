@@ -37,14 +37,13 @@ export class DeviantArtFollowComponent implements OnInit {
   }
 
   public getDAURL(username: string) {
-    return 'http://' + username + '.deviantart.com';
+    return 'https://' + username + '.deviantart.com';
   }
 
   /* If the user has scrolled to bottom, make a call for more watchers. */
   public onWatcherScroll(event: any) {
     this.userNearBottomWatchers = this.isUserNearBottom(this.watcherContainer);
     if (this.userNearBottomWatchers) {
-      console.log("Time to get the next batch (watchers)!");
       this.fetchNextWatchers.emit();
     }
   }
@@ -52,7 +51,6 @@ export class DeviantArtFollowComponent implements OnInit {
   public onWatchingScroll(event: any) {
     this.userNearBottomWatching = this.isUserNearBottom(this.watchingContainer);
     if (this.userNearBottomWatching) {
-      console.log("Time to get the next batch (watching)");
       this.fetchNextFriends.emit();
     }
   }
@@ -72,13 +70,11 @@ export class DeviantArtFollowComponent implements OnInit {
     const threshold = 150;
     const position = container.nativeElement.scrollHeight - container.nativeElement.scrollTop;
     const height = container.nativeElement.clientHeight;
-    console.log("Reload? ", position, height, position > height - threshold);
     return position < height + threshold;
   }
 
   /* Generic callback for when user clicks on a button in the blog component. */
   public onUserAction(action: UserMediaAction, deviant: string) {
-    console.log("On user action: ", action, deviant);
     switch(action) {
       case UserMediaAction.Follow:
         this.followBlog.emit(deviant);

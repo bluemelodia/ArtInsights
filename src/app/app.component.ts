@@ -23,20 +23,11 @@ export class AppComponent {
 
   @HostListener('window:message', ['$event'])
   receivedPostedMessage(event: any) {
-    console.log("Received a message: ", event);
     if (event.origin !== 'https://artinsights.ue.r.appspot.com') {
       return;
     }
-    console.log("Auth passed? ", event.data);
     this.auth.authSuccess(event.data);
   }
-
-  // /* Log out the user, clearing local storage when they close the window. */
-  // @HostListener('window:beforeunload', ['$event'])
-  // beforeunloadHandler(event: any) {
-  //     console.log("Window closing. Log out the user.");
-  //     this.login.logoutUser();
-  // }
 
   ngOnDestroy() {
     this.destroyed$.next(true);

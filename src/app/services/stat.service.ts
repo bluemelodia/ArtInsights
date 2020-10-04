@@ -101,7 +101,6 @@ export class StatService {
       }
       this.hashTagStats[tag].favorites.push(faves);
       this.hashTagStats[tag].retweets.push(retweets);
-      console.log("Hash tag stats: ", this.hashTagStats);
     }
   }
 
@@ -126,7 +125,6 @@ export class StatService {
     const twitterStats = {};
     Object.keys(this.hashTagStats).forEach((hashTag: string) => {
       const hashTagStat = this.hashTagStats[hashTag];
-      console.log("HashTag stats: ", hashTagStat, hashTag);
       
       const faves: number[] = hashTagStat.favorites;
       faves.sort((a, b) => a - b);
@@ -186,8 +184,6 @@ export class StatService {
     let retweetCounts: number[] = [];
     this.hashTagStats = {};
 
-    console.log("Twitter: ", tweets);
-
     for(let i = 0; i < tweets.length; i++) {
       const tweet: TaggedTweet = tweets[i];
       const favorites = tweet.favorite_count;
@@ -206,8 +202,6 @@ export class StatService {
 
     favoriteCounts.sort((a, b) => a - b);
     retweetCounts.sort((a, b) => a - b);
-    console.log("Favorite counts: ", favoriteCounts);
-    console.log("Retweet counts: ", retweetCounts);
 
     this.tweetStats = {
       favoriteStats: {
@@ -224,7 +218,6 @@ export class StatService {
       },
       hashtags: this.findHashTagEngagements()
     }
-    console.log("Twitter stats: ", this.tweetStats);
     this.twitterSubject$.next(this.tweetStats);
   }
 

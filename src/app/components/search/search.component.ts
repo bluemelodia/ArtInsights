@@ -17,7 +17,6 @@ export class SearchComponent implements OnInit {
   }
 
   userSearched(searchString: string) {
-    console.log("User searched for: ", searchString);
     this.onUserSearch.emit(searchString);
   }
 

@@ -37,10 +37,8 @@ export class BlogService {
   getDeviant() {
     this.http.get(this.deviantURL, { withCredentials: true })
       .subscribe((data: UserResponse) => {
-        console.log("RECEIVED USER DATA: ", data);
         if (data && data.statusCode === 0 && data.responseData) {
           const deviant = data.responseData as DeviantData;
-          console.log("Send deviant: ", deviant);
           this.deviantSubject$.next(deviant);
         } else if (data && data.statusCode === 450) {
           /* Keep this here in case the user un-auths mid-session. */
@@ -52,7 +50,6 @@ export class BlogService {
         }
       }, 
       (error: Error) => {
-        console.log("ERROR: ", error);
         this.deviantSubject$.next(null);
       });
   }
@@ -60,23 +57,18 @@ export class BlogService {
   getTumblrUser() {
     this.http.get(this.tumblrUserURL, { withCredentials: true })
       .subscribe((data: UserResponse) => {
-        console.log("RECEIVED USER DATA: ", data);
         if (data && data.statusCode === 0 && data.responseData) {
           const tumblrUser = data.responseData as TumblrResponseData;
-          console.log("Tumblr response data: ", tumblrUser);
-          console.log("Send tumblr user: ", tumblrUser.user);
           this.tumblrUserSubject$.next(tumblrUser.user);
         } else if (data && data.statusCode === 450) {
           /* Keep this here in case the user un-auths mid-session. */
           this.auth.userUnauthForMedia(Media.Tumblr);
           this.tumblrUserSubject$.next(null);
         } else {
-          throw new Error(`Failed to get Tumblr user.`);
           this.redirect.route('/login');
         }
       }, 
       (error: Error) => {
-        console.log("ERROR: ", error);
         this.tumblrUserSubject$.next(null);
       });
   }
