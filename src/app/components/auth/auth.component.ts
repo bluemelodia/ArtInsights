@@ -110,14 +110,14 @@ export class AuthComponent {
             console.log("==> OPEN WINDOW!");
             window.open(redirectLink.redirect);
           };
-          this.tabOpener.nativeElement.addEventListener('click touchstart', clickListener);
+          this.tabOpener.nativeElement.addEventListener('click', clickListener);
           setTimeout(() => {
             this.tabOpener.nativeElement.click();
           }, 0);
           console.log("===> CLICKED ON TAB OPENER LISTENER: ", redirectLink.redirect);
           setTimeout(() => {
             console.log("===> REMOVE TAB OPENER LISTENER");
-            this.tabOpener.nativeElement.removeEventListener('click touchstart', clickListener);
+            this.tabOpener.nativeElement.removeEventListener('click', clickListener);
           }, 3000);
         } else {
           this.alert.showAlert(AlertType.Error, `We are unable to connect to ${redirectLink.mediaType} at this time. Please try again later.`);
