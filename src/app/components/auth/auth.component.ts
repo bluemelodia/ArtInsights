@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Media, mediaData, AlertType } from '../../app.consts';
 import { authMediaData, AuthPostResponse, AuthStatus, AuthRedirectResponse } from './auth.types';
 import { AuthService } from '../../services/auth.service';
@@ -22,6 +22,12 @@ export class AuthComponent {
   private authRedirect$: Observable<AuthRedirectResponse>;
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   private routeObserver: Subscription;
+
+  private clickListener = (redirectLink: string) => { 
+    window.open(redirectLink);
+  };
+
+  @ViewChild('tabOpener', {static: false}) tabOpener: ElementRef;
 
   constructor(
     private alert: AlertService,
@@ -102,6 +108,15 @@ export class AuthComponent {
         if (redirectLink.redirect) {
           this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
           this.redirect.redirect(redirectLink.redirect);
+
+          /* This is needed to get the window opening functionality to work on mobile Safari. */
+          this.tabOpener.nativeElement.addEventListener('click', this.clickListener(redirectLink.redirect));
+          this.tabOpener.nativeElement.click();
+          console.log("CLICKED ON TAB OPENER LISTENER");
+          setTimeout(() => {
+            console.log("REMOVE TAB OPENER LISTENER");
+            this.tabOpener.nativeElement.removeEventListener('click', this.clickListener(redirectLink.redirect));
+          }, 3000);
         } else {
           this.alert.showAlert(AlertType.Error, `We are unable to connect to ${redirectLink.mediaType} at this time. Please try again later.`);
         }
