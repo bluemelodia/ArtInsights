@@ -1,11 +1,28 @@
 # ArtInsights
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
+This was my first full-fleged Angular project. This application provides the user with insights on how their artworks are received on DeviantArt and Tumblr, two social media sites with large communities of artists. It also allows the user to manage their followings on both sites.
+
+Main features:
+
+- Authorize the application to fetch information about the user's DeviantArt and Tumblr accounts. 
+
+DeviantArt
+- View information about the user's deviations (artworks), including tags used, and level of engagement (favorites, comments, views) per piece.
+- View engagement levels by tags and day / time of deviation submission.
+- View information about friends (deviants and groups the user is following) and followers, including whether the friendship is mutual (the deviations/groups the user is following is following them back).
+- Watch / unwatch deviants and groups.
+
+Tumblr
+- See which blogs are following the user, and which blogs the user is following. Includes information about mutual followings.
+- Follow / unfollow blogs.
+
+Tag Search
+- Search for visual artworks (ex. drawings, photographs) by tag on DeviantArt, Tumblr, and Twitter. 
+- View engagement levels per piece and per tag.
 
 The application can be run on: Safari (desktop), Firefox (both desktop & mobile). Chrome and Safari mobile are not supported as when these browsers are used, req.session.id is not persisted on the server side in-between requests.
 
-- Auth icons are not always responsive on click.
-- Don't add event listeners when you aren't on mobile - opens tons of new tabs. 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
 ## Development server
 
