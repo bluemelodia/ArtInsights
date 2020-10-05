@@ -103,10 +103,6 @@ export class AuthComponent {
           this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
           this.redirect.redirect(redirectLink.redirect);
 
-          /*
-          * We don't need this logic for Safari as there is currently no way to persist the session
-          * on the server side.
-          */
           /* 
           * This is needed to get the window opening functionality to work on mobile Safari.
           * For click events on Safari to work, the listener has to be directly attached to the
