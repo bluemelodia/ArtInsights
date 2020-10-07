@@ -31,7 +31,7 @@
         <div #watching class="scrollable-list" 
             (scroll)="onWatchingScroll($event)">
             <app-blog *ngFor="let friend of watchingMap | keyvalue"
-                [isFollowing]="true"
+                [isFollowing]="friend.value.is_watching"
                 [mediaType]="mediaType"
                 (onUserAction)="onUserAction($event, friend.key)">
                 <div media-type="deviantArt">
