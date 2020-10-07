@@ -33,7 +33,7 @@
             <app-blog *ngFor="let friend of watchingMap | keyvalue"
                 [isFollowing]="true"
                 [mediaType]="mediaType"
-                (onUserAction)="onUserAction($event, friend.value.url)">
+                (onUserAction)="onUserAction($event, friend.key)">
                 <div media-type="deviantArt">
                     <div class="da-style">
                         <img class="watcher-icon"
