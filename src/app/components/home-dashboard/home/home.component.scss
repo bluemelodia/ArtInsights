@@ -9,11 +9,16 @@ $font-size: 30px;
 
 button {
     @include home-tile();
-    max-height: 400px;
     position: relative;
 
-    background-color: $app-secondary;
-    opacity: 0.8;
+    background-color: transparent;
+    border: 1px solid $app-primary;
+    padding: $small-spacing/2;
+    opacity: 0.9;
+
+    :hover {
+        background-color: $app-secondary;
+    }
 
     .name {
         position: absolute;
