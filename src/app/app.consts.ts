@@ -101,6 +101,12 @@ export const homeActions: NavItem[] = [
 /* Don't really need anything beyond tag search at the moment. May add more if needed. */
 export const navActions: NavItem[] = [
     {
+        iconName: 'home', 
+        alt: 'home',
+        link: '/home',
+        name: 'Home'
+    },
+    {
         iconName: 'tag', 
         alt: 'search by tag',
         link: '/home/tags',
