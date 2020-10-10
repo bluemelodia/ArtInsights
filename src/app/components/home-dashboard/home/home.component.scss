@@ -7,6 +7,12 @@ $font-size: 30px;
     @include flex-col($justify-content: center);
 }
 
+.home-button {
+    :hover {
+        background-color: $app-primary;
+    }
+}
+
 button {
     @include home-tile();
     position: relative;
@@ -18,7 +24,6 @@ button {
 
     :hover {
         font-weight: bold;
-        opacity:1;
     }
 
     .name {

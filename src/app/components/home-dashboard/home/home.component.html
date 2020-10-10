@@ -1,4 +1,4 @@
-<button (click)="routeToLink(action.link)" *ngFor="let action of homeActions">
+<button class="home-button" (click)="routeToLink(action.link)" *ngFor="let action of homeActions">
     <span class="name">{{action.name}}</span>
     <a>
         <img [src]="homeLinks[action.iconName]" [alt]="action.alt">
