@@ -18,6 +18,9 @@ button {
 
     :hover:not(.name):not(a) {
         border: 2px solid $app-primary;
+    }
+
+    :hover {
         font-weight: bold;
     }
 
