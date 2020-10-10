@@ -8,7 +8,7 @@ $font-size: 30px;
 }
 
 .home-button {
-    :hover:not(.name):not(a) {
+    :hover:not(.name), :hover:not(a) {
         background-color: $app-primary;
     }
 }
