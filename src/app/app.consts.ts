@@ -79,19 +79,19 @@ export const mediaData: { [id: string] : NavItem } = {
 
 export const homeActions: NavItem[] = [
     { 
-        iconName: 'deviantart', 
+        iconName: 'deviantart-blog', 
         alt: 'deviantArt',
         link: '/home/deviant-art',
         name: 'Deviant Art'
     },
     {
-        iconName: 'tumblr',
+        iconName: 'tumblr-blog',
         alt: 'tumblr',
         link: '/home/tumblr',
         name: 'Tumblr'
     },
     {
-        iconName: 'tag', 
+        iconName: 'tag-search', 
         alt: 'search by tag',
         link: '/home/tags',
         name: 'Tag Search'

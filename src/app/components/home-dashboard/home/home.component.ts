@@ -3,6 +3,8 @@ import { takeUntil } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { LoadingService } from '../../../services/loading.service';
 import { Subscription, ReplaySubject } from 'rxjs';
+import { RedirectService } from '../../../services/redirect.service';
+import { homeActions } from '../../../app.consts';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +14,11 @@ import { Subscription, ReplaySubject } from 'rxjs';
 export class HomeComponent implements OnInit {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   private routeObserver: Subscription;
+  public homeActions = homeActions;
 
   constructor(
     private loading: LoadingService,
+    private redirect: RedirectService, 
     private router: Router
   ) {
     this.routeObserver = this.router.events
@@ -29,6 +33,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
+  routeToLink(link: string) {
+    this.redirect.route(link);
+  }
 }
