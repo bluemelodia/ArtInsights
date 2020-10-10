@@ -13,7 +13,7 @@ button {
     position: relative;
 
     background-color: $app-secondary;
-    opacity: 0.75;
+    opacity: 0.8;
 
     .name {
         position: absolute;
@@ -31,8 +31,13 @@ button {
 
         img {
             width: 100%;
+            height: 100%;
             object-fit: cover;
-            opacity: 0.5;
+            opacity: 0.8;
         }
     }
+}
+
+button:not(:last-child) {
+    margin-bottom: $large-spacing;
 }
