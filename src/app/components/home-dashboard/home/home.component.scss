@@ -7,12 +7,6 @@ $font-size: 30px;
     @include flex-col($justify-content: center);
 }
 
-.home-button {
-    :hover:not(.name), :hover:not(a) {
-        background-color: $app-primary;
-    }
-}
-
 button {
     @include home-tile();
     position: relative;
