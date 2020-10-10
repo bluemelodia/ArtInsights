@@ -1,0 +1,10 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+button {
+    @include home-tile();
+
+    a, a.img {
+        width: 100%;
+    }
+}

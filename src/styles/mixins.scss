@@ -116,6 +116,19 @@ $default-line-height: 0px;
     max-width: $limit;
 }
 
+@mixin full-width-responsive() {
+    width: 100%;
+    margin: 0 auto;
+
+    @include tablet() {
+        max-width: $max-width;
+    }
+
+    @include desktop() {
+        max-width: $max-wide-width;
+    }
+}
+
 @mixin input-style($width: 100%) {
     font-size: $large-font;
     text-align: center;
@@ -148,6 +161,10 @@ $default-line-height: 0px;
     box-shadow: inset 0 0 0 2px $app-dark-nav;
 }
 
+@mixin home-tile() {
+    @include full-width-responsive();
+}
+
 @mixin user-profile-img() {
     height: 80px;
     width: 80px;
@@ -164,17 +181,7 @@ $default-line-height: 0px;
     }
 
     border: 3px solid $widget-border;
-
-    width: 100%;
-    margin: 0 auto;
-
-    @include tablet() {
-        max-width: $max-width;
-    }
-
-    @include desktop() {
-        max-width: $max-wide-width;
-    }
+    @include full-width-responsive();
 }
 
 @mixin deviantart-container() {
