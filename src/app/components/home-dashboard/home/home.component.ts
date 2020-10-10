@@ -5,6 +5,7 @@ import { LoadingService } from '../../../services/loading.service';
 import { Subscription, ReplaySubject } from 'rxjs';
 import { RedirectService } from '../../../services/redirect.service';
 import { homeActions } from '../../../app.consts';
+import { UtilsService } from '../../../services/utils.service';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +16,13 @@ export class HomeComponent implements OnInit {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   private routeObserver: Subscription;
   public homeActions = homeActions;
+  public homeLinks = {};
 
   constructor(
     private loading: LoadingService,
     private redirect: RedirectService, 
-    private router: Router
+    private router: Router,
+    private utils: UtilsService
   ) {
     this.routeObserver = this.router.events
       .pipe(takeUntil(this.destroyed$))
@@ -30,10 +33,14 @@ export class HomeComponent implements OnInit {
           } 
         }
       });
+
+    for(let action of homeActions) {
+      this.homeLinks[action.iconName] = utils.getImagePath(action.iconName);
+    }
   }
 
   ngOnInit() {
-    
+
   }
 
   routeToLink(link: string) {

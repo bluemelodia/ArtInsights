@@ -1,7 +1,7 @@
 <button *ngFor="let action of homeActions">
     <a 
         (click)="routeToLink(action.link)">
-        <img [src]="action.iconName" [alt]="action.alt">
+        <img [src]="homeLinks[action.iconName]" [alt]="action.alt">
         <span>{{action.name}}</span>
     </a>
 </button>
