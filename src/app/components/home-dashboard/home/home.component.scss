@@ -16,7 +16,7 @@ button {
     padding: $small-spacing/2;
     opacity: 0.8;
 
-    :hover {
+    :hover:not(.name):not(a) {
         border: 2px solid $app-primary;
         font-weight: bold;
     }
