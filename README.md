@@ -113,4 +113,6 @@ Icons made by:
 from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 Photos by:
-Jess Bailey Designs from Pexels
+<a href="https://www.pexels.com/@jessbaileydesign">Jess Bailey Designs</a>
+<a href="https://www.pexels.com/@pixabay">Pixabay</a>
+<a href="https://www.pexels.com/@nurseryart">Porapak Apichodilok</a>

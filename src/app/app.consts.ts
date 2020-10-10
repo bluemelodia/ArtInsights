@@ -77,6 +77,27 @@ export const mediaData: { [id: string] : NavItem } = {
     }
 }
 
+export const homeActions: NavItem[] = [
+    { 
+        iconName: 'deviantart', 
+        alt: 'deviantArt',
+        link: '/home/deviant-art',
+        name: 'Deviant Art'
+    },
+    {
+        iconName: 'tumblr',
+        alt: 'tumblr',
+        link: '/home/tumblr',
+        name: 'Tumblr'
+    },
+    {
+        iconName: 'tag', 
+        alt: 'search by tag',
+        link: '/home/tags',
+        name: 'Tag Search'
+    },
+];
+
 /* Don't really need anything beyond tag search at the moment. May add more if needed. */
 export const navActions: NavItem[] = [
     {
