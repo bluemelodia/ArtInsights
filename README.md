@@ -4,7 +4,12 @@ This was my first full-fleged Angular project. This application provides the use
 
 Main features:
 
+<img src="./app-screenshots/Login.png"/>
+<img src="./app-screenshots/Landing-Page.png"/>
+
 - Authorize the application to fetch information about the user's DeviantArt and Tumblr accounts. 
+
+<img src="./app-screenshots/Auth.png"/>
 
 DeviantArt
 - View information about the user's deviations (artworks), including tags used, and level of engagement (favorites, comments, views) per piece.
@@ -16,11 +21,22 @@ Tumblr
 - See which blogs are following the user, and which blogs the user is following. Includes information about mutual followings.
 - Follow / unfollow blogs.
 
+<img src="./app-screenshots/Tumblr-Phone.png"/>
+<img src="./app-screenshots/Tumblr-Tablet.png"/>
+<img src="./app-screenshots/Tumblr-Desktop.png"/>
+
 Tag Search
 - Search for visual artworks (ex. drawings, photographs) by tag on DeviantArt, Tumblr, and Twitter. 
 - View engagement levels per piece and per tag.
 
-The application can be run on: Safari (desktop), Firefox (both desktop & mobile). Chrome and Safari mobile are not supported as when these browsers are used, req.session.id is not persisted on the server side in-between requests.
+<img src="./app-screenshots/Tag-Search.png"/>
+<img src="./app-screenshots/Tag-Search2.png"/>
+
+The application can be run on: Safari (desktop), Firefox (both desktop & mobile). 
+
+Chrome and Safari mobile are not supported as when these browsers are used, req.session.id is not persisted on the server side in-between requests. This is probably due to incorrect backend configuration. As the primary purpose of this project was for me to practice Angular and CSS, I will address these issues in a future project.
+
+Data and images in app screenshots and videos are mocked and blurred to protect user privacy.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
@@ -116,3 +132,4 @@ Photos by:
 <a href="https://www.pexels.com/@jessbaileydesign">Jess Bailey Designs</a>
 <a href="https://www.pexels.com/@pixabay">Pixabay</a>
 <a href="https://www.pexels.com/@nurseryart">Porapak Apichodilok</a>
+<a href="https://unsplash.com/@juanmgiraldo96">Juan Manuel Giraldo Grisales</a>
