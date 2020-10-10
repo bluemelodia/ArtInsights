@@ -30,8 +30,12 @@ export class TumblrComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
         if (event instanceof NavigationEnd && event.url === "/home/tumblr"){
-          this.blog.getTumblrUser();
-          this.loading.hideLoader();
+          if (this.auth.isAuthorizedForMedia(Media.Tumblr)) {
+            this.blog.getTumblrUser();
+            this.loading.hideLoader();
+          } else {
+            this.auth.userUnauthForMedia(Media.Tumblr);
+          }
         }
     });
   }

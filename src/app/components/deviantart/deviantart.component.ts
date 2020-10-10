@@ -41,7 +41,11 @@ export class DeviantArtComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(event => {
         if (event instanceof NavigationEnd && event.url === "/home/deviant-art"){
-          this.blog.getDeviant();
+          if (this.auth.isAuthorizedForMedia(Media.DeviantArt)) {
+            this.blog.getDeviant();
+          } else {
+            this.auth.userUnauthForMedia(Media.DeviantArt);
+          }
         }
       });
   }
