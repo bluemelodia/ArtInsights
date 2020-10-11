@@ -34,7 +34,7 @@ export class RedirectService {
     */
    public redirect(url: string, target = '_blank'): Observable<boolean> {
       const now = new Date();
-      if (this.timeOfLastOpen && now.getTime() - this.timeOfLastOpen.getTime() < 10000) {
+      if (this.timeOfLastOpen && now.getTime() - this.timeOfLastOpen.getTime() < 5000) {
         return;
       }
 
