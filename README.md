@@ -83,7 +83,7 @@ The mechanism for DeviantArt and Tumblr is similar.
 7) Depending on whether the auth token was successfully obtained, the server returns either a success or failure HTML template for the client to render. This template contains code to automatically close the client-opened tab after three seconds. 
 8) After the success HTML page is rendered, the script in the template uses the postMessage API to notify the client app that authorization has either succeeded or failed for DeviantArt.
 9) The client saves the outcome (success or failure) of the authentication attempt into session storage and alerts all subscribers of the change. This will result in some UI changes, such as enabling/disabling the DeviantArt button in the navigation bar and enabling/preventing users from directly routing to the DeviantArt page within the app.
-10) If the clients attempts to make any services calls without the proper authentication, they will be redirected to the auth page and given an opportunity to re-authenticate.
+10) If the clients attempts to make any service calls without the proper authentication, they will be redirected to the auth page and given an opportunity to re-authenticate.
 
 ## Development server
 
