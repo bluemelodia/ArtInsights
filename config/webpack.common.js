@@ -15,6 +15,11 @@ const CleanWebpackPlugin   = require('clean-webpack-plugin');
 */
 const HtmlWebpackPlugin    = require('html-webpack-plugin');
 
+/*
+* Generates favicons.
+*/
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
 const CopyPlugin = require('copy-webpack-plugin');
 var webpack = require('webpack');
 
@@ -136,5 +141,6 @@ module.exports = {
         new CopyPlugin([
             { from: 'src/images', to: 'images' } 
         ]), 
+        new FaviconsWebpackPlugin('./src/images/favicon.png')
     ]
 };
