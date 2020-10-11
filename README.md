@@ -58,17 +58,32 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 <img src="./Arch.png"/>
 
 User Registration: 
-1) When the user submits the registration form with a valid username (valid e-mail address) and password (at least six characters long), the client app calls the server’s /register endpoint.
+1) When the user submits the registration form with a valid username (valid e-mail address) and password (at least six characters long), the client app calls the server’s register endpoint.
 2) If the user provided a valid username and password, the server makes a call to the Firebase Authentication service to create a user with the given e-mail and password.
 3) On successful registration, the client app shows a success notification to the user. Otherwise, the app shows a failure notification (ex. the e-mail address is not available).
 
 User Login:
-1) When the user submits the login form with a valid username and password (same validation rules as user registration), the client app calls the server's /login endpoint.
+1) When the user submits the login form with a valid username and password (same validation rules as user registration), the client app calls the server's login endpoint.
 2) If the user provided a valid username nad password, the server makes a call to the Firebase Authentication service to sign in the user with the provided e-mail and password. 
 3) On successful login, the server asks Firebase for the user ID token, which is then used to exchange for a session cookie.
 4) The server passes the user ID token to the Firebase Authentication service. On successful verification, the server checks that the user was recently signed in before asking the Firebase Authentication service to create a session cookie. 
 5) The server saves the returned session cookie (used as the auth token) in the Firebase Cloud Firestore, then sends a success message back to the client with the token as the payload. 
 6) The client app saves the auth token in the browser's session storage. These values are salved locally and are persisted until the window or tab is closed or when the user clicks on the logout button.
+
+Social Media OAuth: 
+
+The mechanism for DeviantArt and Tumblr is similar.
+
+1) On successful login, the user is taken to the auth page, where they have the choice of authenticating their Tumblr and/or DeviantArt accounts. At least one of the two accounts is required in order to proceed. 
+2) When the user clicks on the DeviantArt icon, the click handler will either authenticate or unauthenticate the user based on their current status. 
+3) If the user is not yet authenticated with DeviantArt, the client calls the server's art/auth endpoint, which returns the URL of the redirect URL to display to the user.
+4) On receiving the server's response, the client opens the redirect URL in a new tab. Once the user enters their credentials into the DeviantArt redirect page and clicks the login button, DeviantArt calls the server art/callback endpoint with the authorization code as a parameter.
+5) The server calls the DeviantArt auth token URL (https://www.deviantart.com/oauth2/token?&grant_type=authorization_code), including the authorization code as a query parameter, and exchanges it for the authorization token.
+6) The server saves the authorization token in Firebase, using the request session id as the key. On subsequent user requests, the server will obtain the authorization token from firebase using the persisted request session id.
+7) Depending on whether the auth token was successfully obtained, the server returns either a success or failure HTML template for the client to render. This template contains code to automatically close the client-opened tab after three seconds. 
+8) After the success HTML page is rendered, the script in the template uses the postMessage API to notify the client app that authorization has either succeeded or failed for DeviantArt.
+9) The client saves the outcome (success or failure) of the authentication attempt into session storage and alerts all subscribers of the change. This will result in some UI changes, such as enabling/disabling the DeviantArt button in the navigation bar and enabling/preventing users from directly routing to the DeviantArt page within the app.
+10) If the clients attempts to make any services calls without the proper authentication, they will be redirected to the auth page and given an opportunity to re-authenticate.
 
 ## Development server
 
