@@ -102,22 +102,6 @@ export class AuthComponent {
         if (redirectLink.redirect) {
           this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
           this.redirect.redirect(redirectLink.redirect);
-
-          /* 
-          * This is needed to get the window opening functionality to work on mobile Safari.
-          * For click events on Safari to work, the listener has to be directly attached to the
-          * element. Remove the event listener after click to avoid adding multiple listeners.
-          */
-          // var clickListener = () => { 
-          //   window.open(redirectLink.redirect);
-          // };
-          // this.tabOpener.nativeElement.addEventListener('click', clickListener);
-          // setTimeout(() => {
-          //   this.tabOpener.nativeElement.click();
-          // }, 0);
-          // setTimeout(() => {
-          //   this.tabOpener.nativeElement.removeEventListener('click', clickListener);
-          // }, 3000);
         } else {
           this.alert.showAlert(AlertType.Error, `We are unable to connect to ${redirectLink.mediaType} at this time. Please try again later.`);
         }

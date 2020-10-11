@@ -37,19 +37,23 @@ export class RedirectService {
        * and without the rel="opener" attribute, window.opener will be null, 
        * preventing the opened window from sending a message back to the application. 
        */
-      try {
-        // Create a link in memory.
-        let link = this.document.createElement("a");
-        link.target = target;
-        link.href = url;
-        link.rel = "opener";
-        
-        // Dispatch a fake click
-        let clickEvent = this.document.createEvent("MouseEvents");
-        clickEvent.initMouseEvent("click", true, true, this.window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        link.dispatchEvent(clickEvent);
-      } catch (error) {
-        return error;
+      if (navigator.userAgent.includes("Safari")) {
+        try {
+          // Create a link in memory.
+          let link = this.document.createElement("a");
+          link.target = target;
+          link.href = url;
+          link.rel = "opener";
+          
+          // Dispatch a fake click
+          let clickEvent = this.document.createEvent("MouseEvents");
+          clickEvent.initMouseEvent("click", true, true, this.window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+          link.dispatchEvent(clickEvent);
+        } catch (error) {
+          return error;
+        }
+      } else {
+        window.open(url, "_blank");
       }
    }
 
