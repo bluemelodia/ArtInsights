@@ -128,19 +128,15 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Icons made by:
 
-<a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a>
-
-<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
-
-<a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a>
-
-<a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a>
-
-<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a>
+<a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a><br>
+<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a><br>
+<a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a><br>
+<a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a><br>
+<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a><br>
 from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 Photos by:
-<a href="https://www.pexels.com/@jessbaileydesign">Jess Bailey Designs</a>
-<a href="https://www.pexels.com/@pixabay">Pixabay</a>
-<a href="https://www.pexels.com/@nurseryart">Porapak Apichodilok</a>
+<a href="https://www.pexels.com/@jessbaileydesign">Jess Bailey Designs</a><br>
+<a href="https://www.pexels.com/@pixabay">Pixabay</a><br>
+<a href="https://www.pexels.com/@nurseryart">Porapak Apichodilok</a><br>
 <a href="https://unsplash.com/@juanmgiraldo96">Juan Manuel Giraldo Grisales</a>
