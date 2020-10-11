@@ -63,7 +63,12 @@ User Registration:
 3) On successful registration, the client app shows a success notification to the user. Otherwise, the app shows a failure notification (ex. the e-mail address is not available).
 
 User Login:
-1) When the user submits the login form with a valid username and password (same validation rules as
+1) When the user submits the login form with a valid username and password (same validation rules as user registration), the client app calls the server's /login endpoint.
+2) If the user provided a valid username nad password, the server makes a call to the Firebase Authentication service to sign in the user with the provided e-mail and password. 
+3) On successful login, the server asks Firebase for the user ID token, which is then used to exchange for a session cookie.
+4) The server passes the user ID token to the Firebase Authentication service. On successful verification, the server checks that the user was recently signed in before asking the Firebase Authentication service to create a session cookie. 
+5) The server saves the returned session cookie (used as the auth token) in the Firebase Cloud Firestore, then sends a success message back to the client with the token as the payload. 
+6) The client app saves the auth token in the browser's session storage. These values are salved locally and are persisted until the window or tab is closed or when the user clicks on the logout button.
 
 ## Development server
 

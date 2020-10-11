@@ -7,7 +7,7 @@ import { AuthTokenKey } from '../app.consts';
 export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         /* Retrieve the token from local storage. */
-        const idToken = localStorage.getItem(AuthTokenKey);
+        const idToken = sessionStorage.getItem(AuthTokenKey);
         console.log("Auth Interceptor - ID token: ", idToken);
 
         if (idToken) {

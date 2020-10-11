@@ -23,7 +23,7 @@ export class LocalStorageService {
   /* Store the auth token returned from the server. To be sent on each post-login request. */
   public storeAuthToken(token: string) {
     console.log("Store the user auth token: ", token);
-    localStorage.setItem(AuthTokenKey, token);
+    sessionStorage.setItem(AuthTokenKey, token);
   }
 
   /* Check if the user auth at least one social media. */
@@ -38,12 +38,12 @@ export class LocalStorageService {
     switch (mediaType) {
       case Media.DeviantArt:
         console.log("Set DA auth key: ", authStatus);
-        localStorage.setItem(DeviantArtOAuthKey, authStatus);
+        sessionStorage.setItem(DeviantArtOAuthKey, authStatus);
         this.DeviantArtOAuthSubject$.next(authStatus);
         break;
       case Media.Tumblr:
         console.log("Set Tumblr auth key: ", authStatus);
-        localStorage.setItem(TumblrOAuthKey, authStatus);
+        sessionStorage.setItem(TumblrOAuthKey, authStatus);
         this.TumblrOAuthSubject$.next(authStatus);
         break;
     }
@@ -54,10 +54,10 @@ export class LocalStorageService {
    * page refresh, the nav bar, auth pages, etc. will not have the up to date
    * info on the auth statuses. */
   public refreshOAuthStatuses() {
-    const deviantArtStatus = localStorage.getItem(DeviantArtOAuthKey) as AuthStatus;
+    const deviantArtStatus = sessionStorage.getItem(DeviantArtOAuthKey) as AuthStatus;
     this.DeviantArtOAuthSubject$.next(deviantArtStatus);
 
-    const tumblrStatus = localStorage.getItem(TumblrOAuthKey) as AuthStatus;
+    const tumblrStatus = sessionStorage.getItem(TumblrOAuthKey) as AuthStatus;
     this.TumblrOAuthSubject$.next(tumblrStatus);
   }
 
@@ -65,10 +65,10 @@ export class LocalStorageService {
     let key: AuthStatus;
     switch (mediaType) {
       case Media.DeviantArt:
-        key = localStorage.getItem(DeviantArtOAuthKey) as AuthStatus;
+        key = sessionStorage.getItem(DeviantArtOAuthKey) as AuthStatus;
         break;
       case Media.Tumblr:
-        key = localStorage.getItem(TumblrOAuthKey) as AuthStatus;
+        key = sessionStorage.getItem(TumblrOAuthKey) as AuthStatus;
         break;
     }
     return key;
@@ -76,8 +76,8 @@ export class LocalStorageService {
 
   /* Logout or start new session. */
   public resetKeys() {
-    localStorage.removeItem(AuthTokenKey);
-    localStorage.setItem(DeviantArtOAuthKey, AuthStatus.Unattempted);
-    localStorage.setItem(TumblrOAuthKey, AuthStatus.Unattempted);
+    sessionStorage.removeItem(AuthTokenKey);
+    sessionStorage.setItem(DeviantArtOAuthKey, AuthStatus.Unattempted);
+    sessionStorage.setItem(TumblrOAuthKey, AuthStatus.Unattempted);
   }
 }
