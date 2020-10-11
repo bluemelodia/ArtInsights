@@ -98,7 +98,7 @@ export class AuthComponent {
   public setupRedirectSubscriptions() {
     this.authRedirect$ = this.auth.authRedirect$;
     this.authRedirect$
-      .pipe(throttleTime(1500))
+      .pipe(throttleTime(3000))
       .subscribe((redirectLink: AuthRedirectResponse) => {
         if (redirectLink.redirect) {
           this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
