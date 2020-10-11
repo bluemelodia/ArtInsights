@@ -1,6 +1,8 @@
 # ArtInsights
 
-This was my first full-fleged Angular project. This application provides the user with insights on how their artworks are received on DeviantArt and Tumblr, two social media sites with large communities of artists. It also allows the user to manage their followings on both sites.
+<img src="./app-screenshots/ArtInsights-Collage.png"/>
+
+This was my first full-fleged Angular project. This application provides the user with insights on how their artworks are received on DeviantArt and Tumblr, two social media sites with large communities of artists. It also allows the user to manage their followings on both sites, and search artworks by tag on DeviantArt, Tumblr, and Twitter.
 
 Main features:
 
@@ -136,6 +138,7 @@ Icons made by:
 from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 Photos by:
+
 <a href="https://www.pexels.com/@jessbaileydesign">Jess Bailey Designs</a><br>
 <a href="https://www.pexels.com/@pixabay">Pixabay</a><br>
 <a href="https://www.pexels.com/@nurseryart">Porapak Apichodilok</a><br>
