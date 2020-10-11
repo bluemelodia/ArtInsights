@@ -53,6 +53,18 @@ Icons credit:
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
+## Architecture
+
+<img src="./Arch.png"/>
+
+User Registration: 
+1) When the user submits the registration form with a valid username (valid e-mail address) and password (at least six characters long), the client app calls the server’s /register endpoint.
+2) If the user provided a valid username and password, the server makes a call to the Firebase Authentication service to create a user with the given e-mail and password.
+3) On successful registration, the client app shows a success notification to the user. Otherwise, the app shows a failure notification (ex. the e-mail address is not available).
+
+User Login:
+1) When the user submits the login form with a valid username and password (same validation rules as
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
