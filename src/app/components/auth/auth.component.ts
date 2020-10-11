@@ -4,12 +4,12 @@ import { authMediaData, AuthPostResponse, AuthStatus, AuthRedirectResponse } fro
 import { AuthService } from '../../services/auth.service';
 import { RedirectService } from '../../services/redirect.service';
 import { UtilsService } from '../../services/utils.service';
-import { Observable, ReplaySubject, Subscription } from 'rxjs';
+import { Observable, ReplaySubject, Subscription, interval } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { LoadingService } from '../../services/loading.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, debounce } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth',
@@ -98,6 +98,7 @@ export class AuthComponent {
   public setupRedirectSubscriptions() {
     this.authRedirect$ = this.auth.authRedirect$;
     this.authRedirect$
+      .pipe(debounce(() => interval(1000)))
       .subscribe((redirectLink: AuthRedirectResponse) => {
         if (redirectLink.redirect) {
           this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
