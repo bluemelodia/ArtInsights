@@ -1,13 +1,12 @@
 # ArtInsights
 
-<img src="./app-screenshots/ArtInsights-Collage.png"/>
-[![Demo - Part I](./app-screenshots/ArtInsights-Collage.png)](https://youtu.be/yAg1yCC9n8Y)
-
-
-
 This was my first full-fleged Angular project. This application provides the user with insights on how their artworks are received on DeviantArt and Tumblr, two social media sites with large communities of artists. It also allows the user to manage their followings on both sites, and search artworks by tag on DeviantArt, Tumblr, and Twitter.
 
-Main features:
+## Demos
+<a href="https://youtu.be/yAg1yCC9n8Y"><img src="./app-screenshots/ArtInsights-Collage.png"/>
+</a>
+
+## Features
 
 <img src="./app-screenshots/Landing-Page.png"/>
 
