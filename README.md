@@ -4,8 +4,11 @@ This was my first full-fleged Angular project. This application provides the use
 
 Main features:
 
-<img src="./app-screenshots/Login.png"/>
 <img src="./app-screenshots/Landing-Page.png"/>
+
+- Support user account creation and login.
+
+<img src="./app-screenshots/Login.png"/>
 
 - Authorize the application to fetch information about the user's DeviantArt and Tumblr accounts. 
 
@@ -16,6 +19,11 @@ DeviantArt
 - View engagement levels by tags and day / time of deviation submission.
 - View information about friends (deviants and groups the user is following) and followers, including whether the friendship is mutual (the deviations/groups the user is following is following them back).
 - Watch / unwatch deviants and groups.
+
+<img src="./app-screenshots/DeviantArt1.png"/>
+<img src="./app-screenshots/DeviantArt2.png"/>
+<img src="./app-screenshots/Engagement.png"/>
+<img src="./app-screenshots/Watchers.png"/>
 
 Tumblr
 - See which blogs are following the user, and which blogs the user is following. Includes information about mutual followings.
@@ -37,6 +45,9 @@ The application can be run on: Safari (desktop), Firefox (both desktop & mobile)
 Chrome and Safari mobile are not supported as when these browsers are used, req.session.id is not persisted on the server side in-between requests. This is probably due to incorrect backend configuration. As the primary purpose of this project was for me to practice Angular and CSS, I will address these issues in a future project.
 
 Data and images in app screenshots and videos are mocked and blurred to protect user privacy.
+
+Icons credit:
+<a href="https://www.deviantart.com/riverkpocc">riverkpocc</a>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
