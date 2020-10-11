@@ -15,7 +15,7 @@ Main features:
 <img src="./app-screenshots/Auth.png"/>
 
 DeviantArt
-- View information about the user's deviations (artworks), including tags used, and level of engagement (favorites, comments, views) per piece.
+- View information about the user's deviations (artworks), including tags used, and level of engagement (favorites, comments, views) per piece. The user is able to view the entire deviation description that accompanied their original deviation, including embedded images (thumbs) and emoticons.
 - View engagement levels by tags and day / time of deviation submission.
 - View information about friends (deviants and groups the user is following) and followers, including whether the friendship is mutual (the deviations/groups the user is following is following them back).
 - Watch / unwatch deviants and groups.
