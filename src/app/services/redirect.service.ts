@@ -12,6 +12,7 @@ import { LoadingService } from './loading.service';
   providedIn: 'root'
 })
 export class RedirectService {
+  private timeOfLastOpen: Date;
 
   constructor(
     readonly router: Router, 
@@ -32,6 +33,13 @@ export class RedirectService {
     * resource, another window will open and keep the app up and running.
     */
    public redirect(url: string, target = '_blank'): Observable<boolean> {
+      const now = new Date();
+      if (this.timeOfLastOpen && now.getTime() - this.timeOfLastOpen.getTime() < 1000) {
+        return;
+      }
+
+      this.timeOfLastOpen = now;
+
       /*
        * This is needed in Safari - as it will not open a new window by default, 
        * and without the rel="opener" attribute, window.opener will be null, 

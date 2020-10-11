@@ -9,7 +9,7 @@ import { AlertService } from '../../services/alert.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { LoadingService } from '../../services/loading.service';
-import { takeUntil, throttleTime } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth',
@@ -98,7 +98,6 @@ export class AuthComponent {
   public setupRedirectSubscriptions() {
     this.authRedirect$ = this.auth.authRedirect$;
     this.authRedirect$
-      .pipe(throttleTime(3000))
       .subscribe((redirectLink: AuthRedirectResponse) => {
         if (redirectLink.redirect) {
           this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
