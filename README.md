@@ -8,6 +8,7 @@ This was my first full-fleged Angular project. This application provides the use
 ## Demos
 
 <a href="https://youtu.be/yAg1yCC9n8Y">Part I - Registration, Login, Auth, Tag Search</a>
+<a href="https://youtu.be/5cUuG4xZd_o">Part II - DeviantArt</a>
 
 
 ## Features
