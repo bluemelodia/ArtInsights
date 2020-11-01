@@ -117,9 +117,9 @@ export class AuthComponent {
       console.log("==> CHROME");
       alert("CHROME!!!!");
       return;
-    } else if ((this.platform.isPlatform(Platform.Firefox) || this.platform.isPlatform(Platform.Safari)) && !this.platform.isMobile()) {
-      console.log("==> SAFARI OR FIREFOX DESKTOP");
-      alert("SAFARI OR FIREFOX DESKTOP");
+    } else if (!this.platform.isMobile()) {
+      console.log("==> SAFARI OR FIREFOX MOBILE");
+      alert("SAFARI OR FIREFOX MOBILE");
       return;
     }
 

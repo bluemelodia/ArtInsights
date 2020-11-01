@@ -10,6 +10,12 @@ export class PlatformService {
   constructor() { }
 
   isPlatform(platform: Platform) {
+    let isPlatform = this.userAgent.indexOf(platform) > -1;
+    switch (platform) {
+      case Platform.Chrome:
+        isPlatform = isPlatform && this.userAgent.indexOf('crios') > -1;
+    }
+
     return this.userAgent.indexOf(platform) > -1;
   }
 
@@ -18,10 +24,12 @@ export class PlatformService {
   }
 
   isiOS() {
-    return /iPad|iPhone|iPod/.test(navigator.userAgent);
+    alert("iphone test: " + /ipad|iphone|ipod/.test(this.userAgent));
+    return /ipad|iphone|ipod/.test(this.userAgent);
   }
 
   isAndroid() {
-    /android/i.test(navigator.userAgent);
+    alert("android test: " + /android/i.test(this.userAgent));
+    return /android/i.test(this.userAgent);
   }
 }

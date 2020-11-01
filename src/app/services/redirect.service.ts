@@ -48,13 +48,11 @@ export class RedirectService {
        * and without the rel="opener" attribute, window.opener will be null, 
        * preventing the opened window from sending a message back to the application. 
        */
-      alert("Is this Safari: " + this.platform.isPlatform(Platform.Safari));
-      alert("Is this Firefox: " + this.platform.isPlatform(Platform.Firefox));
+      alert("User agent: " + navigator.userAgent.toLowerCase());
+      alert("Is this NOT CHROME: " + this.platform.isPlatform(Platform.Chrome));
       alert("Is this mobile: " + this.platform.isMobile());
 
-      if (this.platform.isPlatform(Platform.Safari) || (
-        this.platform.isPlatform(Platform.Firefox) && this.platform.isMobile()
-      )) {
+      if (this.platform.isMobile() && !this.platform.isPlatform(Platform.Chrome)) {
         try {
           // Create a link in memory.
           let link = this.document.createElement("a");
