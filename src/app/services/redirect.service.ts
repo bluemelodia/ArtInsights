@@ -61,6 +61,7 @@ export class RedirectService {
           clickEvent.initMouseEvent("click", true, true, this.window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
           link.dispatchEvent(clickEvent);
         } catch (error) {
+          alert("ERROR in dispatch: " + error);
           return error;
         }
       } else {

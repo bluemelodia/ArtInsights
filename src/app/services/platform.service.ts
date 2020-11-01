@@ -11,7 +11,6 @@ export class PlatformService {
 
   isPlatform(platform: Platform) {
     let isPlatform = this.userAgent.indexOf(platform) > -1;
-    alert("USER AGENT: " + this.userAgent);
     switch (platform) {
       case Platform.Chrome:
         isPlatform = isPlatform || this.userAgent.indexOf('crios') > -1;
@@ -34,14 +33,11 @@ export class PlatformService {
   */
   isSafariOrFirefoxMobile() {
     if (this.isPlatform(Platform.Chrome)) {
-      alert("CHROME BROWSER");
       return false;
     } else if (this.isPlatform(Platform.Firefox) && !this.isMobile()) {
-      alert("FIREFOX DESKTOP");
       return false;
     }
 
-    alert("SAFARI OR FIREFOX MOBILE");
     return this.isPlatform(Platform.Safari) || this.isMobile();
   }
 

@@ -113,13 +113,10 @@ export class AuthComponent {
   }
 
   public setupClickListener(redirectLink: string) {
-    alert("USER AGENT: " + navigator.userAgent.toLowerCase());
     if (!this.platform.isSafariOrFirefoxMobile()) {
-      alert("CHROME, SAFARI OR FIREFOX DESKTOP");
       return;
     }
 
-    alert("SAFARI OR FIREFOX MOBILE");
     /* 
     * This is needed to get the window opening functionality to work on mobile Safari.
     * For click events on Safari to work, the listener has to be directly attached to the
@@ -127,15 +124,13 @@ export class AuthComponent {
     */
     var clickListener = () => { 
       window.open(redirectLink);
-      alert("WINDOW OPEN");
     };
     this.tabOpener.nativeElement.addEventListener('click', clickListener);
       setTimeout(() => {
-          alert("NATIVE ELEMENT: " + this.tabOpener.nativeElement);
+          alert(this.tabOpener.nativeElement);
           this.tabOpener.nativeElement.click();
       }, 0);
       setTimeout(() => {
-        alert("REMOVE THE CLICK LISTENER");
         this.tabOpener.nativeElement.removeEventListener('click', clickListener);
       }, 3000);
   }
