@@ -142,7 +142,40 @@ Safari iOS:
 
 For the app to work on Safari iOS, the user, must allow cross-site tracking. Under Safari > Privacy & Security, make sure the "Prevent Cross-Site Tracking" and "Block All Cookies" options are toggled off.
 
-<img src="./app-screenshots/iOS-Config.png"/>
+<img src="./app-screenshots/iOS-Config.jpg"/>
+
+## Notes for Future Projects
+
+Deploy the Angular client code and NodeJS server-side code on the same server to avoid cross-site scripting issues and issues related to third-party cookies.
+
+## Tutorial Credits
+
+<a href="https://www.freecodecamp.org/news/how-to-configure-webpack-4-with-angular-7-a-complete-guide-9a23c879f471/">How to configure Webpack 4 with Angular 7: a complete guide</a>
+
+<a href="https://medium.com/a-beginners-guide-for-webpack-2/copy-all-images-files-to-a-folder-using-copy-webpack-plugin-7c8cf2de7676">Copy all images/files to a folder using copy-webpack-plugin</a>
+
+<a href="https://shermandigital.com/blog/fix-404-errors-from-angular-projects-hosted-on-github-pages/#:~:text=If%20you%20deploy%20an%20Angular,html%20page.&text=To%20accomplish%20the%20redirect%2C%20create,of%20the%20angular%2Dcli%20application.">Fix 404 Errors from Angular Projects Hosted on Github Pages
+</a>
+
+<a href="https://pumpingco.de/blog/automatic-scrolling-only-if-a-user-already-scrolled-the-bottom-of-a-page-in-angular/">Automatic scrolling, only if a user already scrolled the bottom of a page in Angular</a>
+
+## Asset Credits
+
+Icons made by:
+
+<a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a><br>
+<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a><br>
+<a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a><br>
+<a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a><br>
+<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a><br>
+from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+Photos by:
+
+<a href="https://www.pexels.com/@jessbaileydesign">Jess Bailey Designs</a><br>
+<a href="https://www.pexels.com/@pixabay">Pixabay</a><br>
+<a href="https://www.pexels.com/@nurseryart">Porapak Apichodilok</a><br>
+<a href="https://unsplash.com/@juanmgiraldo96">Juan Manuel Giraldo Grisales</a>
 
 ## Development server
 
@@ -205,32 +238,3 @@ Source: <a href="https://www.freecodecamp.org/news/how-to-configure-webpack-4-wi
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-## Tutorial Credits
-
-<a href="https://www.freecodecamp.org/news/how-to-configure-webpack-4-with-angular-7-a-complete-guide-9a23c879f471/">How to configure Webpack 4 with Angular 7: a complete guide</a>
-
-<a href="https://medium.com/a-beginners-guide-for-webpack-2/copy-all-images-files-to-a-folder-using-copy-webpack-plugin-7c8cf2de7676">Copy all images/files to a folder using copy-webpack-plugin</a>
-
-<a href="https://shermandigital.com/blog/fix-404-errors-from-angular-projects-hosted-on-github-pages/#:~:text=If%20you%20deploy%20an%20Angular,html%20page.&text=To%20accomplish%20the%20redirect%2C%20create,of%20the%20angular%2Dcli%20application.">Fix 404 Errors from Angular Projects Hosted on Github Pages
-</a>
-
-<a href="https://pumpingco.de/blog/automatic-scrolling-only-if-a-user-already-scrolled-the-bottom-of-a-page-in-angular/">Automatic scrolling, only if a user already scrolled the bottom of a page in Angular</a>
-
-## Asset Credits
-
-Icons made by:
-
-<a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a><br>
-<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a><br>
-<a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a><br>
-<a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a><br>
-<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a><br>
-from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-
-Photos by:
-
-<a href="https://www.pexels.com/@jessbaileydesign">Jess Bailey Designs</a><br>
-<a href="https://www.pexels.com/@pixabay">Pixabay</a><br>
-<a href="https://www.pexels.com/@nurseryart">Porapak Apichodilok</a><br>
-<a href="https://unsplash.com/@juanmgiraldo96">Juan Manuel Giraldo Grisales</a>
