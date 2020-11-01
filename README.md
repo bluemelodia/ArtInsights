@@ -90,6 +90,11 @@ The mechanism for DeviantArt and Tumblr is similar.
 
 ## Platform Support
 
+## Known Issues
+
+- On Firefox mobile, clicking on the social media button on the auth page does not open a new tab.
+- On Safari iPhone/iPad, sessions are not persisted.
+
 ### Update 11/1/20 - Chrome Support Added
 
 As of 11/1/20 the application is supported on Chrome. Originally sessions were not being persisted (req.session.id was different on each request), and thus user were getting unauthenticated on subsequent requests to the DeviantArt and Tumblr APIs. There were two main root causes:
