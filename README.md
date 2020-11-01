@@ -90,10 +90,6 @@ The mechanism for DeviantArt and Tumblr is similar.
 
 ## Platform Support
 
-## Known Issues
-
-- On Safari iPhone/iPad, sessions are not persisted.
-
 ### Update 11/1/20 - Chrome Support Added
 
 As of 11/1/20 the application is supported on Chrome. Originally sessions were not being persisted (req.session.id was different on each request), and thus user were getting unauthenticated on subsequent requests to the DeviantArt and Tumblr APIs. There were two main root causes:
@@ -142,7 +138,7 @@ Safari iOS:
 
 For the app to work on Safari iOS, the user, must allow cross-site tracking. Under Safari > Privacy & Security, make sure the "Prevent Cross-Site Tracking" and "Block All Cookies" options are toggled off.
 
-<img src="./app-screenshots/iOS-Config.jpg"/>
+<img src="./app-screenshots/iOS-Config.png"/>
 
 ## Notes for Future Projects
 
