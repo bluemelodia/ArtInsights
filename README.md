@@ -131,6 +131,11 @@ As of 11/1/20 the application is supported on Chrome. Originally sessions were n
 
 <img src="./app-screenshots/Cookies.png"/>
 
+### 
+
+iOS doesn't allow other browser engines to run, hence the Firefox iOS user agent string is 'safari' - it actually uses the Safari engine.
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
