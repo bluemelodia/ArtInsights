@@ -115,28 +115,22 @@ The fix involved porting the same mechanism that allows users to open new tabs o
 Note: iOS does not allow other browser engines to run, hence the Firefox iOS user agent string is 'safari' - it uses the Safari engine.
 
 Firefox Desktop:
-
-mozilla/5.0 (macintosh; intel mac os x 10.14; rv:81.0) gecko/20100101 firefox/81.0
+    mozilla/5.0 (macintosh; intel mac os x 10.14; rv:81.0) gecko/20100101 firefox/81.0
 
 Chrome Desktop:
-
-mozilla/5.0 (macintosh; intel mac os x 10_14_6) applewebkit/537.36 (khtml, like gecko) chrome/86.0.4240.111 safari/537.36
+    mozilla/5.0 (macintosh; intel mac os x 10_14_6) applewebkit/537.36 (khtml, like gecko) chrome/86.0.4240.111 safari/537.36
 
 Safari Desktop:
-
-mozilla/5.0 (macintosh; intel mac os x 10_14_6) applewebkit/605.1.15 (khtml, like gecko) version/14.0 safari/605.1.15
+    mozilla/5.0 (macintosh; intel mac os x 10_14_6) applewebkit/605.1.15 (khtml, like gecko) version/14.0 safari/605.1.15
 
 Firefox iOS:
-
-mozilla/5.0 (macintosh; intel mac osx 10_15_4) applewebkit/ 605.1.15 (khtml, like gecko) version/13.1 safari/605.1.15
+    mozilla/5.0 (macintosh; intel mac osx 10_15_4) applewebkit/ 605.1.15 (khtml, like gecko) version/13.1 safari/605.1.15
 
 Chrome iOS:
-
-mozilla/5.0 (iPad; cpu os 13_7 like mac os x) applewebkit/605.1.15 (khtml, like gecko) crios/ 86.0.4240.95 mobile/15e148 safari/604.1
+    mozilla/5.0 (iPad; cpu os 13_7 like mac os x) applewebkit/605.1.15 (khtml, like gecko) crios/ 86.0.4240.95 mobile/15e148 safari/604.1
 
 Safari iOS:
-
-mozilla/5.0 (iPad; cpu os 13_7 like mac os x) applewebkit/605.1.15 (khtml, like gecko) version/13.1.2 mobile/15e148 safari/604.1
+    mozilla/5.0 (iPad; cpu os 13_7 like mac os x) applewebkit/605.1.15 (khtml, like gecko) version/13.1.2 mobile/15e148 safari/604.1
 
 ## Development server
 
