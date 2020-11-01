@@ -49,9 +49,15 @@ Tag Search
 <img src="./app-screenshots/Tag-Search.png"/>
 <img src="./app-screenshots/Tag-Search2.png"/>
 
-The application can be run on: Safari (desktop), Firefox (both desktop & mobile). 
+The application can be run on: Safari (desktop), Firefox (both desktop & mobile), and Chrome (desktop). 
 
-Chrome and Safari mobile are not supported as when these browsers are used, req.session.id is not persisted on the server side in-between requests. This is probably due to incorrect backend configuration. As the primary purpose of this project was for me to practice Angular and CSS, I will address these issues in a future project.
+As of 11/1/20 the application is supported on Chrome. Originally sessions were not being persisted (req.session.id was different on each request), and thus user were getting unauthenticated on subsequent requests to the DeviantArt and Tumblr APIs. There were two main root causes:
+
+1) Chrome was not allowing request cookies to be sent because they did not specify SameSite = None. The server and client are on different domains, hence the cookies sent back by the server as considered third-party cookies - Chrome blocks these cookies by default. Without the cookies being sent, the server had no idea that the initial (auth) and subsequent (DA/Tumblr) requests were being sent from the same client.
+
+2) After fixing the cookies, the client requests were being split across multiple instances. Updating my NodeJS project's app.yaml file to use one instance fixed this issue.
+
+<img src="./app-screenshots/Cookies.png"/>
 
 Data and images in app screenshots and videos are mocked and blurred to protect user privacy.
 

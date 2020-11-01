@@ -50,7 +50,7 @@ export class LoginService {
 
   private loginOrRegisterUser(userAction: UserAction, body: any) {
     const url = userAction === UserAction.Register ? this.registerURL : this.loginURL;
-    this.http.post(url, body)
+    this.http.post(url, body, { withCredentials: true })
       .subscribe((data: LoginPostResponse) => {
         if (data) {
           data.userAction = userAction;
