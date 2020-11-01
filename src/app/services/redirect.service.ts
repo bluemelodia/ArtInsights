@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
 import { LoadingService } from './loading.service';
+import { PlatformService } from './platform.service';
+import { Platform } from '../types/platform.types';
 
 /* 
 * Used to redirect to an external resource. 
@@ -17,6 +19,7 @@ export class RedirectService {
   constructor(
     readonly router: Router, 
     private loading: LoadingService,
+    private platform: PlatformService,
     @Inject(DOCUMENT) readonly document: Document
   ) {}
     /* 
@@ -45,7 +48,13 @@ export class RedirectService {
        * and without the rel="opener" attribute, window.opener will be null, 
        * preventing the opened window from sending a message back to the application. 
        */
-      if (navigator.userAgent.includes("Safari")) {
+      alert("Is this Safari: " + this.platform.isPlatform(Platform.Safari));
+      alert("Is this Firefox: " + this.platform.isPlatform(Platform.Firefox));
+      alert("Is this mobile: " + this.platform.isMobile());
+
+      if (this.platform.isPlatform(Platform.Safari) || (
+        this.platform.isPlatform(Platform.Firefox) && this.platform.isMobile()
+      )) {
         try {
           // Create a link in memory.
           let link = this.document.createElement("a");
