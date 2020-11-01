@@ -90,7 +90,29 @@ The mechanism for DeviantArt and Tumblr is similar.
 
 ## Platform Support
 
-## User Agent Strings
+## Known Issues
+
+- On Safari iPhone/iPad, sessions are not persisted.
+
+### Update 11/1/20 - Chrome Support Added
+
+As of 11/1/20 the application is supported on Chrome. Originally sessions were not being persisted (req.session.id was different on each request), and thus user were getting unauthenticated on subsequent requests to the DeviantArt and Tumblr APIs. There were two main root causes:
+
+1) Chrome was not allowing request cookies to be sent to the server because the initial response cookies sent from the server did not specify SameSite = None. The server and client are on different domains, hence the cookies sent back by the server as considered third-party cookies - Chrome will not send these cookies by default. Without the request cookies, the server cannot maintain the session as it cannot tell that the initial (auth) and subsequent (DA/Tumblr) requests were sent from the same client.
+
+2) After fixing the cookies, the client requests were being split across multiple instances, hence some requests to the DA/Tumblr APIs were failing due to having a different req.session id. Updating my NodeJS project's app.yaml file to use one instance fixed this issue.
+
+<img src="./app-screenshots/Cookies.png"/>
+
+### Update 11/1/20 - Firefox iOS Support Added
+
+Fixed an issue where clicking on the DeviantArt and Tumblr buttons on the auth page does not open a new tab, thus preventing the auth process from continuing.
+
+The fix involved porting the same mechanism that allows users to open new tabs on Safari mobile to Firefox. To prevent this code from being invoked on desktop browsers  (which will result in additional tabs being opened), I added a user agent detection service and the appropriate checks.
+
+#### Tested User Agent Strings
+
+Note: iOS does not allow other browser engines to run, hence the Firefox iOS user agent string is 'safari' - it uses the Safari engine.
 
 Firefox Desktop:
 
@@ -115,26 +137,6 @@ mozilla/5.0 (iPad; cpu os 13_7 like mac os x) applewebkit/605.1.15 (khtml, like 
 Safari iOS:
 
 mozilla/5.0 (iPad; cpu os 13_7 like mac os x) applewebkit/605.1.15 (khtml, like gecko) version/13.1.2 mobile/15e148 safari/604.1
-
-## Known Issues
-
-- On Firefox mobile, clicking on the social media button on the auth page does not open a new tab.
-- On Safari iPhone/iPad, sessions are not persisted.
-
-### Update 11/1/20 - Chrome Support Added
-
-As of 11/1/20 the application is supported on Chrome. Originally sessions were not being persisted (req.session.id was different on each request), and thus user were getting unauthenticated on subsequent requests to the DeviantArt and Tumblr APIs. There were two main root causes:
-
-1) Chrome was not allowing request cookies to be sent to the server because the initial response cookies sent from the server did not specify SameSite = None. The server and client are on different domains, hence the cookies sent back by the server as considered third-party cookies - Chrome will not send these cookies by default. Without the request cookies, the server cannot maintain the session as it cannot tell that the initial (auth) and subsequent (DA/Tumblr) requests were sent from the same client.
-
-2) After fixing the cookies, the client requests were being split across multiple instances, hence some requests to the DA/Tumblr APIs were failing due to having a different req.session id. Updating my NodeJS project's app.yaml file to use one instance fixed this issue.
-
-<img src="./app-screenshots/Cookies.png"/>
-
-### 
-
-iOS doesn't allow other browser engines to run, hence the Firefox iOS user agent string is 'safari' - it actually uses the Safari engine.
-
 
 ## Development server
 
