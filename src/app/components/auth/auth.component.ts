@@ -113,13 +113,9 @@ export class AuthComponent {
   }
 
   public setupClickListener(redirectLink: string) {
-    if (this.platform.isPlatform(Platform.Chrome)) {
-      console.log("==> CHROME");
-      alert("CHROME!!!!");
-      return;
-    } else if (!this.platform.isMobile()) {
-      console.log("==> SAFARI OR FIREFOX MOBILE");
-      alert("SAFARI OR FIREFOX MOBILE");
+    if (!this.platform.isSafariOrFirefoxMobile()) {
+      console.log("==> Chome, or SAFARI OR FIREFOX DESKTOP");
+      alert("CHROME, SAFARI OR FIREFOX DESKTOP");
       return;
     }
 

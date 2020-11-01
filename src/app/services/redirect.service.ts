@@ -52,7 +52,9 @@ export class RedirectService {
       alert("Is this NOT CHROME: " + this.platform.isPlatform(Platform.Chrome));
       alert("Is this mobile: " + this.platform.isMobile());
 
-      if (this.platform.isMobile() && !this.platform.isPlatform(Platform.Chrome)) {
+      /* This works on Firefox because the user agent is wrong on Firefox iOS & says
+      * that it is Safari. */
+      if (this.platform.isSafariOrFirefoxMobile()) {
         try {
           // Create a link in memory.
           let link = this.document.createElement("a");
