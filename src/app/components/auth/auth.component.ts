@@ -113,6 +113,7 @@ export class AuthComponent {
   }
 
   public setupClickListener(redirectLink: string) {
+    alert("USER AGENT: " + navigator.userAgent.toLowerCase());
     if (!this.platform.isSafariOrFirefoxMobile()) {
       alert("CHROME, SAFARI OR FIREFOX DESKTOP");
       return;

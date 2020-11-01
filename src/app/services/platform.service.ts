@@ -14,9 +14,10 @@ export class PlatformService {
     switch (platform) {
       case Platform.Chrome:
         isPlatform = isPlatform && this.userAgent.indexOf('crios') > -1;
+        break;
     }
 
-    return this.userAgent.indexOf(platform) > -1;
+    return isPlatform;
   }
 
   isMobile() {
