@@ -48,12 +48,6 @@ export class RedirectService {
        * and without the rel="opener" attribute, window.opener will be null, 
        * preventing the opened window from sending a message back to the application. 
        */
-      alert("User agent: " + navigator.userAgent.toLowerCase());
-      alert("Is this NOT CHROME: " + this.platform.isPlatform(Platform.Chrome));
-      alert("Is this mobile: " + this.platform.isMobile());
-
-      /* This works on Firefox because the user agent is wrong on Firefox iOS & says
-      * that it is Safari. */
       if (this.platform.isSafariOrFirefoxMobile()) {
         try {
           // Create a link in memory.

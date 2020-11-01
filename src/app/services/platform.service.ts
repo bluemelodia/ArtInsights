@@ -31,19 +31,23 @@ export class PlatformService {
   * If Firefox fixes its user agent string, the second condition will become true.
   */
   isSafariOrFirefoxMobile() {
-    return !(
-      !this.isPlatform(Platform.Chrome) 
-      && (!this.isPlatform(Platform.Safari) || !this.isMobile())
-    );
+    if (this.isPlatform(Platform.Chrome)) {
+      alert("CHROME BROWSER");
+      return false;
+    } else if (this.isPlatform(Platform.Firefox) && !this.isMobile()) {
+      alert("FIREFOX DESKTOP");
+      return false;
+    }
+
+    alert("SAFARI OR FIREFOX MOBILE");
+    return this.isPlatform(Platform.Safari) || this.isMobile();
   }
 
   isiOS() {
-    alert("iphone test: " + /ipad|iphone|ipod/.test(this.userAgent));
     return /ipad|iphone|ipod/.test(this.userAgent);
   }
 
   isAndroid() {
-    alert("android test: " + /android/i.test(this.userAgent));
     return /android/i.test(this.userAgent);
   }
 }

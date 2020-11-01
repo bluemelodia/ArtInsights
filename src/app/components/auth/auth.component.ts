@@ -114,12 +114,10 @@ export class AuthComponent {
 
   public setupClickListener(redirectLink: string) {
     if (!this.platform.isSafariOrFirefoxMobile()) {
-      console.log("==> Chome, or SAFARI OR FIREFOX DESKTOP");
       alert("CHROME, SAFARI OR FIREFOX DESKTOP");
       return;
     }
 
-    console.log("SAFARI OR FIREFOX MOBILE");
     alert("SAFARI OR FIREFOX MOBILE");
     /* 
     * This is needed to get the window opening functionality to work on mobile Safari.
