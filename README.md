@@ -138,6 +138,12 @@ Safari iOS:
 
     mozilla/5.0 (iPad; cpu os 13_7 like mac os x) applewebkit/605.1.15 (khtml, like gecko) version/13.1.2 mobile/15e148 safari/604.1
 
+### Note About Safari iOS
+
+For the app to work on Safari iOS, the user, must allow cross-site tracking. Under Safari > Privacy & Security, make sure the "Prevent Cross-Site Tracking" and "Block All Cookies" options are toggled off.
+
+<img src="./app-screenshots/iOS-Config.png"/>
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
