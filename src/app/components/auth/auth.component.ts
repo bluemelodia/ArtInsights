@@ -10,6 +10,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { LoadingService } from '../../services/loading.service';
 import { takeUntil } from 'rxjs/operators';
+import { PlatformService } from '../../services/platform.service';
+import { Platform } from '../../types/platform.types';
 
 @Component({
   selector: 'app-auth',
@@ -29,6 +31,7 @@ export class AuthComponent {
     private alert: AlertService,
     public auth: AuthService, 
     private loading: LoadingService,
+    private platform: PlatformService,
     private storage: LocalStorageService,
     private redirect: RedirectService,
     private router: Router,
@@ -102,10 +105,39 @@ export class AuthComponent {
         if (redirectLink.redirect) {
           this.alert.showAlert(AlertType.Info, `Connecting to ${redirectLink.mediaType}...`);
           this.redirect.redirect(redirectLink.redirect);
+          this.setupClickListener(redirectLink.redirect);
         } else {
           this.alert.showAlert(AlertType.Error, `We are unable to connect to ${redirectLink.mediaType} at this time. Please try again later.`);
         }
     });
+  }
+
+  public setupClickListener(redirectLink: string) {
+    if (this.platform.isPlatform(Platform.Chrome)) {
+      console.log("==> CHROME");
+      return;
+    } else if ((this.platform.isPlatform(Platform.Firefox) || this.platform.isPlatform(Platform.Safari)) && !this.platform.isMobile()) {
+      console.log("==> SAFARI OR FIREFOX DESKTOP");
+      return;
+    }
+
+    console.log("SAFARI OR FIREFOX MOBILE");
+    
+    /* 
+    * This is needed to get the window opening functionality to work on mobile Safari.
+    * For click events on Safari to work, the listener has to be directly attached to the
+    * element. Remove the event listener after click to avoid adding multiple listeners.
+    */
+    var clickListener = () => { 
+      window.open(redirectLink);
+    };
+    this.tabOpener.nativeElement.addEventListener('click', clickListener);
+      setTimeout(() => {
+          this.tabOpener.nativeElement.click();
+      }, 0);
+      setTimeout(() => {
+        this.tabOpener.nativeElement.removeEventListener('click', clickListener);
+      }, 3000);
   }
 
   public setupAuthSubscription() {

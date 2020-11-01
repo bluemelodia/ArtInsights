@@ -90,15 +90,13 @@ The mechanism for DeviantArt and Tumblr is similar.
 
 ## Platform Support
 
-The application can be run on: Safari (desktop), Firefox (both desktop & mobile), and Chrome (desktop). 
-
 ### Update 11/1/20 - Chrome Support Added
 
 As of 11/1/20 the application is supported on Chrome. Originally sessions were not being persisted (req.session.id was different on each request), and thus user were getting unauthenticated on subsequent requests to the DeviantArt and Tumblr APIs. There were two main root causes:
 
-1) Chrome was not allowing request cookies to be sent because they did not specify SameSite = None. The server and client are on different domains, hence the cookies sent back by the server as considered third-party cookies - Chrome blocks these cookies by default. Without the cookies being sent, the server had no idea that the initial (auth) and subsequent (DA/Tumblr) requests were being sent from the same client.
+1) Chrome was not allowing request cookies to be sent to the server because the initial response cookies sent from the server did not specify SameSite = None. The server and client are on different domains, hence the cookies sent back by the server as considered third-party cookies - Chrome will not send these cookies by default. Without the request cookies, the server cannot maintain the session as it cannot tell that the initial (auth) and subsequent (DA/Tumblr) requests were sent from the same client.
 
-2) After fixing the cookies, the client requests were being split across multiple instances. Updating my NodeJS project's app.yaml file to use one instance fixed this issue.
+2) After fixing the cookies, the client requests were being split across multiple instances, hence some requests to the DA/Tumblr APIs were failing due to having a different req.session id. Updating my NodeJS project's app.yaml file to use one instance fixed this issue.
 
 <img src="./app-screenshots/Cookies.png"/>
 
