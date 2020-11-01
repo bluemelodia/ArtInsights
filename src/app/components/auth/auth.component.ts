@@ -127,7 +127,6 @@ export class AuthComponent {
     };
     this.tabOpener.nativeElement.addEventListener('click', clickListener);
       setTimeout(() => {
-          alert(this.tabOpener.nativeElement);
           this.tabOpener.nativeElement.click();
       }, 0);
       setTimeout(() => {
