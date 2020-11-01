@@ -11,6 +11,7 @@ export class PlatformService {
 
   isPlatform(platform: Platform) {
     let isPlatform = this.userAgent.indexOf(platform) > -1;
+    alert("USER AGENT: " + this.userAgent);
     switch (platform) {
       case Platform.Chrome:
         isPlatform = isPlatform && this.userAgent.indexOf('crios') > -1;
