@@ -27,7 +27,7 @@
                 Passwords must contain at least 6 characters.
             </label>
             <label class="warn-invalid" *ngIf="loginFormControl.password.touched && loginFormControl.password.errors?.pattern">
-                Passwords can only contain letters, numbers, and the following characters: _, ., !, @, #, *, \, and -.
+                Password can only contain letters, numbers, and _.!@#*\-.
             </label>
         </div>
         <input type="password" placeholder="Enter password." formControlName="password">
